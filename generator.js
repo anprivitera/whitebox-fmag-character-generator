@@ -254,17 +254,6 @@ const WEAPONS = [
     missileROF: null,
   },
   {
-    weaponName: "Warhammer",
-    damage: "1d6",
-    weight: 10,
-    cost: 5,
-    blunt: true,
-    twoHanded: false,
-    melee: true,
-    missile: false,
-    missileROF: null,
-  },
-  {
     weaponName: "Bow, long",
     damage: "1d6",
     weight: 5,
