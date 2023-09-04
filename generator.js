@@ -19,7 +19,7 @@ It includes:
 - Coins
 - ~~Languages~~
 - ~~To-Hit bonus~~
-- Number of hirelings and loyalty
+- ~~Number of hirelings and loyalty~~
 - Weight carried and movement speed
 */
 
