@@ -41,6 +41,13 @@ function determineModifier(attributeScore) {
   }
 }
 
+function shuffle(array) {
+  for (let i = array.length - 1; i > 0; i--) {
+    let j = Math.floor(Math.random() * (i + 1));
+    [array[i], array[j]] = [array[j], array[i]];
+  }
+}
+
 const ROLL_FOR_STRENGTH = diceRoller(3),
   ROLL_FOR_DEXTERITY = diceRoller(3),
   ROLL_FOR_CONSTITUTION = diceRoller(3),
@@ -524,11 +531,23 @@ if (
   raceAbilities = `Race Abilities: ${generatedCharacterRace.raceSpecialAbilities}`;
 }
 
-const currentMoney = diceRoller(3) * 10;
+const initialMoney = diceRoller(3) * 10;
+let currentMoney = initialMoney;
 
 // create a new array called purchasedItems
 // while initialMoney is above the "cost" value of at least one item in the WEAPONS array
 // select a random item to transfer from the WEAPONS array to the purchasedItems array, making sure that it is not already present in the purchasedItems array
+
+let characterEquipment = [];
+let shoppingArray = WEAPONS.map((x) => x);
+shuffle(shoppingArray);
+
+for (let i = 0; i < shoppingArray.length; i++) {
+  if (shoppingArray[i].cost <= currentMoney) {
+    characterEquipment.push(shoppingArray.pop());
+    currentMoney = currentMoney - shoppingArray[i].cost;
+  }
+}
 
 // copy the WEAPONS array into shoppingArray
 // while there are still items in shoppingArray with "cost" value equal or lower than currentMoney
@@ -559,6 +578,9 @@ if (generatedCharacterClass.spellcasterType === "magic") {
       Math.floor(Math.random() * MAGIC_USER_SPELLS_LEVEL_1.length)
     ]
   }<br />`;
+}
+for (let n = 0; n < characterEquipment.length; n++) {
+  stringToDisplay += `${initialMoney} ${characterEquipment[n].weaponName} <br />`;
 }
 stringToDisplay += `Equipment: ${currentMoney} gp <br /><br /> Hirelings (Max #): ${maxHirelings}<br /> Loyalty: ${
   hirelingsLoyalty > 0 ? "+" : ""
