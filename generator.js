@@ -23,7 +23,6 @@ It includes:
 - Weight carried and movement speed
 */
 
-// Define dice roller (3d6)
 function diceRoller (numberOfDice) {
     let rollResult = null;
     for (let i = 0; i < numberOfDice; i++) {
@@ -32,7 +31,6 @@ function diceRoller (numberOfDice) {
     return rollResult
 }
 
-// Give an appropriate modifier for each score (3-6 = -1, 7-14 =0, 15-18 = +1)
 function determineModifier(attributeScore) {
     if (attributeScore <= 6) {
         return -1;
@@ -56,8 +54,8 @@ const ROLL_FOR_STRENGTH = diceRoller(3),
     WISDOM_MODIFIER = determineModifier(ROLL_FOR_WISDOM),
     CHARISMA_MODIFIER = determineModifier(ROLL_FOR_CHARISMA);
 
-let stringToDisplay = "";
-// Define Strengths, Dexterity, Constitution, Intelligence, Wisdom, Charisma. For each of them, roll 3d6 separately
+let stringToDisplay = ""; //TODO: based on the highest score, choose the most appropriate class.
+
 const ATTRIBUTES = [ 
     { attributeName:"STR", attributeValue:ROLL_FOR_STRENGTH, modifierValue:STRENGTH_MODIFIER }, 
     { attributeName:"DEX", attributeValue:ROLL_FOR_DEXTERITY, modifierValue:DEXTERITY_MODIFIER }, 
@@ -71,12 +69,17 @@ for (let n = 0; n < ATTRIBUTES.length; n++) {
     stringToDisplay += `${ATTRIBUTES[n].attributeName} ${ATTRIBUTES[n].attributeValue} (${ATTRIBUTES[n].modifierValue > 0 ? "+" : ""}${ATTRIBUTES[n].modifierValue}), `
 }
 
+
+stringToDisplay += `HP ${diceRoller(1)}, Alignment,`
+//TODO: Include different HP roller for Fighter
+
+
+
 document.getElementById("generator").innerHTML = stringToDisplay;
-// Give 5% xp bonus if WIS is 15+, and 5% if CHA is 15+
-// HD Dice is 1d6
-// Choose an alignment randmoly between Law, Neutrality and Chaos
-// based on the highest score, choose the most appropriate class
-// include class characteristics
-// roll for initial money
-// pick elements from list of items randomly until money runs out (giving priority to 1 allowed weapon, 1 allowed armor and then assigning the rest randomly)
-// calculate movement speed
+//TODO: Give 5% xp bonus if WIS is 15+, and 5% if CHA is 15+
+//TODO: Choose an alignment randmoly between Law, Neutrality and Chaos
+
+//TODO: include class characteristics
+//TODO: roll for initial money
+//TODO: pick elements from list of items randomly until money runs out (giving priority to 1 allowed weapon, 1 allowed armor and then assigning the rest randomly)
+//TODO: calculate movement speed
