@@ -54,9 +54,36 @@ const ROLL_FOR_STRENGTH = diceRoller(3),
     WISDOM_MODIFIER = determineModifier(ROLL_FOR_WISDOM),
     CHARISMA_MODIFIER = determineModifier(ROLL_FOR_CHARISMA);
 
-const cleric = { characterClassName:"Cleric", xpAtLevel1 : 0, HDatLevel1 : diceRoller(1), toHitAtLevel1 : 0, savingThrowAtLevel1 : 15, savingThrowBonus : "+2 vs. Death and Poison", spellsAtLevel1:[0,0,0,0,0], primeAttribute : "WISDOM", specialAbilities : "Turn the Undead"  };
-const fighter = { characterClassName:"Fighter", xpAtLevel1 : 0, HDatLevel1 : diceRoller(1) + 1, toHitAtLevel1 : 0, savingThrowAtLevel1 : 14, savingThrowBonus : "+2 vs. Poison and Paralysis", spellsAtLevel1:[0,0,0,0,0], primeAttribute : "STRENGTH", specialAbilities : "Combat Fury, Establish Stronghold (at level 9)"};
-const magicUser = { characterClassName:"Magic-User", xpAtLevel1 : 0, HDatLevel1 : diceRoller(1), toHitAtLevel1 : 0, savingThrowAtLevel1 : 15, savingThrowBonus : "+2 vs. Spells", spellsAtLevel1:[1,0,0,0,0], primeAttribute : "INTELLIGENCE", specialAbilities : "Spell Casting, Establish Wizard Tower"};
+const cleric = { characterClassName:"Cleric", 
+                xpAtLevel1 : 0, 
+                HDatLevel1 : diceRoller(1), 
+                toHitAtLevel1 : 0, 
+                savingThrowAtLevel1 : 15, 
+                savingThrowBonus : "+2 vs. Death and Poison", 
+                spellsAtLevel1:[0,0,0,0,0], 
+                primeAttribute : "WISDOM", 
+                specialAbilities : "Turn the Undead"  
+                };
+const fighter = { characterClassName:"Fighter", 
+                xpAtLevel1 : 0, 
+                HDatLevel1 : diceRoller(1) + 1, 
+                toHitAtLevel1 : 0, 
+                savingThrowAtLevel1 : 14, 
+                savingThrowBonus : "+2 vs. Poison and Paralysis", 
+                spellsAtLevel1:[0,0,0,0,0], 
+                primeAttribute : "STRENGTH", 
+                specialAbilities : "Combat Fury, Establish Stronghold (at level 9)"
+                };
+const magicUser = { characterClassName:"Magic-User", 
+                    xpAtLevel1 : 0, 
+                    HDatLevel1 : diceRoller(1), 
+                    toHitAtLevel1 : 0, 
+                    savingThrowAtLevel1 : 15, 
+                    savingThrowBonus : "+2 vs. Spells", 
+                    spellsAtLevel1:[1,0,0,0,0], 
+                    primeAttribute : "INTELLIGENCE", 
+                    specialAbilities : "Spell Casting, Establish Wizard Tower"
+                    };
 
 
 const ALIGNMENTS = ["Law", "Neutral", "Chaos"];
