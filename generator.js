@@ -97,6 +97,7 @@ function determineCharacterClass(attributes) {
     savingThrowBonus: "+2 vs. Death and Poison",
     spellsAtLevel1: [0, 0, 0, 0, 0],
     primeAttribute: "WIS",
+    // primeAttributeValue: null;
     specialAbilities: "Turn the Undead",
   };
   const fighter = {
@@ -108,6 +109,7 @@ function determineCharacterClass(attributes) {
     savingThrowBonus: "+2 vs. Poison and Paralysis",
     spellsAtLevel1: [0, 0, 0, 0, 0],
     primeAttribute: "STR",
+    // primeAttributeValue: null;
     specialAbilities: "Combat Fury, Establish Stronghold (at level 9)",
   };
   const magicUser = {
@@ -119,6 +121,7 @@ function determineCharacterClass(attributes) {
     savingThrowBonus: "+2 vs. Spells",
     spellsAtLevel1: [1, 0, 0, 0, 0],
     primeAttribute: "INT",
+    // primeAttributeValue: null;
     specialAbilities: "Spell Casting, Establish Wizard Tower",
   };
   let generatedCharacterClass = null;
@@ -128,12 +131,18 @@ function determineCharacterClass(attributes) {
     for (let x = 0; x < fromHighToLow.length; x++) {
       if (fromHighToLow[x].attributeName == cleric.primeAttribute) {
         generatedCharacterClass = cleric;
+        generatedCharacterClass.primeAttributeValue =
+          fromHighToLow[x].attributeValue;
         return generatedCharacterClass;
       } else if (fromHighToLow[x].attributeName == fighter.primeAttribute) {
         generatedCharacterClass = fighter;
+        generatedCharacterClass.primeAttributeValue =
+          fromHighToLow[x].attributeValue;
         return generatedCharacterClass;
       } else if (fromHighToLow[x].attributeName == magicUser.primeAttribute) {
         generatedCharacterClass = magicUser;
+        generatedCharacterClass.primeAttributeValue =
+          fromHighToLow[x].attributeValue;
         return generatedCharacterClass;
       }
     }
@@ -164,6 +173,9 @@ if (ROLL_FOR_WISDOM >= 15) {
   xpBonus += 5;
 }
 if (ROLL_FOR_CHARISMA >= 15) {
+  xpBonus += 5;
+}
+if (generatedCharacterClass.primeAttributeValue >= 15) {
   xpBonus += 5;
 }
 if (xpBonus > 15) {
