@@ -166,9 +166,6 @@ if (ROLL_FOR_WISDOM >= 15) {
 if (ROLL_FOR_CHARISMA >= 15) {
   xpBonus += 5;
 }
-if (generatedCharacterClass.primeAttribute >= 15) {
-  xpBonus += 5;
-}
 if (xpBonus > 15) {
   xpBonus = 15;
 }
