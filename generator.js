@@ -336,7 +336,7 @@ function determineCharacterClass(attributes) {
     primeAttribute: "WIS",
     // primeAttributeValue: null;
     specialAbilities:
-      "<ul><li>Turn the Undead</li><li>Establish Temple (at Level 10)</li>",
+      "<ul><li>Turn the Undead.</li><li>Establish Temple (at Level 10).</li></ul>",
   };
   const fighter = {
     characterClassName: "Fighter",
@@ -350,7 +350,7 @@ function determineCharacterClass(attributes) {
     primeAttribute: "STR",
     // primeAttributeValue: null;
     specialAbilities:
-      "<ul><li>Combat Fury</li><li>Establish Stronghold (at Level 9)</li></ul>",
+      "<ul><li>Combat Fury (+1 attack/level vs. >=1 HD foes).</li><li>Establish Stronghold (at Level 9).</li></ul>",
   };
   const elf = {
     characterClassName: "Elf",
@@ -364,7 +364,7 @@ function determineCharacterClass(attributes) {
     primeAttribute: null,
     // primeAttributeValue: null;
     specialAbilities:
-      "<ul><li>+1 to-hit vs. goblins, orcs, intelligent undead, lycantropes</li><li>immune to undead paralysis</li>half damage from giants and ogres</li><li>4-in-6 chances of actively spotting hidden or concealed doors (2-in-6 if passing by).</li></ul>",
+      "<ul><li>+1 to-hit vs. goblins, orcs, intelligent undead, lycantropes.</li><li>Immune to undead paralysis.</li>Half damage from giants and ogres.</li><li>4-in-6 chances of actively spotting hidden or concealed doors (2-in-6 if passing by).</li></ul>",
   };
   const magicUser = {
     characterClassName: "Magic-User",
@@ -377,7 +377,7 @@ function determineCharacterClass(attributes) {
     primeAttribute: "INT",
     // primeAttributeValue: null;
     specialAbilities:
-      "<ul><li>Spell Casting</li><li>Establish Wizard Tower (at Level 9)</li></ul>",
+      "<ul><li>Spell Casting.</li><li>Establish Wizard Tower (at Level 9).</li></ul>",
   };
   const thief = {
     characterClassName: "Thief",
@@ -551,11 +551,11 @@ stringToDisplay += `<br />Melee: ${toHitMelee} (to-hit and damage) <br /> Missil
       : ""
   }`;
 if (generatedCharacterClass.spellcasterType === "magic") {
-  stringToDisplay += `<br />Known Spells: ${
+  stringToDisplay += `Known Spells: ${
     MAGIC_USER_SPELLS_LEVEL_1[
       Math.floor(Math.random() * MAGIC_USER_SPELLS_LEVEL_1.length)
     ]
-  }`;
+  }<br />`;
 }
 stringToDisplay += `Equipment: ${initialMoney} gp <br /><br /> Hirelings (Max #): ${maxHirelings}<br /> Loyalty: ${hirelingsLoyalty}<br />`;
 //TODO: pick elements from list of items randomly until money runs out (giving priority to 1 allowed weapon, 1 allowed armor and then assigning the rest randomly)
