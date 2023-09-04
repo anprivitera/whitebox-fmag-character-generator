@@ -284,7 +284,7 @@ stringToDisplay += `<br />Melee: ${
 } (${
   generatedCharacterClass.savingThrowBonus +
   generatedCharacterRace.raceSavingThrowBonus
-}) <br />  </br> Current XP 0, XP Bonus ${xpBonus}% <br /> <br />Abilities: ${
+}) <br />  </br> Current XP 0, XP Bonus ${xpBonus}% <br /> <br /> Abilities: ${
   generatedCharacterClass.specialAbilities +
   generatedCharacterRace.raceSpecialAbilities
 }`;
