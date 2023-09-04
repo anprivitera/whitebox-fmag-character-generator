@@ -23,106 +23,135 @@ It includes:
 - Weight carried and movement speed
 */
 
-function diceRoller (numberOfDice) {
-    let rollResult = null;
-    for (let i = 0; i < numberOfDice; i++) {
-        rollResult += Math.floor(Math.random() * 6 + 1);
-    }
-    return rollResult
+function diceRoller(numberOfDice) {
+  let rollResult = null;
+  for (let i = 0; i < numberOfDice; i++) {
+    rollResult += Math.floor(Math.random() * 6 + 1);
+  }
+  return rollResult;
 }
 
 function determineModifier(attributeScore) {
-    if (attributeScore <= 6) {
-        return -1;
-    } else if (attributeScore >= 7 && attributeScore <= 14) {
-        return 0;
-    } else {
-        return +1;
-    }
-} 
+  if (attributeScore <= 6) {
+    return -1;
+  } else if (attributeScore >= 7 && attributeScore <= 14) {
+    return 0;
+  } else {
+    return +1;
+  }
+}
 
 const ROLL_FOR_STRENGTH = diceRoller(3),
-    ROLL_FOR_DEXTERITY = diceRoller(3),
-    ROLL_FOR_CONSTITUTION = diceRoller(3),
-    ROLL_FOR_INTELLIGENCE = diceRoller(3),
-    ROLL_FOR_WISDOM = diceRoller(3),
-    ROLL_FOR_CHARISMA = diceRoller(3),
-    STRENGTH_MODIFIER =  determineModifier(ROLL_FOR_STRENGTH),
-    DEXTERITY_MODIFIER =  determineModifier(ROLL_FOR_DEXTERITY),
-    CONSTITUTION_MODIFIER =  determineModifier(ROLL_FOR_CONSTITUTION),
-    INTELLIGENCE_MODIFIER = determineModifier(ROLL_FOR_INTELLIGENCE),
-    WISDOM_MODIFIER = determineModifier(ROLL_FOR_WISDOM),
-    CHARISMA_MODIFIER = determineModifier(ROLL_FOR_CHARISMA);
+  ROLL_FOR_DEXTERITY = diceRoller(3),
+  ROLL_FOR_CONSTITUTION = diceRoller(3),
+  ROLL_FOR_INTELLIGENCE = diceRoller(3),
+  ROLL_FOR_WISDOM = diceRoller(3),
+  ROLL_FOR_CHARISMA = diceRoller(3),
+  STRENGTH_MODIFIER = determineModifier(ROLL_FOR_STRENGTH),
+  DEXTERITY_MODIFIER = determineModifier(ROLL_FOR_DEXTERITY),
+  CONSTITUTION_MODIFIER = determineModifier(ROLL_FOR_CONSTITUTION),
+  INTELLIGENCE_MODIFIER = determineModifier(ROLL_FOR_INTELLIGENCE),
+  WISDOM_MODIFIER = determineModifier(ROLL_FOR_WISDOM),
+  CHARISMA_MODIFIER = determineModifier(ROLL_FOR_CHARISMA);
 
-const cleric = { characterClassName:"Cleric", 
-                xpAtLevel1 : 0, 
-                HDatLevel1 : diceRoller(1), 
-                toHitAtLevel1 : 0, 
-                savingThrowAtLevel1 : 15, 
-                savingThrowBonus : "+2 vs. Death and Poison", 
-                spellsAtLevel1:[0,0,0,0,0], 
-                primeAttribute : "WISDOM", 
-                specialAbilities : "Turn the Undead"  
-                };
-const fighter = { characterClassName:"Fighter", 
-                xpAtLevel1 : 0, 
-                HDatLevel1 : diceRoller(1) + 1, 
-                toHitAtLevel1 : 0, 
-                savingThrowAtLevel1 : 14, 
-                savingThrowBonus : "+2 vs. Poison and Paralysis", 
-                spellsAtLevel1:[0,0,0,0,0], 
-                primeAttribute : "STRENGTH", 
-                specialAbilities : "Combat Fury, Establish Stronghold (at level 9)"
-                };
-const magicUser = { characterClassName:"Magic-User", 
-                    xpAtLevel1 : 0, 
-                    HDatLevel1 : diceRoller(1), 
-                    toHitAtLevel1 : 0, 
-                    savingThrowAtLevel1 : 15, 
-                    savingThrowBonus : "+2 vs. Spells", 
-                    spellsAtLevel1:[1,0,0,0,0], 
-                    primeAttribute : "INTELLIGENCE", 
-                    specialAbilities : "Spell Casting, Establish Wizard Tower"
-                    };
-
+const cleric = {
+  characterClassName: "Cleric",
+  xpAtLevel1: 0,
+  HDatLevel1: diceRoller(1),
+  toHitAtLevel1: 0,
+  savingThrowAtLevel1: 15,
+  savingThrowBonus: "+2 vs. Death and Poison",
+  spellsAtLevel1: [0, 0, 0, 0, 0],
+  primeAttribute: "WISDOM",
+  specialAbilities: "Turn the Undead",
+};
+const fighter = {
+  characterClassName: "Fighter",
+  xpAtLevel1: 0,
+  HDatLevel1: diceRoller(1) + 1,
+  toHitAtLevel1: 0,
+  savingThrowAtLevel1: 14,
+  savingThrowBonus: "+2 vs. Poison and Paralysis",
+  spellsAtLevel1: [0, 0, 0, 0, 0],
+  primeAttribute: "STRENGTH",
+  specialAbilities: "Combat Fury, Establish Stronghold (at level 9)",
+};
+const magicUser = {
+  characterClassName: "Magic-User",
+  xpAtLevel1: 0,
+  HDatLevel1: diceRoller(1),
+  toHitAtLevel1: 0,
+  savingThrowAtLevel1: 15,
+  savingThrowBonus: "+2 vs. Spells",
+  spellsAtLevel1: [1, 0, 0, 0, 0],
+  primeAttribute: "INTELLIGENCE",
+  specialAbilities: "Spell Casting, Establish Wizard Tower",
+};
 
 const ALIGNMENTS = ["Law", "Neutral", "Chaos"];
-const CHARACTER_ALIGNMENT = ALIGNMENTS[Math.floor(Math.random() * ALIGNMENTS.length)];
+const CHARACTER_ALIGNMENT =
+  ALIGNMENTS[Math.floor(Math.random() * ALIGNMENTS.length)];
 
 let stringToDisplay = ""; //TODO: based on the highest score, choose the most appropriate class.
 
-const ATTRIBUTES = [ 
-    { attributeName:"STR", attributeValue:ROLL_FOR_STRENGTH, modifierValue:STRENGTH_MODIFIER }, 
-    { attributeName:"DEX", attributeValue:ROLL_FOR_DEXTERITY, modifierValue:DEXTERITY_MODIFIER }, 
-    { attributeName:"CON", attributeValue:ROLL_FOR_CONSTITUTION, modifierValue:CONSTITUTION_MODIFIER }, 
-    { attributeName:"INT", attributeValue:ROLL_FOR_INTELLIGENCE, modifierValue:INTELLIGENCE_MODIFIER },
-    { attributeName:"WIS", attributeValue:ROLL_FOR_WISDOM, modifierValue:WISDOM_MODIFIER },
-    { attributeName:"CHA", attributeValue:ROLL_FOR_CHARISMA, modifierValue:CHARISMA_MODIFIER }
+const ATTRIBUTES = [
+  {
+    attributeName: "STR",
+    attributeValue: ROLL_FOR_STRENGTH,
+    modifierValue: STRENGTH_MODIFIER,
+  },
+  {
+    attributeName: "DEX",
+    attributeValue: ROLL_FOR_DEXTERITY,
+    modifierValue: DEXTERITY_MODIFIER,
+  },
+  {
+    attributeName: "CON",
+    attributeValue: ROLL_FOR_CONSTITUTION,
+    modifierValue: CONSTITUTION_MODIFIER,
+  },
+  {
+    attributeName: "INT",
+    attributeValue: ROLL_FOR_INTELLIGENCE,
+    modifierValue: INTELLIGENCE_MODIFIER,
+  },
+  {
+    attributeName: "WIS",
+    attributeValue: ROLL_FOR_WISDOM,
+    modifierValue: WISDOM_MODIFIER,
+  },
+  {
+    attributeName: "CHA",
+    attributeValue: ROLL_FOR_CHARISMA,
+    modifierValue: CHARISMA_MODIFIER,
+  },
 ];
 
 for (let n = 0; n < ATTRIBUTES.length; n++) {
-    stringToDisplay += `${ATTRIBUTES[n].attributeName} ${ATTRIBUTES[n].attributeValue} (${ATTRIBUTES[n].modifierValue > 0 ? "+" : ""}${ATTRIBUTES[n].modifierValue}), `
+  stringToDisplay += `${ATTRIBUTES[n].attributeName} ${
+    ATTRIBUTES[n].attributeValue
+  } (${ATTRIBUTES[n].modifierValue > 0 ? "+" : ""}${
+    ATTRIBUTES[n].modifierValue
+  }), `;
 }
 
-stringToDisplay += `HP ${diceRoller(1)}, Alignment ${CHARACTER_ALIGNMENT}, `
+stringToDisplay += `HP ${diceRoller(1)}, Alignment ${CHARACTER_ALIGNMENT}, `;
 //TODO: Include different HP roller for Fighter
 
 let xpBonus = 0;
 if (ROLL_FOR_WISDOM >= 15) {
-    xpBonus += 5;
+  xpBonus += 5;
 }
 if (ROLL_FOR_CHARISMA >= 15) {
-    xpBonus += 5;
+  xpBonus += 5;
 }
 if (xpBonus > 15) {
-    xpBonus = 15;
+  xpBonus = 15;
 }
-stringToDisplay += `Current XP 0, XP Bonus ${xpBonus}%`
+stringToDisplay += `Current XP 0, XP Bonus ${xpBonus}%`;
 //TODO: Include prime attribute in XP bonus
 
 document.getElementById("generator").innerHTML = stringToDisplay;
-
-
 
 //TODO: include class characteristics
 //TODO: roll for initial money
