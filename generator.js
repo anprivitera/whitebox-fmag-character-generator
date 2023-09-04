@@ -54,6 +54,9 @@ const ROLL_FOR_STRENGTH = diceRoller(3),
     WISDOM_MODIFIER = determineModifier(ROLL_FOR_WISDOM),
     CHARISMA_MODIFIER = determineModifier(ROLL_FOR_CHARISMA);
 
+const ALIGNMENTS = ["Law", "Neutral", "Chaos"];
+const CHARACTER_ALIGNMENT = ALIGNMENTS[Math.floor(Math.random() * ALIGNMENTS.length)];
+
 let stringToDisplay = ""; //TODO: based on the highest score, choose the most appropriate class.
 
 const ATTRIBUTES = [ 
@@ -69,15 +72,14 @@ for (let n = 0; n < ATTRIBUTES.length; n++) {
     stringToDisplay += `${ATTRIBUTES[n].attributeName} ${ATTRIBUTES[n].attributeValue} (${ATTRIBUTES[n].modifierValue > 0 ? "+" : ""}${ATTRIBUTES[n].modifierValue}), `
 }
 
-
-stringToDisplay += `HP ${diceRoller(1)}, Alignment,`
+stringToDisplay += `HP ${diceRoller(1)}, Alignment ${CHARACTER_ALIGNMENT},`
 //TODO: Include different HP roller for Fighter
 
 
 
 document.getElementById("generator").innerHTML = stringToDisplay;
 //TODO: Give 5% xp bonus if WIS is 15+, and 5% if CHA is 15+
-//TODO: Choose an alignment randmoly between Law, Neutrality and Chaos
+
 
 //TODO: include class characteristics
 //TODO: roll for initial money
