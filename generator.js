@@ -335,7 +335,8 @@ function determineCharacterClass(attributes) {
     spellcasterType: "divine",
     primeAttribute: "WIS",
     // primeAttributeValue: null;
-    specialAbilities: "Turn the Undead, Establish Temple (at Level 10)",
+    specialAbilities:
+      "<ul><li>Turn the Undead</li><li>Establish Temple (at Level 10)</li>",
   };
   const fighter = {
     characterClassName: "Fighter",
@@ -348,7 +349,8 @@ function determineCharacterClass(attributes) {
     spellsAtLevel1: null,
     primeAttribute: "STR",
     // primeAttributeValue: null;
-    specialAbilities: "Combat Fury, Establish Stronghold (at Level 9)",
+    specialAbilities:
+      "<ul><li>Combat Fury</li><li>Establish Stronghold (at Level 9)</li></ul>",
   };
   const elf = {
     characterClassName: "Elf",
@@ -362,7 +364,7 @@ function determineCharacterClass(attributes) {
     primeAttribute: null,
     // primeAttributeValue: null;
     specialAbilities:
-      "+1 to-hit vs. goblins, orcs, intelligent undead, lycantropes; immune to undead paralysis;  damage from giants and ogres; 4-in-6 chances of actively spotting hidden or concealed doors (2-in-6 if passing by).",
+      "<ul><li>+1 to-hit vs. goblins, orcs, intelligent undead, lycantropes</li><li>immune to undead paralysis</li>half damage from giants and ogres</li><li>4-in-6 chances of actively spotting hidden or concealed doors (2-in-6 if passing by).</li></ul>",
   };
   const magicUser = {
     characterClassName: "Magic-User",
@@ -374,7 +376,8 @@ function determineCharacterClass(attributes) {
     spellcasterType: "magic",
     primeAttribute: "INT",
     // primeAttributeValue: null;
-    specialAbilities: "Spell Casting, Establish Wizard Tower (at Level 9)",
+    specialAbilities:
+      "<ul><li>Spell Casting</li><li>Establish Wizard Tower (at Level 9)</li></ul>",
   };
   const thief = {
     characterClassName: "Thief",
@@ -387,7 +390,7 @@ function determineCharacterClass(attributes) {
     primeAttribute: "DEX",
     // primeAttributeValue: null;
     specialAbilities:
-      "Back Stab (+2 to Hit and x2 damage on hit), Thievery 2, Establish Guild (at Level 9)",
+      "<ul><li>Back Stab (+2 to Hit and x2 damage on hit)</li><li>Thievery 2-in-6</li><li>Establish Guild (at Level 9)</li></ul>",
   };
   let generatedCharacterClass = null;
   if (Math.random() < 0.1) {
@@ -440,13 +443,16 @@ function determineCharacterRace(generatedCharacterClass) {
     raceName: "Dwarf",
     raceSavingThrowBonus: ", +4 vs. Magic",
     raceSpecialAbilities:
-      "; can reach maximum level 6; half damage from giants and ogres; 4-in-6 chances of actively spotting traps, slanting passages or construction (2-in-6 if passing by); can speak with goblins, orgrs, orcs, kobolds.",
+      "<ul><li>Can reach maximum level 6</li><li>Half damage from giants and ogres</li><li>4-in-6 chances of actively spotting traps, slanting passages or construction (2-in-6 if passing by)</li><li>Can speak with goblins, ogres, orcs, kobolds</li></ul>",
   };
   const HALFLING = {
     raceName: "Halfling",
     raceSavingThrowBonus: ", +4 vs. Magic",
-    raceSpecialAbilities:
-      "; can reach maximum level 4 (fighter) or level 6 (thief); half damage from giants and ogres; +2 to-hit using missile weapons; 5-in-6 chance of going undetected when outside of combat",
+    raceSpecialAbilities: `<ul><li>${
+      generatedCharacterClass.characterClassName == "Fighter"
+        ? "Can reach maxium level 4."
+        : "Can reach maxium Level 6."
+    }</li><li>Half damage from giants and ogres</li><li>+2 to-hit using missile weapons</li><li>5-in-6 chance of going undetected when outside of combat</li></ul>`,
   };
   const RACES = [HUMAN, DWARF, HALFLING];
   if (generatedCharacterClass.characterClassName == "Elf") {
@@ -482,45 +488,19 @@ if (generatedCharacterClass.primeAttributeValue >= 15) {
 if (xpBonus > 15) {
   xpBonus = 15;
 }
-let stringToDisplay = `${generatedCharacterRace.raceName} ${generatedCharacterClass.characterClassName}, Level 1 <br /> Alignment: ${CHARACTER_ALIGNMENT}<br /><br />`;
-
-for (let n = 0; n < ATTRIBUTES.length; n++) {
-  stringToDisplay += `${ATTRIBUTES[n].attributeName} ${
-    ATTRIBUTES[n].attributeValue
-  } (${ATTRIBUTES[n].modifierValue > 0 ? "+" : ""}${
-    ATTRIBUTES[n].modifierValue
-  }) <br />`;
-}
 
 let characterHP = generatedCharacterClass.HDatLevel1 + CONSTITUTION_MODIFIER;
 if (characterHP <= 0) {
   characterHP = 1;
 }
 
-const toHitMelee = generatedCharacterClass.toHitAtLevel1 + STRENGTH_MODIFIER;
-const toHitMissile = generatedCharacterClass.toHitAtLevel1 + DEXTERITY_MODIFIER;
+const toHitMelee = `${
+  generatedCharacterClass.toHitAtLevel1 + STRENGTH_MODIFIER > 0 ? "+" : ""
+}${generatedCharacterClass.toHitAtLevel1 + STRENGTH_MODIFIER}`;
+const toHitMissile = `${
+  generatedCharacterClass.toHitAtLevel1 + DEXTERITY_MODIFIER > 0 ? "+" : ""
+}${generatedCharacterClass.toHitAtLevel1 + DEXTERITY_MODIFIER}`;
 
-//TODO: Include AC value after including equipment
-stringToDisplay += `<br />Melee: ${
-  toHitMelee > 0 ? "+" : ""
-}${toHitMelee} (to-hit and damage) <br /> Missile: ${
-  toHitMissile > 0 ? "+" : ""
-}${toHitMissile} (to-hit) <br /> AC <br/> HP ${characterHP} <br /> ST ${
-  generatedCharacterClass.savingThrowAtLevel1
-} (${
-  generatedCharacterClass.savingThrowBonus +
-  generatedCharacterRace.raceSavingThrowBonus
-}) <br />  </br> Current XP 0, XP Bonus ${xpBonus}% <br /> <br /> Abilities: ${
-  generatedCharacterClass.specialAbilities +
-  generatedCharacterRace.raceSpecialAbilities
-}`;
-if (generatedCharacterClass.spellcasterType === "magic") {
-  stringToDisplay += `<br />Known Spells: ${
-    MAGIC_USER_SPELLS_LEVEL_1[
-      Math.floor(Math.random() * MAGIC_USER_SPELLS_LEVEL_1.length)
-    ]
-  }`;
-}
 let maxHirelings = null;
 let hirelingsLoyalty = null;
 if (ROLL_FOR_CHARISMA <= 4) {
@@ -546,12 +526,38 @@ if (ROLL_FOR_CHARISMA <= 4) {
   hirelingsLoyalty = 2;
 }
 
-//TODO: roll for initial money
 const initialMoney = diceRoller(3) * 10;
-stringToDisplay += `<br /><br />Equipment: ${initialMoney} gp`;
 
-stringToDisplay += `<br /><br /> Hirelings (Max #): ${maxHirelings}; Loyalty: ${hirelingsLoyalty}<br />`;
-
+//TODO: Include AC value after including equipment
+let stringToDisplay = `${generatedCharacterRace.raceName} ${generatedCharacterClass.characterClassName}, Level 1 <br /> Alignment: ${CHARACTER_ALIGNMENT}<br /><br />`;
+for (let n = 0; n < ATTRIBUTES.length; n++) {
+  stringToDisplay += `${ATTRIBUTES[n].attributeName} ${
+    ATTRIBUTES[n].attributeValue
+  } (${ATTRIBUTES[n].modifierValue > 0 ? "+" : ""}${
+    ATTRIBUTES[n].modifierValue
+  }) <br />`;
+}
+stringToDisplay += `<br />Melee: ${toHitMelee} (to-hit and damage) <br /> Missile: ${toHitMissile} (to-hit) <br /> AC <br/> HP ${characterHP} <br /> ST ${
+  generatedCharacterClass.savingThrowAtLevel1
+} (${
+  generatedCharacterClass.savingThrowBonus +
+  generatedCharacterRace.raceSavingThrowBonus
+}) <br /> </br> Current XP 0 <br /> XP Bonus ${xpBonus}% <br /> <br /> Class Abilities: ${
+  generatedCharacterClass.specialAbilities
+}
+  ${
+    generatedCharacterRace.raceName != "Human"
+      ? "Race Abilities: " + generatedCharacterRace.raceSpecialAbilities
+      : ""
+  }`;
+if (generatedCharacterClass.spellcasterType === "magic") {
+  stringToDisplay += `<br />Known Spells: ${
+    MAGIC_USER_SPELLS_LEVEL_1[
+      Math.floor(Math.random() * MAGIC_USER_SPELLS_LEVEL_1.length)
+    ]
+  }`;
+}
+stringToDisplay += `Equipment: ${initialMoney} gp <br /><br /> Hirelings (Max #): ${maxHirelings}<br /> Loyalty: ${hirelingsLoyalty}<br />`;
 //TODO: pick elements from list of items randomly until money runs out (giving priority to 1 allowed weapon, 1 allowed armor and then assigning the rest randomly)
 //TODO: calculate movement speed
 
