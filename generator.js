@@ -571,7 +571,9 @@ if (generatedCharacterClass.spellcasterType === "magic") {
     ]
   }<br />`;
 }
-stringToDisplay += `Equipment: ${currentMoney} gp <br /><br /> Hirelings (Max #): ${maxHirelings}<br /> Loyalty: ${hirelingsLoyalty}<br />`;
+stringToDisplay += `Equipment: ${currentMoney} gp <br /><br /> Hirelings (Max #): ${maxHirelings}<br /> Loyalty: ${
+  hirelingsLoyalty > 0 ? "+" : ""
+}${hirelingsLoyalty}<br />`;
 //TODO: pick elements from list of items randomly until money runs out (giving priority to 1 allowed weapon, 1 allowed armor and then assigning the rest randomly)
 //TODO: calculate movement speed
 
