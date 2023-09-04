@@ -5,11 +5,11 @@ It includes:
 - HD
 - ~~Attribute scores with modifiers~~
 - Name 
-- Class
+- ~~Class~~
 - Level
-- Race
+- (Race)
 - ~~Alignment~~
-- Initial XP
+- ~~Initial XP~~
 - XP bonus
 - A character portrait
 - Saving throw and mods
@@ -146,7 +146,7 @@ const ALIGNMENTS = ["Law", "Neutral", "Chaos"];
 const CHARACTER_ALIGNMENT =
   ALIGNMENTS[Math.floor(Math.random() * ALIGNMENTS.length)];
 
-let stringToDisplay = `${generatedCharacterClass.characterClassName} `; //TODO: based on the highest score, choose the most appropriate class.
+let stringToDisplay = `${generatedCharacterClass.characterClassName}, Level 1, `;
 
 for (let n = 0; n < ATTRIBUTES.length; n++) {
   stringToDisplay += `${ATTRIBUTES[n].attributeName} ${
@@ -164,6 +164,9 @@ if (ROLL_FOR_WISDOM >= 15) {
   xpBonus += 5;
 }
 if (ROLL_FOR_CHARISMA >= 15) {
+  xpBonus += 5;
+}
+if (generatedCharacterClass.primeAttribute >= 15) {
   xpBonus += 5;
 }
 if (xpBonus > 15) {
