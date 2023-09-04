@@ -16,7 +16,7 @@ It includes:
 - ~~Spells / Abilities ~~
 - Equipment
 - Weapons & Armor
-- Coins
+- ~~Coins~~
 - ~~Languages~~
 - ~~To-Hit bonus~~
 - ~~Number of hirelings and loyalty~~
