@@ -18,7 +18,7 @@ It includes:
 - Weapons & Armor
 - Coins
 - ~~Languages~~
-- To-Hit bonus
+- ~~To-Hit bonus~~
 - Number of hirelings and loyalty
 - Weight carried and movement speed
 */
