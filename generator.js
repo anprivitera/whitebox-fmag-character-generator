@@ -7,7 +7,7 @@ It includes:
 - Name 
 - ~~Class~~
 - ~~Level~~
-- Race
+- ~~Race~~
 - ~~Alignment~~
 - ~~Initial XP~~
 - ~~XP bonus~~
@@ -271,7 +271,7 @@ if (characterHP <= 0) {
   characterHP = 1;
 }
 
-stringToDisplay += `<br />HP ${characterHP} <br /> ST ${
+stringToDisplay += `<br /> AC <br/> HP ${characterHP} <br /> ST ${
   generatedCharacterClass.savingThrowAtLevel1
 } (${
   generatedCharacterClass.savingThrowBonus +
