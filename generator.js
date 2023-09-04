@@ -87,6 +87,17 @@ const ATTRIBUTES = [
   },
 ];
 
+const MAGIC_USER_SPELLS_LEVEL_1 = [
+  "Charm Person",
+  "Detect Magic",
+  "Hold Portal",
+  "Light",
+  "Protection from Chaos",
+  "Read Languages",
+  "Read Magic",
+  "Sleep",
+];
+
 function determineCharacterClass(attributes) {
   const cleric = {
     characterClassName: "Cleric",
@@ -95,6 +106,7 @@ function determineCharacterClass(attributes) {
     toHitAtLevel1: 0,
     savingThrowAtLevel1: 15,
     savingThrowBonus: "+2 vs. Death and Poison",
+    spellcasterType: "divine",
     spellsAtLevel1: [0, 0, 0, 0, 0],
     primeAttribute: "WIS",
     // primeAttributeValue: null;
@@ -107,7 +119,8 @@ function determineCharacterClass(attributes) {
     toHitAtLevel1: 0,
     savingThrowAtLevel1: 14,
     savingThrowBonus: "+2 vs. Poison and Paralysis",
-    spellsAtLevel1: [0, 0, 0, 0, 0],
+    spellcasterType: null,
+    spellsAtLevel1: null,
     primeAttribute: "STR",
     // primeAttributeValue: null;
     specialAbilities: "Combat Fury, Establish Stronghold (at Level 9)",
@@ -119,6 +132,7 @@ function determineCharacterClass(attributes) {
     toHitAtLevel1: 0,
     savingThrowAtLevel1: 15,
     savingThrowBonus: "+2 vs. Spells",
+    spellcasterType: "magic",
     spellsAtLevel1: [1, 0, 0, 0, 0],
     primeAttribute: "INT",
     // primeAttributeValue: null;
@@ -184,6 +198,14 @@ stringToDisplay += `<br />HP ${diceRoller(1)} <br /> ST ${
 }) <br />  </br> Current XP 0, XP Bonus ${xpBonus}% <br /> Abilities: ${
   generatedCharacterClass.specialAbilities
 }`;
+if (generatedCharacterClass.spellcasterType === "magic") {
+  stringToDisplay += `<br />Known Spells: ${
+    MAGIC_USER_SPELLS_LEVEL_1[
+      Math.floor(Math.random() * MAGIC_USER_SPELLS_LEVEL_1.length)
+    ]
+  }`;
+}
+// TODO:
 
 document.getElementById("generator").innerHTML = stringToDisplay;
 
