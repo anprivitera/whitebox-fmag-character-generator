@@ -529,7 +529,7 @@ if (ROLL_FOR_CHARISMA <= 4) {
 let raceAbilities = "";
 
 if (
-  generatedCharacterRace.raceName != "Human" ||
+  generatedCharacterRace.raceName != "Human" &&
   generatedCharacterRace.raceName != "Elf"
 ) {
   raceAbilities = `Race Abilities: ${generatedCharacterRace.raceSpecialAbilities}`;
