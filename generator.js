@@ -59,16 +59,16 @@ const ROLL_FOR_STRENGTH = diceRoller(3),
 let stringToDisplay = "";
 // Define Strengths, Dexterity, Constitution, Intelligence, Wisdom, Charisma. For each of them, roll 3d6 separately
 const ATTRIBUTES = [ 
-    { attributeName:"STR", attributeValue:ROLL_FOR_STRENGTH, modifierValue: }, 
-    { attributeName:"DEX", attributeValue:ROLL_FOR_DEXTERITY }, 
-    { attributeName:"CON", attributeValue:ROLL_FOR_CONSTITUTION }, 
-    { attributeName:"INT", attributeValue:ROLL_FOR_INTELLIGENCE },
-    { attributeName:"WIS", attributeValue:ROLL_FOR_WISDOM },
-    { attributeName:"CHA", attributeValue:ROLL_FOR_CHARISMA }
+    { attributeName:"STR", attributeValue:ROLL_FOR_STRENGTH, modifierValue:STRENGTH_MODIFIER }, 
+    { attributeName:"DEX", attributeValue:ROLL_FOR_DEXTERITY, modifierValue:DEXTERITY_MODIFIER }, 
+    { attributeName:"CON", attributeValue:ROLL_FOR_CONSTITUTION, modifierValue:CONSTITUTION_MODIFIER }, 
+    { attributeName:"INT", attributeValue:ROLL_FOR_INTELLIGENCE, modifierValue:INTELLIGENCE_MODIFIER },
+    { attributeName:"WIS", attributeValue:ROLL_FOR_WISDOM, modifierValue:WISDOM_MODIFIER },
+    { attributeName:"CHA", attributeValue:ROLL_FOR_CHARISMA, modifierValue:CHARISMA_MODIFIER }
 ];
 
 for (let n = 0; n < ATTRIBUTES.length; n++) {
-    stringToDisplay += `${ATTRIBUTES[n].attributeName} ${ATTRIBUTES[n].attributeValue}, `
+    stringToDisplay += `${ATTRIBUTES[n].attributeName} ${ATTRIBUTES[n].attributeValue} (${ATTRIBUTES[n].modifierValue}), `
 }
 
 document.getElementById("generator").innerHTML = stringToDisplay;
