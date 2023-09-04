@@ -54,46 +54,6 @@ const ROLL_FOR_STRENGTH = diceRoller(3),
   WISDOM_MODIFIER = determineModifier(ROLL_FOR_WISDOM),
   CHARISMA_MODIFIER = determineModifier(ROLL_FOR_CHARISMA);
 
-const cleric = {
-  characterClassName: "Cleric",
-  xpAtLevel1: 0,
-  HDatLevel1: diceRoller(1),
-  toHitAtLevel1: 0,
-  savingThrowAtLevel1: 15,
-  savingThrowBonus: "+2 vs. Death and Poison",
-  spellsAtLevel1: [0, 0, 0, 0, 0],
-  primeAttribute: "WISDOM",
-  specialAbilities: "Turn the Undead",
-};
-const fighter = {
-  characterClassName: "Fighter",
-  xpAtLevel1: 0,
-  HDatLevel1: diceRoller(1) + 1,
-  toHitAtLevel1: 0,
-  savingThrowAtLevel1: 14,
-  savingThrowBonus: "+2 vs. Poison and Paralysis",
-  spellsAtLevel1: [0, 0, 0, 0, 0],
-  primeAttribute: "STRENGTH",
-  specialAbilities: "Combat Fury, Establish Stronghold (at level 9)",
-};
-const magicUser = {
-  characterClassName: "Magic-User",
-  xpAtLevel1: 0,
-  HDatLevel1: diceRoller(1),
-  toHitAtLevel1: 0,
-  savingThrowAtLevel1: 15,
-  savingThrowBonus: "+2 vs. Spells",
-  spellsAtLevel1: [1, 0, 0, 0, 0],
-  primeAttribute: "INTELLIGENCE",
-  specialAbilities: "Spell Casting, Establish Wizard Tower",
-};
-
-const ALIGNMENTS = ["Law", "Neutral", "Chaos"];
-const CHARACTER_ALIGNMENT =
-  ALIGNMENTS[Math.floor(Math.random() * ALIGNMENTS.length)];
-
-let stringToDisplay = ""; //TODO: based on the highest score, choose the most appropriate class.
-
 const ATTRIBUTES = [
   {
     attributeName: "STR",
@@ -126,6 +86,67 @@ const ATTRIBUTES = [
     modifierValue: CHARISMA_MODIFIER,
   },
 ];
+
+function determineCharacterClass(attributes) {
+  const cleric = {
+    characterClassName: "Cleric",
+    xpAtLevel1: 0,
+    HDatLevel1: diceRoller(1),
+    toHitAtLevel1: 0,
+    savingThrowAtLevel1: 15,
+    savingThrowBonus: "+2 vs. Death and Poison",
+    spellsAtLevel1: [0, 0, 0, 0, 0],
+    primeAttribute: "WIS",
+    specialAbilities: "Turn the Undead",
+  };
+  const fighter = {
+    characterClassName: "Fighter",
+    xpAtLevel1: 0,
+    HDatLevel1: diceRoller(1) + 1,
+    toHitAtLevel1: 0,
+    savingThrowAtLevel1: 14,
+    savingThrowBonus: "+2 vs. Poison and Paralysis",
+    spellsAtLevel1: [0, 0, 0, 0, 0],
+    primeAttribute: "STR",
+    specialAbilities: "Combat Fury, Establish Stronghold (at level 9)",
+  };
+  const magicUser = {
+    characterClassName: "Magic-User",
+    xpAtLevel1: 0,
+    HDatLevel1: diceRoller(1),
+    toHitAtLevel1: 0,
+    savingThrowAtLevel1: 15,
+    savingThrowBonus: "+2 vs. Spells",
+    spellsAtLevel1: [1, 0, 0, 0, 0],
+    primeAttribute: "INT",
+    specialAbilities: "Spell Casting, Establish Wizard Tower",
+  };
+  let generatedCharacterClass = null;
+  let fromHighToLow = attributes.map((x) => x);
+  fromHighToLow.sort((a, b) => b.attributeValue - a.attributeValue);
+  while (generatedCharacterClass == null) {
+    for (let x = 0; x < fromHighToLow.length; x++) {
+      if (fromHighToLow[x].attributeName == cleric.primeAttribute) {
+        generatedCharacterClass = cleric;
+        return generatedCharacterClass;
+      } else if (fromHighToLow[x].attributeName == fighter.primeAttribute) {
+        generatedCharacterClass = fighter;
+        return generatedCharacterClass;
+      } else if (fromHighToLow[x].attributeName == magicUser.primeAttribute) {
+        generatedCharacterClass = magicUser;
+        return generatedCharacterClass;
+      }
+    }
+  }
+}
+
+let generatedCharacterClass = determineCharacterClass(ATTRIBUTES);
+
+const ALIGNMENTS = ["Law", "Neutral", "Chaos"];
+const CHARACTER_ALIGNMENT =
+  ALIGNMENTS[Math.floor(Math.random() * ALIGNMENTS.length)];
+
+let stringToDisplay = `${generatedCharacterClass.characterClassName} `; //TODO: based on the highest score, choose the most appropriate class.
 
 for (let n = 0; n < ATTRIBUTES.length; n++) {
   stringToDisplay += `${ATTRIBUTES[n].attributeName} ${
