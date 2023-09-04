@@ -2,12 +2,12 @@
 /* USER STORY: I see a short textual description Whitebox character randomly generated and ready to play. 
 It includes: 
 - Ascending Armor class
-- HD
+- ~~HD~~
 - ~~Attribute scores with modifiers~~
 - Name 
 - ~~Class~~
-- Level
-- (Race)
+- ~~Level~~
+- Race
 - ~~Alignment~~
 - ~~Initial XP~~
 - ~~XP bonus~~
@@ -136,6 +136,19 @@ function determineCharacterClass(attributes) {
     // primeAttributeValue: null;
     specialAbilities: "Spell Casting, Establish Wizard Tower (at Level 9)",
   };
+  const thief = {
+    characterClassName: "Thief",
+    xpAtLevel1: 0,
+    HDatLevel1: diceRoller(1),
+    toHitAtLevel1: 0,
+    savingThrowAtLevel1: 14,
+    savingThrowBonus: "+2 vs. Traps",
+    spellcasterType: null,
+    primeAttribute: "DEX",
+    // primeAttributeValue: null;
+    specialAbilities:
+      "Back Stab (+2 to Hit and x2 damage on hit), Thievery 2, Establish Guild (at Level 9)",
+  };
   let generatedCharacterClass = null;
   let fromHighToLow = attributes.map((x) => x);
   fromHighToLow.sort((a, b) => b.attributeValue - a.attributeValue);
@@ -153,6 +166,11 @@ function determineCharacterClass(attributes) {
         return generatedCharacterClass;
       } else if (fromHighToLow[x].attributeName == magicUser.primeAttribute) {
         generatedCharacterClass = magicUser;
+        generatedCharacterClass.primeAttributeValue =
+          fromHighToLow[x].attributeValue;
+        return generatedCharacterClass;
+      } else if (fromHighToLow[x].attributeName == thief.primeAttribute) {
+        generatedCharacterClass = thief;
         generatedCharacterClass.primeAttributeValue =
           fromHighToLow[x].attributeValue;
         return generatedCharacterClass;
