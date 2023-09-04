@@ -316,9 +316,48 @@ const WEAPONS = [
     missileROF: 1,
   },
 ];
-
 //TODO: Treat ammunitions as a separate purchase: if a character gets a missile weapon, they should obviously get also ammunitions
 //Bow > arrows, Sling > stones, Crossbow > Bolts
+
+//TODO: Divide consumables items, so that they can be purchased more than once, and display them as unified (i.e., Torches (10))
+
+//TODO: Required items should go into character classes?
+
+const ADVENTURING_GEAR = [
+  { itemName: "Backpack (30 lb. capacity", cost: 5 },
+  { itemName: "Bedroll", cost: 2 },
+  { itemName: "Belladonna, bunch", cost: 10 },
+  { itemName: "Bottle (wine), glass", cost: 1 },
+  { itemName: "Case (map or scroll)", cost: 3 },
+  { itemName: "Crowbar", cost: 5 },
+  { itemName: "Flint and Stell", cost: 5 },
+  { itemName: "Garlic (1 lb.)", cost: 10 },
+  { itemName: "Grappling Hook", cost: 5 },
+  { itemName: "Hammer", cost: 2 },
+  { itemName: "Helmet", cost: 10 },
+  { itemName: "Holy Symbol, wooden", cost: 2 },
+  { itemName: "Holy Symbol, silver", cost: 25 },
+  { itemName: "Holy Water, small vial", cost: 25 },
+  { itemName: "Lantern", cost: 10 },
+  { itemName: "Mirror (small), steel", cost: 5 },
+  { itemName: "Oil (lamp), 1 pint", cost: 2 },
+  { itemName: "Pole, 10 ft.", cost: 1 },
+  { itemName: "Rations, trail (day)", cost: 1 },
+  { itemName: "Rations, dried (day)", cost: 3 },
+  { itemName: "Rope (50 ft.), hemp", cost: 1 },
+  { itemName: "Rope (50 ft.), silk", cost: 5 },
+  { itemName: "Sack (15 lb. capacity)", cost: 1 },
+  { itemName: "Sack (30 lb. capacity)", cost: 2 },
+  { itemName: "Shovel", cost: 5 },
+  { itemName: "Spellbook (blank)", cost: 100 },
+  { itemName: "Spikes (12), iron", cost: 1 },
+  { itemName: "Stakes (12), wooden", cost: 1 },
+  { itemName: "Tent", cost: 20 },
+  { itemName: "Thieves' Tools", cost: 25 },
+  { itemName: "Torches (6)", cost: 1 },
+  { itemName: "Waterskin", cost: 1 },
+  { itemName: "Wolfsbane, bunch", cost: 10 },
+];
 
 function determineCharacterClass(attributes) {
   const cleric = {
@@ -538,8 +577,11 @@ let currentMoney = initialMoney;
 // while initialMoney is above the "cost" value of at least one item in the WEAPONS array
 // select a random item to transfer from the WEAPONS array to the purchasedItems array, making sure that it is not already present in the purchasedItems array
 
+//Select a random weapon
+//If weapon selected is
+
 let characterEquipment = [];
-let shoppingArray = WEAPONS.map((x) => x);
+let shoppingArray = ADVENTURING_GEAR.map((x) => x);
 shuffle(shoppingArray);
 
 for (let i = 0; i < shoppingArray.length; i++) {
@@ -580,7 +622,7 @@ if (generatedCharacterClass.spellcasterType === "magic") {
   }<br />`;
 }
 for (let n = 0; n < characterEquipment.length; n++) {
-  stringToDisplay += `${initialMoney} ${characterEquipment[n].weaponName} <br />`;
+  stringToDisplay += `${characterEquipment[n].itemName} <br />`;
 }
 stringToDisplay += `Equipment: ${currentMoney} gp <br /><br /> Hirelings (Max #): ${maxHirelings}<br /> Loyalty: ${
   hirelingsLoyalty > 0 ? "+" : ""
