@@ -124,6 +124,20 @@ function determineCharacterClass(attributes) {
     // primeAttributeValue: null;
     specialAbilities: "Combat Fury, Establish Stronghold (at Level 9)",
   };
+  const elf = {
+    characterClassName: "Elf",
+    xpAtLevel1: 0,
+    HDatLevel1: diceRoller(1) + 1,
+    toHitAtLevel1: 0,
+    savingThrowAtLevel1: 14,
+    savingThrowBonus: "+2 vs. Poison and Paralysis",
+    spellcasterType: null, // TODO: change when implementing more character levels
+    spellsAtLevel1: null,
+    primeAttribute: null,
+    // primeAttributeValue: null;
+    specialAbilities:
+      "+1 to-hit vs. goblins, orcs, intelligent undead, lycantropes; immune to undead paralysis;  damage from giants and ogres; 4-in-6 chances of actively spotting hidden or concealed doors (2-in-6 if passing by).",
+  };
   const magicUser = {
     characterClassName: "Magic-User",
     xpAtLevel1: 0,
@@ -150,6 +164,10 @@ function determineCharacterClass(attributes) {
       "Back Stab (+2 to Hit and x2 damage on hit), Thievery 2, Establish Guild (at Level 9)",
   };
   let generatedCharacterClass = null;
+  if (Math.random() < 0.1) {
+    generatedCharacterClass = elf;
+    return generatedCharacterClass;
+  }
   let fromHighToLow = attributes.map((x) => x);
   fromHighToLow.sort((a, b) => b.attributeValue - a.attributeValue);
   while (generatedCharacterClass == null) {
@@ -187,6 +205,11 @@ function determineCharacterRace(generatedCharacterClass) {
     raceSavingThrowBonus: "",
     raceSpecialAbilities: "",
   };
+  const ELF = {
+    raceName: "",
+    raceSavingThrowBonus: "",
+    raceSpecialAbilities: "",
+  };
   const DWARF = {
     raceName: "Dwarf",
     raceSavingThrowBonus: ", +4 vs. Magic",
@@ -200,6 +223,10 @@ function determineCharacterRace(generatedCharacterClass) {
       "; can reach maximum level 4 (fighter) or level 6 (thief); half damage from giants and ogres; +2 to-hit using missile weapons; 5-in-6 chance of going undetected when outside of combat",
   };
   const RACES = [HUMAN, DWARF, HALFLING];
+  if (generatedCharacterClass.characterClassName == "Elf") {
+    let characterRace = ELF;
+    return characterRace;
+  }
   let characterRace = HUMAN;
   if (
     generatedCharacterClass.characterClassName == "Fighter" ||
