@@ -23,7 +23,6 @@ It includes:
 - Weight carried and movement speed
 */
 
-
 // Define dice roller (3d6)
 function diceRoller (numberOfDice) {
     let rollResult = null;
@@ -33,11 +32,22 @@ function diceRoller (numberOfDice) {
     return rollResult
 }
 
-const STRENGHT = diceRoller(3);
-
-document.getElementById("generator").innerHTML = `STR ${STRENGHT}`;
-
+let stringToDisplay = "";
 // Define Strengths, Dexterity, Constitution, Intelligence, Wisdom, Charisma. For each of them, roll 3d6 separately
+const ATTRIBUTES = [ 
+    { attributeName:"STR", attributeValue:diceRoller(3) }, 
+    { attributeName:"DEX", attributeValue:diceRoller(3) }, 
+    { attributeName:"CON", attributeValue:diceRoller(3) }, 
+    { attributeName:"INT", attributeValue:diceRoller(3) },
+    { attributeName:"WIS", attributeValue:diceRoller(3) },
+    { attributeName:"CHA", attributeValue:diceRoller(3) }
+];
+
+for (let n = 0; n < ATTRIBUTES.length; n++) {
+    stringToDisplay += `${ATTRIBUTES[n].attributeName} ${ATTRIBUTES[n].attributeValue}, `
+}
+
+document.getElementById("generator").innerHTML = stringToDisplay;
 // Give an appropriate modifier for each score (3-6 = -1, 7-14 =0, 15-18 = +1)
 // Give 5% xp bonus if WIS is 15+, and 5% if CHA is 15+
 // HD Dice is 1d6
