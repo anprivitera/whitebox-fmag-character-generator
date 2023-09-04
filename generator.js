@@ -535,10 +535,16 @@ if (
   raceAbilities = `Race Abilities: ${generatedCharacterRace.raceSpecialAbilities}`;
 }
 
-const initialMoney = diceRoller(3) * 10;
+const currentMoney = diceRoller(3) * 10;
+
 // create a new array called purchasedItems
 // while initialMoney is above the "cost" value of at least one item in the WEAPONS array
 // select a random item to transfer from the WEAPONS array to the purchasedItems array, making sure that it is not already present in the purchasedItems array
+
+// copy the WEAPONS array into shoppingArray
+// while there are still items in shoppingArray with "cost" value equal or lower than currentMoney
+// take out an item from the shoppyingArray whose value is lower or equal to the currentMoney
+// subtract item cost from currentMoney
 
 //TODO: Include AC value after including equipment
 let stringToDisplay = `${generatedCharacterRace.raceName} ${generatedCharacterClass.characterClassName}, Level 1 <br /> Alignment: ${CHARACTER_ALIGNMENT}<br /><br />`;
@@ -565,7 +571,7 @@ if (generatedCharacterClass.spellcasterType === "magic") {
     ]
   }<br />`;
 }
-stringToDisplay += `Equipment: ${initialMoney} gp <br /><br /> Hirelings (Max #): ${maxHirelings}<br /> Loyalty: ${hirelingsLoyalty}<br />`;
+stringToDisplay += `Equipment: ${currentMoney} gp <br /><br /> Hirelings (Max #): ${maxHirelings}<br /> Loyalty: ${hirelingsLoyalty}<br />`;
 //TODO: pick elements from list of items randomly until money runs out (giving priority to 1 allowed weapon, 1 allowed armor and then assigning the rest randomly)
 //TODO: calculate movement speed
 
