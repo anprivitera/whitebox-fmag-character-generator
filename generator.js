@@ -155,23 +155,6 @@ const ALIGNMENTS = ["Law", "Neutral", "Chaos"];
 const CHARACTER_ALIGNMENT =
   ALIGNMENTS[Math.floor(Math.random() * ALIGNMENTS.length)];
 
-let stringToDisplay = `${generatedCharacterClass.characterClassName}, Level 1, `;
-
-for (let n = 0; n < ATTRIBUTES.length; n++) {
-  stringToDisplay += `${ATTRIBUTES[n].attributeName} ${
-    ATTRIBUTES[n].attributeValue
-  } (${ATTRIBUTES[n].modifierValue > 0 ? "+" : ""}${
-    ATTRIBUTES[n].modifierValue
-  }), `;
-}
-
-stringToDisplay += `HP ${diceRoller(1)}, ST ${
-  generatedCharacterClass.savingThrowAtLevel1
-} (${
-  generatedCharacterClass.savingThrowBonus
-}) Alignment ${CHARACTER_ALIGNMENT}, `;
-//TODO: Include different HP roller for Fighter
-
 let xpBonus = 0;
 if (ROLL_FOR_WISDOM >= 15) {
   xpBonus += 5;
@@ -185,7 +168,20 @@ if (generatedCharacterClass.primeAttributeValue >= 15) {
 if (xpBonus > 15) {
   xpBonus = 15;
 }
-stringToDisplay += `Current XP 0, XP Bonus ${xpBonus}%, `;
+let stringToDisplay = `${generatedCharacterClass.characterClassName}, Level 1 <br /> Alignment: ${CHARACTER_ALIGNMENT}<br /><br />`;
+
+for (let n = 0; n < ATTRIBUTES.length; n++) {
+  stringToDisplay += `${ATTRIBUTES[n].attributeName} ${
+    ATTRIBUTES[n].attributeValue
+  } (${ATTRIBUTES[n].modifierValue > 0 ? "+" : ""}${
+    ATTRIBUTES[n].modifierValue
+  }) <br />`;
+}
+stringToDisplay += `<br />HP ${diceRoller(1)} <br /> ST ${
+  generatedCharacterClass.savingThrowAtLevel1
+} (${
+  generatedCharacterClass.savingThrowBonus
+}) <br />  </br> Current XP 0, XP Bonus ${xpBonus}% <br /> Abilities: `;
 
 document.getElementById("generator").innerHTML = stringToDisplay;
 
