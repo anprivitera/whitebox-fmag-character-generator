@@ -1,3 +1,4 @@
+"strict mode";
 /* USER STORY: I see a short textual description Whitebox character randomly generated and ready to play. 
 It includes: 
 - Ascending Armor class
@@ -24,6 +25,18 @@ It includes:
 
 
 // Define dice roller (3d6)
+function diceRoller (numberOfDice) {
+    let rollResult = null;
+    for (let i = 0; i < numberOfDice; i++) {
+        rollResult += Math.floor(Math.random() * 6 + 1);
+    }
+    return rollResult
+}
+
+const STRENGHT = diceRoller(3);
+
+document.getElementById("generator").innerHTML = `STR ${STRENGHT}`;
+
 // Define Strengths, Dexterity, Constitution, Intelligence, Wisdom, Charisma. For each of them, roll 3d6 separately
 // Give an appropriate modifier for each score (3-6 = -1, 7-14 =0, 15-18 = +1)
 // Give 5% xp bonus if WIS is 15+, and 5% if CHA is 15+
