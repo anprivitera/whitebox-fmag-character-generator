@@ -13,7 +13,7 @@ It includes:
 - ~~XP bonus~~
 - A character portrait
 - ~~Saving throw and mods~~
-- Spells / Abilities
+- ~~Spells / Abilities ~~
 - Equipment
 - Weapons & Armor
 - Coins
@@ -107,7 +107,6 @@ function determineCharacterClass(attributes) {
     savingThrowAtLevel1: 15,
     savingThrowBonus: "+2 vs. Death and Poison",
     spellcasterType: "divine",
-    spellsAtLevel1: [0, 0, 0, 0, 0],
     primeAttribute: "WIS",
     // primeAttributeValue: null;
     specialAbilities: "Turn the Undead, Establish Temple (at Level 10)",
@@ -133,7 +132,6 @@ function determineCharacterClass(attributes) {
     savingThrowAtLevel1: 15,
     savingThrowBonus: "+2 vs. Spells",
     spellcasterType: "magic",
-    spellsAtLevel1: [1, 0, 0, 0, 0],
     primeAttribute: "INT",
     // primeAttributeValue: null;
     specialAbilities: "Spell Casting, Establish Wizard Tower (at Level 9)",
@@ -191,13 +189,13 @@ for (let n = 0; n < ATTRIBUTES.length; n++) {
     ATTRIBUTES[n].modifierValue
   }) <br />`;
 }
-stringToDisplay += `<br />HP ${diceRoller(1)} <br /> ST ${
-  generatedCharacterClass.savingThrowAtLevel1
-} (${
-  generatedCharacterClass.savingThrowBonus
-}) <br />  </br> Current XP 0, XP Bonus ${xpBonus}% <br /> Abilities: ${
-  generatedCharacterClass.specialAbilities
-}`;
+
+let characterHP = generatedCharacterClass.HDatLevel1 + CONSTITUTION_MODIFIER;
+if (characterHP <= 0) {
+  characterHP = 1;
+}
+
+stringToDisplay += `<br />HP ${characterHP} <br /> ST ${generatedCharacterClass.savingThrowAtLevel1} (${generatedCharacterClass.savingThrowBonus}) <br />  </br> Current XP 0, XP Bonus ${xpBonus}% <br /> Abilities: ${generatedCharacterClass.specialAbilities}`;
 if (generatedCharacterClass.spellcasterType === "magic") {
   stringToDisplay += `<br />Known Spells: ${
     MAGIC_USER_SPELLS_LEVEL_1[
@@ -205,11 +203,9 @@ if (generatedCharacterClass.spellcasterType === "magic") {
     ]
   }`;
 }
-// TODO:
 
 document.getElementById("generator").innerHTML = stringToDisplay;
 
-//TODO: include class characteristics
 //TODO: roll for initial money
 //TODO: pick elements from list of items randomly until money runs out (giving priority to 1 allowed weapon, 1 allowed armor and then assigning the rest randomly)
 //TODO: calculate movement speed
