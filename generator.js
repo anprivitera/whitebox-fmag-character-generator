@@ -85,7 +85,7 @@ if (ROLL_FOR_CHARISMA >= 15) {
 if (xpBonus > 15) {
     xpBonus = 15;
 }
-stringToDisplay += `XP Bonus: ${xpBonus}%`
+stringToDisplay += `Current XP 0, XP Bonus ${xpBonus}%`
 //TODO: Include prime attribute in XP bonus
 
 document.getElementById("generator").innerHTML = stringToDisplay;
