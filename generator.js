@@ -10,9 +10,9 @@ It includes:
 - (Race)
 - ~~Alignment~~
 - ~~Initial XP~~
-- XP bonus
+- ~~XP bonus~~
 - A character portrait
-- Saving throw and mods
+- ~~Saving throw and mods~~
 - Spells / Abilities
 - Equipment
 - Weapons & Armor
@@ -165,7 +165,11 @@ for (let n = 0; n < ATTRIBUTES.length; n++) {
   }), `;
 }
 
-stringToDisplay += `HP ${diceRoller(1)}, Alignment ${CHARACTER_ALIGNMENT}, `;
+stringToDisplay += `HP ${diceRoller(1)}, ST ${
+  generatedCharacterClass.savingThrowAtLevel1
+} (${
+  generatedCharacterClass.savingThrowBonus
+}) Alignment ${CHARACTER_ALIGNMENT}, `;
 //TODO: Include different HP roller for Fighter
 
 let xpBonus = 0;
@@ -181,8 +185,7 @@ if (generatedCharacterClass.primeAttributeValue >= 15) {
 if (xpBonus > 15) {
   xpBonus = 15;
 }
-stringToDisplay += `Current XP 0, XP Bonus ${xpBonus}%`;
-//TODO: Include prime attribute in XP bonus
+stringToDisplay += `Current XP 0, XP Bonus ${xpBonus}%, `;
 
 document.getElementById("generator").innerHTML = stringToDisplay;
 
