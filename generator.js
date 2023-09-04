@@ -364,7 +364,7 @@ function determineCharacterClass(attributes) {
     primeAttribute: null,
     // primeAttributeValue: null;
     specialAbilities:
-      "<ul><li>+1 to-hit vs. goblins, orcs, intelligent undead, lycantropes.</li><li>Immune to undead paralysis.</li>Half damage from giants and ogres.</li><li>4-in-6 chances of actively spotting hidden or concealed doors (2-in-6 if passing by).</li></ul>",
+      "<ul><li>+1 to-hit vs. goblins, orcs, intelligent undead, lycantropes.</li><li>Immune to undead paralysis.</li><li>Half damage from giants and ogres.</li><li>4-in-6 chances of actively spotting hidden or concealed doors (2-in-6 if passing by).</li></ul>",
   };
   const magicUser = {
     characterClassName: "Magic-User",
@@ -526,6 +526,15 @@ if (ROLL_FOR_CHARISMA <= 4) {
   hirelingsLoyalty = 2;
 }
 
+let raceAbilities = "";
+
+if (
+  generatedCharacterRace.raceName != "Human" ||
+  generatedCharacterRace.raceName != "Elf"
+) {
+  let raceAbilities = `Race Abilities: ${generatedCharacterRace.raceSpecialAbilities}`;
+}
+
 const initialMoney = diceRoller(3) * 10;
 // create a new array called purchasedItems
 // while initialMoney is above the "cost" value of at least one item in the WEAPONS array
@@ -548,11 +557,7 @@ stringToDisplay += `<br />Melee: ${toHitMelee} (to-hit and damage) <br /> Missil
 }) <br /> </br> Current XP 0 <br /> XP Bonus ${xpBonus}% <br /> <br /> Class Abilities: ${
   generatedCharacterClass.specialAbilities
 }
-  ${
-    generatedCharacterRace.raceName != "Human"
-      ? "Race Abilities: " + generatedCharacterRace.raceSpecialAbilities
-      : ""
-  }`;
+  ${raceAbilities}`;
 if (generatedCharacterClass.spellcasterType === "magic") {
   stringToDisplay += `Known Spells: ${
     MAGIC_USER_SPELLS_LEVEL_1[
