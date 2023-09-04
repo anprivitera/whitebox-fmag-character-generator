@@ -527,6 +527,9 @@ if (ROLL_FOR_CHARISMA <= 4) {
 }
 
 const initialMoney = diceRoller(3) * 10;
+// create a new array called purchasedItems
+// while initialMoney is above the "cost" value of at least one item in the WEAPONS array
+// select a random item to transfer from the WEAPONS array to the purchasedItems array, making sure that it is not already present in the purchasedItems array
 
 //TODO: Include AC value after including equipment
 let stringToDisplay = `${generatedCharacterRace.raceName} ${generatedCharacterClass.characterClassName}, Level 1 <br /> Alignment: ${CHARACTER_ALIGNMENT}<br /><br />`;
