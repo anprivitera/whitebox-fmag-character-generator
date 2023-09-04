@@ -122,7 +122,7 @@ function determineCharacterClass(attributes) {
     spellsAtLevel1: [1, 0, 0, 0, 0],
     primeAttribute: "INT",
     // primeAttributeValue: null;
-    specialAbilities: "Spell Casting, Establish Wizard Tower (at Level 9",
+    specialAbilities: "Spell Casting, Establish Wizard Tower (at Level 9)",
   };
   let generatedCharacterClass = null;
   let fromHighToLow = attributes.map((x) => x);
