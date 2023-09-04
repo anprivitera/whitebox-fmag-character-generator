@@ -17,7 +17,7 @@ It includes:
 - Equipment
 - Weapons & Armor
 - Coins
-- Languages
+- ~~Languages~~
 - To-Hit bonus
 - Number of hirelings and loyalty
 - Weight carried and movement speed
@@ -181,6 +181,37 @@ function determineCharacterClass(attributes) {
 
 let generatedCharacterClass = determineCharacterClass(ATTRIBUTES);
 
+function determineCharacterRace(generatedCharacterClass) {
+  const HUMAN = {
+    raceName: "Human",
+    raceSavingThrowBonus: "",
+    raceSpecialAbilities: "",
+  };
+  const DWARF = {
+    raceName: "Dwarf",
+    raceSavingThrowBonus: ", +4 vs. Magic",
+    raceSpecialAbilities:
+      "; can reach maximum level 6; half damage from giants and ogres; 4-in-6 chances of actively spotting traps, slanting passages or construction (2-in-6 if passing by); can speak with goblins, orgrs, orcs, kobolds.",
+  };
+  const HALFLING = {
+    raceName: "Halfling",
+    raceSavingThrowBonus: ", +4 vs. Magic",
+    raceSpecialAbilities:
+      "; can reach maximum level 4 (fighter) or level 6 (thief); half damage from giants and ogres; +2 to-hit using missile weapons; 5-in-6 chance of going undetected when outside of combat",
+  };
+  const RACES = [HUMAN, DWARF, HALFLING];
+  let characterRace = HUMAN;
+  if (
+    generatedCharacterClass.characterClassName == "Fighter" ||
+    generatedCharacterClass.characterClassName == "Thief"
+  ) {
+    characterRace = RACES[Math.floor(Math.random() * RACES.length)];
+  }
+  return characterRace;
+}
+
+let generatedCharacterRace = determineCharacterRace(generatedCharacterClass);
+
 const ALIGNMENTS = ["Law", "Neutral", "Chaos"];
 const CHARACTER_ALIGNMENT =
   ALIGNMENTS[Math.floor(Math.random() * ALIGNMENTS.length)];
@@ -198,7 +229,7 @@ if (generatedCharacterClass.primeAttributeValue >= 15) {
 if (xpBonus > 15) {
   xpBonus = 15;
 }
-let stringToDisplay = `${generatedCharacterClass.characterClassName}, Level 1 <br /> Alignment: ${CHARACTER_ALIGNMENT}<br /><br />`;
+let stringToDisplay = `${generatedCharacterRace.raceName} ${generatedCharacterClass.characterClassName}, Level 1 <br /> Alignment: ${CHARACTER_ALIGNMENT}<br /><br />`;
 
 for (let n = 0; n < ATTRIBUTES.length; n++) {
   stringToDisplay += `${ATTRIBUTES[n].attributeName} ${
@@ -213,7 +244,15 @@ if (characterHP <= 0) {
   characterHP = 1;
 }
 
-stringToDisplay += `<br />HP ${characterHP} <br /> ST ${generatedCharacterClass.savingThrowAtLevel1} (${generatedCharacterClass.savingThrowBonus}) <br />  </br> Current XP 0, XP Bonus ${xpBonus}% <br /> Abilities: ${generatedCharacterClass.specialAbilities}`;
+stringToDisplay += `<br />HP ${characterHP} <br /> ST ${
+  generatedCharacterClass.savingThrowAtLevel1
+} (${
+  generatedCharacterClass.savingThrowBonus +
+  generatedCharacterRace.raceSavingThrowBonus
+}) <br />  </br> Current XP 0, XP Bonus ${xpBonus}% <br /> Abilities: ${
+  generatedCharacterClass.specialAbilities +
+  generatedCharacterRace.raceSpecialAbilities
+}`;
 if (generatedCharacterClass.spellcasterType === "magic") {
   stringToDisplay += `<br />Known Spells: ${
     MAGIC_USER_SPELLS_LEVEL_1[
