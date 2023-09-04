@@ -68,7 +68,7 @@ const ATTRIBUTES = [
 ];
 
 for (let n = 0; n < ATTRIBUTES.length; n++) {
-    stringToDisplay += `${ATTRIBUTES[n].attributeName} ${ATTRIBUTES[n].attributeValue} (${ATTRIBUTES[n].modifierValue}), `
+    stringToDisplay += `${ATTRIBUTES[n].attributeName} ${ATTRIBUTES[n].attributeValue} (${ATTRIBUTES[n].modifierValue > 0 ? "+" : ""}${ATTRIBUTES[n].modifierValue}), `
 }
 
 document.getElementById("generator").innerHTML = stringToDisplay;
