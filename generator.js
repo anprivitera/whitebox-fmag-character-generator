@@ -322,8 +322,10 @@ if (ROLL_FOR_CHARISMA <= 4) {
 
 stringToDisplay += `<br /> Hirelings (Max #): ${maxHirelings}; Loyalty: ${hirelingsLoyalty}<br />`;
 
-document.getElementById("generator").innerHTML = stringToDisplay;
-
 //TODO: roll for initial money
+const initialMoney = diceRoller(3);
+
 //TODO: pick elements from list of items randomly until money runs out (giving priority to 1 allowed weapon, 1 allowed armor and then assigning the rest randomly)
 //TODO: calculate movement speed
+
+document.getElementById("generator").innerHTML = stringToDisplay;
