@@ -271,7 +271,15 @@ if (characterHP <= 0) {
   characterHP = 1;
 }
 
-stringToDisplay += `<br /> AC <br/> HP ${characterHP} <br /> ST ${
+const toHitMelee = generatedCharacterClass.toHitAtLevel1 + STRENGTH_MODIFIER;
+const toHitMissile = generatedCharacterClass.toHitAtLevel1 + DEXTERITY_MODIFIER;
+
+//TODO: Include AC value after including equipment
+stringToDisplay += `<br />Melee: ${
+  toHitMelee > 0 ? "+" : ""
+}${toHitMelee} (to-hit and damage) <br /> Missile: ${
+  toHitMissile > 0 ? "+" : ""
+}${toHitMissile} (to-hit) <br /> AC <br/> HP ${characterHP} <br /> ST ${
   generatedCharacterClass.savingThrowAtLevel1
 } (${
   generatedCharacterClass.savingThrowBonus +
