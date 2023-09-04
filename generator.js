@@ -532,7 +532,7 @@ if (
   generatedCharacterRace.raceName != "Human" ||
   generatedCharacterRace.raceName != "Elf"
 ) {
-  let raceAbilities = `Race Abilities: ${generatedCharacterRace.raceSpecialAbilities}`;
+  raceAbilities = `Race Abilities: ${generatedCharacterRace.raceSpecialAbilities}`;
 }
 
 const initialMoney = diceRoller(3) * 10;
