@@ -295,6 +295,32 @@ if (generatedCharacterClass.spellcasterType === "magic") {
     ]
   }`;
 }
+let maxHirelings = null;
+let hirelingsLoyalty = null;
+if (ROLL_FOR_CHARISMA <= 4) {
+  maxHirelings = 1;
+  hirelingsLoyalty = -2;
+} else if (ROLL_FOR_CHARISMA >= 5 && ROLL_FOR_CHARISMA <= 6) {
+  maxHirelings = 2;
+  hirelingsLoyalty = -2;
+} else if (ROLL_FOR_CHARISMA >= 7 && ROLL_FOR_CHARISMA <= 8) {
+  maxHirelings = 3;
+  hirelingsLoyalty = -1;
+} else if (ROLL_FOR_CHARISMA >= 9 && ROLL_FOR_CHARISMA <= 12) {
+  maxHirelings = 4;
+  hirelingsLoyalty = 0;
+} else if (ROLL_FOR_CHARISMA >= 13 && ROLL_FOR_CHARISMA <= 15) {
+  maxHirelings = 5;
+  hirelingsLoyalty = 1;
+} else if (ROLL_FOR_CHARISMA >= 16 && ROLL_FOR_CHARISMA <= 17) {
+  maxHirelings = 6;
+  hirelingsLoyalty = 2;
+} else {
+  maxHirelings = 7;
+  hirelingsLoyalty = 2;
+}
+
+stringToDisplay += `<br /> Hirelings (Max #): ${maxHirelings}; Loyalty: ${hirelingsLoyalty}<br />`;
 
 document.getElementById("generator").innerHTML = stringToDisplay;
 
