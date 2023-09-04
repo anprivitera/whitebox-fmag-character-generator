@@ -3,12 +3,12 @@
 It includes: 
 - Ascending Armor class
 - HD
-- Attribute scores with modifiers
+- ~~Attribute scores with modifiers~~
 - Name 
 - Class
 - Level
 - Race
-- Alignment
+- ~~Alignment~~
 - Initial XP
 - XP bonus
 - A character portrait
@@ -72,13 +72,24 @@ for (let n = 0; n < ATTRIBUTES.length; n++) {
     stringToDisplay += `${ATTRIBUTES[n].attributeName} ${ATTRIBUTES[n].attributeValue} (${ATTRIBUTES[n].modifierValue > 0 ? "+" : ""}${ATTRIBUTES[n].modifierValue}), `
 }
 
-stringToDisplay += `HP ${diceRoller(1)}, Alignment ${CHARACTER_ALIGNMENT},`
+stringToDisplay += `HP ${diceRoller(1)}, Alignment ${CHARACTER_ALIGNMENT}, `
 //TODO: Include different HP roller for Fighter
 
-
+let xpBonus = 0;
+if (ROLL_FOR_WISDOM >= 15) {
+    xpBonus += 5;
+}
+if (ROLL_FOR_CHARISMA >= 15) {
+    xpBonus += 5;
+}
+if (xpBonus > 15) {
+    xpBonus = 15;
+}
+stringToDisplay += `XP Bonus: ${xpBonus}%`
+//TODO: Include prime attribute in XP bonus
 
 document.getElementById("generator").innerHTML = stringToDisplay;
-//TODO: Give 5% xp bonus if WIS is 15+, and 5% if CHA is 15+
+
 
 
 //TODO: include class characteristics
