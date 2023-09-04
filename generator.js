@@ -98,7 +98,7 @@ function determineCharacterClass(attributes) {
     spellsAtLevel1: [0, 0, 0, 0, 0],
     primeAttribute: "WIS",
     // primeAttributeValue: null;
-    specialAbilities: "Turn the Undead",
+    specialAbilities: "Turn the Undead, Establish Temple (at Level 10)",
   };
   const fighter = {
     characterClassName: "Fighter",
@@ -110,7 +110,7 @@ function determineCharacterClass(attributes) {
     spellsAtLevel1: [0, 0, 0, 0, 0],
     primeAttribute: "STR",
     // primeAttributeValue: null;
-    specialAbilities: "Combat Fury, Establish Stronghold (at level 9)",
+    specialAbilities: "Combat Fury, Establish Stronghold (at Level 9)",
   };
   const magicUser = {
     characterClassName: "Magic-User",
@@ -122,7 +122,7 @@ function determineCharacterClass(attributes) {
     spellsAtLevel1: [1, 0, 0, 0, 0],
     primeAttribute: "INT",
     // primeAttributeValue: null;
-    specialAbilities: "Spell Casting, Establish Wizard Tower",
+    specialAbilities: "Spell Casting, Establish Wizard Tower (at Level 9",
   };
   let generatedCharacterClass = null;
   let fromHighToLow = attributes.map((x) => x);
@@ -181,7 +181,9 @@ stringToDisplay += `<br />HP ${diceRoller(1)} <br /> ST ${
   generatedCharacterClass.savingThrowAtLevel1
 } (${
   generatedCharacterClass.savingThrowBonus
-}) <br />  </br> Current XP 0, XP Bonus ${xpBonus}% <br /> Abilities: `;
+}) <br />  </br> Current XP 0, XP Bonus ${xpBonus}% <br /> Abilities: ${
+  generatedCharacterClass.specialAbilities
+}`;
 
 document.getElementById("generator").innerHTML = stringToDisplay;
 
