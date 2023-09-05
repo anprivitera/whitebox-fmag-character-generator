@@ -23,6 +23,7 @@ It includes:
 - Weight carried and movement speed
 */
 
+//CONSTANTS
 const ROLL_FOR_STRENGTH = diceRoller(3),
   ROLL_FOR_DEXTERITY = diceRoller(3),
   ROLL_FOR_CONSTITUTION = diceRoller(3),
@@ -35,7 +36,8 @@ const ROLL_FOR_STRENGTH = diceRoller(3),
   INTELLIGENCE_MODIFIER = determineModifier(ROLL_FOR_INTELLIGENCE),
   WISDOM_MODIFIER = determineModifier(ROLL_FOR_WISDOM),
   CHARISMA_MODIFIER = determineModifier(ROLL_FOR_CHARISMA),
-  INITIAL_MONEY = diceRoller(3) * 10;
+  INITIAL_MONEY = diceRoller(3) * 10,
+  ALIGNMENTS = ["Law", "Neutral", "Chaos"];
 
 const ATTRIBUTES = [
   {
@@ -293,6 +295,46 @@ const WEAPONS = [
   },
 ];
 
+const ADVENTURING_GEAR = [
+  { itemName: "Backpack (30 lb. capacity", cost: 5 },
+  { itemName: "Bedroll", cost: 2 },
+  { itemName: "Belladonna, bunch", cost: 10 },
+  { itemName: "Bottle (wine), glass", cost: 1 },
+  { itemName: "Case (map or scroll)", cost: 3 },
+  { itemName: "Crowbar", cost: 5 },
+  { itemName: "Flint and Stell", cost: 5 },
+  { itemName: "Garlic (1 lb.)", cost: 10 },
+  { itemName: "Grappling Hook", cost: 5 },
+  { itemName: "Hammer", cost: 2 },
+  { itemName: "Helmet", cost: 10 },
+  { itemName: "Holy Symbol, wooden", cost: 2 },
+  { itemName: "Holy Symbol, silver", cost: 25 },
+  { itemName: "Holy Water, small vial", cost: 25 },
+  { itemName: "Lantern", cost: 10 },
+  { itemName: "Mirror (small), steel", cost: 5 },
+  { itemName: "Oil (lamp), 1 pint", cost: 2 },
+  { itemName: "Pole, 10 ft.", cost: 1 },
+  { itemName: "Rations, trail (day)", cost: 1 },
+  { itemName: "Rations, dried (day)", cost: 3 },
+  { itemName: "Rope (50 ft.), hemp", cost: 1 },
+  { itemName: "Rope (50 ft.), silk", cost: 5 },
+  { itemName: "Sack (15 lb. capacity)", cost: 1 },
+  { itemName: "Sack (30 lb. capacity)", cost: 2 },
+  { itemName: "Shovel", cost: 5 },
+  { itemName: "Spellbook (blank)", cost: 100 },
+  { itemName: "Spikes (12), iron", cost: 1 },
+  { itemName: "Stakes (12), wooden", cost: 1 },
+  { itemName: "Tent", cost: 20 },
+  { itemName: "Thieves' Tools", cost: 25 },
+  { itemName: "Torches (6)", cost: 1 },
+  { itemName: "Waterskin", cost: 1 },
+  { itemName: "Wolfsbane, bunch", cost: 10 },
+];
+//TODO: Treat ammunitions as a separate purchase: if a character gets a missile weapon, they should obviously get also ammunitions. Bow > arrows, Sling > stones, Crossbow > Bolts
+//TODO: Divide consumables items, so that they can be purchased more than once, and display them as unified (i.e., Torches (10))
+//TODO: Required items should go into character classes?
+
+//FUNCTIONS
 function diceRoller(numberOfDice) {
   let rollResult = null;
   for (let i = 0; i < numberOfDice; i++) {
@@ -461,55 +503,36 @@ function determineCharacterClass(attributes) {
   }
 }
 
-//TODO: Treat ammunitions as a separate purchase: if a character gets a missile weapon, they should obviously get also ammunitions
-//Bow > arrows, Sling > stones, Crossbow > Bolts
+function selectWeapons(weaponsAvailable, currentMoney) {
+  let shoppingArray = weaponsAvailable.map((x) => x);
+  shuffle(shoppingArray);
+  characterEquipment.push(
+    shoppingArray.pop(Math.floor(Math.random() * shoppingArray.length))
+  );
+  currentMoney = currentMoney - characterEquipment[0].cost;
+  return { characterEquipment, currentMoney };
+}
 
-//TODO: Divide consumables items, so that they can be purchased more than once, and display them as unified (i.e., Torches (10))
+function selectAdventuringGear(aventuringGear, currentMoney) {
+  let shoppingArray = aventuringGear.map((x) => x);
+  shuffle(shoppingArray);
+  let shoppableItems = shoppingArray.some((item) => item.cost <= currentMoney);
+  while (shoppableItems) {
+    // for (let i = 0; i < shoppingArray.length; i++) {
+    if (shoppingArray[0].cost <= currentMoney) {
+      characterEquipment.push(shoppingArray.pop());
+      currentMoney = currentMoney - shoppingArray[0].cost;
+    }
+  }
+  return { characterEquipment, currentMoney };
+}
 
-//TODO: Required items should go into character classes?
-
-const ADVENTURING_GEAR = [
-  { itemName: "Backpack (30 lb. capacity", cost: 5 },
-  { itemName: "Bedroll", cost: 2 },
-  { itemName: "Belladonna, bunch", cost: 10 },
-  { itemName: "Bottle (wine), glass", cost: 1 },
-  { itemName: "Case (map or scroll)", cost: 3 },
-  { itemName: "Crowbar", cost: 5 },
-  { itemName: "Flint and Stell", cost: 5 },
-  { itemName: "Garlic (1 lb.)", cost: 10 },
-  { itemName: "Grappling Hook", cost: 5 },
-  { itemName: "Hammer", cost: 2 },
-  { itemName: "Helmet", cost: 10 },
-  { itemName: "Holy Symbol, wooden", cost: 2 },
-  { itemName: "Holy Symbol, silver", cost: 25 },
-  { itemName: "Holy Water, small vial", cost: 25 },
-  { itemName: "Lantern", cost: 10 },
-  { itemName: "Mirror (small), steel", cost: 5 },
-  { itemName: "Oil (lamp), 1 pint", cost: 2 },
-  { itemName: "Pole, 10 ft.", cost: 1 },
-  { itemName: "Rations, trail (day)", cost: 1 },
-  { itemName: "Rations, dried (day)", cost: 3 },
-  { itemName: "Rope (50 ft.), hemp", cost: 1 },
-  { itemName: "Rope (50 ft.), silk", cost: 5 },
-  { itemName: "Sack (15 lb. capacity)", cost: 1 },
-  { itemName: "Sack (30 lb. capacity)", cost: 2 },
-  { itemName: "Shovel", cost: 5 },
-  { itemName: "Spellbook (blank)", cost: 100 },
-  { itemName: "Spikes (12), iron", cost: 1 },
-  { itemName: "Stakes (12), wooden", cost: 1 },
-  { itemName: "Tent", cost: 20 },
-  { itemName: "Thieves' Tools", cost: 25 },
-  { itemName: "Torches (6)", cost: 1 },
-  { itemName: "Waterskin", cost: 1 },
-  { itemName: "Wolfsbane, bunch", cost: 10 },
-];
-
+//START RUN-TIME
 let generatedCharacterClass = determineCharacterClass(ATTRIBUTES);
 
 let generatedCharacterRace = determineCharacterRace(generatedCharacterClass);
 
-const ALIGNMENTS = ["Law", "Neutral", "Chaos"];
-const CHARACTER_ALIGNMENT =
+const characterAlignment =
   ALIGNMENTS[Math.floor(Math.random() * ALIGNMENTS.length)];
 
 let xpBonus = 0;
@@ -573,35 +596,11 @@ if (
 }
 
 let currentMoney = INITIAL_MONEY;
-let weaponsArray = WEAPONS.map((x) => x);
-shuffle(weaponsArray);
 
 let characterEquipment = [];
-characterEquipment.push(
-  weaponsArray.pop(Math.floor(Math.random() * weaponsArray.length))
-);
-currentMoney = currentMoney - characterEquipment[0].cost;
-
-let shoppingArray = ADVENTURING_GEAR.map((x) => x);
-shuffle(shoppingArray);
-
-const shoppableItems = shoppingArray.some((item) => item.cost <= currentMoney);
-
-while (shoppableItems) {
-  // for (let i = 0; i < shoppingArray.length; i++) {
-  if (shoppingArray[0].cost <= currentMoney) {
-    characterEquipment.push(shoppingArray.pop());
-    currentMoney = currentMoney - shoppingArray[0].cost;
-  }
-}
-//}
-// copy the WEAPONS array into shoppingArray
-// while there are still items in shoppingArray with "cost" value equal or lower than currentMoney
-// take out an item from the shoppyingArray whose value is lower or equal to the currentMoney
-// subtract item cost from currentMoney
 
 //TODO: Include AC value after including equipment
-let stringToDisplay = `${generatedCharacterRace.raceName} ${generatedCharacterClass.characterClassName}, Level 1 <br /> Alignment: ${CHARACTER_ALIGNMENT}<br /><br />`;
+let stringToDisplay = `${generatedCharacterRace.raceName} ${generatedCharacterClass.characterClassName}, Level 1 <br /> Alignment: ${characterAlignment}<br /><br />`;
 for (let n = 0; n < ATTRIBUTES.length; n++) {
   stringToDisplay += `${ATTRIBUTES[n].attributeName} ${
     ATTRIBUTES[n].attributeValue
