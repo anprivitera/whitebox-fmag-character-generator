@@ -771,7 +771,7 @@ if (generatedCharacterClass.spellcasterType === "magic") {
     ]
   }<br />`;
 }
-stringToDisplay += `Weapons & Armor: <br/><ul>`;
+stringToDisplay += `<br />Weapons & Armor: <br/><ul>`;
 for (let n = 0; n < characterWeapons.length; n++) {
   stringToDisplay += `<li>${characterWeapons[n].weaponName} (${characterWeapons[n].damage}) </li>`;
 }
