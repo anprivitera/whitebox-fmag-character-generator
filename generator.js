@@ -50,13 +50,13 @@ function shuffle(array) {
 }
 
 function determineCharacterRace(generatedCharacterClass) {
-  const HUMAN = {
-    raceName: "Human",
+  const ELF = {
+    raceName: "",
     raceSavingThrowBonus: "",
     raceSpecialAbilities: "",
   };
-  const ELF = {
-    raceName: "",
+  const HUMAN = {
+    raceName: "Human",
     raceSavingThrowBonus: "",
     raceSpecialAbilities: "",
   };
@@ -588,10 +588,11 @@ if (ROLL_FOR_CHARISMA <= 4) {
 
 let raceAbilities = "";
 
-if (
+let notHumanOrElf =
   generatedCharacterRace.raceName != "Human" &&
-  generatedCharacterRace.raceName != "Elf"
-) {
+  generatedCharacterClass.characterClassName != "Elf";
+
+if (notHumanOrElf) {
   raceAbilities = `Race Abilities: ${generatedCharacterRace.raceSpecialAbilities}`;
 }
 
