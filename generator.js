@@ -23,31 +23,6 @@ It includes:
 - Weight carried and movement speed
 */
 
-function diceRoller(numberOfDice) {
-  let rollResult = null;
-  for (let i = 0; i < numberOfDice; i++) {
-    rollResult += Math.floor(Math.random() * 6 + 1);
-  }
-  return rollResult;
-}
-
-function determineModifier(attributeScore) {
-  if (attributeScore <= 6) {
-    return -1;
-  } else if (attributeScore >= 7 && attributeScore <= 14) {
-    return 0;
-  } else {
-    return +1;
-  }
-}
-
-function shuffle(array) {
-  for (let i = array.length - 1; i > 0; i--) {
-    let j = Math.floor(Math.random() * (i + 1));
-    [array[i], array[j]] = [array[j], array[i]];
-  }
-}
-
 const ROLL_FOR_STRENGTH = diceRoller(3),
   ROLL_FOR_DEXTERITY = diceRoller(3),
   ROLL_FOR_CONSTITUTION = diceRoller(3),
@@ -317,48 +292,72 @@ const WEAPONS = [
     missileROF: 1,
   },
 ];
-//TODO: Treat ammunitions as a separate purchase: if a character gets a missile weapon, they should obviously get also ammunitions
-//Bow > arrows, Sling > stones, Crossbow > Bolts
 
-//TODO: Divide consumables items, so that they can be purchased more than once, and display them as unified (i.e., Torches (10))
+function diceRoller(numberOfDice) {
+  let rollResult = null;
+  for (let i = 0; i < numberOfDice; i++) {
+    rollResult += Math.floor(Math.random() * 6 + 1);
+  }
+  return rollResult;
+}
 
-//TODO: Required items should go into character classes?
+function determineModifier(attributeScore) {
+  if (attributeScore <= 6) {
+    return -1;
+  } else if (attributeScore >= 7 && attributeScore <= 14) {
+    return 0;
+  } else {
+    return +1;
+  }
+}
 
-const ADVENTURING_GEAR = [
-  { itemName: "Backpack (30 lb. capacity", cost: 5 },
-  { itemName: "Bedroll", cost: 2 },
-  { itemName: "Belladonna, bunch", cost: 10 },
-  { itemName: "Bottle (wine), glass", cost: 1 },
-  { itemName: "Case (map or scroll)", cost: 3 },
-  { itemName: "Crowbar", cost: 5 },
-  { itemName: "Flint and Stell", cost: 5 },
-  { itemName: "Garlic (1 lb.)", cost: 10 },
-  { itemName: "Grappling Hook", cost: 5 },
-  { itemName: "Hammer", cost: 2 },
-  { itemName: "Helmet", cost: 10 },
-  { itemName: "Holy Symbol, wooden", cost: 2 },
-  { itemName: "Holy Symbol, silver", cost: 25 },
-  { itemName: "Holy Water, small vial", cost: 25 },
-  { itemName: "Lantern", cost: 10 },
-  { itemName: "Mirror (small), steel", cost: 5 },
-  { itemName: "Oil (lamp), 1 pint", cost: 2 },
-  { itemName: "Pole, 10 ft.", cost: 1 },
-  { itemName: "Rations, trail (day)", cost: 1 },
-  { itemName: "Rations, dried (day)", cost: 3 },
-  { itemName: "Rope (50 ft.), hemp", cost: 1 },
-  { itemName: "Rope (50 ft.), silk", cost: 5 },
-  { itemName: "Sack (15 lb. capacity)", cost: 1 },
-  { itemName: "Sack (30 lb. capacity)", cost: 2 },
-  { itemName: "Shovel", cost: 5 },
-  { itemName: "Spellbook (blank)", cost: 100 },
-  { itemName: "Spikes (12), iron", cost: 1 },
-  { itemName: "Stakes (12), wooden", cost: 1 },
-  { itemName: "Tent", cost: 20 },
-  { itemName: "Thieves' Tools", cost: 25 },
-  { itemName: "Torches (6)", cost: 1 },
-  { itemName: "Waterskin", cost: 1 },
-  { itemName: "Wolfsbane, bunch", cost: 10 },
-];
+function shuffle(array) {
+  for (let i = array.length - 1; i > 0; i--) {
+    let j = Math.floor(Math.random() * (i + 1));
+    [array[i], array[j]] = [array[j], array[i]];
+  }
+}
+
+function determineCharacterRace(generatedCharacterClass) {
+  const HUMAN = {
+    raceName: "Human",
+    raceSavingThrowBonus: "",
+    raceSpecialAbilities: "",
+  };
+  const ELF = {
+    raceName: "",
+    raceSavingThrowBonus: "",
+    raceSpecialAbilities: "",
+  };
+  const DWARF = {
+    raceName: "Dwarf",
+    raceSavingThrowBonus: ", +4 vs. Magic",
+    raceSpecialAbilities:
+      "<ul><li>Can reach maximum level 6</li><li>Half damage from giants and ogres</li><li>4-in-6 chances of actively spotting traps, slanting passages or construction (2-in-6 if passing by)</li><li>Can speak with goblins, ogres, orcs, kobolds</li></ul>",
+  };
+  const HALFLING = {
+    raceName: "Halfling",
+    raceSavingThrowBonus: ", +4 vs. Magic",
+    raceSpecialAbilities: `<ul><li>${
+      generatedCharacterClass.characterClassName == "Fighter"
+        ? "Can reach maxium level 4."
+        : "Can reach maxium Level 6."
+    }</li><li>Half damage from giants and ogres</li><li>+2 to-hit using missile weapons</li><li>5-in-6 chance of going undetected when outside of combat</li></ul>`,
+  };
+  const RACES = [HUMAN, DWARF, HALFLING];
+  if (generatedCharacterClass.characterClassName == "Elf") {
+    let characterRace = ELF;
+    return characterRace;
+  }
+  let characterRace = HUMAN;
+  if (
+    generatedCharacterClass.characterClassName == "Fighter" ||
+    generatedCharacterClass.characterClassName == "Thief"
+  ) {
+    characterRace = RACES[Math.floor(Math.random() * RACES.length)];
+  }
+  return characterRace;
+}
 
 function determineCharacterClass(attributes) {
   const cleric = {
@@ -462,48 +461,50 @@ function determineCharacterClass(attributes) {
   }
 }
 
-let generatedCharacterClass = determineCharacterClass(ATTRIBUTES);
+//TODO: Treat ammunitions as a separate purchase: if a character gets a missile weapon, they should obviously get also ammunitions
+//Bow > arrows, Sling > stones, Crossbow > Bolts
 
-function determineCharacterRace(generatedCharacterClass) {
-  const HUMAN = {
-    raceName: "Human",
-    raceSavingThrowBonus: "",
-    raceSpecialAbilities: "",
-  };
-  const ELF = {
-    raceName: "",
-    raceSavingThrowBonus: "",
-    raceSpecialAbilities: "",
-  };
-  const DWARF = {
-    raceName: "Dwarf",
-    raceSavingThrowBonus: ", +4 vs. Magic",
-    raceSpecialAbilities:
-      "<ul><li>Can reach maximum level 6</li><li>Half damage from giants and ogres</li><li>4-in-6 chances of actively spotting traps, slanting passages or construction (2-in-6 if passing by)</li><li>Can speak with goblins, ogres, orcs, kobolds</li></ul>",
-  };
-  const HALFLING = {
-    raceName: "Halfling",
-    raceSavingThrowBonus: ", +4 vs. Magic",
-    raceSpecialAbilities: `<ul><li>${
-      generatedCharacterClass.characterClassName == "Fighter"
-        ? "Can reach maxium level 4."
-        : "Can reach maxium Level 6."
-    }</li><li>Half damage from giants and ogres</li><li>+2 to-hit using missile weapons</li><li>5-in-6 chance of going undetected when outside of combat</li></ul>`,
-  };
-  const RACES = [HUMAN, DWARF, HALFLING];
-  if (generatedCharacterClass.characterClassName == "Elf") {
-    let characterRace = ELF;
-    return characterRace;
-  }
-  let characterRace = HUMAN;
-  if (
-    generatedCharacterClass.characterClassName == "Fighter" ||
-    generatedCharacterClass.characterClassName == "Thief"
-  ) {
-    characterRace = RACES[Math.floor(Math.random() * RACES.length)];
-  }
-  return characterRace;
-}
+//TODO: Divide consumables items, so that they can be purchased more than once, and display them as unified (i.e., Torches (10))
+
+//TODO: Required items should go into character classes?
+
+const ADVENTURING_GEAR = [
+  { itemName: "Backpack (30 lb. capacity", cost: 5 },
+  { itemName: "Bedroll", cost: 2 },
+  { itemName: "Belladonna, bunch", cost: 10 },
+  { itemName: "Bottle (wine), glass", cost: 1 },
+  { itemName: "Case (map or scroll)", cost: 3 },
+  { itemName: "Crowbar", cost: 5 },
+  { itemName: "Flint and Stell", cost: 5 },
+  { itemName: "Garlic (1 lb.)", cost: 10 },
+  { itemName: "Grappling Hook", cost: 5 },
+  { itemName: "Hammer", cost: 2 },
+  { itemName: "Helmet", cost: 10 },
+  { itemName: "Holy Symbol, wooden", cost: 2 },
+  { itemName: "Holy Symbol, silver", cost: 25 },
+  { itemName: "Holy Water, small vial", cost: 25 },
+  { itemName: "Lantern", cost: 10 },
+  { itemName: "Mirror (small), steel", cost: 5 },
+  { itemName: "Oil (lamp), 1 pint", cost: 2 },
+  { itemName: "Pole, 10 ft.", cost: 1 },
+  { itemName: "Rations, trail (day)", cost: 1 },
+  { itemName: "Rations, dried (day)", cost: 3 },
+  { itemName: "Rope (50 ft.), hemp", cost: 1 },
+  { itemName: "Rope (50 ft.), silk", cost: 5 },
+  { itemName: "Sack (15 lb. capacity)", cost: 1 },
+  { itemName: "Sack (30 lb. capacity)", cost: 2 },
+  { itemName: "Shovel", cost: 5 },
+  { itemName: "Spellbook (blank)", cost: 100 },
+  { itemName: "Spikes (12), iron", cost: 1 },
+  { itemName: "Stakes (12), wooden", cost: 1 },
+  { itemName: "Tent", cost: 20 },
+  { itemName: "Thieves' Tools", cost: 25 },
+  { itemName: "Torches (6)", cost: 1 },
+  { itemName: "Waterskin", cost: 1 },
+  { itemName: "Wolfsbane, bunch", cost: 10 },
+];
+
+let generatedCharacterClass = determineCharacterClass(ATTRIBUTES);
 
 let generatedCharacterRace = determineCharacterRace(generatedCharacterClass);
 
@@ -573,6 +574,7 @@ if (
 
 let currentMoney = INITIAL_MONEY;
 let weaponsArray = WEAPONS.map((x) => x);
+shuffle(weaponsArray);
 
 let characterEquipment = [];
 characterEquipment.push(
