@@ -195,36 +195,57 @@ function determineCharacterClass(attributes) {
 // let filteredShoppingArray = shoppingArray.filter(
 //   (n) => n.characterClass == true
 // );
-function selectWeapons(weaponsAvailable, currentMoney, whoIsTheCharacter) {
-  let shoppingArray = weaponsAvailable.map((x) => x);
-  let filteredShoppingArray = null;
-  let selectedWeapon = [];
+function selectItems(
+  itemsAvailable,
+  numberOfItems,
+  currentMoney,
+  whoIsTheCharacter
+) {
+  let shoppingArray = itemsAvailable.map((x) => x),
+    filteredShoppingArray = null,
+    selectedItem = [],
+    i = 0;
   shuffle(shoppingArray);
   //TODO: Include more dynamic combinations for weapon selection (i.e., weapon and shield, two weapons...)
   switch (whoIsTheCharacter) {
     case "Fighter":
       filteredShoppingArray = shoppingArray.filter((n) => n.fighter == true);
-      selectedWeapon.push(filteredShoppingArray.pop());
+      for (let i = 0; i < numberOfItems; i++) {
+        selectedItem.push(filteredShoppingArray.pop());
+        currentMoney = currentMoney - selectedItem[0].cost;
+      }
       break;
     case "Elf":
       filteredShoppingArray = shoppingArray.filter((n) => n.fighter == true);
-      selectedWeapon.push(filteredShoppingArray.pop());
+      for (let i = 0; i < numberOfItems; i++) {
+        selectedItem.push(filteredShoppingArray.pop());
+        currentMoney = currentMoney - selectedItem[0].cost;
+      }
       break;
     case "Cleric":
       filteredShoppingArray = shoppingArray.filter((n) => n.cleric == true);
-      selectedWeapon.push(filteredShoppingArray.pop());
+      for (let i = 0; i < numberOfItems; i++) {
+        selectedItem.push(filteredShoppingArray.pop());
+        currentMoney = currentMoney - selectedItem[0].cost;
+      }
       break;
     case "Magic-User":
       filteredShoppingArray = shoppingArray.filter((n) => n.magicUser == true);
-      selectedWeapon.push(filteredShoppingArray.pop());
+      for (let i = 0; i < numberOfItems; i++) {
+        selectedItem.push(filteredShoppingArray.pop());
+        currentMoney = currentMoney - selectedItem[0].cost;
+      }
       break;
     case "Thief":
       filteredShoppingArray = shoppingArray.filter((n) => n.thief == true);
-      selectedWeapon.push(filteredShoppingArray.pop());
+      for (let i = 0; i < numberOfItems; i++) {
+        selectedItem.push(filteredShoppingArray.pop());
+        currentMoney = currentMoney - selectedItem[0].cost;
+      }
       break;
   }
-  currentMoney = currentMoney - selectedWeapon[0].cost;
-  return [selectedWeapon, currentMoney];
+
+  return [selectedItem, currentMoney];
 }
 
 function selectAdventuringGear(
@@ -595,6 +616,17 @@ const WEAPONS = [
 
 const ARMOR = [
   {
+    armorName: "Unarmored",
+    AC: 0,
+    weight: 0,
+    cost: 0,
+    cleric: true,
+    fighter: false,
+    magicUser: true,
+    thief: true,
+    elf: true,
+  },
+  {
     armorName: "Chain Mail",
     AC: 4,
     weight: 50,
@@ -739,9 +771,18 @@ if (notHumanOrElf) {
 
 let currentMoney = INITIAL_MONEY;
 let characterWeapons = [];
+let characterArmor = [];
 
-[characterWeapons, currentMoney] = selectWeapons(
+[characterWeapons, currentMoney] = selectItems(
   WEAPONS,
+  1,
+  currentMoney,
+  generatedCharacterClass.characterClassName
+);
+
+[characterArmor, currentMoney] = selectItems(
+  ARMOR,
+  1,
   currentMoney,
   generatedCharacterClass.characterClassName
 );
@@ -755,7 +796,11 @@ for (let n = 0; n < ATTRIBUTES.length; n++) {
     ATTRIBUTES[n].modifierValue
   }) <br />`;
 }
-stringToDisplay += `<br />Melee: ${toHitMelee} (to-hit and damage) <br /> Missile: ${toHitMissile} (to-hit) <br /> AC <br/> HP ${characterHP} <br /> ST ${
+stringToDisplay += `<br />Melee: ${toHitMelee} (to-hit and damage) <br /> Missile: ${toHitMissile} (to-hit) <br /> AC 
+${9 - characterArmor[0].AC - DEXTERITY_MODIFIER}
+[${
+  10 + characterArmor[0].AC + DEXTERITY_MODIFIER
+}] <br/> HP ${characterHP} <br /> ST ${
   generatedCharacterClass.savingThrowAtLevel1
 } (${
   generatedCharacterClass.savingThrowBonus +
@@ -774,6 +819,9 @@ if (generatedCharacterClass.spellcasterType === "magic") {
 stringToDisplay += `<br />Weapons & Armor: <br/><ul>`;
 for (let n = 0; n < characterWeapons.length; n++) {
   stringToDisplay += `<li>${characterWeapons[n].weaponName} (${characterWeapons[n].damage}) </li>`;
+}
+for (let n = 0; n < characterArmor.length; n++) {
+  stringToDisplay += `<li>${characterArmor[n].armorName} (-${characterArmor[n].AC} [+${characterArmor[n].AC}]) </li>`;
 }
 stringToDisplay += `</ul>Equipment: ${currentMoney} gp <br /><br /> Hirelings (Max #): ${maxHirelings}<br /> Loyalty: ${
   hirelingsLoyalty > 0 ? "+" : ""
