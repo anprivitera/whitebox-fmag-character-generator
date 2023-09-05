@@ -192,14 +192,39 @@ function determineCharacterClass(attributes) {
   }
 }
 //TODO: Complete functions for Weapons and Gear
-function selectWeapons(weaponsAvailable, currentMoney) {
+// let filteredShoppingArray = shoppingArray.filter(
+//   (n) => n.characterClass == true
+// );
+function selectWeapons(weaponsAvailable, currentMoney, whoIsTheCharacter) {
   let shoppingArray = weaponsAvailable.map((x) => x);
+  let filteredShoppingArray = null;
+  let selectedWeapon = [];
   shuffle(shoppingArray);
-  characterWeapons.push(
-    shoppingArray.pop(Math.floor(Math.random() * shoppingArray.length))
-  );
-  currentMoney = currentMoney - characterWeapons[0].cost;
-  return [characterWeapons, currentMoney];
+  //TODO: Include more dynamic combinations for weapon selection (i.e., weapon and shield, two weapons...)
+  switch (whoIsTheCharacter) {
+    case "Fighter":
+      filteredShoppingArray = shoppingArray.filter((n) => n.fighter == true);
+      selectedWeapon.push(filteredShoppingArray.pop());
+      break;
+    case "Elf":
+      filteredShoppingArray = shoppingArray.filter((n) => n.fighter == true);
+      selectedWeapon.push(filteredShoppingArray.pop());
+      break;
+    case "Cleric":
+      filteredShoppingArray = shoppingArray.filter((n) => n.cleric == true);
+      selectedWeapon.push(filteredShoppingArray.pop());
+      break;
+    case "Magic-User":
+      filteredShoppingArray = shoppingArray.filter((n) => n.magicUser == true);
+      selectedWeapon.push(filteredShoppingArray.pop());
+      break;
+    case "Thief":
+      filteredShoppingArray = shoppingArray.filter((n) => n.thief == true);
+      selectedWeapon.push(filteredShoppingArray.pop());
+      break;
+  }
+  currentMoney = currentMoney - selectedWeapon[0].cost;
+  return [selectedWeapon, currentMoney];
 }
 
 function selectAdventuringGear(
@@ -331,7 +356,6 @@ const WEAPONS = [
     damage: "1d6-1",
     weight: 2,
     cost: 3,
-    blunt: false,
     twoHanded: false,
     melee: true,
     missile: true,
@@ -716,7 +740,11 @@ if (notHumanOrElf) {
 let currentMoney = INITIAL_MONEY;
 let characterWeapons = [];
 
-[characterWeapons, currentMoney] = selectWeapons(WEAPONS, currentMoney);
+[characterWeapons, currentMoney] = selectWeapons(
+  WEAPONS,
+  currentMoney,
+  generatedCharacterClass.characterClassName
+);
 
 //TODO: Include AC value after including equipment
 let stringToDisplay = `${generatedCharacterRace.raceName} ${generatedCharacterClass.characterClassName}, Level 1 <br /> Alignment: ${characterAlignment}<br /><br />`;
