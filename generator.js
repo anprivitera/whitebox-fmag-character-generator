@@ -199,10 +199,14 @@ function selectWeapons(weaponsAvailable, currentMoney) {
     shoppingArray.pop(Math.floor(Math.random() * shoppingArray.length))
   );
   currentMoney = currentMoney - characterEquipment[0].cost;
-  return { characterEquipment, currentMoney };
+  return [characterEquipment, currentMoney];
 }
 
-function selectAdventuringGear(aventuringGear, currentMoney) {
+function selectAdventuringGear(
+  characterEquipment,
+  aventuringGear,
+  currentMoney
+) {
   let shoppingArray = aventuringGear.map((x) => x);
   shuffle(shoppingArray);
   let shoppableItems = shoppingArray.some((item) => item.cost <= currentMoney);
@@ -597,8 +601,10 @@ if (notHumanOrElf) {
 }
 
 let currentMoney = INITIAL_MONEY;
-
 let characterEquipment = [];
+let characterWeapons = null;
+
+[characterWeapons, currentMoney] = selectWeapons(WEAPONS, currentMoney);
 
 //TODO: Include AC value after including equipment
 let stringToDisplay = `${generatedCharacterRace.raceName} ${generatedCharacterClass.characterClassName}, Level 1 <br /> Alignment: ${characterAlignment}<br /><br />`;
@@ -625,10 +631,11 @@ if (generatedCharacterClass.spellcasterType === "magic") {
     ]
   }<br />`;
 }
+stringToDisplay += `Weapons & Armor: <br/><ul>`;
 for (let n = 0; n < characterEquipment.length; n++) {
-  stringToDisplay += `${characterEquipment[n].itemName} <br />`;
+  stringToDisplay += `<li>${characterWeapons[n].weaponName} (${characterWeapons[n].damage}) </li>`;
 }
-stringToDisplay += `Equipment: ${currentMoney} gp <br /><br /> Hirelings (Max #): ${maxHirelings}<br /> Loyalty: ${
+stringToDisplay += `</ul>Equipment:${currentMoney} gp <br /><br /> Hirelings (Max #): ${maxHirelings}<br /> Loyalty: ${
   hirelingsLoyalty > 0 ? "+" : ""
 }${hirelingsLoyalty}<br />`;
 //TODO: pick elements from list of items randomly until money runs out (giving priority to 1 allowed weapon, 1 allowed armor and then assigning the rest randomly)
