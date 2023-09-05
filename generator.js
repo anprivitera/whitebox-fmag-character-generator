@@ -59,7 +59,8 @@ const ROLL_FOR_STRENGTH = diceRoller(3),
   CONSTITUTION_MODIFIER = determineModifier(ROLL_FOR_CONSTITUTION),
   INTELLIGENCE_MODIFIER = determineModifier(ROLL_FOR_INTELLIGENCE),
   WISDOM_MODIFIER = determineModifier(ROLL_FOR_WISDOM),
-  CHARISMA_MODIFIER = determineModifier(ROLL_FOR_CHARISMA);
+  CHARISMA_MODIFIER = determineModifier(ROLL_FOR_CHARISMA),
+  INITIAL_MONEY = diceRoller(3) * 10;
 
 const ATTRIBUTES = [
   {
@@ -570,27 +571,28 @@ if (
   raceAbilities = `Race Abilities: ${generatedCharacterRace.raceSpecialAbilities}`;
 }
 
-const initialMoney = diceRoller(3) * 10;
-let currentMoney = initialMoney;
-
-// create a new array called purchasedItems
-// while initialMoney is above the "cost" value of at least one item in the WEAPONS array
-// select a random item to transfer from the WEAPONS array to the purchasedItems array, making sure that it is not already present in the purchasedItems array
-
-//Select a random weapon
-//If weapon selected is
+let currentMoney = INITIAL_MONEY;
+let weaponsArray = WEAPONS.map((x) => x);
 
 let characterEquipment = [];
+characterEquipment.push(
+  weaponsArray.pop(Math.floor(Math.random() * weaponsArray.length))
+);
+currentMoney = currentMoney - characterEquipment[0].cost;
+
 let shoppingArray = ADVENTURING_GEAR.map((x) => x);
 shuffle(shoppingArray);
 
-for (let i = 0; i < shoppingArray.length; i++) {
-  if (shoppingArray[i].cost <= currentMoney) {
+const shoppableItems = shoppingArray.some((item) => item.cost <= currentMoney);
+
+while (shoppableItems) {
+  // for (let i = 0; i < shoppingArray.length; i++) {
+  if (shoppingArray[0].cost <= currentMoney) {
     characterEquipment.push(shoppingArray.pop());
-    currentMoney = currentMoney - shoppingArray[i].cost;
+    currentMoney = currentMoney - shoppingArray[0].cost;
   }
 }
-
+//}
 // copy the WEAPONS array into shoppingArray
 // while there are still items in shoppingArray with "cost" value equal or lower than currentMoney
 // take out an item from the shoppyingArray whose value is lower or equal to the currentMoney
