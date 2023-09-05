@@ -428,7 +428,7 @@ const WEAPONS = [
     missileROF: null,
     cleric: false,
     fighter: true,
-    magicUser: false,
+    magicUser: true,
     thief: true,
     elf: true,
   },
