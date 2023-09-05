@@ -191,7 +191,7 @@ function determineCharacterClass(attributes) {
     }
   }
 }
-
+//TODO: Complete functions for Weapons and Gear
 function selectWeapons(weaponsAvailable, currentMoney) {
   let shoppingArray = weaponsAvailable.map((x) => x);
   shuffle(shoppingArray);
