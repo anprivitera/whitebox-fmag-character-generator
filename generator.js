@@ -24,6 +24,54 @@ It includes:
 */
 
 //CONSTANTS
+const ROLL_FOR_STRENGTH = diceRoller(3),
+  ROLL_FOR_DEXTERITY = diceRoller(3),
+  ROLL_FOR_CONSTITUTION = diceRoller(3),
+  ROLL_FOR_INTELLIGENCE = diceRoller(3),
+  ROLL_FOR_WISDOM = diceRoller(3),
+  ROLL_FOR_CHARISMA = diceRoller(3),
+  STRENGTH_MODIFIER = determineModifier(ROLL_FOR_STRENGTH),
+  DEXTERITY_MODIFIER = determineModifier(ROLL_FOR_DEXTERITY),
+  CONSTITUTION_MODIFIER = determineModifier(ROLL_FOR_CONSTITUTION),
+  INTELLIGENCE_MODIFIER = determineModifier(ROLL_FOR_INTELLIGENCE),
+  WISDOM_MODIFIER = determineModifier(ROLL_FOR_WISDOM),
+  CHARISMA_MODIFIER = determineModifier(ROLL_FOR_CHARISMA),
+  INITIAL_MONEY = diceRoller(3) * 10,
+  ALIGNMENTS = ["Law", "Neutral", "Chaos"];
+
+const ATTRIBUTES = [
+  {
+    attributeName: "STR",
+    attributeValue: ROLL_FOR_STRENGTH,
+    modifierValue: STRENGTH_MODIFIER,
+  },
+  {
+    attributeName: "DEX",
+    attributeValue: ROLL_FOR_DEXTERITY,
+    modifierValue: DEXTERITY_MODIFIER,
+  },
+  {
+    attributeName: "CON",
+    attributeValue: ROLL_FOR_CONSTITUTION,
+    modifierValue: CONSTITUTION_MODIFIER,
+  },
+  {
+    attributeName: "INT",
+    attributeValue: ROLL_FOR_INTELLIGENCE,
+    modifierValue: INTELLIGENCE_MODIFIER,
+  },
+  {
+    attributeName: "WIS",
+    attributeValue: ROLL_FOR_WISDOM,
+    modifierValue: WISDOM_MODIFIER,
+  },
+  {
+    attributeName: "CHA",
+    attributeValue: ROLL_FOR_CHARISMA,
+    modifierValue: CHARISMA_MODIFIER,
+  },
+];
+
 const MAGIC_USER_SPELLS_LEVEL_1 = [
   "Charm Person",
   "Detect Magic",
@@ -286,11 +334,6 @@ const ADVENTURING_GEAR = [
 //TODO: Divide consumables items, so that they can be purchased more than once, and display them as unified (i.e., Torches (10))
 //TODO: Required items should go into character classes?
 
-//INITIAL VARIABLES
-let raceAbilities = "",
-  currentMoney = initialMoney,
-  characterEquipment = [];
-
 //FUNCTIONS
 function diceRoller(numberOfDice) {
   let rollResult = null;
@@ -485,54 +528,6 @@ function selectAdventuringGear(aventuringGear, currentMoney) {
 }
 
 //START RUN-TIME
-const rollStrength = diceRoller(3),
-  rollDexterity = diceRoller(3),
-  rollConstitution = diceRoller(3),
-  rollIntelligence = diceRoller(3),
-  rollWisdom = diceRoller(3),
-  rollCharisma = diceRoller(3),
-  strengthModifier = determineModifier(rollStrength),
-  dexterityModifier = determineModifier(rollDexterity),
-  constitutionModifier = determineModifier(rollConstitution),
-  intelligenceModifier = determineModifier(rollIntelligence),
-  wisdomModifier = determineModifier(rollWisdom),
-  charsimaModifier = determineModifier(rollCharisma),
-  initialMoney = diceRoller(3) * 10,
-  ALIGNMENTS = ["Law", "Neutral", "Chaos"];
-
-const attributes = [
-  {
-    attributeName: "STR",
-    attributeValue: rollStrength,
-    modifierValue: strengthModifier,
-  },
-  {
-    attributeName: "DEX",
-    attributeValue: rollDexterity,
-    modifierValue: dexterityModifier,
-  },
-  {
-    attributeName: "CON",
-    attributeValue: rollConstitution,
-    modifierValue: constitutionModifier,
-  },
-  {
-    attributeName: "INT",
-    attributeValue: rollIntelligence,
-    modifierValue: intelligenceModifier,
-  },
-  {
-    attributeName: "WIS",
-    attributeValue: rollWisdom,
-    modifierValue: wisdomModifier,
-  },
-  {
-    attributeName: "CHA",
-    attributeValue: rollCharisma,
-    modifierValue: charsimaModifier,
-  },
-];
-
 let generatedCharacterClass = determineCharacterClass(ATTRIBUTES);
 
 let generatedCharacterRace = determineCharacterRace(generatedCharacterClass);
@@ -541,10 +536,10 @@ const characterAlignment =
   ALIGNMENTS[Math.floor(Math.random() * ALIGNMENTS.length)];
 
 let xpBonus = 0;
-if (rollWisdom >= 15) {
+if (ROLL_FOR_WISDOM >= 15) {
   xpBonus += 5;
 }
-if (rollCharisma >= 15) {
+if (ROLL_FOR_CHARISMA >= 15) {
   xpBonus += 5;
 }
 if (generatedCharacterClass.primeAttributeValue >= 15) {
@@ -554,36 +549,36 @@ if (xpBonus > 15) {
   xpBonus = 15;
 }
 
-let characterHP = generatedCharacterClass.HDatLevel1 + constitutionModifier;
+let characterHP = generatedCharacterClass.HDatLevel1 + CONSTITUTION_MODIFIER;
 if (characterHP <= 0) {
   characterHP = 1;
 }
 
 const toHitMelee = `${
-  generatedCharacterClass.toHitAtLevel1 + strengthModifier > 0 ? "+" : ""
-}${generatedCharacterClass.toHitAtLevel1 + strengthModifier}`;
+  generatedCharacterClass.toHitAtLevel1 + STRENGTH_MODIFIER > 0 ? "+" : ""
+}${generatedCharacterClass.toHitAtLevel1 + STRENGTH_MODIFIER}`;
 const toHitMissile = `${
-  generatedCharacterClass.toHitAtLevel1 + dexterityModifier > 0 ? "+" : ""
-}${generatedCharacterClass.toHitAtLevel1 + dexterityModifier}`;
+  generatedCharacterClass.toHitAtLevel1 + DEXTERITY_MODIFIER > 0 ? "+" : ""
+}${generatedCharacterClass.toHitAtLevel1 + DEXTERITY_MODIFIER}`;
 
 let maxHirelings = null;
 let hirelingsLoyalty = null;
-if (rollCharisma <= 4) {
+if (ROLL_FOR_CHARISMA <= 4) {
   maxHirelings = 1;
   hirelingsLoyalty = -2;
-} else if (rollCharisma >= 5 && rollCharisma <= 6) {
+} else if (ROLL_FOR_CHARISMA >= 5 && ROLL_FOR_CHARISMA <= 6) {
   maxHirelings = 2;
   hirelingsLoyalty = -2;
-} else if (rollCharisma >= 7 && rollCharisma <= 8) {
+} else if (ROLL_FOR_CHARISMA >= 7 && ROLL_FOR_CHARISMA <= 8) {
   maxHirelings = 3;
   hirelingsLoyalty = -1;
-} else if (rollCharisma >= 9 && rollCharisma <= 12) {
+} else if (ROLL_FOR_CHARISMA >= 9 && ROLL_FOR_CHARISMA <= 12) {
   maxHirelings = 4;
   hirelingsLoyalty = 0;
-} else if (rollCharisma >= 13 && rollCharisma <= 15) {
+} else if (ROLL_FOR_CHARISMA >= 13 && ROLL_FOR_CHARISMA <= 15) {
   maxHirelings = 5;
   hirelingsLoyalty = 1;
-} else if (rollCharisma >= 16 && rollCharisma <= 17) {
+} else if (ROLL_FOR_CHARISMA >= 16 && ROLL_FOR_CHARISMA <= 17) {
   maxHirelings = 6;
   hirelingsLoyalty = 2;
 } else {
@@ -591,12 +586,18 @@ if (rollCharisma <= 4) {
   hirelingsLoyalty = 2;
 }
 
+let raceAbilities = "";
+
 if (
   generatedCharacterRace.raceName != "Human" &&
   generatedCharacterRace.raceName != "Elf"
 ) {
   raceAbilities = `Race Abilities: ${generatedCharacterRace.raceSpecialAbilities}`;
 }
+
+let currentMoney = INITIAL_MONEY;
+
+let characterEquipment = [];
 
 //TODO: Include AC value after including equipment
 let stringToDisplay = `${generatedCharacterRace.raceName} ${generatedCharacterClass.characterClassName}, Level 1 <br /> Alignment: ${characterAlignment}<br /><br />`;
