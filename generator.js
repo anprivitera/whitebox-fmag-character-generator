@@ -14,8 +14,8 @@ It includes:
 - A character portrait
 - ~~Saving throw and mods~~
 - ~~Spells / Abilities ~~
-- Equipment
-- Weapons & Armor
+- ~~Equipment~~
+- ~~Weapons & Armor~~
 - ~~Coins~~
 - ~~Languages~~
 - ~~To-Hit bonus~~
@@ -100,7 +100,6 @@ function determineCharacterClass(attributes) {
     savingThrowBonus: "+2 vs. Death and Poison",
     spellcasterType: "divine",
     primeAttribute: "WIS",
-    // primeAttributeValue: null;
     specialAbilities:
       "<ul><li>Turn the Undead.</li><li>Establish Temple (at Level 10).</li></ul>",
   };
@@ -114,7 +113,6 @@ function determineCharacterClass(attributes) {
     spellcasterType: null,
     spellsAtLevel1: null,
     primeAttribute: "STR",
-    // primeAttributeValue: null;
     specialAbilities:
       "<ul><li>Combat Fury (+1 attack/level vs. >=1 HD foes).</li><li>Establish Stronghold (at Level 9).</li></ul>",
   };
@@ -128,7 +126,6 @@ function determineCharacterClass(attributes) {
     spellcasterType: null, // TODO: change when implementing more character levels
     spellsAtLevel1: null,
     primeAttribute: null,
-    // primeAttributeValue: null;
     specialAbilities:
       "<ul><li>+1 to-hit vs. goblins, orcs, intelligent undead, lycantropes.</li><li>Immune to undead paralysis.</li><li>Half damage from giants and ogres.</li><li>4-in-6 chances of actively spotting hidden or concealed doors (2-in-6 if passing by).</li></ul>",
   };
@@ -141,7 +138,6 @@ function determineCharacterClass(attributes) {
     savingThrowBonus: "+2 vs. Spells",
     spellcasterType: "magic",
     primeAttribute: "INT",
-    // primeAttributeValue: null;
     specialAbilities:
       "<ul><li>Spell Casting.</li><li>Establish Wizard Tower (at Level 9).</li></ul>",
   };
@@ -154,7 +150,6 @@ function determineCharacterClass(attributes) {
     savingThrowBonus: "+2 vs. Traps",
     spellcasterType: null,
     primeAttribute: "DEX",
-    // primeAttributeValue: null;
     specialAbilities:
       "<ul><li>Back Stab (+2 to Hit and x2 damage on hit)</li><li>Thievery 2-in-6</li><li>Establish Guild (at Level 9)</li></ul>",
   };
@@ -191,10 +186,6 @@ function determineCharacterClass(attributes) {
     }
   }
 }
-//TODO: Complete functions for Weapons and Gear
-// let filteredShoppingArray = shoppingArray.filter(
-//   (n) => n.characterClass == true
-// );
 function selectItems(
   itemsAvailable,
   numberOfItems,
@@ -207,6 +198,8 @@ function selectItems(
     i = 0;
   shuffle(shoppingArray);
   //TODO: Include more dynamic combinations for weapon selection (i.e., weapon and shield, two weapons...)
+  //TODO: make sure that currentMoney is never negative, both by checking at the beginning of the function if the money can be spent, and by checking after each purchase.
+  //TODO: turn recurring code below into function
   switch (whoIsTheCharacter) {
     case "Fighter":
       filteredShoppingArray = shoppingArray.filter((n) => n.fighter == true);
@@ -1084,7 +1077,7 @@ for (let n = 0; n < characterEquipment.length; n++) {
 stringToDisplay += `<li>${currentMoney} gp</li></ul> <br /><br /> Hirelings (Max #): ${maxHirelings}<br /> Loyalty: ${
   hirelingsLoyalty > 0 ? "+" : ""
 }${hirelingsLoyalty}<br />`;
-//TODO: pick elements from list of items randomly until money runs out (giving priority to 1 allowed weapon, 1 allowed armor and then assigning the rest randomly)
+
 //TODO: calculate movement speed
 
 document.getElementById("generator").innerHTML = stringToDisplay;
