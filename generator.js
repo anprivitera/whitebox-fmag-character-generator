@@ -248,24 +248,6 @@ function selectItems(
   return [selectedItem, currentMoney];
 }
 
-function selectAdventuringGear(
-  characterEquipment,
-  aventuringGear,
-  currentMoney
-) {
-  let shoppingArray = aventuringGear.map((x) => x);
-  shuffle(shoppingArray);
-  let shoppableItems = shoppingArray.some((item) => item.cost <= currentMoney);
-  while (shoppableItems) {
-    // for (let i = 0; i < shoppingArray.length; i++) {
-    if (shoppingArray[0].cost <= currentMoney) {
-      characterEquipment.push(shoppingArray.pop());
-      currentMoney = currentMoney - shoppingArray[0].cost;
-    }
-  }
-  return { characterEquipment, currentMoney };
-}
-
 //CONSTANTS
 const ROLL_FOR_STRENGTH = diceRoller(3),
   ROLL_FOR_DEXTERITY = diceRoller(3),
