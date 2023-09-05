@@ -23,6 +23,199 @@ It includes:
 - Weight carried and movement speed
 */
 
+//FUNCTIONS
+function diceRoller(numberOfDice) {
+  let rollResult = null;
+  for (let i = 0; i < numberOfDice; i++) {
+    rollResult += Math.floor(Math.random() * 6 + 1);
+  }
+  return rollResult;
+}
+
+function determineModifier(attributeScore) {
+  if (attributeScore <= 6) {
+    return -1;
+  } else if (attributeScore >= 7 && attributeScore <= 14) {
+    return 0;
+  } else {
+    return +1;
+  }
+}
+
+function shuffle(array) {
+  for (let i = array.length - 1; i > 0; i--) {
+    let j = Math.floor(Math.random() * (i + 1));
+    [array[i], array[j]] = [array[j], array[i]];
+  }
+}
+
+function determineCharacterRace(generatedCharacterClass) {
+  const HUMAN = {
+    raceName: "Human",
+    raceSavingThrowBonus: "",
+    raceSpecialAbilities: "",
+  };
+  const ELF = {
+    raceName: "",
+    raceSavingThrowBonus: "",
+    raceSpecialAbilities: "",
+  };
+  const DWARF = {
+    raceName: "Dwarf",
+    raceSavingThrowBonus: ", +4 vs. Magic",
+    raceSpecialAbilities:
+      "<ul><li>Can reach maximum level 6</li><li>Half damage from giants and ogres</li><li>4-in-6 chances of actively spotting traps, slanting passages or construction (2-in-6 if passing by)</li><li>Can speak with goblins, ogres, orcs, kobolds</li></ul>",
+  };
+  const HALFLING = {
+    raceName: "Halfling",
+    raceSavingThrowBonus: ", +4 vs. Magic",
+    raceSpecialAbilities: `<ul><li>${
+      generatedCharacterClass.characterClassName == "Fighter"
+        ? "Can reach maxium level 4."
+        : "Can reach maxium Level 6."
+    }</li><li>Half damage from giants and ogres</li><li>+2 to-hit using missile weapons</li><li>5-in-6 chance of going undetected when outside of combat</li></ul>`,
+  };
+  const RACES = [HUMAN, DWARF, HALFLING];
+  if (generatedCharacterClass.characterClassName == "Elf") {
+    let characterRace = ELF;
+    return characterRace;
+  }
+  let characterRace = HUMAN;
+  if (
+    generatedCharacterClass.characterClassName == "Fighter" ||
+    generatedCharacterClass.characterClassName == "Thief"
+  ) {
+    characterRace = RACES[Math.floor(Math.random() * RACES.length)];
+  }
+  return characterRace;
+}
+
+function determineCharacterClass(attributes) {
+  const cleric = {
+    characterClassName: "Cleric",
+    xpAtLevel1: 0,
+    HDatLevel1: diceRoller(1),
+    toHitAtLevel1: 0,
+    savingThrowAtLevel1: 15,
+    savingThrowBonus: "+2 vs. Death and Poison",
+    spellcasterType: "divine",
+    primeAttribute: "WIS",
+    // primeAttributeValue: null;
+    specialAbilities:
+      "<ul><li>Turn the Undead.</li><li>Establish Temple (at Level 10).</li></ul>",
+  };
+  const fighter = {
+    characterClassName: "Fighter",
+    xpAtLevel1: 0,
+    HDatLevel1: diceRoller(1) + 1,
+    toHitAtLevel1: 0,
+    savingThrowAtLevel1: 14,
+    savingThrowBonus: "+2 vs. Poison and Paralysis",
+    spellcasterType: null,
+    spellsAtLevel1: null,
+    primeAttribute: "STR",
+    // primeAttributeValue: null;
+    specialAbilities:
+      "<ul><li>Combat Fury (+1 attack/level vs. >=1 HD foes).</li><li>Establish Stronghold (at Level 9).</li></ul>",
+  };
+  const elf = {
+    characterClassName: "Elf",
+    xpAtLevel1: 0,
+    HDatLevel1: diceRoller(1) + 1,
+    toHitAtLevel1: 0,
+    savingThrowAtLevel1: 14,
+    savingThrowBonus: "+2 vs. Poison and Paralysis",
+    spellcasterType: null, // TODO: change when implementing more character levels
+    spellsAtLevel1: null,
+    primeAttribute: null,
+    // primeAttributeValue: null;
+    specialAbilities:
+      "<ul><li>+1 to-hit vs. goblins, orcs, intelligent undead, lycantropes.</li><li>Immune to undead paralysis.</li><li>Half damage from giants and ogres.</li><li>4-in-6 chances of actively spotting hidden or concealed doors (2-in-6 if passing by).</li></ul>",
+  };
+  const magicUser = {
+    characterClassName: "Magic-User",
+    xpAtLevel1: 0,
+    HDatLevel1: diceRoller(1),
+    toHitAtLevel1: 0,
+    savingThrowAtLevel1: 15,
+    savingThrowBonus: "+2 vs. Spells",
+    spellcasterType: "magic",
+    primeAttribute: "INT",
+    // primeAttributeValue: null;
+    specialAbilities:
+      "<ul><li>Spell Casting.</li><li>Establish Wizard Tower (at Level 9).</li></ul>",
+  };
+  const thief = {
+    characterClassName: "Thief",
+    xpAtLevel1: 0,
+    HDatLevel1: diceRoller(1),
+    toHitAtLevel1: 0,
+    savingThrowAtLevel1: 14,
+    savingThrowBonus: "+2 vs. Traps",
+    spellcasterType: null,
+    primeAttribute: "DEX",
+    // primeAttributeValue: null;
+    specialAbilities:
+      "<ul><li>Back Stab (+2 to Hit and x2 damage on hit)</li><li>Thievery 2-in-6</li><li>Establish Guild (at Level 9)</li></ul>",
+  };
+  let generatedCharacterClass = null;
+  if (Math.random() < 0.1) {
+    generatedCharacterClass = elf;
+    return generatedCharacterClass;
+  }
+  let fromHighToLow = attributes.map((x) => x);
+  fromHighToLow.sort((a, b) => b.attributeValue - a.attributeValue);
+  while (generatedCharacterClass == null) {
+    for (let x = 0; x < fromHighToLow.length; x++) {
+      if (fromHighToLow[x].attributeName == cleric.primeAttribute) {
+        generatedCharacterClass = cleric;
+        generatedCharacterClass.primeAttributeValue =
+          fromHighToLow[x].attributeValue;
+        return generatedCharacterClass;
+      } else if (fromHighToLow[x].attributeName == fighter.primeAttribute) {
+        generatedCharacterClass = fighter;
+        generatedCharacterClass.primeAttributeValue =
+          fromHighToLow[x].attributeValue;
+        return generatedCharacterClass;
+      } else if (fromHighToLow[x].attributeName == magicUser.primeAttribute) {
+        generatedCharacterClass = magicUser;
+        generatedCharacterClass.primeAttributeValue =
+          fromHighToLow[x].attributeValue;
+        return generatedCharacterClass;
+      } else if (fromHighToLow[x].attributeName == thief.primeAttribute) {
+        generatedCharacterClass = thief;
+        generatedCharacterClass.primeAttributeValue =
+          fromHighToLow[x].attributeValue;
+        return generatedCharacterClass;
+      }
+    }
+  }
+}
+
+function selectWeapons(weaponsAvailable, currentMoney) {
+  let shoppingArray = weaponsAvailable.map((x) => x);
+  shuffle(shoppingArray);
+  characterEquipment.push(
+    shoppingArray.pop(Math.floor(Math.random() * shoppingArray.length))
+  );
+  currentMoney = currentMoney - characterEquipment[0].cost;
+  return { characterEquipment, currentMoney };
+}
+
+function selectAdventuringGear(aventuringGear, currentMoney) {
+  let shoppingArray = aventuringGear.map((x) => x);
+  shuffle(shoppingArray);
+  let shoppableItems = shoppingArray.some((item) => item.cost <= currentMoney);
+  while (shoppableItems) {
+    // for (let i = 0; i < shoppingArray.length; i++) {
+    if (shoppingArray[0].cost <= currentMoney) {
+      characterEquipment.push(shoppingArray.pop());
+      currentMoney = currentMoney - shoppingArray[0].cost;
+    }
+  }
+  return { characterEquipment, currentMoney };
+}
+
 //CONSTANTS
 const ROLL_FOR_STRENGTH = diceRoller(3),
   ROLL_FOR_DEXTERITY = diceRoller(3),
@@ -333,199 +526,6 @@ const ADVENTURING_GEAR = [
 //TODO: Treat ammunitions as a separate purchase: if a character gets a missile weapon, they should obviously get also ammunitions. Bow > arrows, Sling > stones, Crossbow > Bolts
 //TODO: Divide consumables items, so that they can be purchased more than once, and display them as unified (i.e., Torches (10))
 //TODO: Required items should go into character classes?
-
-//FUNCTIONS
-function diceRoller(numberOfDice) {
-  let rollResult = null;
-  for (let i = 0; i < numberOfDice; i++) {
-    rollResult += Math.floor(Math.random() * 6 + 1);
-  }
-  return rollResult;
-}
-
-function determineModifier(attributeScore) {
-  if (attributeScore <= 6) {
-    return -1;
-  } else if (attributeScore >= 7 && attributeScore <= 14) {
-    return 0;
-  } else {
-    return +1;
-  }
-}
-
-function shuffle(array) {
-  for (let i = array.length - 1; i > 0; i--) {
-    let j = Math.floor(Math.random() * (i + 1));
-    [array[i], array[j]] = [array[j], array[i]];
-  }
-}
-
-function determineCharacterRace(generatedCharacterClass) {
-  const HUMAN = {
-    raceName: "Human",
-    raceSavingThrowBonus: "",
-    raceSpecialAbilities: "",
-  };
-  const ELF = {
-    raceName: "",
-    raceSavingThrowBonus: "",
-    raceSpecialAbilities: "",
-  };
-  const DWARF = {
-    raceName: "Dwarf",
-    raceSavingThrowBonus: ", +4 vs. Magic",
-    raceSpecialAbilities:
-      "<ul><li>Can reach maximum level 6</li><li>Half damage from giants and ogres</li><li>4-in-6 chances of actively spotting traps, slanting passages or construction (2-in-6 if passing by)</li><li>Can speak with goblins, ogres, orcs, kobolds</li></ul>",
-  };
-  const HALFLING = {
-    raceName: "Halfling",
-    raceSavingThrowBonus: ", +4 vs. Magic",
-    raceSpecialAbilities: `<ul><li>${
-      generatedCharacterClass.characterClassName == "Fighter"
-        ? "Can reach maxium level 4."
-        : "Can reach maxium Level 6."
-    }</li><li>Half damage from giants and ogres</li><li>+2 to-hit using missile weapons</li><li>5-in-6 chance of going undetected when outside of combat</li></ul>`,
-  };
-  const RACES = [HUMAN, DWARF, HALFLING];
-  if (generatedCharacterClass.characterClassName == "Elf") {
-    let characterRace = ELF;
-    return characterRace;
-  }
-  let characterRace = HUMAN;
-  if (
-    generatedCharacterClass.characterClassName == "Fighter" ||
-    generatedCharacterClass.characterClassName == "Thief"
-  ) {
-    characterRace = RACES[Math.floor(Math.random() * RACES.length)];
-  }
-  return characterRace;
-}
-
-function determineCharacterClass(attributes) {
-  const cleric = {
-    characterClassName: "Cleric",
-    xpAtLevel1: 0,
-    HDatLevel1: diceRoller(1),
-    toHitAtLevel1: 0,
-    savingThrowAtLevel1: 15,
-    savingThrowBonus: "+2 vs. Death and Poison",
-    spellcasterType: "divine",
-    primeAttribute: "WIS",
-    // primeAttributeValue: null;
-    specialAbilities:
-      "<ul><li>Turn the Undead.</li><li>Establish Temple (at Level 10).</li></ul>",
-  };
-  const fighter = {
-    characterClassName: "Fighter",
-    xpAtLevel1: 0,
-    HDatLevel1: diceRoller(1) + 1,
-    toHitAtLevel1: 0,
-    savingThrowAtLevel1: 14,
-    savingThrowBonus: "+2 vs. Poison and Paralysis",
-    spellcasterType: null,
-    spellsAtLevel1: null,
-    primeAttribute: "STR",
-    // primeAttributeValue: null;
-    specialAbilities:
-      "<ul><li>Combat Fury (+1 attack/level vs. >=1 HD foes).</li><li>Establish Stronghold (at Level 9).</li></ul>",
-  };
-  const elf = {
-    characterClassName: "Elf",
-    xpAtLevel1: 0,
-    HDatLevel1: diceRoller(1) + 1,
-    toHitAtLevel1: 0,
-    savingThrowAtLevel1: 14,
-    savingThrowBonus: "+2 vs. Poison and Paralysis",
-    spellcasterType: null, // TODO: change when implementing more character levels
-    spellsAtLevel1: null,
-    primeAttribute: null,
-    // primeAttributeValue: null;
-    specialAbilities:
-      "<ul><li>+1 to-hit vs. goblins, orcs, intelligent undead, lycantropes.</li><li>Immune to undead paralysis.</li><li>Half damage from giants and ogres.</li><li>4-in-6 chances of actively spotting hidden or concealed doors (2-in-6 if passing by).</li></ul>",
-  };
-  const magicUser = {
-    characterClassName: "Magic-User",
-    xpAtLevel1: 0,
-    HDatLevel1: diceRoller(1),
-    toHitAtLevel1: 0,
-    savingThrowAtLevel1: 15,
-    savingThrowBonus: "+2 vs. Spells",
-    spellcasterType: "magic",
-    primeAttribute: "INT",
-    // primeAttributeValue: null;
-    specialAbilities:
-      "<ul><li>Spell Casting.</li><li>Establish Wizard Tower (at Level 9).</li></ul>",
-  };
-  const thief = {
-    characterClassName: "Thief",
-    xpAtLevel1: 0,
-    HDatLevel1: diceRoller(1),
-    toHitAtLevel1: 0,
-    savingThrowAtLevel1: 14,
-    savingThrowBonus: "+2 vs. Traps",
-    spellcasterType: null,
-    primeAttribute: "DEX",
-    // primeAttributeValue: null;
-    specialAbilities:
-      "<ul><li>Back Stab (+2 to Hit and x2 damage on hit)</li><li>Thievery 2-in-6</li><li>Establish Guild (at Level 9)</li></ul>",
-  };
-  let generatedCharacterClass = null;
-  if (Math.random() < 0.1) {
-    generatedCharacterClass = elf;
-    return generatedCharacterClass;
-  }
-  let fromHighToLow = attributes.map((x) => x);
-  fromHighToLow.sort((a, b) => b.attributeValue - a.attributeValue);
-  while (generatedCharacterClass == null) {
-    for (let x = 0; x < fromHighToLow.length; x++) {
-      if (fromHighToLow[x].attributeName == cleric.primeAttribute) {
-        generatedCharacterClass = cleric;
-        generatedCharacterClass.primeAttributeValue =
-          fromHighToLow[x].attributeValue;
-        return generatedCharacterClass;
-      } else if (fromHighToLow[x].attributeName == fighter.primeAttribute) {
-        generatedCharacterClass = fighter;
-        generatedCharacterClass.primeAttributeValue =
-          fromHighToLow[x].attributeValue;
-        return generatedCharacterClass;
-      } else if (fromHighToLow[x].attributeName == magicUser.primeAttribute) {
-        generatedCharacterClass = magicUser;
-        generatedCharacterClass.primeAttributeValue =
-          fromHighToLow[x].attributeValue;
-        return generatedCharacterClass;
-      } else if (fromHighToLow[x].attributeName == thief.primeAttribute) {
-        generatedCharacterClass = thief;
-        generatedCharacterClass.primeAttributeValue =
-          fromHighToLow[x].attributeValue;
-        return generatedCharacterClass;
-      }
-    }
-  }
-}
-
-function selectWeapons(weaponsAvailable, currentMoney) {
-  let shoppingArray = weaponsAvailable.map((x) => x);
-  shuffle(shoppingArray);
-  characterEquipment.push(
-    shoppingArray.pop(Math.floor(Math.random() * shoppingArray.length))
-  );
-  currentMoney = currentMoney - characterEquipment[0].cost;
-  return { characterEquipment, currentMoney };
-}
-
-function selectAdventuringGear(aventuringGear, currentMoney) {
-  let shoppingArray = aventuringGear.map((x) => x);
-  shuffle(shoppingArray);
-  let shoppableItems = shoppingArray.some((item) => item.cost <= currentMoney);
-  while (shoppableItems) {
-    // for (let i = 0; i < shoppingArray.length; i++) {
-    if (shoppingArray[0].cost <= currentMoney) {
-      characterEquipment.push(shoppingArray.pop());
-      currentMoney = currentMoney - shoppingArray[0].cost;
-    }
-  }
-  return { characterEquipment, currentMoney };
-}
 
 //START RUN-TIME
 let generatedCharacterClass = determineCharacterClass(ATTRIBUTES);
