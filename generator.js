@@ -192,14 +192,19 @@ function determineCharacterClass(attributes) {
   }
 }
 //TODO: Complete functions for Weapons and Gear
-function selectWeapons(weaponsAvailable, currentMoney) {
-  let shoppingArray = weaponsAvailable.map((x) => x);
+function selectWeapons(weapons, currentMoney) {
+  let shoppingArray = weapons.map((x) => x);
+  let weaponsOutput = null;
+  //let characterWeapon = [];
+  // let filteredShoppingArray = shoppingArray.filter(
+  //   (n) => n.characterClass == true
+  // );
   shuffle(shoppingArray);
-  characterEquipment.push(
+  weaponsOutput.push(
     shoppingArray.pop(Math.floor(Math.random() * shoppingArray.length))
   );
-  currentMoney = currentMoney - characterEquipment[0].cost;
-  return [characterEquipment, currentMoney];
+  currentMoney = currentMoney - weaponsOutput[0].cost;
+  return [weaponsOutput, currentMoney];
 }
 
 function selectAdventuringGear(
@@ -714,8 +719,8 @@ if (notHumanOrElf) {
 }
 
 let currentMoney = INITIAL_MONEY;
-let characterEquipment = [];
-let characterWeapons = null;
+let characterEquipment = null,
+  characterWeapons = null;
 
 [characterWeapons, currentMoney] = selectWeapons(WEAPONS, currentMoney);
 
