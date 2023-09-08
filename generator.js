@@ -1078,7 +1078,7 @@ document.getElementById("attributes").innerHTML = attributesToDisplay;
 
 let stringToDisplay = ``;
 
-let combatInfo = `<h2>Combat Info</h2><br />Melee: ${toHitMelee} (to-hit and damage) <br /> Missile: ${toHitMissile} (to-hit) <br /> AC 
+let combatInfo = `<h2>Combat Info</h2>Melee: ${toHitMelee} (to-hit and damage) <br /> Missile: ${toHitMissile} (to-hit) <br /> AC 
 ${9 - characterArmor[0].AC - dexterityModifier}
 [${
   10 + characterArmor[0].AC + dexterityModifier
