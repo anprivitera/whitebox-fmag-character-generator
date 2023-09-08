@@ -1088,7 +1088,8 @@ function receivePortrait() {
     generatedCharacterRace.raceName == "Halfling"
   ) {
     const gender = ["man", "woman"];
-    character = gender[Math.floor(Math.random * gender.length)];
+    character = gender[Math.floor(Math.random() * gender.length)];
+    // character = gender[genderSelect];
   } else if (generatedCharacterRace.raceName == "Dwarf") {
     character = "dwarf";
   } else {
