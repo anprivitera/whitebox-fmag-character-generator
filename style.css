@@ -4,11 +4,16 @@ body {
     font-family: sans-serif;
 }
 
+ul.sheet {
+    list-style: square;
+}
+
 #sheet {
-    background-image:url("https://wallpapercave.com/wp/wp8571277.jpg");
+    /* background-image:url("https://wallpapercave.com/wp/wp8571277.jpg"); */
     background-size: 700px;
     text-align: right;
-}
+
+
 
 
 /* div.center {
