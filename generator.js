@@ -260,53 +260,6 @@ function selectItems(
 }
 
 //CONSTANTS
-const rollForStrength = diceRoller(3),
-  rollForDexterity = diceRoller(3),
-  rollForConstitution = diceRoller(3),
-  rollForIntelligence = diceRoller(3),
-  rollForWisdom = diceRoller(3),
-  rollForCharisma = diceRoller(3),
-  stengthModifier = determineModifier(rollForStrength),
-  dexterityModifier = determineModifier(rollForDexterity),
-  constitutionModifier = determineModifier(rollForConstitution),
-  intelligenceModifier = determineModifier(rollForIntelligence),
-  wisdomModifier = determineModifier(rollForWisdom),
-  charismaModifier = determineModifier(rollForCharisma),
-  initialMoney = diceRoller(3) * 10;
-
-const generatedAttributes = [
-  {
-    attributeName: "STR",
-    attributeValue: rollForStrength,
-    modifierValue: stengthModifier,
-  },
-  {
-    attributeName: "DEX",
-    attributeValue: rollForDexterity,
-    modifierValue: dexterityModifier,
-  },
-  {
-    attributeName: "CON",
-    attributeValue: rollForConstitution,
-    modifierValue: constitutionModifier,
-  },
-  {
-    attributeName: "INT",
-    attributeValue: rollForIntelligence,
-    modifierValue: intelligenceModifier,
-  },
-  {
-    attributeName: "WIS",
-    attributeValue: rollForWisdom,
-    modifierValue: wisdomModifier,
-  },
-  {
-    attributeName: "CHA",
-    attributeValue: rollForCharisma,
-    modifierValue: charismaModifier,
-  },
-];
-
 const MAGIC_USER_SPELLS_LEVEL_1 = [
   "Charm Person",
   "Detect Magic",
@@ -959,6 +912,53 @@ const ADVENTURING_GEAR = [
 //TODO: Required items should go into character classes?
 
 //START RUN-TIME
+const rollForStrength = diceRoller(3),
+  rollForDexterity = diceRoller(3),
+  rollForConstitution = diceRoller(3),
+  rollForIntelligence = diceRoller(3),
+  rollForWisdom = diceRoller(3),
+  rollForCharisma = diceRoller(3),
+  stengthModifier = determineModifier(rollForStrength),
+  dexterityModifier = determineModifier(rollForDexterity),
+  constitutionModifier = determineModifier(rollForConstitution),
+  intelligenceModifier = determineModifier(rollForIntelligence),
+  wisdomModifier = determineModifier(rollForWisdom),
+  charismaModifier = determineModifier(rollForCharisma),
+  initialMoney = diceRoller(3) * 10;
+
+const generatedAttributes = [
+  {
+    attributeName: "STR",
+    attributeValue: rollForStrength,
+    modifierValue: stengthModifier,
+  },
+  {
+    attributeName: "DEX",
+    attributeValue: rollForDexterity,
+    modifierValue: dexterityModifier,
+  },
+  {
+    attributeName: "CON",
+    attributeValue: rollForConstitution,
+    modifierValue: constitutionModifier,
+  },
+  {
+    attributeName: "INT",
+    attributeValue: rollForIntelligence,
+    modifierValue: intelligenceModifier,
+  },
+  {
+    attributeName: "WIS",
+    attributeValue: rollForWisdom,
+    modifierValue: wisdomModifier,
+  },
+  {
+    attributeName: "CHA",
+    attributeValue: rollForCharisma,
+    modifierValue: charismaModifier,
+  },
+];
+
 const generatedCharacterClass = determineCharacterClass(generatedAttributes);
 
 const generatedCharacterRace = determineCharacterRace(generatedCharacterClass);
