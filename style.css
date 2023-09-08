@@ -1,13 +1,21 @@
 body {
     background-color: whitesmoke;
     color: darkblue;
+    font-family: sans-serif;
 }
 
-div.center {
+#sheet {
+    background-image:url("https://wallpapercave.com/wp/wp8571277.jpg");
+    background-size: 700px;
+    text-align: right;
+}
+
+
+/* div.center {
     margin: auto;
-    width: 23%;
+    width: auto;
     border: 2px solid darkblue;
     padding: 1px;
-  }
+  } */
 
 /* TODO: Include animations. I don't want the character to just appear instantly, but to make the user feel as if they are rolling it physically */
