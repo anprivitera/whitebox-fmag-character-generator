@@ -10,7 +10,7 @@ ul {
 
 
 
-#sheet {
+.sheet {
     /* background-image:url("https://wallpapercave.com/wp/wp8571277.jpg"); */
     display: flex;
     flex-wrap: wrap;
@@ -21,7 +21,7 @@ ul {
 .character-info {
     font-size: large;
     border: 3px, 3px, 3px, 3px;
-    border-style: solid;
+    border-style:ridge;
 }
 
 /* #portrait{
