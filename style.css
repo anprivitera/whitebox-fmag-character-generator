@@ -8,12 +8,20 @@ ul {
     list-style: none;
 }
 
+
+
 #sheet {
     /* background-image:url("https://wallpapercave.com/wp/wp8571277.jpg"); */
     display: flex;
     flex-wrap: wrap;
     background-size: 700px;
     /* text-align: right; */
+}
+
+.character-info {
+    font-size: large;
+    border: 3px, 3px, 3px, 3px;
+    border-style: solid;
 }
 
 /* #portrait{

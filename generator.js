@@ -1063,17 +1063,21 @@ let characterEquipment = [];
 
 //TODO: Divide this string into specific div id sections
 
-const basicInfo = `${generatedCharacterRace.raceName} ${generatedCharacterClass.characterClassName}, Level 1<br />Alignment: ${characterAlignment}`;
+const basicInfo = `<h2>Basic info</h2>${generatedCharacterRace.raceName} ${generatedCharacterClass.characterClassName}, Level 1<br />Alignment: ${characterAlignment}`;
 document.getElementById("basic-info").innerHTML = basicInfo;
 
-let stringToDisplay = `<br />`;
+let attributesToDisplay = `<h2>Attributes</h2>`;
 for (let n = 0; n < generatedAttributes.length; n++) {
-  stringToDisplay += `${generatedAttributes[n].attributeName} ${
+  attributesToDisplay += `${generatedAttributes[n].attributeName} ${
     generatedAttributes[n].attributeValue
   } (${generatedAttributes[n].modifierValue > 0 ? "+" : ""}${
     generatedAttributes[n].modifierValue
   }) <br />`;
 }
+document.getElementById("attributes").innerHTML = attributesToDisplay;
+
+let stringToDisplay = ``;
+
 stringToDisplay += `<br />Melee: ${toHitMelee} (to-hit and damage) <br /> Missile: ${toHitMissile} (to-hit) <br /> AC 
 ${9 - characterArmor[0].AC - dexterityModifier}
 [${
