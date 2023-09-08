@@ -102,11 +102,11 @@ function determineCharacterClass(attributes) {
     primeAttribute: "INT",
     domininonKind: "Wizard Tower",
     dominionLevel: 9,
-    specialAbilities: `Known Spells: ${
+    specialAbilities: `<ul><li>Known Spells: ${
       MAGIC_USER_SPELLS_LEVEL_1[
         Math.floor(Math.random() * MAGIC_USER_SPELLS_LEVEL_1.length)
       ]
-    }`,
+    }</li>`,
   };
   const thief = {
     characterClassName: "Thief",
@@ -163,7 +163,7 @@ function determineCharacterRace(generatedCharacterClass) {
   const HUMAN = {
     raceName: "Human",
     raceSavingThrowBonus: "",
-    raceSpecialAbilities: `<li>Can establish ${generatedCharacterClass.domininonKind} at Level ${generatedCharacterClass.dominionLevel}`,
+    raceSpecialAbilities: `<li>Can establish ${generatedCharacterClass.domininonKind} at Level ${generatedCharacterClass.dominionLevel}</ul>`,
   };
   const DWARF = {
     raceName: "Dwarf",
@@ -1083,22 +1083,22 @@ ${9 - characterArmor[0].AC - dexterityModifier}
 } (${
   generatedCharacterClass.savingThrowBonus +
   generatedCharacterRace.raceSavingThrowBonus
-})`;
-`Weapons & Armor: <br/><ul>`;
+})<br /><br />`;
 for (let n = 0; n < characterWeapons.length; n++) {
-  combatInfo += `<li>${characterWeapons[n].weaponName} (${characterWeapons[n].damage}) </li>`;
+  combatInfo += `${characterWeapons[n].weaponName} (${characterWeapons[n].damage})`;
 }
+combatInfo += `<br />`;
 for (let n = 0; n < characterArmor.length; n++) {
-  combatInfo += `<li>${characterArmor[n].armorName} (-${characterArmor[n].AC} [+${characterArmor[n].AC}]) </li>`;
+  combatInfo += `${characterArmor[n].armorName} (-${characterArmor[n].AC} [+${characterArmor[n].AC}])`;
 }
+combatInfo += `</ul>`;
 document.getElementById("combat-info").innerHTML = combatInfo;
 
-let characterAbilities = `<h2>Abilities</h2>${generatedCharacterClass.specialAbilities}
-${generatedCharacterRace.raceSpecialAbilities}`;
+let characterAbilities = `<h2>Abilities</h2>${generatedCharacterClass.specialAbilities}${generatedCharacterRace.raceSpecialAbilities}`;
 
 document.getElementById("character-abilities").innerHTML = characterAbilities;
 
-let equipmentToDisplay = `<h2>Equipment</h2>`;
+let equipmentToDisplay = `<h2>Equipment</h2><ul>`;
 for (let n = 0; n < characterEquipment.length; n++) {
   equipmentToDisplay += `<li>${characterEquipment[n].itemName}</li>`;
 }
