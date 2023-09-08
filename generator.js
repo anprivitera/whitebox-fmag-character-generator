@@ -1034,7 +1034,7 @@ let characterEquipment = [];
   generatedCharacterClass.characterClassName
 );
 
-//TODO: Include AC value after including equipment
+//TODO: Divide this string into specific div id sections
 let stringToDisplay = `${generatedCharacterRace.raceName} ${generatedCharacterClass.characterClassName}, Level 1 <br /> Alignment: ${characterAlignment}<br /><br />`;
 for (let n = 0; n < ATTRIBUTES.length; n++) {
   stringToDisplay += `${ATTRIBUTES[n].attributeName} ${
