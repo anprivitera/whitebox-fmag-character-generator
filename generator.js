@@ -1080,6 +1080,7 @@ stringToDisplay += `<li>${currentMoney} gp</li></ul> <br /><br /> Hirelings (Max
 
 //TODO: calculate movement speed
 
+//TODO: implement async function so that character portrait for humans/halflings looks good.
 function receivePortrait() {
   let character = null;
   if (generatedCharacterRace.raceName == "Elf") {
@@ -1098,5 +1099,5 @@ const characterPortrait = receivePortrait();
 
 document.getElementById(
   "portrait"
-).innerHTML = `<img src = "${characterPortrait}" width = 120></img><br />`;
+).innerHTML = `<img src = "${characterPortrait}" width = 120></img>`;
 document.getElementById("generator").innerHTML = stringToDisplay;
