@@ -1081,7 +1081,7 @@ stringToDisplay += `<li>${currentMoney} gp</li></ul> <br /><br /> Hirelings (Max
 //TODO: calculate movement speed
 
 //TODO: implement async function so that character portrait for humans/halflings looks good.
-async function receivePortrait() {
+function receivePortrait() {
   let character = null;
   if (
     generatedCharacterRace.raceName == "Human" ||
@@ -1094,11 +1094,8 @@ async function receivePortrait() {
   } else {
     character = "elf";
   }
-  const characterPortrait = await fetch(
-    `https://campaignwiki.org/face/redirect/alex/${character}`
-  );
-  const characterPortraitLink = characterPortrait.text;
-  return characterPortraitLink;
+  const characterPortrait = `https://campaignwiki.org/face/redirect/alex/${character}`;
+  return characterPortrait;
 }
 
 const characterPortrait = receivePortrait();
