@@ -25,6 +25,7 @@ It includes:
 */
 
 //FUNCTIONS
+//TODO: move these functions to modules?
 function diceRoller(numberOfDice) {
   let rollResult = null;
   for (let i = 0; i < numberOfDice; i++) {
