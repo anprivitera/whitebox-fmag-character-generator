@@ -10,9 +10,18 @@ ul {
 
 #sheet {
     /* background-image:url("https://wallpapercave.com/wp/wp8571277.jpg"); */
+    display: flex;
+    flex-wrap: wrap;
     background-size: 700px;
-    text-align: right;
+    /* text-align: right; */
 }
+
+/* #portrait{
+    align-self: left;
+}
+#basic-info{
+    align-self: right;
+} */
 
 
 
