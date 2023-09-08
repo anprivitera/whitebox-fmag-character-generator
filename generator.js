@@ -204,6 +204,24 @@ function determineCharacterClass(attributes) {
     }
   }
 }
+
+function determineXPBonus(primeAttribute) {
+  let xpBonus = 0;
+  if (rollForWisdom >= 15) {
+    xpBonus += 5;
+  }
+  if (rollForCharisma >= 15) {
+    xpBonus += 5;
+  }
+  if (generatedCharacterClass.primeAttributeValue >= 15) {
+    xpBonus += 5;
+  }
+  if (xpBonus > 15) {
+    xpBonus = 15;
+  }
+  return xpBonus;
+}
+
 function selectItems(
   itemsAvailable,
   numberOfItems,
@@ -968,19 +986,7 @@ const characterPortrait = receivePortrait();
 const characterAlignment =
   ALIGNMENTS[Math.floor(Math.random() * ALIGNMENTS.length)];
 
-let xpBonus = 0;
-if (rollForWisdom >= 15) {
-  xpBonus += 5;
-}
-if (rollForCharisma >= 15) {
-  xpBonus += 5;
-}
-if (generatedCharacterClass.primeAttributeValue >= 15) {
-  xpBonus += 5;
-}
-if (xpBonus > 15) {
-  xpBonus = 15;
-}
+let xpBonus = determineXPBonus(generatedCharacterClass.primeAttributeValue);
 
 let characterHP = generatedCharacterClass.HDatLevel1 + constitutionModifier;
 if (characterHP <= 0) {
