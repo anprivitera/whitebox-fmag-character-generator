@@ -1087,9 +1087,12 @@ ${9 - characterArmor[0].AC - dexterityModifier}
 } (${
   generatedCharacterClass.savingThrowBonus +
   generatedCharacterRace.raceSavingThrowBonus
-}) <br/> Class Abilities: ${generatedCharacterClass.specialAbilities}
-  ${raceAbilities}`;
+})`;
 document.getElementById("combat-info").innerHTML = combatInfo;
+
+let characterAbilities = `<h2>Abilities</h2> Class Abilities: ${generatedCharacterClass.specialAbilities}
+${raceAbilities}`;
+document.getElementById("character-abilities").innerHTML = characterAbilities;
 
 if (generatedCharacterClass.spellcasterType === "magic") {
   stringToDisplay += `Known Spells: ${
