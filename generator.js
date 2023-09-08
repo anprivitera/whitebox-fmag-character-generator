@@ -274,7 +274,7 @@ const rollForStrength = diceRoller(3),
   charismaModifier = determineModifier(rollForCharisma),
   initialMoney = diceRoller(3) * 10;
 
-const ATTRIBUTES = [
+const generatedAttributes = [
   {
     attributeName: "STR",
     attributeValue: rollForStrength,
@@ -959,7 +959,7 @@ const ADVENTURING_GEAR = [
 //TODO: Required items should go into character classes?
 
 //START RUN-TIME
-const generatedCharacterClass = determineCharacterClass(ATTRIBUTES);
+const generatedCharacterClass = determineCharacterClass(generatedAttributes);
 
 const generatedCharacterRace = determineCharacterRace(generatedCharacterClass);
 
@@ -1057,11 +1057,11 @@ let characterEquipment = [];
 
 //TODO: Divide this string into specific div id sections
 let stringToDisplay = `${generatedCharacterRace.raceName} ${generatedCharacterClass.characterClassName}, Level 1 <br /> Alignment: ${characterAlignment}<br /><br />`;
-for (let n = 0; n < ATTRIBUTES.length; n++) {
-  stringToDisplay += `${ATTRIBUTES[n].attributeName} ${
-    ATTRIBUTES[n].attributeValue
-  } (${ATTRIBUTES[n].modifierValue > 0 ? "+" : ""}${
-    ATTRIBUTES[n].modifierValue
+for (let n = 0; n < generatedAttributes.length; n++) {
+  stringToDisplay += `${generatedAttributes[n].attributeName} ${
+    generatedAttributes[n].attributeValue
+  } (${generatedAttributes[n].modifierValue > 0 ? "+" : ""}${
+    generatedAttributes[n].modifierValue
   }) <br />`;
 }
 stringToDisplay += `<br />Melee: ${toHitMelee} (to-hit and damage) <br /> Missile: ${toHitMissile} (to-hit) <br /> AC 
