@@ -1,7 +1,7 @@
 "strict mode";
 /* USER STORY: I see a short textual description Whitebox character randomly generated and ready to play. 
 It includes: 
-- Ascending Armor class
+- ~~Ascending Armor class~~
 - ~~HD~~
 - ~~Attribute scores with modifiers~~
 - Name 
@@ -1080,4 +1080,9 @@ stringToDisplay += `<li>${currentMoney} gp</li></ul> <br /><br /> Hirelings (Max
 
 //TODO: calculate movement speed
 
+portait = "https://campaignwiki.org/face/redirect/alex/woman";
+
+document.getElementById(
+  "portrait"
+).innerHTML = `<img src = "${portait}" width = 120></img><br />`;
 document.getElementById("generator").innerHTML = stringToDisplay;
