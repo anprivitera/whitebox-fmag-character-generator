@@ -940,9 +940,9 @@ const ADVENTURING_GEAR = [
 //TODO: Required items should go into character classes?
 
 //START RUN-TIME
-let generatedCharacterClass = determineCharacterClass(ATTRIBUTES);
+const generatedCharacterClass = determineCharacterClass(ATTRIBUTES);
 
-let generatedCharacterRace = determineCharacterRace(generatedCharacterClass);
+const generatedCharacterRace = determineCharacterRace(generatedCharacterClass);
 
 const characterAlignment =
   ALIGNMENTS[Math.floor(Math.random() * ALIGNMENTS.length)];
@@ -1080,9 +1080,23 @@ stringToDisplay += `<li>${currentMoney} gp</li></ul> <br /><br /> Hirelings (Max
 
 //TODO: calculate movement speed
 
-portait = "https://campaignwiki.org/face/redirect/alex/woman";
+function receivePortrait() {
+  let character = null;
+  if (generatedCharacterRace.raceName == "Elf") {
+    character = "elf";
+  } else if (generatedCharacterRace.raceName == "Dwarf") {
+    character = "dwarf";
+  } else {
+    const gender = ["man", "woman"];
+    character = gender[Math.floor(Math.random * gender.length)];
+  }
+  const characterPortrait = `https://campaignwiki.org/face/redirect/alex/${character}`;
+  return characterPortrait;
+}
+
+const characterPortrait = receivePortrait();
 
 document.getElementById(
   "portrait"
-).innerHTML = `<img src = "${portait}" width = 120></img><br />`;
+).innerHTML = `<img src = "${characterPortrait}" width = 120></img><br />`;
 document.getElementById("generator").innerHTML = stringToDisplay;
