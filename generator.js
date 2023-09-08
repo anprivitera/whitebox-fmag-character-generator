@@ -90,6 +90,24 @@ function determineCharacterRace(generatedCharacterClass) {
   return characterRace;
 }
 
+function receivePortrait() {
+  let character = null;
+  if (
+    generatedCharacterRace.raceName == "Human" ||
+    generatedCharacterRace.raceName == "Halfling"
+  ) {
+    const gender = ["man", "woman"];
+    character = gender[Math.floor(Math.random() * gender.length)];
+    // character = gender[genderSelect];
+  } else if (generatedCharacterRace.raceName == "Dwarf") {
+    character = "dwarf";
+  } else {
+    character = "elf";
+  }
+  const characterPortrait = `https://campaignwiki.org/face/redirect/alex/${character}`;
+  return characterPortrait;
+}
+
 function determineCharacterClass(attributes) {
   const cleric = {
     characterClassName: "Cleric",
@@ -944,6 +962,8 @@ const generatedCharacterClass = determineCharacterClass(ATTRIBUTES);
 
 const generatedCharacterRace = determineCharacterRace(generatedCharacterClass);
 
+const characterPortrait = receivePortrait();
+
 const characterAlignment =
   ALIGNMENTS[Math.floor(Math.random() * ALIGNMENTS.length)];
 
@@ -1081,25 +1101,6 @@ stringToDisplay += `<li>${currentMoney} gp</li></ul> <br /><br /> Hirelings (Max
 //TODO: calculate movement speed
 
 //TODO: implement async function so that character portrait for humans/halflings looks good.
-function receivePortrait() {
-  let character = null;
-  if (
-    generatedCharacterRace.raceName == "Human" ||
-    generatedCharacterRace.raceName == "Halfling"
-  ) {
-    const gender = ["man", "woman"];
-    character = gender[Math.floor(Math.random() * gender.length)];
-    // character = gender[genderSelect];
-  } else if (generatedCharacterRace.raceName == "Dwarf") {
-    character = "dwarf";
-  } else {
-    character = "elf";
-  }
-  const characterPortrait = `https://campaignwiki.org/face/redirect/alex/${character}`;
-  return characterPortrait;
-}
-
-const characterPortrait = receivePortrait();
 
 document.getElementById(
   "portrait"
