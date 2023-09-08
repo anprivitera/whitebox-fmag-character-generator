@@ -260,51 +260,50 @@ function selectItems(
 }
 
 //CONSTANTS
-const ROLL_FOR_STRENGTH = diceRoller(3),
-  ROLL_FOR_DEXTERITY = diceRoller(3),
-  ROLL_FOR_CONSTITUTION = diceRoller(3),
-  ROLL_FOR_INTELLIGENCE = diceRoller(3),
-  ROLL_FOR_WISDOM = diceRoller(3),
-  ROLL_FOR_CHARISMA = diceRoller(3),
-  STRENGTH_MODIFIER = determineModifier(ROLL_FOR_STRENGTH),
-  DEXTERITY_MODIFIER = determineModifier(ROLL_FOR_DEXTERITY),
-  CONSTITUTION_MODIFIER = determineModifier(ROLL_FOR_CONSTITUTION),
-  INTELLIGENCE_MODIFIER = determineModifier(ROLL_FOR_INTELLIGENCE),
-  WISDOM_MODIFIER = determineModifier(ROLL_FOR_WISDOM),
-  CHARISMA_MODIFIER = determineModifier(ROLL_FOR_CHARISMA),
-  INITIAL_MONEY = diceRoller(3) * 10,
-  ALIGNMENTS = ["Law", "Neutral", "Chaos"];
+const rollForStrength = diceRoller(3),
+  rollForDexterity = diceRoller(3),
+  rollForConstitution = diceRoller(3),
+  rollForIntelligence = diceRoller(3),
+  rollForWisdom = diceRoller(3),
+  rollForCharisma = diceRoller(3),
+  stengthModifier = determineModifier(rollForStrength),
+  dexterityModifier = determineModifier(rollForDexterity),
+  constitutionModifier = determineModifier(rollForConstitution),
+  intelligenceModifier = determineModifier(rollForIntelligence),
+  wisdomModifier = determineModifier(rollForWisdom),
+  charismaModifier = determineModifier(rollForCharisma),
+  initialMoney = diceRoller(3) * 10;
 
 const ATTRIBUTES = [
   {
     attributeName: "STR",
-    attributeValue: ROLL_FOR_STRENGTH,
-    modifierValue: STRENGTH_MODIFIER,
+    attributeValue: rollForStrength,
+    modifierValue: stengthModifier,
   },
   {
     attributeName: "DEX",
-    attributeValue: ROLL_FOR_DEXTERITY,
-    modifierValue: DEXTERITY_MODIFIER,
+    attributeValue: rollForDexterity,
+    modifierValue: dexterityModifier,
   },
   {
     attributeName: "CON",
-    attributeValue: ROLL_FOR_CONSTITUTION,
-    modifierValue: CONSTITUTION_MODIFIER,
+    attributeValue: rollForConstitution,
+    modifierValue: constitutionModifier,
   },
   {
     attributeName: "INT",
-    attributeValue: ROLL_FOR_INTELLIGENCE,
-    modifierValue: INTELLIGENCE_MODIFIER,
+    attributeValue: rollForIntelligence,
+    modifierValue: intelligenceModifier,
   },
   {
     attributeName: "WIS",
-    attributeValue: ROLL_FOR_WISDOM,
-    modifierValue: WISDOM_MODIFIER,
+    attributeValue: rollForWisdom,
+    modifierValue: wisdomModifier,
   },
   {
     attributeName: "CHA",
-    attributeValue: ROLL_FOR_CHARISMA,
-    modifierValue: CHARISMA_MODIFIER,
+    attributeValue: rollForCharisma,
+    modifierValue: charismaModifier,
   },
 ];
 
@@ -318,6 +317,8 @@ const MAGIC_USER_SPELLS_LEVEL_1 = [
   "Read Magic",
   "Sleep",
 ];
+
+const ALIGNMENTS = ["Law", "Neutral", "Chaos"];
 
 const WEAPONS = [
   {
@@ -968,10 +969,10 @@ const characterAlignment =
   ALIGNMENTS[Math.floor(Math.random() * ALIGNMENTS.length)];
 
 let xpBonus = 0;
-if (ROLL_FOR_WISDOM >= 15) {
+if (rollForWisdom >= 15) {
   xpBonus += 5;
 }
-if (ROLL_FOR_CHARISMA >= 15) {
+if (rollForCharisma >= 15) {
   xpBonus += 5;
 }
 if (generatedCharacterClass.primeAttributeValue >= 15) {
@@ -981,36 +982,36 @@ if (xpBonus > 15) {
   xpBonus = 15;
 }
 
-let characterHP = generatedCharacterClass.HDatLevel1 + CONSTITUTION_MODIFIER;
+let characterHP = generatedCharacterClass.HDatLevel1 + constitutionModifier;
 if (characterHP <= 0) {
   characterHP = 1;
 }
 
 const toHitMelee = `${
-  generatedCharacterClass.toHitAtLevel1 + STRENGTH_MODIFIER > 0 ? "+" : ""
-}${generatedCharacterClass.toHitAtLevel1 + STRENGTH_MODIFIER}`;
+  generatedCharacterClass.toHitAtLevel1 + stengthModifier > 0 ? "+" : ""
+}${generatedCharacterClass.toHitAtLevel1 + stengthModifier}`;
 const toHitMissile = `${
-  generatedCharacterClass.toHitAtLevel1 + DEXTERITY_MODIFIER > 0 ? "+" : ""
-}${generatedCharacterClass.toHitAtLevel1 + DEXTERITY_MODIFIER}`;
+  generatedCharacterClass.toHitAtLevel1 + dexterityModifier > 0 ? "+" : ""
+}${generatedCharacterClass.toHitAtLevel1 + dexterityModifier}`;
 
 let maxHirelings = null;
 let hirelingsLoyalty = null;
-if (ROLL_FOR_CHARISMA <= 4) {
+if (rollForCharisma <= 4) {
   maxHirelings = 1;
   hirelingsLoyalty = -2;
-} else if (ROLL_FOR_CHARISMA >= 5 && ROLL_FOR_CHARISMA <= 6) {
+} else if (rollForCharisma >= 5 && rollForCharisma <= 6) {
   maxHirelings = 2;
   hirelingsLoyalty = -2;
-} else if (ROLL_FOR_CHARISMA >= 7 && ROLL_FOR_CHARISMA <= 8) {
+} else if (rollForCharisma >= 7 && rollForCharisma <= 8) {
   maxHirelings = 3;
   hirelingsLoyalty = -1;
-} else if (ROLL_FOR_CHARISMA >= 9 && ROLL_FOR_CHARISMA <= 12) {
+} else if (rollForCharisma >= 9 && rollForCharisma <= 12) {
   maxHirelings = 4;
   hirelingsLoyalty = 0;
-} else if (ROLL_FOR_CHARISMA >= 13 && ROLL_FOR_CHARISMA <= 15) {
+} else if (rollForCharisma >= 13 && rollForCharisma <= 15) {
   maxHirelings = 5;
   hirelingsLoyalty = 1;
-} else if (ROLL_FOR_CHARISMA >= 16 && ROLL_FOR_CHARISMA <= 17) {
+} else if (rollForCharisma >= 16 && rollForCharisma <= 17) {
   maxHirelings = 6;
   hirelingsLoyalty = 2;
 } else {
@@ -1028,7 +1029,7 @@ if (notHumanOrElf) {
   raceAbilities = `Race Abilities: ${generatedCharacterRace.raceSpecialAbilities}`;
 }
 
-let currentMoney = INITIAL_MONEY;
+let currentMoney = initialMoney;
 let characterWeapons = [];
 let characterArmor = [];
 let characterEquipment = [];
@@ -1064,9 +1065,9 @@ for (let n = 0; n < ATTRIBUTES.length; n++) {
   }) <br />`;
 }
 stringToDisplay += `<br />Melee: ${toHitMelee} (to-hit and damage) <br /> Missile: ${toHitMissile} (to-hit) <br /> AC 
-${9 - characterArmor[0].AC - DEXTERITY_MODIFIER}
+${9 - characterArmor[0].AC - dexterityModifier}
 [${
-  10 + characterArmor[0].AC + DEXTERITY_MODIFIER
+  10 + characterArmor[0].AC + dexterityModifier
 }] <br/> HP ${characterHP} <br /> ST ${
   generatedCharacterClass.savingThrowAtLevel1
 } (${
