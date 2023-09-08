@@ -1063,7 +1063,7 @@ let characterEquipment = [];
 
 //TODO: Divide this string into specific div id sections
 
-const basicInfo = `<h2>Basic info</h2>${generatedCharacterRace.raceName} ${generatedCharacterClass.characterClassName}, Level 1<br />Alignment: ${characterAlignment}`;
+const basicInfo = `<h2>Basic info</h2>${generatedCharacterRace.raceName} ${generatedCharacterClass.characterClassName}, Level 1<br />Alignment: ${characterAlignment}<br /><br />Current XP 0 <br /> XP Bonus ${xpBonus}%`;
 document.getElementById("basic-info").innerHTML = basicInfo;
 
 let attributesToDisplay = `<h2>Attributes</h2>`;
@@ -1087,9 +1087,7 @@ ${9 - characterArmor[0].AC - dexterityModifier}
 } (${
   generatedCharacterClass.savingThrowBonus +
   generatedCharacterRace.raceSavingThrowBonus
-}) <br /> </br> Current XP 0 <br /> XP Bonus ${xpBonus}% <br /> <br /> Class Abilities: ${
-  generatedCharacterClass.specialAbilities
-}
+}) <br/> Class Abilities: ${generatedCharacterClass.specialAbilities}
   ${raceAbilities}`;
 document.getElementById("combat-info").innerHTML = combatInfo;
 
