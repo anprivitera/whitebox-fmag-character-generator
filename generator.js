@@ -102,7 +102,11 @@ function determineCharacterClass(attributes) {
     primeAttribute: "INT",
     domininonKind: "Wizard Tower",
     dominionLevel: 9,
-    specialAbilities: "<ul><li>Spell Casting.</li>",
+    specialAbilities: `Known Spells: ${
+      MAGIC_USER_SPELLS_LEVEL_1[
+        Math.floor(Math.random() * MAGIC_USER_SPELLS_LEVEL_1.length)
+      ]
+    }`,
   };
   const thief = {
     characterClassName: "Thief",
@@ -1091,14 +1095,6 @@ document.getElementById("combat-info").innerHTML = combatInfo;
 
 let characterAbilities = `<h2>Abilities</h2>${generatedCharacterClass.specialAbilities}
 ${generatedCharacterRace.raceSpecialAbilities}`;
-
-if (generatedCharacterClass.spellcasterType === "magic") {
-  characterAbilities += `Known Spells: ${
-    MAGIC_USER_SPELLS_LEVEL_1[
-      Math.floor(Math.random() * MAGIC_USER_SPELLS_LEVEL_1.length)
-    ]
-  }<br />`;
-}
 
 document.getElementById("character-abilities").innerHTML = characterAbilities;
 
