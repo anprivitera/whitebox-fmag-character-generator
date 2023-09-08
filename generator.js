@@ -11,7 +11,7 @@ It includes:
 - ~~Alignment~~
 - ~~Initial XP~~
 - ~~XP bonus~~
-- A character portrait
+- ~~A character portrait~~
 - ~~Saving throw and mods~~
 - ~~Spells / Abilities ~~
 - ~~Equipment~~
