@@ -49,27 +49,130 @@ function shuffle(array) {
   }
 }
 
+function determineCharacterClass(attributes) {
+  const cleric = {
+    characterClassName: "Cleric",
+    xpAtLevel1: 0,
+    HDatLevel1: diceRoller(1),
+    toHitAtLevel1: 0,
+    savingThrowAtLevel1: 15,
+    savingThrowBonus: "+2 vs. Death and Poison",
+    spellcasterType: "divine",
+    primeAttribute: "WIS",
+    domininonKind: "Temple",
+    dominionLevel: 10,
+    specialAbilities:
+      "<ul><li>Turn the Undead.</li><li>Establish Temple (at Level 10).</li>",
+  };
+  const fighter = {
+    characterClassName: "Fighter",
+    xpAtLevel1: 0,
+    HDatLevel1: diceRoller(1) + 1,
+    toHitAtLevel1: 0,
+    savingThrowAtLevel1: 14,
+    savingThrowBonus: "+2 vs. Poison and Paralysis",
+    spellcasterType: null,
+    spellsAtLevel1: null,
+    primeAttribute: "STR",
+    domininonKind: "Stronghold",
+    dominionLevel: 9,
+    specialAbilities:
+      "<ul><li>Combat Fury (+1 attack/level vs. >=1 HD foes).</li>",
+  };
+  const elf = {
+    characterClassName: "Elf",
+    xpAtLevel1: 0,
+    HDatLevel1: diceRoller(1) + 1,
+    toHitAtLevel1: 0,
+    savingThrowAtLevel1: 14,
+    savingThrowBonus: "+2 vs. Poison and Paralysis",
+    spellcasterType: null, // TODO: change when implementing more character levels
+    spellsAtLevel1: null,
+    primeAttribute: null,
+    specialAbilities:
+      "<ul><li>+1 to-hit vs. goblins, orcs, intelligent undead, lycantropes.</li><li>Immune to undead paralysis.</li><li>Half damage from giants and ogres.</li><li>4-in-6 chances of actively spotting hidden or concealed doors (2-in-6 if passing by).</li>",
+  };
+  const magicUser = {
+    characterClassName: "Magic-User",
+    xpAtLevel1: 0,
+    HDatLevel1: diceRoller(1),
+    toHitAtLevel1: 0,
+    savingThrowAtLevel1: 15,
+    savingThrowBonus: "+2 vs. Spells",
+    spellcasterType: "magic",
+    primeAttribute: "INT",
+    domininonKind: "Wizard Tower",
+    dominionLevel: 9,
+    specialAbilities:
+      "<ul><li>Spell Casting.</li><li>Establish Wizard Tower (at Level 9).</li>",
+  };
+  const thief = {
+    characterClassName: "Thief",
+    xpAtLevel1: 0,
+    HDatLevel1: diceRoller(1),
+    toHitAtLevel1: 0,
+    savingThrowAtLevel1: 14,
+    savingThrowBonus: "+2 vs. Traps",
+    spellcasterType: null,
+    primeAttribute: "DEX",
+    specialAbilities:
+      "<ul><li>Back Stab (+2 to Hit and x2 damage on hit)</li><li>Thievery 2-in-6</li><li>Establish Guild (at Level 9)</li>",
+  };
+  let generatedCharacterClass = null;
+  if (Math.random() < 0.1) {
+    generatedCharacterClass = elf;
+    return generatedCharacterClass;
+  }
+  let fromHighToLow = attributes.map((x) => x);
+  fromHighToLow.sort((a, b) => b.attributeValue - a.attributeValue);
+  while (generatedCharacterClass == null) {
+    for (let x = 0; x < fromHighToLow.length; x++) {
+      if (fromHighToLow[x].attributeName == cleric.primeAttribute) {
+        generatedCharacterClass = cleric;
+        generatedCharacterClass.primeAttributeValue =
+          fromHighToLow[x].attributeValue;
+        return generatedCharacterClass;
+      } else if (fromHighToLow[x].attributeName == fighter.primeAttribute) {
+        generatedCharacterClass = fighter;
+        generatedCharacterClass.primeAttributeValue =
+          fromHighToLow[x].attributeValue;
+        return generatedCharacterClass;
+      } else if (fromHighToLow[x].attributeName == magicUser.primeAttribute) {
+        generatedCharacterClass = magicUser;
+        generatedCharacterClass.primeAttributeValue =
+          fromHighToLow[x].attributeValue;
+        return generatedCharacterClass;
+      } else if (fromHighToLow[x].attributeName == thief.primeAttribute) {
+        generatedCharacterClass = thief;
+        generatedCharacterClass.primeAttributeValue =
+          fromHighToLow[x].attributeValue;
+        return generatedCharacterClass;
+      }
+    }
+  }
+}
+
 function determineCharacterRace(generatedCharacterClass) {
   const ELF = {
     raceName: "",
     raceSavingThrowBonus: "",
-    raceSpecialAbilities: "",
+    raceSpecialAbilities: "<li>Can reach maximum level 8</li></ul>",
   };
   const HUMAN = {
     raceName: "Human",
     raceSavingThrowBonus: "",
-    raceSpecialAbilities: "",
+    raceSpecialAbilities: `<li>Can establish ${generatedCharacterClass.domininonKind} at Level ${generatedCharacterClass.dominionLevel}`,
   };
   const DWARF = {
     raceName: "Dwarf",
     raceSavingThrowBonus: ", +4 vs. Magic",
     raceSpecialAbilities:
-      "<ul><li>Can reach maximum level 6</li><li>Half damage from giants and ogres</li><li>4-in-6 chances of actively spotting traps, slanting passages or construction (2-in-6 if passing by)</li><li>Can speak with goblins, ogres, orcs, kobolds</li></ul>",
+      "<li>Can reach maximum level 6</li><li>Half damage from giants and ogres</li><li>4-in-6 chances of actively spotting traps, slanting passages or construction (2-in-6 if passing by)</li><li>Can speak with goblins, ogres, orcs, kobolds</li></ul>",
   };
   const HALFLING = {
     raceName: "Halfling",
     raceSavingThrowBonus: ", +4 vs. Magic",
-    raceSpecialAbilities: `<ul><li>${
+    raceSpecialAbilities: `<li>${
       generatedCharacterClass.characterClassName == "Fighter"
         ? "Can reach maxium level 4."
         : "Can reach maxium Level 6."
@@ -106,103 +209,6 @@ function receivePortrait() {
   }
   const characterPortrait = `https://campaignwiki.org/face/redirect/alex/${character}`;
   return characterPortrait;
-}
-
-function determineCharacterClass(attributes) {
-  const cleric = {
-    characterClassName: "Cleric",
-    xpAtLevel1: 0,
-    HDatLevel1: diceRoller(1),
-    toHitAtLevel1: 0,
-    savingThrowAtLevel1: 15,
-    savingThrowBonus: "+2 vs. Death and Poison",
-    spellcasterType: "divine",
-    primeAttribute: "WIS",
-    specialAbilities:
-      "<h3>Class Abilities</h3><ul><li>Turn the Undead.</li><li>Establish Temple (at Level 10).</li></ul>",
-  };
-  const fighter = {
-    characterClassName: "Fighter",
-    xpAtLevel1: 0,
-    HDatLevel1: diceRoller(1) + 1,
-    toHitAtLevel1: 0,
-    savingThrowAtLevel1: 14,
-    savingThrowBonus: "+2 vs. Poison and Paralysis",
-    spellcasterType: null,
-    spellsAtLevel1: null,
-    primeAttribute: "STR",
-    specialAbilities:
-      "<h3>Class Abilities</h3><ul><li>Combat Fury (+1 attack/level vs. >=1 HD foes).</li><li>Establish Stronghold (at Level 9).</li></ul>",
-  };
-  const elf = {
-    characterClassName: "Elf",
-    xpAtLevel1: 0,
-    HDatLevel1: diceRoller(1) + 1,
-    toHitAtLevel1: 0,
-    savingThrowAtLevel1: 14,
-    savingThrowBonus: "+2 vs. Poison and Paralysis",
-    spellcasterType: null, // TODO: change when implementing more character levels
-    spellsAtLevel1: null,
-    primeAttribute: null,
-    specialAbilities:
-      "<h3>Race Abilities</h3><ul><li>+1 to-hit vs. goblins, orcs, intelligent undead, lycantropes.</li><li>Immune to undead paralysis.</li><li>Half damage from giants and ogres.</li><li>4-in-6 chances of actively spotting hidden or concealed doors (2-in-6 if passing by).</li></ul>",
-  };
-  const magicUser = {
-    characterClassName: "Magic-User",
-    xpAtLevel1: 0,
-    HDatLevel1: diceRoller(1),
-    toHitAtLevel1: 0,
-    savingThrowAtLevel1: 15,
-    savingThrowBonus: "+2 vs. Spells",
-    spellcasterType: "magic",
-    primeAttribute: "INT",
-    specialAbilities:
-      "<h3>Class Abilities</h3><ul><li>Spell Casting.</li><li>Establish Wizard Tower (at Level 9).</li></ul>",
-  };
-  const thief = {
-    characterClassName: "Thief",
-    xpAtLevel1: 0,
-    HDatLevel1: diceRoller(1),
-    toHitAtLevel1: 0,
-    savingThrowAtLevel1: 14,
-    savingThrowBonus: "+2 vs. Traps",
-    spellcasterType: null,
-    primeAttribute: "DEX",
-    specialAbilities:
-      "<h3>Class Abilities</h3><ul><li>Back Stab (+2 to Hit and x2 damage on hit)</li><li>Thievery 2-in-6</li><li>Establish Guild (at Level 9)</li></ul>",
-  };
-  let generatedCharacterClass = null;
-  if (Math.random() < 0.1) {
-    generatedCharacterClass = elf;
-    return generatedCharacterClass;
-  }
-  let fromHighToLow = attributes.map((x) => x);
-  fromHighToLow.sort((a, b) => b.attributeValue - a.attributeValue);
-  while (generatedCharacterClass == null) {
-    for (let x = 0; x < fromHighToLow.length; x++) {
-      if (fromHighToLow[x].attributeName == cleric.primeAttribute) {
-        generatedCharacterClass = cleric;
-        generatedCharacterClass.primeAttributeValue =
-          fromHighToLow[x].attributeValue;
-        return generatedCharacterClass;
-      } else if (fromHighToLow[x].attributeName == fighter.primeAttribute) {
-        generatedCharacterClass = fighter;
-        generatedCharacterClass.primeAttributeValue =
-          fromHighToLow[x].attributeValue;
-        return generatedCharacterClass;
-      } else if (fromHighToLow[x].attributeName == magicUser.primeAttribute) {
-        generatedCharacterClass = magicUser;
-        generatedCharacterClass.primeAttributeValue =
-          fromHighToLow[x].attributeValue;
-        return generatedCharacterClass;
-      } else if (fromHighToLow[x].attributeName == thief.primeAttribute) {
-        generatedCharacterClass = thief;
-        generatedCharacterClass.primeAttributeValue =
-          fromHighToLow[x].attributeValue;
-        return generatedCharacterClass;
-      }
-    }
-  }
 }
 
 function determineXPBonus(primeAttribute) {
@@ -1025,16 +1031,6 @@ if (rollForCharisma <= 4) {
   hirelingsLoyalty = 2;
 }
 
-let raceAbilities = "";
-
-let notHumanOrElf =
-  generatedCharacterRace.raceName != "Human" &&
-  generatedCharacterClass.characterClassName != "Elf";
-
-if (notHumanOrElf) {
-  raceAbilities = `Race Abilities: ${generatedCharacterRace.raceSpecialAbilities}`;
-}
-
 let currentMoney = initialMoney;
 let characterWeapons = [];
 let characterArmor = [];
@@ -1091,7 +1087,7 @@ ${9 - characterArmor[0].AC - dexterityModifier}
 document.getElementById("combat-info").innerHTML = combatInfo;
 
 let characterAbilities = `<h2>Abilities</h2>${generatedCharacterClass.specialAbilities}
-${raceAbilities}`;
+${generatedCharacterRace.raceSpecialAbilities}}`;
 document.getElementById("character-abilities").innerHTML = characterAbilities;
 
 if (generatedCharacterClass.spellcasterType === "magic") {
