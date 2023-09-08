@@ -3,4 +3,11 @@ body {
     color: darkblue;
 }
 
+div.center {
+    margin: auto;
+    width: 23%;
+    border: 2px solid darkblue;
+    padding: 1px;
+  }
+
 /* TODO: Include animations. I don't want the character to just appear instantly, but to make the user feel as if they are rolling it physically */
