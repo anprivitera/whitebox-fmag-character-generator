@@ -1063,10 +1063,10 @@ let characterEquipment = [];
 
 //TODO: Divide this string into specific div id sections
 
-const basicInfo = `${generatedCharacterRace.raceName} ${generatedCharacterClass.characterClassName}, Lvl 1 <br />`;
+const basicInfo = `${generatedCharacterRace.raceName} ${generatedCharacterClass.characterClassName}, Level 1<br />Alignment: ${characterAlignment}`;
 document.getElementById("basic-info").innerHTML = basicInfo;
 
-let stringToDisplay = `Alignment: ${characterAlignment}<br /><br />`;
+let stringToDisplay = `<br />`;
 for (let n = 0; n < generatedAttributes.length; n++) {
   stringToDisplay += `${generatedAttributes[n].attributeName} ${
     generatedAttributes[n].attributeValue
