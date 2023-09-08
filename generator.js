@@ -1102,14 +1102,14 @@ if (generatedCharacterClass.spellcasterType === "magic") {
 
 document.getElementById("character-abilities").innerHTML = characterAbilities;
 
-let equipmentToDisplay = `</ul>Equipment:<ul>`;
+let equipmentToDisplay = `<h2>Equipment</h2>`;
 for (let n = 0; n < characterEquipment.length; n++) {
   equipmentToDisplay += `<li>${characterEquipment[n].itemName}</li>`;
 }
 equipmentToDisplay += `<li>${currentMoney} gp</li></ul>`;
 document.getElementById("equipment").innerHTML = equipmentToDisplay;
 
-let hirelings = `<br /><br /> Hirelings (Max #): ${maxHirelings}<br /> Loyalty: ${
+let hirelings = `<h2>Hirelings</h2> Max #: ${maxHirelings}<br /> Loyalty: ${
   hirelingsLoyalty > 0 ? "+" : ""
 }${hirelingsLoyalty}<br />`;
 
