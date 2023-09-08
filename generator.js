@@ -61,8 +61,7 @@ function determineCharacterClass(attributes) {
     primeAttribute: "WIS",
     domininonKind: "Temple",
     dominionLevel: 10,
-    specialAbilities:
-      "<ul><li>Turn the Undead.</li><li>Establish Temple (at Level 10).</li>",
+    specialAbilities: "<ul><li>Turn the Undead.</li>",
   };
   const fighter = {
     characterClassName: "Fighter",
@@ -103,8 +102,7 @@ function determineCharacterClass(attributes) {
     primeAttribute: "INT",
     domininonKind: "Wizard Tower",
     dominionLevel: 9,
-    specialAbilities:
-      "<ul><li>Spell Casting.</li><li>Establish Wizard Tower (at Level 9).</li>",
+    specialAbilities: "<ul><li>Spell Casting.</li>",
   };
   const thief = {
     characterClassName: "Thief",
@@ -116,7 +114,7 @@ function determineCharacterClass(attributes) {
     spellcasterType: null,
     primeAttribute: "DEX",
     specialAbilities:
-      "<ul><li>Back Stab (+2 to Hit and x2 damage on hit)</li><li>Thievery 2-in-6</li><li>Establish Guild (at Level 9)</li>",
+      "<ul><li>Back Stab (+2 to Hit and x2 damage on hit)</li><li>Thievery 2-in-6</li>",
   };
   let generatedCharacterClass = null;
   if (Math.random() < 0.1) {
@@ -1087,7 +1085,7 @@ ${9 - characterArmor[0].AC - dexterityModifier}
 document.getElementById("combat-info").innerHTML = combatInfo;
 
 let characterAbilities = `<h2>Abilities</h2>${generatedCharacterClass.specialAbilities}
-${generatedCharacterRace.raceSpecialAbilities}}`;
+${generatedCharacterRace.raceSpecialAbilities}`;
 document.getElementById("character-abilities").innerHTML = characterAbilities;
 
 if (generatedCharacterClass.spellcasterType === "magic") {
