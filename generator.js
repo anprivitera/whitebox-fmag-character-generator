@@ -119,7 +119,7 @@ function determineCharacterClass(attributes) {
     spellcasterType: "divine",
     primeAttribute: "WIS",
     specialAbilities:
-      "<ul><li>Turn the Undead.</li><li>Establish Temple (at Level 10).</li></ul>",
+      "<h3>Class Abilities</h3><ul><li>Turn the Undead.</li><li>Establish Temple (at Level 10).</li></ul>",
   };
   const fighter = {
     characterClassName: "Fighter",
@@ -132,7 +132,7 @@ function determineCharacterClass(attributes) {
     spellsAtLevel1: null,
     primeAttribute: "STR",
     specialAbilities:
-      "<ul><li>Combat Fury (+1 attack/level vs. >=1 HD foes).</li><li>Establish Stronghold (at Level 9).</li></ul>",
+      "<h3>Class Abilities</h3><ul><li>Combat Fury (+1 attack/level vs. >=1 HD foes).</li><li>Establish Stronghold (at Level 9).</li></ul>",
   };
   const elf = {
     characterClassName: "Elf",
@@ -145,7 +145,7 @@ function determineCharacterClass(attributes) {
     spellsAtLevel1: null,
     primeAttribute: null,
     specialAbilities:
-      "<ul><li>+1 to-hit vs. goblins, orcs, intelligent undead, lycantropes.</li><li>Immune to undead paralysis.</li><li>Half damage from giants and ogres.</li><li>4-in-6 chances of actively spotting hidden or concealed doors (2-in-6 if passing by).</li></ul>",
+      "<h3>Race Abilities</h3><ul><li>+1 to-hit vs. goblins, orcs, intelligent undead, lycantropes.</li><li>Immune to undead paralysis.</li><li>Half damage from giants and ogres.</li><li>4-in-6 chances of actively spotting hidden or concealed doors (2-in-6 if passing by).</li></ul>",
   };
   const magicUser = {
     characterClassName: "Magic-User",
@@ -157,7 +157,7 @@ function determineCharacterClass(attributes) {
     spellcasterType: "magic",
     primeAttribute: "INT",
     specialAbilities:
-      "<ul><li>Spell Casting.</li><li>Establish Wizard Tower (at Level 9).</li></ul>",
+      "<h3>Class Abilities</h3><ul><li>Spell Casting.</li><li>Establish Wizard Tower (at Level 9).</li></ul>",
   };
   const thief = {
     characterClassName: "Thief",
@@ -169,7 +169,7 @@ function determineCharacterClass(attributes) {
     spellcasterType: null,
     primeAttribute: "DEX",
     specialAbilities:
-      "<ul><li>Back Stab (+2 to Hit and x2 damage on hit)</li><li>Thievery 2-in-6</li><li>Establish Guild (at Level 9)</li></ul>",
+      "<h3>Class Abilities</h3><ul><li>Back Stab (+2 to Hit and x2 damage on hit)</li><li>Thievery 2-in-6</li><li>Establish Guild (at Level 9)</li></ul>",
   };
   let generatedCharacterClass = null;
   if (Math.random() < 0.1) {
@@ -1090,7 +1090,7 @@ ${9 - characterArmor[0].AC - dexterityModifier}
 })`;
 document.getElementById("combat-info").innerHTML = combatInfo;
 
-let characterAbilities = `<h2>Abilities</h2> Class Abilities: ${generatedCharacterClass.specialAbilities}
+let characterAbilities = `<h2>Abilities</h2>${generatedCharacterClass.specialAbilities}
 ${raceAbilities}`;
 document.getElementById("character-abilities").innerHTML = characterAbilities;
 
