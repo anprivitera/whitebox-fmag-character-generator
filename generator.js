@@ -1083,13 +1083,16 @@ stringToDisplay += `<li>${currentMoney} gp</li></ul> <br /><br /> Hirelings (Max
 //TODO: implement async function so that character portrait for humans/halflings looks good.
 function receivePortrait() {
   let character = null;
-  if (generatedCharacterRace.raceName == "Elf") {
-    character = "elf";
+  if (
+    generatedCharacterRace.raceName == "Human" ||
+    generatedCharacterRace.raceName == "Halfling"
+  ) {
+    const gender = ["man", "woman"];
+    character = gender[Math.floor(Math.random * gender.length)];
   } else if (generatedCharacterRace.raceName == "Dwarf") {
     character = "dwarf";
   } else {
-    const gender = ["man", "woman"];
-    character = gender[Math.floor(Math.random * gender.length)];
+    character = "elf";
   }
   const characterPortrait = `https://campaignwiki.org/face/redirect/alex/${character}`;
   return characterPortrait;
