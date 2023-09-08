@@ -1070,8 +1070,6 @@ for (let n = 0; n < generatedAttributes.length; n++) {
 }
 document.getElementById("attributes").innerHTML = attributesToDisplay;
 
-let stringToDisplay = ``;
-
 let combatInfo = `<h2>Combat Info</h2>Melee: ${toHitMelee} (to-hit and damage) <br /> Missile: ${toHitMissile} (to-hit) <br /> AC 
 ${9 - characterArmor[0].AC - dexterityModifier}
 [${
@@ -1082,33 +1080,40 @@ ${9 - characterArmor[0].AC - dexterityModifier}
   generatedCharacterClass.savingThrowBonus +
   generatedCharacterRace.raceSavingThrowBonus
 })`;
+`Weapons & Armor: <br/><ul>`;
+for (let n = 0; n < characterWeapons.length; n++) {
+  combatInfo += `<li>${characterWeapons[n].weaponName} (${characterWeapons[n].damage}) </li>`;
+}
+for (let n = 0; n < characterArmor.length; n++) {
+  combatInfo += `<li>${characterArmor[n].armorName} (-${characterArmor[n].AC} [+${characterArmor[n].AC}]) </li>`;
+}
 document.getElementById("combat-info").innerHTML = combatInfo;
 
 let characterAbilities = `<h2>Abilities</h2>${generatedCharacterClass.specialAbilities}
 ${generatedCharacterRace.raceSpecialAbilities}`;
-document.getElementById("character-abilities").innerHTML = characterAbilities;
 
 if (generatedCharacterClass.spellcasterType === "magic") {
-  stringToDisplay += `Known Spells: ${
+  characterAbilities += `Known Spells: ${
     MAGIC_USER_SPELLS_LEVEL_1[
       Math.floor(Math.random() * MAGIC_USER_SPELLS_LEVEL_1.length)
     ]
   }<br />`;
 }
-stringToDisplay += `<br />Weapons & Armor: <br/><ul>`;
-for (let n = 0; n < characterWeapons.length; n++) {
-  stringToDisplay += `<li>${characterWeapons[n].weaponName} (${characterWeapons[n].damage}) </li>`;
-}
-for (let n = 0; n < characterArmor.length; n++) {
-  stringToDisplay += `<li>${characterArmor[n].armorName} (-${characterArmor[n].AC} [+${characterArmor[n].AC}]) </li>`;
-}
-stringToDisplay += `</ul>Equipment:<ul>`;
+
+document.getElementById("character-abilities").innerHTML = characterAbilities;
+
+let equipmentToDisplay = `</ul>Equipment:<ul>`;
 for (let n = 0; n < characterEquipment.length; n++) {
-  stringToDisplay += `<li>${characterEquipment[n].itemName}</li>`;
+  equipmentToDisplay += `<li>${characterEquipment[n].itemName}</li>`;
 }
-stringToDisplay += `<li>${currentMoney} gp</li></ul> <br /><br /> Hirelings (Max #): ${maxHirelings}<br /> Loyalty: ${
+equipmentToDisplay += `<li>${currentMoney} gp</li></ul>`;
+document.getElementById("equipment").innerHTML = equipmentToDisplay;
+
+let hirelings = `<br /><br /> Hirelings (Max #): ${maxHirelings}<br /> Loyalty: ${
   hirelingsLoyalty > 0 ? "+" : ""
 }${hirelingsLoyalty}<br />`;
+
+document.getElementById("hirelings").innerHTML = hirelings;
 
 //TODO: calculate movement speed
 
@@ -1117,4 +1122,3 @@ stringToDisplay += `<li>${currentMoney} gp</li></ul> <br /><br /> Hirelings (Max
 document.getElementById(
   "portrait"
 ).innerHTML = `<img src = "${characterPortrait}" width = 120></img>`;
-document.getElementById("generator").innerHTML = stringToDisplay;
