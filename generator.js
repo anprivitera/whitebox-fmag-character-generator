@@ -213,7 +213,7 @@ function receivePortrait() {
   return characterPortrait;
 }
 
-function determineXPBonus(primeAttribute) {
+function determineXPBonus() {
   let xpBonus = 0;
   if (rollForWisdom >= 15) {
     xpBonus += 5;
