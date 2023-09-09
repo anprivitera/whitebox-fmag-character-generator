@@ -31,10 +31,14 @@ ul {
     flex-wrap: wrap;
 }
 
-#AC {
-    font-size: larger;
-    border-style: dotted;
+.vitals {
+    display: flex;
+    margin: 3px;
+    flex-wrap: wrap;
+    font-size: x-large;
 }
+
+
 /* #portrait{
     align-self: left;
 }

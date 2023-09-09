@@ -1138,9 +1138,9 @@ for (let n = 0; n < generatedAttributes.length; n++) {
 }
 document.getElementById("attributes").innerHTML = attributesToDisplay;
 
-let combatInfo = `<h2>Combat Info</h2><div class="statistic" id="tohit">Melee: ${toHitMelee} (to-hit and damage)</div> <div class="statistic" id="tohit">Missile: ${toHitMissile} (to-hit)</div> <div class="statistic" id="AC">AC 
+let combatInfo = `<h2>Combat Info</h2><div class="vitals" id="AC">AC 
 ${descendingArmorClass}
-[${ascendingArmorClass}]</div> <div class="statistic" id="hp">HP ${characterHP}</div> <div class="statistic" id="saving-throw">ST ${
+[${ascendingArmorClass}]</div> <div class="vitals" id="hp">HP ${characterHP}</div> <div class="statistic" id="tohit">Melee: ${toHitMelee} (to-hit and damage)</div> <div class="statistic" id="tohit">Missile: ${toHitMissile} (to-hit)</div> <div class="statistic" id="saving-throw">ST ${
   generatedCharacterClass.savingThrowAtLevel1
 } (${
   generatedCharacterClass.savingThrowBonus +
