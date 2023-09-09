@@ -50,6 +50,7 @@ h2 {
 .vitals {
     display: flex;
     margin: 3px;
+    padding: 3px;
     flex-wrap: wrap;
     font-size: x-large;
 }

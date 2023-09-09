@@ -1105,7 +1105,7 @@ if (
 
 let descendingArmorClass = 9 - dexterityModifier;
 let ascendingArmorClass = 10 + dexterityModifier;
-let gearWeight = 0;
+let gearWeight = 10;
 for (let i = 0; i < characterArmorGear.length; i++) {
   descendingArmorClass -= characterArmorGear[i].AC;
   ascendingArmorClass += characterArmorGear[i].AC;
@@ -1188,9 +1188,9 @@ document.getElementById("character-abilities").innerHTML =
 
 let equipmentToDisplay = `<h2>Equipment</h2>`;
 for (let n = 0; n < characterEquipment.length; n++) {
-  equipmentToDisplay += `<div class="item">${characterEquipment[n].itemName}</div>`;
+  equipmentToDisplay += `<div class="characer-info">${characterEquipment[n].itemName}</div>`;
 }
-equipmentToDisplay += `<div class="money">${currentMoney} gp</div>`;
+equipmentToDisplay += `<div class="character-info">${currentMoney} gp</div>`;
 document.getElementById("equipment").innerHTML = equipmentToDisplay;
 
 let hirelings = `<h2>Hirelings</h2> Max #: ${maxHirelings}<br /> Loyalty: ${
