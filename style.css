@@ -71,11 +71,6 @@ h2 {
     flex-wrap: wrap;
 }
 
-.equipment-area {
-    display: inline-flex;
-    flex-wrap: wrap;
-}
-
 .abilties-area {
     display: inline-flex;
     flex-wrap: wrap;
@@ -83,6 +78,13 @@ h2 {
 
 #character-abilities {
     width: 45%;
+}
+
+#portrait {
+    border-radius: 8%;
+    border: 2px;
+    border-style: solid;
+    border-bottom-width: auto;
 }
 
 /* #saving-throw:hover ~ #saving-throw-description {
