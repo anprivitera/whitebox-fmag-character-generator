@@ -1164,14 +1164,6 @@ ${descendingArmorClass}
   generatedCharacterClass.savingThrowBonus +
   generatedCharacterRace.raceSavingThrowBonus
 })</div> <div class="vitals" id="tohit-melee">Melee: ${toHitMelee} </div> <div class="description" id="tohit-melee-description">(to-hit and damage)</div> <div class="vitals" id="tohit-missile">Missile: ${toHitMissile} </div> <div class="description" id="tohit-missile-description">(to-hit)</div>`;
-for (let n = 0; n < characterWeapons.length; n++) {
-  combatInfo += `<div class="statistic" id="weapon">${characterWeapons[n].weaponName} (${characterWeapons[n].damage})</div> `;
-}
-combatInfo += `<br />`;
-for (let n = 0; n < characterArmorGear.length; n++) {
-  combatInfo += `${characterArmorGear[n].armorName} (-${characterArmorGear[n].AC} [+${characterArmorGear[n].AC}])<br />`;
-}
-combatInfo += `</ul>`;
 document.getElementById("combat-info").innerHTML = combatInfo;
 
 let characterAbilities = [];
@@ -1187,6 +1179,12 @@ document.getElementById("character-abilities").innerHTML =
   characterAbilitiesToDisplay;
 
 let equipmentToDisplay = `<h2>Equipment</h2>`;
+for (let n = 0; n < characterWeapons.length; n++) {
+  equipmentToDisplay += `${characterWeapons[n].weaponName} (${characterWeapons[n].damage})</div>`;
+}
+for (let n = 0; n < characterArmorGear.length; n++) {
+  equipmentToDisplay += `<div class="statistic" id="armor">${characterArmorGear[n].armorName} (-${characterArmorGear[n].AC} [+${characterArmorGear[n].AC}])</div>`;
+}
 for (let n = 0; n < characterEquipment.length; n++) {
   equipmentToDisplay += `<div class="characer-info">${characterEquipment[n].itemName}</div>`;
 }
@@ -1213,4 +1211,4 @@ document.getElementById(
 
 document.getElementById(
   "portrait"
-).innerHTML = `<img src = "${characterPortrait}" width = 250></img>`;
+).innerHTML = `<img src = "${characterPortrait}" width = 200></img>`;
