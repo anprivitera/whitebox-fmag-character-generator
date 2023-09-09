@@ -159,26 +159,26 @@ function determineCharacterClass(attributes) {
 function determineCharacterRace(generatedCharacterClass) {
   const ELF = {
     raceName: "",
-    movementRate: 12,
+    standardMovementRate: 12,
     raceSavingThrowBonus: "",
     raceSpecialAbilities: "<li>Can reach maximum level 8</li></ul>",
   };
   const HUMAN = {
     raceName: "Human",
-    movementRate: 12,
+    standardMovementRate: 12,
     raceSavingThrowBonus: "",
     raceSpecialAbilities: `<li>Can establish ${generatedCharacterClass.domininonKind} at Level ${generatedCharacterClass.dominionLevel}</ul>`,
   };
   const DWARF = {
     raceName: "Dwarf",
-    movementRate: 9,
+    standardMovementRate: 9,
     raceSavingThrowBonus: ", +4 vs. Magic",
     raceSpecialAbilities:
       "<li>Can reach maximum level 6</li><li>Half damage from giants and ogres</li><li>4-in-6 chances of actively spotting traps, slanting passages or construction (2-in-6 if passing by)</li><li>Can speak with goblins, ogres, orcs, kobolds</li></ul>",
   };
   const HALFLING = {
     raceName: "Halfling",
-    movementRate: 9,
+    standardMovementRate: 9,
     raceSavingThrowBonus: ", +4 vs. Magic",
     raceSpecialAbilities: `<li>Can reach maxium level ${
       generatedCharacterClass.characterClassName == "Fighter" ? "4" : "6"
@@ -1105,6 +1105,15 @@ for (let i = 0; i < characterWeapons.length; i++) {
   gearWeight += characterWeapons[i].weight;
 }
 
+let movementRate = generatedCharacterRace.standardMovementRate;
+if (gearWeight >= 76 && gearWeight <= 100) {
+  movementRate -= 3;
+} else if (gearWeight >= 101 && gearWeight <= 150) {
+  movementRate -= 3;
+} else if (gearWeight >= 151) {
+  movementRate = 3;
+}
+
 [characterEquipment, currentMoney] = selectItems(
   ADVENTURING_GEAR,
   Math.floor(Math.random() * 10 + 5),
@@ -1166,7 +1175,11 @@ document.getElementById("hirelings").innerHTML = hirelings;
 
 document.getElementById(
   "movement"
-).innerHTML = `<h2>Encumberance</h2> Gear Weight: ${gearWeight}<br /> Base Movement: `;
+).innerHTML = `<h2>Encumberance</h2> Gear Weight: ${gearWeight}<br /> Normal: ${movementRate} ft./turn<br /> Careful: ${Math.floor(
+  movementRate / 2
+)} ft./turn<br />Running: ${
+  movementRate * 2
+} ft./turn<br />Combat: ${Math.floor(movementRate / 3)} ft./round`;
 
 //TODO: calculate movement speed
 
