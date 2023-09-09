@@ -63,7 +63,7 @@ function determineCharacterClass(attributes) {
     primeAttribute: "WIS",
     domininonKind: "Temple",
     dominionLevel: 10,
-    specialAbilities: "<ul><li>Turn the Undead.</li>",
+    specialAbilities: [`Turn the Undead`],
   };
   const fighter = {
     characterClassName: "Fighter",
@@ -77,8 +77,7 @@ function determineCharacterClass(attributes) {
     primeAttribute: "STR",
     domininonKind: "Stronghold",
     dominionLevel: 9,
-    specialAbilities:
-      "<ul><li>Combat Fury (+1 attack/level vs. >=1 HD foes).</li>",
+    specialAbilities: [`Combat Fury (+1 attack/level vs. >=1 HD foes)`],
   };
   const elf = {
     characterClassName: "Elf",
@@ -90,8 +89,12 @@ function determineCharacterClass(attributes) {
     spellcasterType: null, // TODO: change when implementing more character levels
     spellsAtLevel1: null,
     primeAttribute: null,
-    specialAbilities:
-      "<ul><li>+1 to-hit vs. goblins, orcs, intelligent undead, lycantropes.</li><li>Immune to undead paralysis.</li><li>Half damage from giants and ogres.</li><li>4-in-6 chances of actively spotting hidden or concealed doors (2-in-6 if passing by).</li>",
+    specialAbilities: [
+      `+1 to-hit vs. goblins, orcs, intelligent undead, lycantropes`,
+      `Immune to undead paralysis`,
+      `Half damage from giants and ogres`,
+      `4-in-6 chances of actively spotting hidden or concealed doors (2-in-6 if passing by)`,
+    ],
   };
   const magicUser = {
     characterClassName: "Magic-User",
@@ -104,11 +107,13 @@ function determineCharacterClass(attributes) {
     primeAttribute: "INT",
     domininonKind: "Wizard Tower",
     dominionLevel: 9,
-    specialAbilities: `<ul><li>Known Spells: ${
-      MAGIC_USER_SPELLS_LEVEL_1[
-        Math.floor(Math.random() * MAGIC_USER_SPELLS_LEVEL_1.length)
-      ]
-    }</li>`,
+    specialAbilities: [
+      `Known Spells: ${
+        MAGIC_USER_SPELLS_LEVEL_1[
+          Math.floor(Math.random() * MAGIC_USER_SPELLS_LEVEL_1.length)
+        ]
+      }`,
+    ],
   };
   const thief = {
     characterClassName: "Thief",
@@ -119,8 +124,10 @@ function determineCharacterClass(attributes) {
     savingThrowBonus: "+2 vs. Traps",
     spellcasterType: null,
     primeAttribute: "DEX",
-    specialAbilities:
-      "<ul><li>Back Stab (+2 to Hit and x2 damage on hit)</li><li>Thievery 2-in-6</li>",
+    specialAbilities: [
+      `Back Stab (+2 to Hit and x2 damage on hit)`,
+      `Thievery 2-in-6`,
+    ],
   };
   let generatedCharacterClass = null;
   if (Math.random() < 0.1) {
@@ -161,20 +168,26 @@ function determineCharacterRace(generatedCharacterClass) {
     raceName: "",
     standardMovementRate: 12,
     raceSavingThrowBonus: "",
-    raceSpecialAbilities: "<li>Can reach maximum level 8</li></ul>",
+    raceSpecialAbilities: [`Can reach maximum level 8`],
   };
   const HUMAN = {
     raceName: "Human",
     standardMovementRate: 12,
     raceSavingThrowBonus: "",
-    raceSpecialAbilities: `<li>Can establish ${generatedCharacterClass.domininonKind} at Level ${generatedCharacterClass.dominionLevel}</ul>`,
+    raceSpecialAbilities: [
+      `Can establish ${generatedCharacterClass.domininonKind} at Level ${generatedCharacterClass.dominionLevel}`,
+    ],
   };
   const DWARF = {
     raceName: "Dwarf",
     standardMovementRate: 9,
     raceSavingThrowBonus: ", +4 vs. Magic",
-    raceSpecialAbilities:
-      "<li>Can reach maximum level 6</li><li>Half damage from giants and ogres</li><li>4-in-6 chances of actively spotting traps, slanting passages or construction (2-in-6 if passing by)</li><li>Can speak with goblins, ogres, orcs, kobolds</li></ul>",
+    raceSpecialAbilities: [
+      `Can reach maximum level 6`,
+      `Half damage from giants and ogres`,
+      `4-in-6 chances of actively spotting traps, slanting passages or construction (2-in-6 if passing by)`,
+      `Can speak with goblins, ogres, orcs, kobolds`,
+    ],
   };
   const HALFLING = {
     raceName: "Halfling",
