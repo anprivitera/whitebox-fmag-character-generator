@@ -1178,13 +1178,16 @@ for (let i = 0; i < characterAbilities.length; i++) {
 document.getElementById("character-abilities").innerHTML =
   characterAbilitiesToDisplay;
 
-let equipmentToDisplay = `<h2>Equipment</h2>`;
+let weaponsAndArmor = `<h2>Weapons and Armor</h2>`;
 for (let n = 0; n < characterWeapons.length; n++) {
-  equipmentToDisplay += `<div class="character-info" id="weapon">${characterWeapons[n].weaponName} (${characterWeapons[n].damage})</div>`;
+  weaponsAndArmor += `<div class="character-info" id="weapon">${characterWeapons[n].weaponName} (${characterWeapons[n].damage})</div>`;
 }
 for (let n = 0; n < characterArmorGear.length; n++) {
-  equipmentToDisplay += `<div class="character-info" id="armor">${characterArmorGear[n].armorName} (-${characterArmorGear[n].AC} [+${characterArmorGear[n].AC}])</div>`;
+  weaponsAndArmor += `<div class="character-info" id="armor">${characterArmorGear[n].armorName} (-${characterArmorGear[n].AC} [+${characterArmorGear[n].AC}])</div>`;
 }
+document.getElementById("weapons-and-armor").innerHTML = weaponsAndArmor;
+
+let equipmentToDisplay = `<h2>Equipment</h2>`;
 for (let n = 0; n < characterEquipment.length; n++) {
   equipmentToDisplay += `<div class="character-info" id="equipment">${characterEquipment[n].itemName}</div> `;
 }

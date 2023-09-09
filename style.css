@@ -18,9 +18,9 @@ h2 {
     display: flex;
     flex-wrap: wrap;
     margin: 25px 100px 25px 100px;
-    max-width: 79%;
+
     max-height: 30%;
-    padding: 1px;
+
     /* text-align: right; */
 }
 
