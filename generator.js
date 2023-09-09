@@ -636,6 +636,18 @@ const ARMOR = [
   },
 ];
 
+const SHIELD = {
+  armorName: "Shield",
+  AC: 1,
+  weight: 10,
+  cost: 10,
+  cleric: true,
+  fighter: true,
+  magicUser: false,
+  thief: false,
+  elf: true,
+};
+
 const ADVENTURING_GEAR = [
   {
     itemName: "Backpack (30 lb. capacity",
@@ -937,7 +949,6 @@ const ADVENTURING_GEAR = [
 ];
 //TODO: Treat ammunitions as a separate purchase: if a character gets a missile weapon, they should obviously get also ammunitions. Bow > arrows, Sling > stones, Crossbow > Bolts
 //TODO: Divide consumables items, so that they can be purchased more than once, and display them as unified (i.e., Torches (10))
-//TODO: Required items should go into character classes?
 
 //START RUN-TIME
 const rollForStrength = diceRoller(3),
@@ -1040,12 +1051,25 @@ let characterWeapons = [];
 let characterArmor = [];
 let characterEquipment = [];
 
+//TODO: Fighters and Clerics should have 40% chance of shield; if no shield, fighters should have a 50% chance of a missile weapon
+
 [characterWeapons, currentMoney] = selectItems(
   WEAPONS,
   1,
   currentMoney,
   generatedCharacterClass.characterClassName
 );
+
+if (
+  generatedCharacterClass.characterClassName == "Fighter" ||
+  generatedCharacterClass.characterClassName == "Cleric" ||
+  generatedCharacterClass.characterClassName == "Elf"
+) {
+  let chanceOfShield = Math.floor(Math.random() * 100);
+  if (chanceOfShield <= 40) {
+    characterWeapons.push(shield);
+  }
+}
 
 [characterArmor, currentMoney] = selectItems(
   ARMOR,
@@ -1061,7 +1085,9 @@ let characterEquipment = [];
   generatedCharacterClass.characterClassName
 );
 
-//TODO: Divide this string into specific div id sections
+// for (let i=0; i < characterEquipment.length; i++ ) {
+
+// }
 
 const basicInfo = `<h2>Basic info</h2>${generatedCharacterRace.raceName} ${generatedCharacterClass.characterClassName}, Level 1<br />Alignment: ${characterAlignment}<br /><br />Current XP 0 <br /> XP Bonus ${xpBonus}%`;
 document.getElementById("basic-info").innerHTML = basicInfo;
