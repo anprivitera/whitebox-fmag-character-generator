@@ -1085,13 +1085,13 @@ if (
   generatedCharacterClass.characterClassName
 );
 
-let descendingArmorClass = 9;
-ler ascendingArmorClass = 10;
-for (let i = 0; i <characterArmorGear.length; i++) {
-  descendingArmorClass += characterArmorGear[i].AC
+let descendingArmorClass = 9 - dexterityModifier;
+let ascendingArmorClass = 10 + dexterityModifier;
+for (let i = 0; i < characterArmorGear.length; i++) {
+  descendingArmorClass -= characterArmorGear[i].AC;
+  ascendingArmorClass += characterArmorGear[i].AC;
 }
 
-const descendingArmorClass = 9 - characterArmorNumber - dexterityModifier
 // for (let i=0; i < characterEquipment.length; i++ ) {
 
 // }
