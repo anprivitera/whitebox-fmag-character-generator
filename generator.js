@@ -1213,4 +1213,4 @@ document.getElementById(
 
 document.getElementById(
   "portrait"
-).innerHTML = `<img src = "${characterPortrait}" width = 150></img>`;
+).innerHTML = `<img src = "${characterPortrait}" width = 250></img>`;
