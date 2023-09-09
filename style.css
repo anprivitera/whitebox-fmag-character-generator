@@ -49,9 +49,10 @@ h2 {
 }
 
 .description {
+    visibility: visible;
     display: inline-flex;
     flex-wrap: wrap;
-    margin: 3px;
+    margin: 1px;
     padding: 1px;
     font-size: small;
     text-align: left;
@@ -63,8 +64,19 @@ h2 {
     padding: 3px;
     flex-wrap: nowrap;
     font-size: x-large;
-
 }
+
+/* #saving-throw:hover ~ #saving-throw-description {
+    visibility: visible;
+}
+
+#tohit-melee:hover ~ #tohit-melee-description {
+    visibility: visible;
+}
+
+#tohit-missile:hover ~ #tohit-missile-description {
+    visibility: visible;
+} */
 
 
 
