@@ -1048,13 +1048,13 @@ if (rollForCharisma <= 4) {
 
 let currentMoney = initialMoney;
 let characterWeapons = [];
-let characterArmor = [];
+let characterArmorGear = [];
 let characterEquipment = [];
 
 //TODO: Fighters and Clerics should have 40% chance of shield; if no shield, fighters should have a 50% chance of a missile weapon
 
-[characterWeapons, currentMoney] = selectItems(
-  WEAPONS,
+[characterArmorGear, currentMoney] = selectItems(
+  ARMOR,
   1,
   currentMoney,
   generatedCharacterClass.characterClassName
@@ -1067,12 +1067,12 @@ if (
 ) {
   let chanceOfShield = Math.floor(Math.random() * 100);
   if (chanceOfShield <= 40) {
-    characterWeapons.push(shield);
+    characterArmorGear.push(SHIELD);
   }
 }
 
-[characterArmor, currentMoney] = selectItems(
-  ARMOR,
+[characterWeapons, currentMoney] = selectItems(
+  WEAPONS,
   1,
   currentMoney,
   generatedCharacterClass.characterClassName
@@ -1085,6 +1085,13 @@ if (
   generatedCharacterClass.characterClassName
 );
 
+let descendingArmorClass = 9;
+ler ascendingArmorClass = 10;
+for (let i = 0; i <characterArmorGear.length; i++) {
+  descendingArmorClass += characterArmorGear[i].AC
+}
+
+const descendingArmorClass = 9 - characterArmorNumber - dexterityModifier
 // for (let i=0; i < characterEquipment.length; i++ ) {
 
 // }
@@ -1103,10 +1110,8 @@ for (let n = 0; n < generatedAttributes.length; n++) {
 document.getElementById("attributes").innerHTML = attributesToDisplay;
 
 let combatInfo = `<h2>Combat Info</h2>Melee: ${toHitMelee} (to-hit and damage) <br /> Missile: ${toHitMissile} (to-hit) <br /> AC 
-${9 - characterArmor[0].AC - dexterityModifier}
-[${
-  10 + characterArmor[0].AC + dexterityModifier
-}] <br/> HP ${characterHP} <br /> ST ${
+${descendingArmorClass}
+[${ascendingArmorClass}] <br/> HP ${characterHP} <br /> ST ${
   generatedCharacterClass.savingThrowAtLevel1
 } (${
   generatedCharacterClass.savingThrowBonus +
@@ -1116,8 +1121,8 @@ for (let n = 0; n < characterWeapons.length; n++) {
   combatInfo += `${characterWeapons[n].weaponName} (${characterWeapons[n].damage})`;
 }
 combatInfo += `<br />`;
-for (let n = 0; n < characterArmor.length; n++) {
-  combatInfo += `${characterArmor[n].armorName} (-${characterArmor[n].AC} [+${characterArmor[n].AC}])`;
+for (let n = 0; n < characterArmorGear.length; n++) {
+  combatInfo += `${characterArmorGear[n].armorName} (-${characterArmorGear[n].AC} [+${characterArmorGear[n].AC}])<br />`;
 }
 combatInfo += `</ul>`;
 document.getElementById("combat-info").innerHTML = combatInfo;
