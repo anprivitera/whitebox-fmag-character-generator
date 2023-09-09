@@ -28,6 +28,7 @@ h2 {
 
 .primary-stats {
     display: inline-flex;
+    flex-wrap: wrap;
 }
 
 .attribute {
@@ -47,13 +48,25 @@ h2 {
     flex-wrap: wrap;
 }
 
+.description {
+    display: inline-flex;
+    flex-wrap: wrap;
+    margin: 3px;
+    padding: 1px;
+    font-size: small;
+    text-align: left;
+}
+
 .vitals {
     display: flex;
     margin: 3px;
     padding: 3px;
-    flex-wrap: wrap;
+    flex-wrap: nowrap;
     font-size: x-large;
+
 }
+
+
 
 
 /* #portrait{

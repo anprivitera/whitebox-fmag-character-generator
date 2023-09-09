@@ -1160,10 +1160,10 @@ let combatInfo = `<h2>Combat Info</h2><div class="vitals" id="AC">AC
 ${descendingArmorClass}
 [${ascendingArmorClass}]</div> <div class="vitals" id="hp">HP ${characterHP}</div> <div class="vitals" id="saving-throw">ST ${
   generatedCharacterClass.savingThrowAtLevel1
-}</div><div class="statistic">(${
+}</div><div class="description">(${
   generatedCharacterClass.savingThrowBonus +
   generatedCharacterRace.raceSavingThrowBonus
-})</div> <div class="statistic" id="tohit">Melee: ${toHitMelee} (to-hit and damage)</div> <div class="statistic" id="tohit">Missile: ${toHitMissile} (to-hit)</div>`;
+})</div> <div class="vitals" id="tohit">Melee: ${toHitMelee} </div> <div class="description">(to-hit and damage)</div> <div class="vitals" id="tohit">Missile: ${toHitMissile} </div> <div class="description">(to-hit)</div>`;
 for (let n = 0; n < characterWeapons.length; n++) {
   combatInfo += `<div class="statistic" id="weapon">${characterWeapons[n].weaponName} (${characterWeapons[n].damage})</div> `;
 }
