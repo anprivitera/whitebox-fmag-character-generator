@@ -1068,6 +1068,7 @@ if (
   let chanceOfShield = Math.floor(Math.random() * 100);
   if (chanceOfShield <= 40) {
     characterArmorGear.push(SHIELD);
+    currentMoney = currentMoney - SHIELD.cost;
   }
 }
 
