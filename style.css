@@ -26,6 +26,10 @@ h2 {
     margin: 10px;
 }
 
+.primary-stats {
+    display: inline-flex;
+}
+
 .attribute {
     display: inline-flex;
 }
