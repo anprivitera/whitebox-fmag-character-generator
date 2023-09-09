@@ -193,9 +193,14 @@ function determineCharacterRace(generatedCharacterClass) {
     raceName: "Halfling",
     standardMovementRate: 9,
     raceSavingThrowBonus: ", +4 vs. Magic",
-    raceSpecialAbilities: `<li>Can reach maxium level ${
-      generatedCharacterClass.characterClassName == "Fighter" ? "4" : "6"
-    }</li><li>Half damage from giants and ogres</li><li>+2 to-hit using missile weapons</li><li>5-in-6 chance of going undetected when outside of combat</li></ul>`,
+    raceSpecialAbilities: [
+      `Can reach maxium level ${
+        generatedCharacterClass.characterClassName == "Fighter" ? "4" : "6"
+      }`,
+      `Half damage from giants and ogres`,
+      `+2 to-hit using missile weapons`,
+      `5-in-6 chance of going undetected when outside of combat`,
+    ],
   };
   const RACES = [HUMAN, DWARF, HALFLING];
   if (generatedCharacterClass.characterClassName == "Elf") {
@@ -1169,9 +1174,17 @@ for (let n = 0; n < characterArmorGear.length; n++) {
 combatInfo += `</ul>`;
 document.getElementById("combat-info").innerHTML = combatInfo;
 
-let characterAbilities = `<h2>Abilities</h2>${generatedCharacterClass.specialAbilities}${generatedCharacterRace.raceSpecialAbilities}`;
+let characterAbilities = [];
+characterAbilities.push(...generatedCharacterClass.specialAbilities);
+characterAbilities.push(...generatedCharacterRace.raceSpecialAbilities);
 
-document.getElementById("character-abilities").innerHTML = characterAbilities;
+let characterAbilitiesToDisplay = `<h2>Abilities</h2>`;
+for (let i = 0; i < characterAbilities.length; i++) {
+  characterAbilitiesToDisplay += `<div class="character-info" id="ability">${characterAbilities[i]}</div> `;
+}
+
+document.getElementById("character-abilities").innerHTML =
+  characterAbilitiesToDisplay;
 
 let equipmentToDisplay = `<h2>Equipment</h2>`;
 for (let n = 0; n < characterEquipment.length; n++) {

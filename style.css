@@ -34,6 +34,13 @@ h2 {
     display: inline-flex;
 }
 
+.item {
+    display: flex;
+    margin: 3px;
+    flex-wrap: wrap;
+}
+
+
 .statistic {
     display: flex;
     margin: 3px;
