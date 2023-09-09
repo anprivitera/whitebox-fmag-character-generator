@@ -1066,9 +1066,23 @@ if (
   generatedCharacterClass.characterClassName == "Elf"
 ) {
   let chanceOfShield = Math.floor(Math.random() * 100);
+
   if (chanceOfShield <= 40) {
     characterArmorGear.push(SHIELD);
     currentMoney = currentMoney - SHIELD.cost;
+  } else {
+    let chanceOf2ndWeapon = Math.floor(Math.random() * 100);
+    if (
+      chanceOf2ndWeapon <= 50 &&
+      generatedCharacterClass.characterClassName == "Fighter"
+    ) {
+      [characterArmorGear, currentMoney] = selectItems(
+        ARMOR,
+        1,
+        currentMoney,
+        generatedCharacterClass.characterClassName
+      );
+    }
   }
 }
 
