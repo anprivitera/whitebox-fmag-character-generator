@@ -181,7 +181,7 @@ function determineCharacterRace(generatedCharacterClass) {
   const DWARF = {
     raceName: "Dwarf",
     standardMovementRate: 9,
-    raceSavingThrowBonus: ", +4 vs. Magic",
+    raceSavingThrowBonus: "<br />+4 vs. Magic",
     raceSpecialAbilities: [
       `Can reach maximum level 6`,
       `Half damage from giants and ogres`,
@@ -192,7 +192,7 @@ function determineCharacterRace(generatedCharacterClass) {
   const HALFLING = {
     raceName: "Halfling",
     standardMovementRate: 9,
-    raceSavingThrowBonus: ", +4 vs. Magic",
+    raceSavingThrowBonus: "<br />+4 vs. Magic",
     raceSpecialAbilities: [
       `Can reach maxium level ${
         generatedCharacterClass.characterClassName == "Fighter" ? "4" : "6"
@@ -1143,7 +1143,7 @@ if (gearWeight >= 76 && gearWeight <= 100) {
 
 // }
 
-const basicInfo = `<h2>Basic info</h2><div class="vitals">${generatedCharacterRace.raceName}</div> <div class="vitals">${generatedCharacterClass.characterClassName}</div> <div class="vitals">Level 1</div><div class="vitals">${characterAlignment}</div><div class="vitals">Current XP 0/${generatedCharacterClass.xpToLevel2} </div><div class="vitals"> XP Bonus ${xpBonus}%</div>`;
+const basicInfo = `<h2>Basic info</h2><div class="vitals">${generatedCharacterRace.raceName} ${generatedCharacterClass.characterClassName}</div> <div class="vitals">Level 1</div><div class="vitals">${characterAlignment}</div><div class="vitals">Current XP 0/${generatedCharacterClass.xpToLevel2} </div><div class="vitals"> XP Bonus ${xpBonus}%</div>`;
 document.getElementById("basic-info").innerHTML = basicInfo;
 
 let attributesToDisplay = `<h2>Attributes</h2>`;
@@ -1158,12 +1158,7 @@ document.getElementById("attributes").innerHTML = attributesToDisplay;
 
 let combatInfo = `<h2>Combat Info</h2><div class="vitals" id="AC">AC 
 ${descendingArmorClass}
-[${ascendingArmorClass}]</div> <div class="vitals" id="hp">HP ${characterHP}</div> <div class="vitals" id="saving-throw">ST ${
-  generatedCharacterClass.savingThrowAtLevel1
-}</div><div class="description" id="saving-throw-description">(${
-  generatedCharacterClass.savingThrowBonus +
-  generatedCharacterRace.raceSavingThrowBonus
-})</div> <div class="vitals" id="tohit-melee">Melee: ${toHitMelee} </div> <div class="description" id="tohit-melee-description">(to-hit and damage)</div> <div class="vitals" id="tohit-missile">Missile: ${toHitMissile} </div> <div class="description" id="tohit-missile-description">(to-hit)</div>`;
+[${ascendingArmorClass}]</div> <div class="vitals" id="hp">HP ${characterHP}</div> <div class="vitals" id="saving-throw">ST ${generatedCharacterClass.savingThrowAtLevel1}</div><div class="description" id="saving-throw-description">(${generatedCharacterClass.savingThrowBonus}${generatedCharacterRace.raceSavingThrowBonus})</div> <div class="vitals" id="tohit-melee">Melee: ${toHitMelee} </div> <div class="description" id="tohit-melee-description">(to-hit and damage)</div> <div class="vitals" id="tohit-missile">Missile: ${toHitMissile} </div> <div class="description" id="tohit-missile-description">(to-hit)</div>`;
 document.getElementById("combat-info").innerHTML = combatInfo;
 
 let characterAbilities = [];

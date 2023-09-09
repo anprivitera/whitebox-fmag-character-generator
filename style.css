@@ -19,8 +19,12 @@ h2 {
     flex-wrap: wrap;
     justify-content: center;
     margin: 25px 100px 25px 100px;
-    max-width: 1300px;
-    max-height: 1800px;
+    max-width: 1200px;
+    max-height: auto;
+    border-radius: 2%;
+    border: 2px;
+    border-style: solid;
+    border-color: darkblue;
 
     /* text-align: right; */
 }
@@ -30,12 +34,13 @@ h2 {
     margin: 10px;
 }
 
-.upper-left-info {
+.upper-info {
     display: flex;
     flex-wrap: wrap;
+    flex-shrink: 3;
 }
 
-.upper-right-info {
+.lower-info {
     display: flex;
     flex-wrap: wrap;
     flex-shrink: 3;
@@ -69,10 +74,7 @@ h2 {
     font-size: x-large;
 }
 
-.portrait-area {
-    display: inline-flex;
-    flex-wrap: wrap;
-}
+
 
 .equipment-area {
     display: flex;
@@ -82,11 +84,11 @@ h2 {
 
 
 #portrait {
-    border-radius: 10%;
+    border-radius: 2%;
     border: 2px;
     border-style: solid;
     min-height: fit-content;
-    max-height: 275px;
+    max-height: 250px;
 }
 
 #equipment {
@@ -101,6 +103,16 @@ h2 {
 #ability {
     font-size: medium;
 }
+
+#attributes {
+    max-height: 250px;
+}
+
+#basic-info {
+    max-height: 250px;
+}
+
+
 /* #saving-throw:hover ~ #saving-throw-description {
     visibility: visible;
 }
