@@ -1143,12 +1143,12 @@ if (gearWeight >= 76 && gearWeight <= 100) {
 
 // }
 
-const basicInfo = `<h2>Basic info</h2>${generatedCharacterRace.raceName} ${generatedCharacterClass.characterClassName}, Level 1<br />Alignment: ${characterAlignment}<br /><br />Current XP 0/${generatedCharacterClass.xpToLevel2} <br /> XP Bonus ${xpBonus}%`;
+const basicInfo = `<h2>Basic info</h2><div class="vitals">${generatedCharacterRace.raceName}</div> <div class="vitals">${generatedCharacterClass.characterClassName}</div> <div class="vitals">Level 1</div><div class="vitals">${characterAlignment}</div><div class="vitals">Current XP 0/${generatedCharacterClass.xpToLevel2} </div><div class="vitals"> XP Bonus ${xpBonus}%</div>`;
 document.getElementById("basic-info").innerHTML = basicInfo;
 
 let attributesToDisplay = `<h2>Attributes</h2>`;
 for (let n = 0; n < generatedAttributes.length; n++) {
-  attributesToDisplay += `<div class="attribute">${
+  attributesToDisplay += `<div class="vitals">${
     generatedAttributes[n].attributeName
   } ${generatedAttributes[n].attributeValue} (${
     generatedAttributes[n].modifierValue > 0 ? "+" : ""
