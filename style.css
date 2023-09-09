@@ -18,8 +18,8 @@ h2 {
     display: flex;
     flex-wrap: wrap;
     margin: 25px 100px 25px 100px;
-
-    max-height: 30%;
+    max-width: 1300px;
+    max-height: 1800px;
 
     /* text-align: right; */
 }
@@ -48,8 +48,8 @@ h2 {
     visibility: visible;
     display: inline-flex;
     flex-wrap: nowrap;
-    margin: 1px;
-    padding: 1px;
+    margin: 3px;
+    padding: 3px;
     font-size: small;
     text-align: left;
 }
@@ -77,11 +77,11 @@ h2 {
 }
 
 #portrait {
-    border-radius: 25%;
+    border-radius: 10%;
     border: 2px;
     border-style: solid;
     min-height: fit-content;
-    max-height: 305px;
+    max-height: 275px;
 }
 
 /* #saving-throw:hover ~ #saving-throw-description {

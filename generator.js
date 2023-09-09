@@ -1180,12 +1180,18 @@ document.getElementById("character-abilities").innerHTML =
 
 let weaponsAndArmor = `<h2>Weapons and Armor</h2>`;
 for (let n = 0; n < characterWeapons.length; n++) {
-  weaponsAndArmor += `<div class="character-info" id="weapon">${characterWeapons[n].weaponName} (${characterWeapons[n].damage})</div>`;
+  weaponsAndArmor += `<div class="vitals" id="weapon">${characterWeapons[n].weaponName} (${characterWeapons[n].damage})</div>`;
 }
 for (let n = 0; n < characterArmorGear.length; n++) {
-  weaponsAndArmor += `<div class="character-info" id="armor">${characterArmorGear[n].armorName} (-${characterArmorGear[n].AC} [+${characterArmorGear[n].AC}])</div>`;
+  weaponsAndArmor += `<div class="vitals" id="armor">${characterArmorGear[n].armorName} (-${characterArmorGear[n].AC} [+${characterArmorGear[n].AC}])</div>`;
 }
 document.getElementById("weapons-and-armor").innerHTML = weaponsAndArmor;
+
+let hirelings = `<h2>Hirelings</h2><div class="character-info">Max #: ${maxHirelings}</div><div class="character-info">Loyalty: ${
+  hirelingsLoyalty > 0 ? "+" : ""
+}${hirelingsLoyalty}</div>`;
+
+document.getElementById("hirelings").innerHTML = hirelings;
 
 let equipmentToDisplay = `<h2>Equipment</h2>`;
 for (let n = 0; n < characterEquipment.length; n++) {
@@ -1193,10 +1199,6 @@ for (let n = 0; n < characterEquipment.length; n++) {
 }
 equipmentToDisplay += `<div class="character-info">${currentMoney} gp</div>`;
 document.getElementById("equipment").innerHTML = equipmentToDisplay;
-
-let hirelings = `<h2>Hirelings</h2><div class="character-info">Max #: ${maxHirelings}</div><div class="character-info">Loyalty: ${
-  hirelingsLoyalty > 0 ? "+" : ""
-}${hirelingsLoyalty}</div>`;
 
 document.getElementById(
   "movement"
@@ -1206,7 +1208,7 @@ document.getElementById(
   movementRate * 2
 } ft./turn</div><div class="character-info">Combat: ${Math.floor(
   movementRate / 3
-)} ft./round${hirelings}</div>`;
+)} ft./round</div>`;
 
 //TODO: calculate movement speed
 
