@@ -54,7 +54,7 @@ function shuffle(array) {
 function determineCharacterClass(attributes) {
   const cleric = {
     characterClassName: "Cleric",
-    xpAtLevel1: 0,
+    xpToLevel2: 1500,
     HDatLevel1: diceRoller(1),
     toHitAtLevel1: 0,
     savingThrowAtLevel1: 15,
@@ -67,7 +67,7 @@ function determineCharacterClass(attributes) {
   };
   const fighter = {
     characterClassName: "Fighter",
-    xpAtLevel1: 0,
+    xpToLevel2: 2000,
     HDatLevel1: diceRoller(1) + 1,
     toHitAtLevel1: 0,
     savingThrowAtLevel1: 14,
@@ -82,7 +82,7 @@ function determineCharacterClass(attributes) {
   };
   const elf = {
     characterClassName: "Elf",
-    xpAtLevel1: 0,
+    xpToLevel2: 5000,
     HDatLevel1: diceRoller(1) + 1,
     toHitAtLevel1: 0,
     savingThrowAtLevel1: 14,
@@ -95,7 +95,7 @@ function determineCharacterClass(attributes) {
   };
   const magicUser = {
     characterClassName: "Magic-User",
-    xpAtLevel1: 0,
+    xpToLevel2: 2500,
     HDatLevel1: diceRoller(1),
     toHitAtLevel1: 0,
     savingThrowAtLevel1: 15,
@@ -112,7 +112,7 @@ function determineCharacterClass(attributes) {
   };
   const thief = {
     characterClassName: "Thief",
-    xpAtLevel1: 0,
+    xpToLevel2: 1250,
     HDatLevel1: diceRoller(1),
     toHitAtLevel1: 0,
     savingThrowAtLevel1: 14,
@@ -1096,7 +1096,7 @@ for (let i = 0; i < characterArmorGear.length; i++) {
 
 // }
 
-const basicInfo = `<h2>Basic info</h2>${generatedCharacterRace.raceName} ${generatedCharacterClass.characterClassName}, Level 1<br />Alignment: ${characterAlignment}<br /><br />Current XP 0 <br /> XP Bonus ${xpBonus}%`;
+const basicInfo = `<h2>Basic info</h2>${generatedCharacterRace.raceName} ${generatedCharacterClass.characterClassName}, Level 1<br />Alignment: ${characterAlignment}<br /><br />Current XP 0/${generatedCharacterClass.xpToLevel2} <br /> XP Bonus ${xpBonus}%`;
 document.getElementById("basic-info").innerHTML = basicInfo;
 
 let attributesToDisplay = `<h2>Attributes</h2>`;
