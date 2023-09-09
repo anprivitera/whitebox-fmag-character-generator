@@ -1160,11 +1160,11 @@ let characterAbilities = `<h2>Abilities</h2>${generatedCharacterClass.specialAbi
 
 document.getElementById("character-abilities").innerHTML = characterAbilities;
 
-let equipmentToDisplay = `<h2>Equipment</h2><ul>`;
+let equipmentToDisplay = `<h2>Equipment</h2>`;
 for (let n = 0; n < characterEquipment.length; n++) {
-  equipmentToDisplay += `<li>${characterEquipment[n].itemName}</li>`;
+  equipmentToDisplay += `<div class="item">${characterEquipment[n].itemName}</div>`;
 }
-equipmentToDisplay += `<li>${currentMoney} gp</li></ul>`;
+equipmentToDisplay += `<div class="money">${currentMoney} gp</div>`;
 document.getElementById("equipment").innerHTML = equipmentToDisplay;
 
 let hirelings = `<h2>Hirelings</h2> Max #: ${maxHirelings}<br /> Loyalty: ${
@@ -1175,7 +1175,7 @@ document.getElementById("hirelings").innerHTML = hirelings;
 
 document.getElementById(
   "movement"
-).innerHTML = `<h2>Encumberance</h2> Gear Weight: ${gearWeight}<br /> Normal: ${movementRate} ft./turn<br /> Careful: ${Math.floor(
+).innerHTML = `<h2>Encumberance</h2> Gear Weight: ${gearWeight}<br /><br /> Normal: ${movementRate} ft./turn<br /> Careful: ${Math.floor(
   movementRate / 2
 )} ft./turn<br />Running: ${
   movementRate * 2
