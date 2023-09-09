@@ -318,7 +318,7 @@ const MAGIC_USER_SPELLS_LEVEL_1 = [
     "Read Magic",
     "Sleep",
   ],
-  ALIGNMENTS = ["Law", "Neutral", "Chaos"],
+  ALIGNMENTS = ["Lawful", "Neutral", "Chaotic"],
   WEAPONS = [
     {
       weaponName: "Axe, battle",
