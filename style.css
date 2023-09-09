@@ -81,6 +81,10 @@ h2 {
     flex-wrap: wrap;
 }
 
+#character-abilities {
+    width: 45%;
+}
+
 /* #saving-throw:hover ~ #saving-throw-description {
     visibility: visible;
 }
