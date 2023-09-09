@@ -1186,22 +1186,24 @@ for (let n = 0; n < characterArmorGear.length; n++) {
   equipmentToDisplay += `<div class="character-info" id="armor">${characterArmorGear[n].armorName} (-${characterArmorGear[n].AC} [+${characterArmorGear[n].AC}])</div>`;
 }
 for (let n = 0; n < characterEquipment.length; n++) {
-  equipmentToDisplay += `<div class="characer-info">${characterEquipment[n].itemName}</div>`;
+  equipmentToDisplay += `<div class="character-info" id="equipment">${characterEquipment[n].itemName}</div> `;
 }
 equipmentToDisplay += `<div class="character-info">${currentMoney} gp</div>`;
 document.getElementById("equipment").innerHTML = equipmentToDisplay;
 
-let hirelings = `<h2>Hirelings</h2><div class="character-info">Max #: ${maxHirelings}</div> <div class="character-info">Loyalty: ${
+let hirelings = `<h2>Hirelings</h2><div class="character-info">Max #: ${maxHirelings}</div><div class="character-info">Loyalty: ${
   hirelingsLoyalty > 0 ? "+" : ""
 }${hirelingsLoyalty}</div>`;
 
 document.getElementById(
   "movement"
-).innerHTML = `<h2>Encumberance</h2> Gear Weight: ${gearWeight}<br /><br /> Normal: ${movementRate} ft./turn<br /> Careful: ${Math.floor(
+).innerHTML = `<h2>Encumberance</h2><div class="character-info">Gear Weight: ${gearWeight}</div><div class="character-info">Normal: ${movementRate} ft./turn</div><div class="character-info">Careful: ${Math.floor(
   movementRate / 2
-)} ft./turn<br />Running: ${
+)} ft./turn</div><div class="character-info">Running: ${
   movementRate * 2
-} ft./turn<br />Combat: ${Math.floor(movementRate / 3)} ft./round${hirelings}`;
+} ft./turn</div><div class="character-info">Combat: ${Math.floor(
+  movementRate / 3
+)} ft./round${hirelings}</div>`;
 
 //TODO: calculate movement speed
 
@@ -1209,4 +1211,4 @@ document.getElementById(
 
 document.getElementById(
   "portrait"
-).innerHTML = `<img src = "${characterPortrait}" width = 200></img>`;
+).innerHTML = `<img src = "${characterPortrait}" width = 175></img>`;

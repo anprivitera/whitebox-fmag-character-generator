@@ -1,5 +1,5 @@
 body {
-    background-color: whitesmoke;
+    background-color: white;
     color: darkblue;
     font-family: sans-serif;
 }
@@ -14,10 +14,13 @@ h2 {
 }
 
 .sheet {
-    /* background-image:url("https://wallpapercave.com/wp/wp8571277.jpg"); */
+    background-color: whitesmoke;
     display: flex;
     flex-wrap: wrap;
-    background-size: 700px;
+    margin: 25px 100px 25px 100px;
+    max-width: 79%;
+    max-height: 30%;
+    padding: 1px;
     /* text-align: right; */
 }
 
@@ -41,17 +44,10 @@ h2 {
     flex-wrap: wrap;
 }
 
-
-.statistic {
-    display: flex;
-    margin: 3px;
-    flex-wrap: wrap;
-}
-
 .description {
     visibility: visible;
     display: inline-flex;
-    flex-wrap: wrap;
+    flex-wrap: nowrap;
     margin: 1px;
     padding: 1px;
     font-size: small;
@@ -71,8 +67,8 @@ h2 {
     flex-wrap: wrap;
 }
 
-.abilties-area {
-    display: inline-flex;
+.equipment-area {
+    display: flex;
     flex-wrap: wrap;
 }
 
@@ -81,10 +77,11 @@ h2 {
 }
 
 #portrait {
-    border-radius: 8%;
+    border-radius: 25%;
     border: 2px;
     border-style: solid;
-    border-bottom-width: auto;
+    min-height: fit-content;
+    max-height: 305px;
 }
 
 /* #saving-throw:hover ~ #saving-throw-description {
