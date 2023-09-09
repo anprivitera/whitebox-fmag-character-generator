@@ -17,6 +17,7 @@ h2 {
     background-color: whitesmoke;
     display: flex;
     flex-wrap: wrap;
+    justify-content: center;
     margin: 25px 100px 25px 100px;
     max-width: 1300px;
     max-height: 1800px;
@@ -29,9 +30,15 @@ h2 {
     margin: 10px;
 }
 
-.primary-stats {
+.upper-left-info {
     display: flex;
     flex-wrap: wrap;
+}
+
+.upper-right-info {
+    display: flex;
+    flex-wrap: wrap;
+    flex-shrink: 3;
 }
 
 .attribute {
@@ -72,9 +79,7 @@ h2 {
     flex-wrap: wrap;
 }
 
-#character-abilities {
-    width: 45%;
-}
+
 
 #portrait {
     border-radius: 10%;
@@ -84,6 +89,18 @@ h2 {
     max-height: 275px;
 }
 
+#equipment {
+    max-width: 200px;
+    font-size: medium;
+}
+
+#character-abilities {
+    max-width: 300px;
+}
+
+#ability {
+    font-size: medium;
+}
 /* #saving-throw:hover ~ #saving-throw-description {
     visibility: visible;
 }

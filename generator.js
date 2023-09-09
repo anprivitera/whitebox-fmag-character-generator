@@ -1193,11 +1193,11 @@ let hirelings = `<h2>Hirelings</h2><div class="character-info">Max #: ${maxHirel
 
 document.getElementById("hirelings").innerHTML = hirelings;
 
-let equipmentToDisplay = `<h2>Equipment</h2>`;
+let equipmentToDisplay = `<h2>Equipment</h2><div class="character-info" id="equipment">`;
 for (let n = 0; n < characterEquipment.length; n++) {
-  equipmentToDisplay += `<div class="character-info" id="equipment">${characterEquipment[n].itemName}</div> `;
+  equipmentToDisplay += `${characterEquipment[n].itemName}, `;
 }
-equipmentToDisplay += `<div class="character-info">${currentMoney} gp</div>`;
+equipmentToDisplay += `${currentMoney} gp</div>`;
 document.getElementById("equipment").innerHTML = equipmentToDisplay;
 
 document.getElementById(
