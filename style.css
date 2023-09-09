@@ -21,6 +21,20 @@ ul {
     margin: 10px;
 }
 
+.attribute {
+    display: inline-flex;
+}
+
+.statistic {
+    display: flex;
+    margin: 3px;
+    flex-wrap: wrap;
+}
+
+#AC {
+    font-size: larger;
+    border-style: dotted;
+}
 /* #portrait{
     align-self: left;
 }

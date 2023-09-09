@@ -1130,24 +1130,24 @@ document.getElementById("basic-info").innerHTML = basicInfo;
 
 let attributesToDisplay = `<h2>Attributes</h2>`;
 for (let n = 0; n < generatedAttributes.length; n++) {
-  attributesToDisplay += `${generatedAttributes[n].attributeName} ${
-    generatedAttributes[n].attributeValue
-  } (${generatedAttributes[n].modifierValue > 0 ? "+" : ""}${
-    generatedAttributes[n].modifierValue
-  }) <br />`;
+  attributesToDisplay += `<div class="attribute">${
+    generatedAttributes[n].attributeName
+  } ${generatedAttributes[n].attributeValue} (${
+    generatedAttributes[n].modifierValue > 0 ? "+" : ""
+  }${generatedAttributes[n].modifierValue})</div> `;
 }
 document.getElementById("attributes").innerHTML = attributesToDisplay;
 
-let combatInfo = `<h2>Combat Info</h2>Melee: ${toHitMelee} (to-hit and damage) <br /> Missile: ${toHitMissile} (to-hit) <br /> AC 
+let combatInfo = `<h2>Combat Info</h2><div class="statistic" id="tohit">Melee: ${toHitMelee} (to-hit and damage)</div> <div class="statistic" id="tohit">Missile: ${toHitMissile} (to-hit)</div> <div class="statistic" id="AC">AC 
 ${descendingArmorClass}
-[${ascendingArmorClass}] <br/> HP ${characterHP} <br /> ST ${
+[${ascendingArmorClass}]</div> <div class="statistic" id="hp">HP ${characterHP}</div> <div class="statistic" id="saving-throw">ST ${
   generatedCharacterClass.savingThrowAtLevel1
 } (${
   generatedCharacterClass.savingThrowBonus +
   generatedCharacterRace.raceSavingThrowBonus
-})<br /><br />`;
+})</div> `;
 for (let n = 0; n < characterWeapons.length; n++) {
-  combatInfo += `${characterWeapons[n].weaponName} (${characterWeapons[n].damage})`;
+  combatInfo += `<div class="statistic" id="weapon">${characterWeapons[n].weaponName} (${characterWeapons[n].damage})</div> `;
 }
 combatInfo += `<br />`;
 for (let n = 0; n < characterArmorGear.length; n++) {
