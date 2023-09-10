@@ -1173,7 +1173,9 @@ function generateCharacter(armorClassPreference) {
     weaponsAndArmor += `<div class="vitals" id="weapon">${characterWeapons[n].weaponName}</div><div class="description">(${characterWeapons[n].damage})</div>`;
   }
   for (let n = 0; n < characterArmorGear.length; n++) {
-    weaponsAndArmor += `<div class="vitals" id="armor">${characterArmorGear[n].armorName}</div><div class="description">(-${characterArmorGear[n].AC} [+${characterArmorGear[n].AC}])</div>`;
+    characterArmorGear[n].armorName == "Unarmored"
+      ? (weaponsAndArmor += "")
+      : (weaponsAndArmor += `<div class="vitals" id="armor">${characterArmorGear[n].armorName}</div><div class="description">(-${characterArmorGear[n].AC} [+${characterArmorGear[n].AC}])</div>`);
   }
   document.getElementById("weapons-and-armor").innerHTML = weaponsAndArmor;
 
