@@ -1205,9 +1205,7 @@ document.getElementById(
   movementRate / 3
 )} ft.</div>`;
 
-//TODO: calculate movement speed
-
-//TODO: implement async function so that character portrait for humans/halflings looks good.
+//TODO: implement async function so that there is no load time for the portait
 
 document.getElementById(
   "portrait"
