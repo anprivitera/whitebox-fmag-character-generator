@@ -242,12 +242,10 @@ function generateCharacter(armorClassPreference) {
   ) {
     let shoppingArray = itemsAvailable.map((x) => x),
       filteredShoppingArray = null,
-      selectedItem = [],
-      i = 0;
+      selectedItems = [];
     shuffle(shoppingArray);
     //TODO: Include more dynamic combinations for weapon selection (i.e., weapon and shield, two weapons...)
     //TODO: make sure that currentMoney is never negative, both by checking at the beginning of the function if the money can be spent, and by checking after each purchase.
-    //TODO: turn recurring code below into function
     switch (whoIsTheCharacter) {
       case "Fighter":
         filteredShoppingArray = shoppingArray.filter((n) => n.fighter == true);
@@ -268,10 +266,12 @@ function generateCharacter(armorClassPreference) {
         break;
     }
     for (let i = 0; i < numberOfItems; i++) {
-      selectedItem.push(filteredShoppingArray.pop());
-      currentMoney = currentMoney - selectedItem[0].cost;
+      while (filteredShoppingArray[i].cost >= currentMoney) {
+        selectedItems.push(filteredShoppingArray.pop());
+        currentMoney = currentMoney - selectedItems[0].cost;
+      }
     }
-    return [selectedItem, currentMoney];
+    return [selectedItems, currentMoney];
   }
 
   //CONSTANTS
