@@ -21,7 +21,7 @@ It includes:
 - ~~Languages~~
 - ~~To-Hit bonus~~
 - ~~Number of hirelings and loyalty~~
-- Weight carried and movement speed
+- ~~Weight carried and movement speed~~
 */
 
 //FUNCTIONS
