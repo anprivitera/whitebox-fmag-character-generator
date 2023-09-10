@@ -1197,13 +1197,13 @@ document.getElementById("equipment").innerHTML = equipmentToDisplay;
 
 document.getElementById(
   "movement"
-).innerHTML = `<h2>Encumberance</h2><div class="character-info">Gear Weight: ${gearWeight}</div><div class="character-info">Normal: ${movementRate} ft./turn</div><div class="character-info">Careful: ${Math.floor(
+).innerHTML = `<h2>Encumberance</h2><div class="character-info">Gear Weight: ${gearWeight}</div><div class="character-info">Normal: ${movementRate} ft.</div><div class="character-info">Careful: ${Math.floor(
   movementRate / 2
-)} ft./turn</div><div class="character-info">Running: ${
+)} ft.</div><div class="character-info">Running: ${
   movementRate * 2
-} ft./turn</div><div class="character-info">Combat: ${Math.floor(
+} ft.</div><div class="character-info">Combat: ${Math.floor(
   movementRate / 3
-)} ft./round</div>`;
+)} ft.</div>`;
 
 //TODO: calculate movement speed
 
