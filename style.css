@@ -15,9 +15,6 @@ h2 {
 
 .sheet {
     background-color: whitesmoke;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-evenly;
     margin: 25px 100px 25px 100px;
     max-width: fit-content;
     max-height: auto;
