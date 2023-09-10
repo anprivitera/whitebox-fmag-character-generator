@@ -22,6 +22,10 @@ h2 {
     font-family: "Josefin Sans", sans-serif;
 }
 
+label {
+    font-family: "Josefin Sans", sans-serif;
+}
+
 .sheet {
     background-image: url("https://gdocservices.com/wp-content/uploads/2020/06/AdobeStock_164991966.jpeg");
     background-size: cover;
@@ -29,10 +33,9 @@ h2 {
     margin: 25px 100px 25px 100px;
     max-width: fit-content;
     max-height: auto;
-    border-radius: 2%;
-    border: 2px;
+    border: 1px;
     border-style: solid;
-    border-color: darkblue;
+    border-color: whitesmoke;
     display: inline-flex;
     flex-wrap: wrap;
     justify-content: space-evenly;
@@ -87,16 +90,15 @@ h2 {
 
 
 #portrait {
-    border-radius: 2%;
+    border:solid 2px #41403E;
+    border-radius: 255px 15px 225px 15px/15px 225px 15px 255px;
     border: 2px;
     border-style: solid;
     max-height: 248px;
 }
 
 #equipment {
-    max-width: 200px;
     font-size: medium; 
-    margin: 1px
 }
 
 #character-abilities {

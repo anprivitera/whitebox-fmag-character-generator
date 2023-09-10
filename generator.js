@@ -1198,7 +1198,7 @@ function generateCharacter() {
 
   let equipmentToDisplay = `<h2>Equipment</h2><div class="character-info" id="equipment">`;
   for (let n = 0; n < characterEquipment.length; n++) {
-    equipmentToDisplay += `${characterEquipment[n].itemName}, `;
+    equipmentToDisplay += `${characterEquipment[n].itemName}<br/> `;
   }
   equipmentToDisplay += `${currentMoney} gp</div>`;
   document.getElementById("equipment").innerHTML = equipmentToDisplay;
