@@ -5,7 +5,7 @@
 //FUNCTIONS
 //TODO: move these functions to modules?
 
-function generateCharacter() {
+function generateCharacter(armorClassPreference) {
   function diceRoller(numberOfDice) {
     let rollResult = null;
     for (let i = 0; i < numberOfDice; i++) {
@@ -1096,6 +1096,13 @@ function generateCharacter() {
     gearWeight += characterArmorGear[i].weight;
   }
 
+  let armorClass = null;
+  if (armorClassPreference == "descending") {
+    armorClass = descendingArmorClass;
+  } else if (armorClassPreference == "ascending") {
+    armorClass = ascendingArmorClass;
+  }
+
   [characterWeapons, currentMoney] = selectItems(
     WEAPONS,
     1,
@@ -1143,8 +1150,7 @@ function generateCharacter() {
   document.getElementById("attributes").innerHTML = attributesToDisplay;
 
   let combatInfo = `<h2>Combat Info</h2><div class="vitals" id="AC">AC 
-  ${descendingArmorClass}
-  [${ascendingArmorClass}]</div> <div class="vitals" id="hp">HP ${characterHP}</div> <div class="vitals" id="saving-throw">ST ${generatedCharacterClass.savingThrowAtLevel1}</div><div class="description" id="saving-throw-description">${generatedCharacterClass.savingThrowBonus}${generatedCharacterRace.raceSavingThrowBonus}</div>`;
+  ${armorClass}</div> <div class="vitals" id="hp">HP ${characterHP}</div> <div class="vitals" id="saving-throw">ST ${generatedCharacterClass.savingThrowAtLevel1}</div><div class="description" id="saving-throw-description">${generatedCharacterClass.savingThrowBonus}${generatedCharacterRace.raceSavingThrowBonus}</div>`;
   document.getElementById("combat-info").innerHTML = combatInfo;
 
   let characterAbilities = [];
@@ -1198,8 +1204,6 @@ function generateCharacter() {
   ).innerHTML = `<img src = "${characterPortrait}" width = 175></img>`;
 }
 
-generateCharacter();
-
 document.getElementById("gen-button").onclick = function () {
-  generateCharacter();
+  generateCharacter(document.getElementById("armor-class").value);
 };
