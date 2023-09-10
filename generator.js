@@ -235,41 +235,37 @@ function generateCharacter(armorClassPreference) {
   }
 
   function selectItems(
-    itemsAvailable,
+    itemsToEvaluate,
     numberOfItems,
     currentMoney,
     whoIsTheCharacter
   ) {
-    let shoppingArray = itemsAvailable.map((x) => x),
-      filteredShoppingArray = null,
+    let shoppingArray = itemsToEvaluate.map((x) => x),
+      purchasesByCharacter = null,
       selectedItems = [];
     shuffle(shoppingArray);
     //TODO: Include more dynamic combinations for weapon selection (i.e., weapon and shield, two weapons...)
     //TODO: make sure that currentMoney is never negative, both by checking at the beginning of the function if the money can be spent, and by checking after each purchase.
     switch (whoIsTheCharacter) {
       case "Fighter":
-        filteredShoppingArray = shoppingArray.filter((n) => n.fighter == true);
+        purchasesByCharacter = shoppingArray.filter((n) => n.fighter == true);
         break;
       case "Elf":
-        filteredShoppingArray = shoppingArray.filter((n) => n.fighter == true);
+        purchasesByCharacter = shoppingArray.filter((n) => n.fighter == true);
         break;
       case "Cleric":
-        filteredShoppingArray = shoppingArray.filter((n) => n.cleric == true);
+        purchasesByCharacter = shoppingArray.filter((n) => n.cleric == true);
         break;
       case "Magic-User":
-        filteredShoppingArray = shoppingArray.filter(
-          (n) => n.magicUser == true
-        );
+        purchasesByCharacter = shoppingArray.filter((n) => n.magicUser == true);
         break;
       case "Thief":
-        filteredShoppingArray = shoppingArray.filter((n) => n.thief == true);
+        purchasesByCharacter = shoppingArray.filter((n) => n.thief == true);
         break;
     }
     for (let i = 0; i < numberOfItems; i++) {
-      while (filteredShoppingArray[i].cost >= currentMoney) {
-        selectedItems.push(filteredShoppingArray.pop());
-        currentMoney = currentMoney - selectedItems[0].cost;
-      }
+      selectedItems.push(purchasesByCharacter.pop());
+      currentMoney = currentMoney - selectedItems[0].cost;
     }
     return [selectedItems, currentMoney];
   }
