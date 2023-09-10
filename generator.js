@@ -1204,6 +1204,9 @@ function generateCharacter(armorClassPreference) {
   ).innerHTML = `<img src = "${characterPortrait}" width = 175></img>`;
 }
 
-document.getElementById("gen-button").onclick = function () {
-  generateCharacter(document.getElementById("armor-class").value);
-};
+let refresher = document.getElementById("gen-button");
+
+refresher.addEventListener(
+  "click",
+  generateCharacter(document.getElementById("armor-class").value)
+);
