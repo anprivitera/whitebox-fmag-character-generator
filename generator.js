@@ -211,7 +211,7 @@ function generateCharacter(armorClassPreference) {
     } else {
       character = "elf";
     }
-    const characterPortrait = `https://campaignwiki.org/face/redirect/alex/${character}`;
+    characterPortrait = `https://campaignwiki.org/face/redirect/alex/${character}`;
     return characterPortrait;
   }
 
@@ -1003,7 +1003,8 @@ function generateCharacter(armorClassPreference) {
     generatedCharacterClass
   );
 
-  const characterPortrait = receivePortrait();
+  let characterPortrait = null;
+  characterPortrait = receivePortrait();
 
   const characterAlignment =
     ALIGNMENTS[Math.floor(Math.random() * ALIGNMENTS.length)];
@@ -1203,7 +1204,10 @@ function generateCharacter(armorClassPreference) {
     "portrait"
   ).innerHTML = `<img src = "${characterPortrait}" width = 175></img>`;
 }
+generateCharacter(document.getElementById("armor-class").value);
 
-document.getElementById("gen-button").onclick = function () {
-  generateCharacter(document.getElementById("armor-class").value);
-};
+const newCharacterButton = document.querySelector("#new-character");
+
+newCharacterButton.addEventListener("click", () => {
+  location.reload(); //TODO: avoid using reload and find a way to make the portait refresh itself
+});
