@@ -241,30 +241,30 @@ function generateCharacter(armorClassPreference) {
     whoIsTheCharacter
   ) {
     let shoppingArray = itemsToEvaluate.map((x) => x),
-      purchasesByCharacter = null,
+      filteredByCharacter = null,
       selectedItems = [];
     shuffle(shoppingArray);
     //TODO: Include more dynamic combinations for weapon selection (i.e., weapon and shield, two weapons...)
     //TODO: make sure that currentMoney is never negative, both by checking at the beginning of the function if the money can be spent, and by checking after each purchase.
     switch (whoIsTheCharacter) {
       case "Fighter":
-        purchasesByCharacter = shoppingArray.filter((n) => n.fighter == true);
+        filteredByCharacter = shoppingArray.filter((n) => n.fighter == true);
         break;
       case "Elf":
-        purchasesByCharacter = shoppingArray.filter((n) => n.fighter == true);
+        filteredByCharacter = shoppingArray.filter((n) => n.fighter == true);
         break;
       case "Cleric":
-        purchasesByCharacter = shoppingArray.filter((n) => n.cleric == true);
+        filteredByCharacter = shoppingArray.filter((n) => n.cleric == true);
         break;
       case "Magic-User":
-        purchasesByCharacter = shoppingArray.filter((n) => n.magicUser == true);
+        filteredByCharacter = shoppingArray.filter((n) => n.magicUser == true);
         break;
       case "Thief":
-        purchasesByCharacter = shoppingArray.filter((n) => n.thief == true);
+        filteredByCharacter = shoppingArray.filter((n) => n.thief == true);
         break;
     }
     for (let i = 0; i < numberOfItems; i++) {
-      selectedItems.push(purchasesByCharacter.pop());
+      selectedItems.push(filteredByCharacter.pop());
       currentMoney = currentMoney - selectedItems[0].cost;
     }
     return [selectedItems, currentMoney];
