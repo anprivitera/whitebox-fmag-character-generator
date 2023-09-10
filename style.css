@@ -17,9 +17,9 @@ h2 {
     background-color: whitesmoke;
     display: flex;
     flex-wrap: wrap;
-    justify-content: center;
+    justify-content: space-evenly;
     margin: 25px 100px 25px 100px;
-    max-width: 1200px;
+    max-width: fit-content;
     max-height: auto;
     border-radius: 2%;
     border: 2px;
@@ -38,12 +38,14 @@ h2 {
     display: flex;
     flex-wrap: wrap;
     flex-shrink: 3;
+    justify-content: space-evenly;
 }
 
 .lower-info {
     display: flex;
     flex-wrap: wrap;
-    flex-shrink: 3;
+    justify-content: space-evenly;
+    /* flex-shrink: 3; */
 }
 
 .attribute {
@@ -52,7 +54,7 @@ h2 {
 
 .item {
     display: flex;
-    margin: 3px;
+    /* margin: 3px; */
     flex-wrap: wrap;
 }
 
@@ -60,16 +62,16 @@ h2 {
     visibility: visible;
     display: inline-flex;
     flex-wrap: nowrap;
-    margin: 3px;
-    padding: 3px;
+    margin: 1px;
+    /* padding: 3px; */
     font-size: small;
     text-align: left;
 }
 
 .vitals {
     display: flex;
-    margin: 3px;
-    padding: 3px;
+    margin: 1px;
+    /* padding: 3px; */
     flex-wrap: nowrap;
     font-size: x-large;
 }
@@ -92,7 +94,8 @@ h2 {
 
 #equipment {
     max-width: 200px;
-    font-size: medium;
+    font-size: medium; 
+    margin: 1px
 }
 
 #character-abilities {
