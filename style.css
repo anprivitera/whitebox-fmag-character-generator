@@ -22,6 +22,9 @@ h2 {
     border: 2px;
     border-style: solid;
     border-color: darkblue;
+    display: inline-flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
 
     /* text-align: right; */
 }
@@ -31,18 +34,10 @@ h2 {
     margin: 10px;
 }
 
-.upper-info {
-    display: flex;
-    flex-wrap: wrap;
-    flex-shrink: 3;
-    justify-content: space-evenly;
-}
-
-.lower-info {
-    display: flex;
+.container {
+    display: inline-flex;
     flex-wrap: wrap;
     justify-content: space-evenly;
-    /* flex-shrink: 3; */
 }
 
 .attribute {
@@ -66,10 +61,8 @@ h2 {
 }
 
 .vitals {
-    display: flex;
     margin: 1px;
     /* padding: 3px; */
-    flex-wrap: nowrap;
     font-size: x-large;
 }
 
