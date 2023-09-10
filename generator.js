@@ -1,28 +1,6 @@
 "strict mode";
-//added comment to test read-only on github
-/* USER STORY: I see a short textual description Whitebox character randomly generated and ready to play. 
-It includes: 
-- ~~Ascending Armor class~~
-- ~~HD~~
-- ~~Attribute scores with modifiers~~
-- Name 
-- ~~Class~~
-- ~~Level~~
-- ~~Race~~
-- ~~Alignment~~
-- ~~Initial XP~~
-- ~~XP bonus~~
-- ~~A character portrait~~
-- ~~Saving throw and mods~~
-- ~~Spells / Abilities ~~
-- ~~Equipment~~
-- ~~Weapons & Armor~~
-- ~~Coins~~
-- ~~Languages~~
-- ~~To-Hit bonus~~
-- ~~Number of hirelings and loyalty~~
-- ~~Weight carried and movement speed~~
-*/
+
+//TODO: Include name randomizer
 
 //FUNCTIONS
 //TODO: move these functions to modules?
