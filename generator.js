@@ -251,43 +251,26 @@ function generateCharacter(armorClassPreference) {
     switch (whoIsTheCharacter) {
       case "Fighter":
         filteredShoppingArray = shoppingArray.filter((n) => n.fighter == true);
-        for (let i = 0; i < numberOfItems; i++) {
-          selectedItem.push(filteredShoppingArray.pop());
-          currentMoney = currentMoney - selectedItem[0].cost;
-        }
         break;
       case "Elf":
         filteredShoppingArray = shoppingArray.filter((n) => n.fighter == true);
-        for (let i = 0; i < numberOfItems; i++) {
-          selectedItem.push(filteredShoppingArray.pop());
-          currentMoney = currentMoney - selectedItem[0].cost;
-        }
         break;
       case "Cleric":
         filteredShoppingArray = shoppingArray.filter((n) => n.cleric == true);
-        for (let i = 0; i < numberOfItems; i++) {
-          selectedItem.push(filteredShoppingArray.pop());
-          currentMoney = currentMoney - selectedItem[0].cost;
-        }
         break;
       case "Magic-User":
         filteredShoppingArray = shoppingArray.filter(
           (n) => n.magicUser == true
         );
-        for (let i = 0; i < numberOfItems; i++) {
-          selectedItem.push(filteredShoppingArray.pop());
-          currentMoney = currentMoney - selectedItem[0].cost;
-        }
         break;
       case "Thief":
         filteredShoppingArray = shoppingArray.filter((n) => n.thief == true);
-        for (let i = 0; i < numberOfItems; i++) {
-          selectedItem.push(filteredShoppingArray.pop());
-          currentMoney = currentMoney - selectedItem[0].cost;
-        }
         break;
     }
-
+    for (let i = 0; i < numberOfItems; i++) {
+      selectedItem.push(filteredShoppingArray.pop());
+      currentMoney = currentMoney - selectedItem[0].cost;
+    }
     return [selectedItem, currentMoney];
   }
 
@@ -309,7 +292,7 @@ function generateCharacter(armorClassPreference) {
         damage: "1d6+1",
         weight: 15,
         cost: 7,
-        twoHanded: true,
+        handling: "two-handed",
         melee: true,
         missile: false,
         missileROF: null,
@@ -324,7 +307,7 @@ function generateCharacter(armorClassPreference) {
         damage: "1d6",
         weight: 5,
         cost: 3,
-        twoHanded: false,
+        handling: "one-handed",
         melee: true,
         missile: true,
         missileROF: 1,
@@ -339,7 +322,7 @@ function generateCharacter(armorClassPreference) {
         damage: "1d6",
         weight: 10,
         cost: 0,
-        twoHanded: false,
+        handling: "one-handed",
         melee: true,
         missile: false,
         missileROF: null,
@@ -354,7 +337,7 @@ function generateCharacter(armorClassPreference) {
         damage: "1d6-1",
         weight: 2,
         cost: 3,
-        twoHanded: false,
+        handling: "one-handed",
         melee: true,
         missile: true,
         missileROF: 1,
@@ -369,7 +352,7 @@ function generateCharacter(armorClassPreference) {
         damage: "1d6",
         weight: 15,
         cost: 8,
-        twoHanded: false,
+        handling: "one-handed",
         melee: true,
         missile: false,
         missileROF: null,
@@ -384,7 +367,7 @@ function generateCharacter(armorClassPreference) {
         damage: "1d6",
         weight: 10,
         cost: 5,
-        twoHanded: false,
+        handling: "one-handed",
         melee: true,
         missile: false,
         missileROF: null,
@@ -399,7 +382,7 @@ function generateCharacter(armorClassPreference) {
         damage: "1d6",
         weight: 15,
         cost: 8,
-        twoHanded: false,
+        handling: "one-handed",
         melee: true,
         missile: false,
         missileROF: null,
@@ -414,7 +397,7 @@ function generateCharacter(armorClassPreference) {
         damage: "1d6+1",
         weight: 15,
         cost: 7,
-        twoHanded: true,
+        handling: "two-handed",
         melee: true,
         missile: false,
         missileROF: null,
@@ -429,7 +412,7 @@ function generateCharacter(armorClassPreference) {
         damage: "1d6",
         weight: 10,
         cost: 2,
-        twoHanded: false,
+        handling: "one-handed",
         melee: true,
         missile: true,
         missileROF: 1,
@@ -444,7 +427,7 @@ function generateCharacter(armorClassPreference) {
         damage: "1d6",
         weight: 10,
         cost: 1,
-        twoHanded: true,
+        handling: "two-handed",
         melee: true,
         missile: false,
         missileROF: null,
@@ -459,7 +442,7 @@ function generateCharacter(armorClassPreference) {
         damage: "1d6",
         weight: 10,
         cost: 10,
-        twoHanded: false,
+        handling: "one-handed",
         melee: true,
         missile: false,
         missileROF: null,
@@ -474,7 +457,7 @@ function generateCharacter(armorClassPreference) {
         damage: "1d6-1",
         weight: 5,
         cost: 8,
-        twoHanded: false,
+        handling: "one-handed",
         melee: true,
         missile: false,
         missileROF: null,
@@ -489,7 +472,7 @@ function generateCharacter(armorClassPreference) {
         damage: "1d6+1",
         weight: 15,
         cost: 15,
-        twoHanded: true,
+        handling: "two-handed",
         melee: true,
         missile: false,
         missileROF: null,
@@ -504,7 +487,7 @@ function generateCharacter(armorClassPreference) {
         damage: "1d6",
         weight: 10,
         cost: 5,
-        twoHanded: false,
+        handling: "one-handed",
         melee: true,
         missile: false,
         missileROF: null,
@@ -519,7 +502,7 @@ function generateCharacter(armorClassPreference) {
         damage: "1d6",
         weight: 5,
         cost: 40,
-        twoHanded: true,
+        handling: "two-handed",
         melee: false,
         missile: true,
         missileROF: 2,
@@ -534,7 +517,7 @@ function generateCharacter(armorClassPreference) {
         damage: "1d6-1",
         weight: 5,
         cost: 25,
-        twoHanded: true,
+        handling: "two-handed",
         melee: false,
         missile: true,
         missileROF: 2,
@@ -549,7 +532,7 @@ function generateCharacter(armorClassPreference) {
         damage: "1d6+1",
         weight: 5,
         cost: 25,
-        twoHanded: true,
+        handling: "two-handed",
         melee: false,
         missile: true,
         missileROF: 0.5,
@@ -564,7 +547,7 @@ function generateCharacter(armorClassPreference) {
         damage: "1d6-1",
         weight: 5,
         cost: 15,
-        twoHanded: true,
+        handling: "two-handed",
         melee: false,
         missile: true,
         missileROF: 1,
@@ -579,7 +562,7 @@ function generateCharacter(armorClassPreference) {
         damage: "1d6",
         weight: 1,
         cost: 2,
-        twoHanded: false,
+        handling: "one-handed",
         melee: false,
         missile: true,
         missileROF: 1,
@@ -1055,8 +1038,6 @@ function generateCharacter(armorClassPreference) {
   let characterArmorGear = [];
   let characterEquipment = [];
 
-  //TODO: Fighters and Clerics should have 40% chance of shield; if no shield, fighters should have a 50% chance of a missile weapon
-
   [characterArmorGear, currentMoney] = selectItems(
     ARMOR,
     1,
@@ -1108,6 +1089,8 @@ function generateCharacter(armorClassPreference) {
     armorClass = ascendingArmorClass;
     armorClassModifier = "+";
   }
+
+  //TODO: if there is a shield, then the selectable weapons should just be one handed
 
   [characterWeapons, currentMoney] = selectItems(
     WEAPONS,
