@@ -58,7 +58,7 @@ function determineCharacterClass(attributes) {
     HDatLevel1: diceRoller(1),
     toHitAtLevel1: 0,
     savingThrowAtLevel1: 15,
-    savingThrowBonus: "+2 vs. Death and Poison",
+    savingThrowBonus: "+2 vs. death/poison",
     spellcasterType: "divine",
     primeAttribute: "WIS",
     domininonKind: "Temple",
@@ -71,7 +71,7 @@ function determineCharacterClass(attributes) {
     HDatLevel1: diceRoller(1) + 1,
     toHitAtLevel1: 0,
     savingThrowAtLevel1: 14,
-    savingThrowBonus: "+2 vs. Poison and Paralysis",
+    savingThrowBonus: "+2 vs. poison/paralysis",
     spellcasterType: null,
     spellsAtLevel1: null,
     primeAttribute: "STR",
@@ -85,7 +85,7 @@ function determineCharacterClass(attributes) {
     HDatLevel1: diceRoller(1) + 1,
     toHitAtLevel1: 0,
     savingThrowAtLevel1: 14,
-    savingThrowBonus: "+2 vs. Poison and Paralysis",
+    savingThrowBonus: "+2 vs. poison/paralysis",
     spellcasterType: null, // TODO: change when implementing more character levels
     spellsAtLevel1: null,
     primeAttribute: null,
@@ -102,7 +102,7 @@ function determineCharacterClass(attributes) {
     HDatLevel1: diceRoller(1),
     toHitAtLevel1: 0,
     savingThrowAtLevel1: 15,
-    savingThrowBonus: "+2 vs. Spells",
+    savingThrowBonus: "+2 vs. spells",
     spellcasterType: "magic",
     primeAttribute: "INT",
     domininonKind: "Wizard Tower",
@@ -1123,13 +1123,13 @@ for (let i = 0; i < characterWeapons.length; i++) {
   gearWeight += characterWeapons[i].weight;
 }
 
-let movementRate = generatedCharacterRace.standardMovementRate;
+let movementRate = generatedCharacterRace.standardMovementRate * 10;
 if (gearWeight >= 76 && gearWeight <= 100) {
-  movementRate -= 3;
+  movementRate -= 30;
 } else if (gearWeight >= 101 && gearWeight <= 150) {
-  movementRate -= 3;
+  movementRate -= 30;
 } else if (gearWeight >= 151) {
-  movementRate = 3;
+  movementRate = 30;
 }
 
 [characterEquipment, currentMoney] = selectItems(
@@ -1158,7 +1158,7 @@ document.getElementById("attributes").innerHTML = attributesToDisplay;
 
 let combatInfo = `<h2>Combat Info</h2><div class="vitals" id="AC">AC 
 ${descendingArmorClass}
-[${ascendingArmorClass}]</div> <div class="vitals" id="hp">HP ${characterHP}</div> <div class="vitals" id="saving-throw">ST ${generatedCharacterClass.savingThrowAtLevel1}</div><div class="description" id="saving-throw-description">(${generatedCharacterClass.savingThrowBonus}${generatedCharacterRace.raceSavingThrowBonus})</div> <div class="vitals" id="tohit-melee">Melee: ${toHitMelee} </div> <div class="description" id="tohit-melee-description">(to-hit and damage)</div> <div class="vitals" id="tohit-missile">Missile: ${toHitMissile} </div> <div class="description" id="tohit-missile-description">(to-hit)</div>`;
+[${ascendingArmorClass}]</div> <div class="vitals" id="hp">HP ${characterHP}</div> <div class="vitals" id="saving-throw">ST ${generatedCharacterClass.savingThrowAtLevel1}</div><div class="description" id="saving-throw-description">${generatedCharacterClass.savingThrowBonus}${generatedCharacterRace.raceSavingThrowBonus}</div>`;
 document.getElementById("combat-info").innerHTML = combatInfo;
 
 let characterAbilities = [];
@@ -1173,12 +1173,12 @@ for (let i = 0; i < characterAbilities.length; i++) {
 document.getElementById("character-abilities").innerHTML =
   characterAbilitiesToDisplay;
 
-let weaponsAndArmor = `<h2>Weapons and Armor</h2>`;
+let weaponsAndArmor = `<h2>Weapons and Armor</h2><div class="vitals" id="tohit-melee">Melee: ${toHitMelee} </div> <div class="description" id="tohit-melee-description">(to-hit and damage)</div> <div class="vitals" id="tohit-missile">Missile: ${toHitMissile} </div> <div class="description" id="tohit-missile-description">(to-hit)</div>`;
 for (let n = 0; n < characterWeapons.length; n++) {
-  weaponsAndArmor += `<div class="vitals" id="weapon">${characterWeapons[n].weaponName} (${characterWeapons[n].damage})</div>`;
+  weaponsAndArmor += `<div class="vitals" id="weapon">${characterWeapons[n].weaponName}</div><div class="description">(${characterWeapons[n].damage})</div>`;
 }
 for (let n = 0; n < characterArmorGear.length; n++) {
-  weaponsAndArmor += `<div class="vitals" id="armor">${characterArmorGear[n].armorName} (-${characterArmorGear[n].AC} [+${characterArmorGear[n].AC}])</div>`;
+  weaponsAndArmor += `<div class="vitals" id="armor">${characterArmorGear[n].armorName}</div><div class="description">(-${characterArmorGear[n].AC} [+${characterArmorGear[n].AC}])</div>`;
 }
 document.getElementById("weapons-and-armor").innerHTML = weaponsAndArmor;
 
