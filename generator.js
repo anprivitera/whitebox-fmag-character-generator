@@ -1099,11 +1099,14 @@ function generateCharacter(armorClassPreference) {
     gearWeight += characterArmorGear[i].weight;
   }
 
-  let armorClass = null;
+  let armorClass = null,
+    armorClassModifier = null;
   if (armorClassPreference == "descending") {
     armorClass = descendingArmorClass;
+    armorClassModifier = "-";
   } else if (armorClassPreference == "ascending") {
     armorClass = ascendingArmorClass;
+    armorClassModifier = "+";
   }
 
   [characterWeapons, currentMoney] = selectItems(
@@ -1175,7 +1178,7 @@ function generateCharacter(armorClassPreference) {
   for (let n = 0; n < characterArmorGear.length; n++) {
     characterArmorGear[n].armorName == "Unarmored"
       ? (weaponsAndArmor += "")
-      : (weaponsAndArmor += `<div class="vitals" id="armor">${characterArmorGear[n].armorName}</div><div class="description">(-${characterArmorGear[n].AC} [+${characterArmorGear[n].AC}])</div>`);
+      : (weaponsAndArmor += `<div class="vitals" id="armor">${characterArmorGear[n].armorName}</div><div class="description">(${armorClassModifier}${characterArmorGear[n].AC})</div>`);
   }
   document.getElementById("weapons-and-armor").innerHTML = weaponsAndArmor;
 
