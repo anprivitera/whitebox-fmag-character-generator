@@ -104,6 +104,8 @@ function generateCharacter(armorClassPreference) {
       savingThrowBonus: "+2 vs. Traps",
       spellcasterType: null,
       primeAttribute: "DEX",
+      domininonKind: "Guild",
+      dominionLevel: 9,
       specialAbilities: [
         `Back Stab (+2 to Hit and x2 damage on hit)`,
         `Thievery 2-in-6`,
