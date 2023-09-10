@@ -3,17 +3,23 @@
 body {
     background-color: white;
     color: darkblue;
-    /* font-family: 'Kalam', cursive, sans-serif; */
-    font-family: "Josefin Sans", sans-serif;
+    font-family: 'Kalam', cursive, sans-serif;
 }
 
 ul {
     list-style-type: none;
 }
 
+h1 {
+    font-size: xx-large;
+    font-weight: 200;
+    font-family: "Josefin Sans", sans-serif;
+}
+
 h2 {
     font-size: medium;
     font-weight: 100;
+    font-family: "Josefin Sans", sans-serif;
 }
 
 .sheet {
