@@ -1144,12 +1144,34 @@ function generateCharacter(armorClassPreference) {
 
   // }
 
+  let currentXP = "";
+  let xpToNextLevel = "";
+
+  document.getElementById(
+    "char-alignment-written"
+  ).innerHTML = `${characterAlignment}`;
+
+  document.getElementById("xp-bonus-written").innerHTML = `${xpBonus}%`;
+
   let characterLevel = document.getElementById("character-level").value;
+  if (characterLevel == 1) {
+    currentXP = 0;
+    xpToNextLevel = generatedCharacterClass.xpToLevel2;
+  } else if (characterLevel == 2) {
+    currentXP = generatedCharacterClass.xpToLevel2;
+    xpToNextLevel = generatedCharacterClass.xpToLevel2 * 2;
+  }
+  document.getElementById("char-level-written").innerHTML = `${characterLevel}`;
+  document.getElementById(
+    "char-current-xp-written"
+  ).innerHTML = `${currentXP}/${xpToNextLevel}`;
 
-  const basicInfo = `<h2>Basic info</h2><div class="vitals">${generatedCharacterRace.raceName} ${generatedCharacterClass.characterClassName}</div> <div class="vitals">Level ${characterLevel}</div><div class="vitals">${characterAlignment}</div><div class="vitals">Current XP 0/${generatedCharacterClass.xpToLevel2} </div><div class="vitals"> XP Bonus ${xpBonus}%</div>`;
-  document.getElementById("basic-info").innerHTML = basicInfo;
+  // setInterval(setXP, 1000);
 
-  document.getElementById("basic-info").innerHTML = basicInfo;
+  document.getElementById(
+    "char-race-class-written"
+  ).innerHTML = `${generatedCharacterRace.raceName}
+  ${generatedCharacterClass.characterClassName}`;
 
   document.getElementById("str-written").innerHTML =
     generatedAttributes[0].attributeValue;
