@@ -1149,15 +1149,45 @@ function generateCharacter(armorClassPreference) {
   const basicInfo = `<h2>Basic info</h2><div class="vitals">${generatedCharacterRace.raceName} ${generatedCharacterClass.characterClassName}</div> <div class="vitals">Level ${characterLevel}</div><div class="vitals">${characterAlignment}</div><div class="vitals">Current XP 0/${generatedCharacterClass.xpToLevel2} </div><div class="vitals"> XP Bonus ${xpBonus}%</div>`;
   document.getElementById("basic-info").innerHTML = basicInfo;
 
-  let attributesToDisplay = `<h2>Attributes</h2>`;
-  for (let n = 0; n < generatedAttributes.length; n++) {
-    attributesToDisplay += `<div class="vitals">${
-      generatedAttributes[n].attributeName
-    } ${generatedAttributes[n].attributeValue} (${
-      generatedAttributes[n].modifierValue > 0 ? "+" : ""
-    }${generatedAttributes[n].modifierValue})</div> `;
-  }
-  document.getElementById("attributes").innerHTML = attributesToDisplay;
+  document.getElementById("basic-info").innerHTML = basicInfo;
+
+  document.getElementById("str-written").innerHTML =
+    generatedAttributes[0].attributeValue;
+  document.getElementById("str-modifier-written").innerHTML = `${
+    generatedAttributes[0].modifierValue > 0 ? "+" : "  "
+  }${generatedAttributes[0].modifierValue}`;
+
+  document.getElementById("dex-written").innerHTML =
+    generatedAttributes[1].attributeValue;
+  document.getElementById("dex-modifier-written").innerHTML = `${
+    generatedAttributes[1].modifierValue > 0 ? "+" : "  "
+  }${generatedAttributes[1].modifierValue}`;
+
+  document.getElementById("con-written").innerHTML =
+    generatedAttributes[2].attributeValue;
+  document.getElementById("con-modifier-written").innerHTML = `${
+    generatedAttributes[2].modifierValue > 0 ? "+" : "  "
+  }${generatedAttributes[2].modifierValue}`;
+
+  document.getElementById("int-written").innerHTML =
+    generatedAttributes[3].attributeValue;
+  document.getElementById("int-modifier-written").innerHTML = `${
+    generatedAttributes[3].modifierValue > 0 ? "+" : "  "
+  }${generatedAttributes[3].modifierValue}`;
+
+  document.getElementById("wis-written").innerHTML =
+    generatedAttributes[4].attributeValue;
+  document.getElementById("wis-modifier-written").innerHTML = `${
+    generatedAttributes[4].modifierValue > 0 ? "+" : "  "
+  }${generatedAttributes[4].modifierValue}`;
+
+  document.getElementById("cha-written").innerHTML =
+    generatedAttributes[5].attributeValue;
+  document.getElementById("cha-modifier-written").innerHTML = `${
+    generatedAttributes[5].modifierValue > 0 ? "+" : "  "
+  }${generatedAttributes[5].modifierValue}`;
+
+  // document.getElementById("attributes").innerHTML = attributesToDisplay;
 
   document.getElementById("ac-written").innerHTML = armorClass;
   document.getElementById("hp-written").innerHTML = characterHP;

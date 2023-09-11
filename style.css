@@ -122,12 +122,13 @@ label {
 }
 
 #attributes {
-    max-height: 250px;
+    /* max-height: 250px; */
+    margin: 0px;
 }
 
-#basic-info {
-    max-height: 250px;
-}
+/* #basic-info {
+    /* max-height: 250px; 
+}*/
 
 
 /* #saving-throw:hover ~ #saving-throw-description {
