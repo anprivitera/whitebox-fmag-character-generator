@@ -42,6 +42,15 @@ label {
 }
     /* text-align: right; */
 
+.printed-small {
+    font-family: "Josefin Sans", sans-serif;
+    font-size: x-large;
+}
+
+.handwritten-small {
+    font-size: x-large;
+}
+
 .character-info {
     font-size: large;
     margin: 10px;

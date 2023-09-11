@@ -1159,9 +1159,13 @@ function generateCharacter(armorClassPreference) {
   }
   document.getElementById("attributes").innerHTML = attributesToDisplay;
 
-  let combatInfo = `<h2>Combat Info</h2><div class="vitals" id="AC">AC 
-  ${armorClass}</div> <div class="vitals" id="hp">HP ${characterHP}</div> <div class="vitals" id="saving-throw">ST ${generatedCharacterClass.savingThrowAtLevel1}</div><div class="description" id="saving-throw-description">${generatedCharacterClass.savingThrowBonus}${generatedCharacterRace.raceSavingThrowBonus}</div>`;
-  document.getElementById("combat-info").innerHTML = combatInfo;
+  document.getElementById("ac-written").innerHTML = armorClass;
+  document.getElementById("hp-written").innerHTML = characterHP;
+  document.getElementById("st-written").innerHTML =
+    generatedCharacterClass.savingThrowAtLevel1;
+  document.getElementById(
+    "st-description-written"
+  ).innerHTML = `${generatedCharacterClass.savingThrowBonus}${generatedCharacterRace.raceSavingThrowBonus}`;
 
   let characterAbilities = [];
   characterAbilities.push(...generatedCharacterClass.specialAbilities);
