@@ -1124,7 +1124,9 @@ function generateCharacter(armorClassPreference) {
     gearWeight += characterWeapons[i].weight;
   }
 
-  gearWeight += currentMoney / 10;
+  if (currentMoney > 0) {
+    gearWeight += currentMoney / 10;
+  }
 
   let movementRate = generatedCharacterRace.standardMovementRate * 10;
   if (gearWeight >= 76 && gearWeight <= 100) {
