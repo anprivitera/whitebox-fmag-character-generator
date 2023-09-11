@@ -68,14 +68,14 @@ label {
     visibility: visible;
     display: inline-flex;
     flex-wrap: nowrap;
-    margin: 1px;
+    margin: 0px;
     /* padding: 3px; */
     font-size: small;
     text-align: left;
 }
 
 .vitals {
-    margin: 1px;
+    margin: 0px;
     /* padding: 3px; */
     font-size: x-large;
 }
