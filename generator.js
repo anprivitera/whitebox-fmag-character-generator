@@ -1078,6 +1078,22 @@ function generateCharacter(armorClassPreference) {
     }
   }
 
+  //TODO: if there is a shield, then the selectable weapons should just be one handed
+
+  [characterWeapons, currentMoney] = selectItems(
+    WEAPONS,
+    1,
+    currentMoney,
+    generatedCharacterClass.characterClassName
+  );
+
+  [characterEquipment, currentMoney] = selectItems(
+    ADVENTURING_GEAR,
+    ADVENTURING_GEAR.length,
+    currentMoney,
+    generatedCharacterClass.characterClassName
+  );
+
   let descendingArmorClass = 9 - dexterityModifier;
   let ascendingArmorClass = 10 + dexterityModifier;
   let gearWeight = 10;
@@ -1097,15 +1113,6 @@ function generateCharacter(armorClassPreference) {
     armorClassModifier = "+";
   }
 
-  //TODO: if there is a shield, then the selectable weapons should just be one handed
-
-  [characterWeapons, currentMoney] = selectItems(
-    WEAPONS,
-    1,
-    currentMoney,
-    generatedCharacterClass.characterClassName
-  );
-
   for (let i = 0; i < characterWeapons.length; i++) {
     gearWeight += characterWeapons[i].weight;
   }
@@ -1118,13 +1125,6 @@ function generateCharacter(armorClassPreference) {
   } else if (gearWeight >= 151) {
     movementRate = 30;
   }
-
-  [characterEquipment, currentMoney] = selectItems(
-    ADVENTURING_GEAR,
-    ADVENTURING_GEAR.length,
-    currentMoney,
-    generatedCharacterClass.characterClassName
-  );
 
   // for (let i=0; i < characterEquipment.length; i++ ) {
 
