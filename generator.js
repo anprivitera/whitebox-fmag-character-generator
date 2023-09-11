@@ -1057,7 +1057,7 @@ function generateCharacter(armorClassPreference) {
   );
 
   [characterWeapons, currentMoney] = selectItems(
-    WEAPONS,
+    WEAPONS.filter((x) => x.handling == "one-handed"), // WEAPONS, //DEBUG!!
     1,
     currentMoney,
     generatedCharacterClass.characterClassName
@@ -1069,25 +1069,25 @@ function generateCharacter(armorClassPreference) {
       generatedCharacterClass.characterClassName == "Elf") &&
     characterWeapons.some((x) => x.handling == "one-handed")
   ) {
-    let chanceOfShield = Math.floor(Math.random() * 100);
+    let chanceOfShield = 41; //Math.floor(Math.random() * 100); DEBUG
 
     if (chanceOfShield <= 40 && currentMoney >= SHIELD.cost) {
       characterArmorGear.push(SHIELD);
       currentMoney = currentMoney - SHIELD.cost;
     } else {
-      let WeaponNum2 = null;
-      let chanceOf2ndWeapon = Math.floor(Math.random() * 100);
+      let chanceOf2ndWeapon = 49; //Math.floor(Math.random() * 100); DEBUG
       if (
         chanceOf2ndWeapon <= 50 &&
         generatedCharacterClass.characterClassName == "Fighter"
       ) {
-        [WeaponNum2, currentMoney] = selectItems(
+        let weaponNum2 = null;
+        [weaponNum2, currentMoney] = selectItems(
           WEAPONS.filter((x) => x.handling == "one-handed"),
           1,
           currentMoney,
           generatedCharacterClass.characterClassName
         );
-        characterWeapons.push(WeaponNum2);
+        characterWeapons.push(weaponNum2);
       }
     }
   }
@@ -1124,8 +1124,11 @@ function generateCharacter(armorClassPreference) {
     gearWeight += characterWeapons[i].weight;
   }
 
-  if (currentMoney > 0) {
-    gearWeight += currentMoney / 10;
+  if (currentMoney != null) {
+    console.log(gearWeight);
+    console.log(currentMoney);
+    gearWeight += Math.floor(currentMoney / 10);
+    console.log(gearWeight);
   }
 
   let movementRate = generatedCharacterRace.standardMovementRate * 10;
