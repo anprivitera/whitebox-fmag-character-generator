@@ -267,10 +267,15 @@ function generateCharacter(armorClassPreference) {
     filteredByPrice = filteredByCharacter.filter((x) => x.cost <= currentMoney);
 
     for (let i = 0; i < numberOfItems; i++) {
-      if (filteredByPrice != 0) {
+      if (
+        filteredByPrice != 0 &&
+        filteredByPrice.some((x) => x.cost < currentMoney && currentMoney > 0)
+      ) {
         selectedItems.push(filteredByPrice.pop());
         currentMoney = currentMoney - selectedItems[0].cost;
         filteredByPrice = filteredByPrice.filter((x) => x.cost <= currentMoney);
+      } else {
+        return [selectedItems, currentMoney];
       }
     }
     return [selectedItems, currentMoney];
@@ -1064,7 +1069,7 @@ function generateCharacter(armorClassPreference) {
         generatedCharacterClass.characterClassName == "Fighter"
       ) {
         [characterArmorGear, currentMoney] = selectItems(
-          ARMOR,
+          WEAPONS.filter((x) => x.handling == "one-handed"),
           1,
           currentMoney,
           generatedCharacterClass.characterClassName
