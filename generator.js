@@ -945,7 +945,7 @@ function generateCharacter(armorClassPreference) {
   //TODO: Treat ammunitions as a separate purchase: if a character gets a missile weapon, they should obviously get also ammunitions. Bow > arrows, Sling > stones, Crossbow > Bolts
   //TODO: Divide consumables items, so that they can be purchased more than once, and display them as unified (i.e., Torches (10))
 
-  //START RUN-TIME
+  //START RUNTIME
   const rollForStrength = diceRoller(3),
     rollForDexterity = diceRoller(3),
     rollForConstitution = diceRoller(3),
@@ -1057,7 +1057,7 @@ function generateCharacter(armorClassPreference) {
   );
 
   [characterWeapons, currentMoney] = selectItems(
-    WEAPONS.filter((x) => x.handling == "one-handed"), // WEAPONS, //DEBUG!!
+    WEAPONS,
     1,
     currentMoney,
     generatedCharacterClass.characterClassName
@@ -1069,13 +1069,13 @@ function generateCharacter(armorClassPreference) {
       generatedCharacterClass.characterClassName == "Elf") &&
     characterWeapons.some((x) => x.handling == "one-handed")
   ) {
-    let chanceOfShield = 41; //Math.floor(Math.random() * 100); DEBUG
+    let chanceOfShield = Math.floor(Math.random() * 100);
 
     if (chanceOfShield <= 40 && currentMoney >= SHIELD.cost) {
       characterArmorGear.push(SHIELD);
       currentMoney = currentMoney - SHIELD.cost;
     } else {
-      let chanceOf2ndWeapon = 49; //Math.floor(Math.random() * 100); DEBUG
+      let chanceOf2ndWeapon = Math.floor(Math.random() * 100);
       if (
         chanceOf2ndWeapon <= 50 &&
         generatedCharacterClass.characterClassName == "Fighter"
@@ -1087,7 +1087,7 @@ function generateCharacter(armorClassPreference) {
           currentMoney,
           generatedCharacterClass.characterClassName
         );
-        characterWeapons.push(weaponNum2);
+        characterWeapons.push(...weaponNum2);
       }
     }
   }
