@@ -954,7 +954,7 @@ function generateCharacter(armorClassPreference) {
     intelligenceModifier = determineModifier(rollForIntelligence),
     wisdomModifier = determineModifier(rollForWisdom),
     charismaModifier = determineModifier(rollForCharisma),
-    initialMoney = diceRoller(3) * 10;
+    initialMoney = diceRoller(3) * 10; //DEBUG: ;40
 
   const generatedAttributes = [
     {
@@ -1052,10 +1052,18 @@ function generateCharacter(armorClassPreference) {
     generatedCharacterClass.characterClassName
   );
 
+  [characterWeapons, currentMoney] = selectItems(
+    WEAPONS,
+    1,
+    currentMoney,
+    generatedCharacterClass.characterClassName
+  );
+
   if (
-    generatedCharacterClass.characterClassName == "Fighter" ||
-    generatedCharacterClass.characterClassName == "Cleric" ||
-    generatedCharacterClass.characterClassName == "Elf"
+    (generatedCharacterClass.characterClassName == "Fighter" ||
+      generatedCharacterClass.characterClassName == "Cleric" ||
+      generatedCharacterClass.characterClassName == "Elf") &&
+    characterWeapons.some((x) => x.handling == "one-handed")
   ) {
     let chanceOfShield = Math.floor(Math.random() * 100);
 
@@ -1063,29 +1071,24 @@ function generateCharacter(armorClassPreference) {
       characterArmorGear.push(SHIELD);
       currentMoney = currentMoney - SHIELD.cost;
     } else {
+      let WeaponNum2 = null;
       let chanceOf2ndWeapon = Math.floor(Math.random() * 100);
       if (
         chanceOf2ndWeapon <= 50 &&
         generatedCharacterClass.characterClassName == "Fighter"
       ) {
-        [characterWeapons, currentMoney] = selectItems(
+        [WeaponNum2, currentMoney] = selectItems(
           WEAPONS.filter((x) => x.handling == "one-handed"),
           1,
           currentMoney,
           generatedCharacterClass.characterClassName
         );
+        characterWeapons.push(WeaponNum2);
       }
     }
   }
 
   //TODO: if there is a shield, then the selectable weapons should just be one handed
-
-  [characterWeapons, currentMoney] = selectItems(
-    WEAPONS,
-    1,
-    currentMoney,
-    generatedCharacterClass.characterClassName
-  );
 
   [characterEquipment, currentMoney] = selectItems(
     ADVENTURING_GEAR,
