@@ -1068,7 +1068,7 @@ function generateCharacter(armorClassPreference) {
         chanceOf2ndWeapon <= 50 &&
         generatedCharacterClass.characterClassName == "Fighter"
       ) {
-        [characterArmorGear, currentMoney] = selectItems(
+        [characterWeapons, currentMoney] = selectItems(
           WEAPONS.filter((x) => x.handling == "one-handed"),
           1,
           currentMoney,
