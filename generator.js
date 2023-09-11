@@ -242,6 +242,7 @@ function generateCharacter(armorClassPreference) {
   ) {
     let shoppingArray = itemsToEvaluate.map((x) => x),
       filteredByCharacter = null,
+      filteredByPrice = null,
       selectedItems = [];
     shuffle(shoppingArray);
     //TODO: Include more dynamic combinations for weapon selection (i.e., weapon and shield, two weapons...)
@@ -263,9 +264,14 @@ function generateCharacter(armorClassPreference) {
         filteredByCharacter = shoppingArray.filter((n) => n.thief == true);
         break;
     }
+    filteredByPrice = filteredByCharacter.filter((x) => x.cost <= currentMoney);
+
     for (let i = 0; i < numberOfItems; i++) {
-      selectedItems.push(filteredByCharacter.pop());
-      currentMoney = currentMoney - selectedItems[0].cost;
+      if (filteredByPrice != 0) {
+        selectedItems.push(filteredByPrice.pop());
+        currentMoney = currentMoney - selectedItems[0].cost;
+        filteredByPrice = filteredByPrice.filter((x) => x.cost <= currentMoney);
+      }
     }
     return [selectedItems, currentMoney];
   }
@@ -1048,7 +1054,7 @@ function generateCharacter(armorClassPreference) {
   ) {
     let chanceOfShield = Math.floor(Math.random() * 100);
 
-    if (chanceOfShield <= 40) {
+    if (chanceOfShield <= 40 && currentMoney >= SHIELD.cost) {
       characterArmorGear.push(SHIELD);
       currentMoney = currentMoney - SHIELD.cost;
     } else {
@@ -1110,7 +1116,7 @@ function generateCharacter(armorClassPreference) {
 
   [characterEquipment, currentMoney] = selectItems(
     ADVENTURING_GEAR,
-    Math.floor(Math.random() * 10 + 5),
+    ADVENTURING_GEAR.length,
     currentMoney,
     generatedCharacterClass.characterClassName
   );
