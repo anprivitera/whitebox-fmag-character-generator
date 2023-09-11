@@ -269,10 +269,14 @@ function generateCharacter(armorClassPreference) {
     for (let i = 0; i < numberOfItems; i++) {
       if (
         filteredByPrice != 0 &&
-        filteredByPrice.some((x) => x.cost < currentMoney && currentMoney > 0)
+        filteredByPrice.some((x) => x.cost < currentMoney) &&
+        currentMoney > 0
       ) {
-        selectedItems.push(filteredByPrice.pop());
+        selectedItems.unshift(filteredByPrice.shift());
+        console.log(selectedItems);
+        console.log(`Money BEFORE purchase: ${currentMoney}`);
         currentMoney = currentMoney - selectedItems[0].cost;
+        console.log(`Money AFTER purchase: ${currentMoney}`);
         filteredByPrice = filteredByPrice.filter((x) => x.cost <= currentMoney);
       } else {
         return [selectedItems, currentMoney];
@@ -954,7 +958,7 @@ function generateCharacter(armorClassPreference) {
     intelligenceModifier = determineModifier(rollForIntelligence),
     wisdomModifier = determineModifier(rollForWisdom),
     charismaModifier = determineModifier(rollForCharisma),
-    initialMoney = diceRoller(3) * 10; //DEBUG: ;40
+    initialMoney = diceRoller(3) * 10;
 
   const generatedAttributes = [
     {
