@@ -2,7 +2,7 @@
 
 body {
     background-color: white;
-    color: darkblue;
+    color: blue;
     font-family: 'Kalam', cursive, sans-serif;
 }
 
@@ -12,18 +12,21 @@ ul {
 
 h1 {
     font-size: xx-large;
+    color: black;
     font-weight: 200;
     font-family: "Josefin Sans", sans-serif;
 }
 
 h2 {
     font-size: medium;
+    color: black;
     font-weight: 100;
     font-family: "Josefin Sans", sans-serif;
 }
 
 label {
     font-family: "Josefin Sans", sans-serif;
+    color: black;
 }
 
 .sheet {
@@ -44,6 +47,7 @@ label {
 
 .printed-small {
     font-family: "Josefin Sans", sans-serif;
+    color: black;
     font-size: x-large;
 }
 
