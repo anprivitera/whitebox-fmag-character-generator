@@ -1,4 +1,5 @@
-"strict mode";
+import { diceRoller } from "./diceRoller";
+("strict mode");
 
 //TODO: Include name randomizer
 
@@ -6,14 +7,6 @@
 //TODO: move these functions to modules?
 
 function generateCharacter(armorClassPreference) {
-  function diceRoller(numberOfDice) {
-    let rollResult = null;
-    for (let i = 0; i < numberOfDice; i++) {
-      rollResult += Math.floor(Math.random() * 6 + 1);
-    }
-    return rollResult;
-  }
-
   function determineModifier(attributeScore) {
     if (attributeScore <= 6) {
       return -1;
