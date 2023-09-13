@@ -1,8 +1,8 @@
 "strict mode";
 import { diceRoller } from "./diceRoller.js";
 
-import { determineModifier } from "./Whitebox/determineModifier.js";
-import { determineXPBonus } from "./Whitebox/determineXPBonus.js";
+import determineModifier from "./Whitebox/determineModifier.js";
+import determineXPBonus from "./Whitebox/determineXPBonus.js";
 import WEAPONS from "./Whitebox/weapons.js";
 import ARMOR from "./Whitebox/armor.js";
 import ALIGNMENTS from "./Whitebox/alignments.js";
