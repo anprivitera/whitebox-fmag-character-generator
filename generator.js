@@ -1,6 +1,11 @@
 "strict mode";
 import { diceRoller } from "./diceRoller.js";
-import WEAPONS from "./weapons.js";
+
+import { determineModifier } from "./Whitebox/determineModifier.js";
+import { determineXPBonus } from "./Whitebox/determineXPBonus.js";
+import WEAPONS from "./Whitebox/weapons.js";
+import ARMOR from "./Whitebox/armor.js";
+import ALIGNMENTS from "./Whitebox/alignments.js";
 
 //TODO: Include name randomizer
 
@@ -8,16 +13,6 @@ import WEAPONS from "./weapons.js";
 //TODO: move these functions to modules?
 
 function generateCharacter(armorClassPreference) {
-  function determineModifier(attributeScore) {
-    if (attributeScore <= 6) {
-      return -1;
-    } else if (attributeScore >= 7 && attributeScore <= 14) {
-      return 0;
-    } else {
-      return +1;
-    }
-  }
-
   function shuffle(array) {
     for (let i = array.length - 1; i > 0; i--) {
       let j = Math.floor(Math.random() * (i + 1));
@@ -211,23 +206,6 @@ function generateCharacter(armorClassPreference) {
     return characterPortrait;
   }
 
-  function determineXPBonus() {
-    let xpBonus = 0;
-    if (rollForWisdom >= 15) {
-      xpBonus += 5;
-    }
-    if (rollForCharisma >= 15) {
-      xpBonus += 5;
-    }
-    if (generatedCharacterClass.primeAttributeValue >= 15) {
-      xpBonus += 5;
-    }
-    if (xpBonus > 15) {
-      xpBonus = 15;
-    }
-    return xpBonus;
-  }
-
   function selectItems(
     itemsToEvaluate,
     numberOfItems,
@@ -281,62 +259,15 @@ function generateCharacter(armorClassPreference) {
 
   //CONSTANTS
   const MAGIC_USER_SPELLS_LEVEL_1 = [
-      "Charm Person",
-      "Detect Magic",
-      "Hold Portal",
-      "Light",
-      "Protection from Chaos",
-      "Read Languages",
-      "Read Magic",
-      "Sleep",
-    ],
-    ALIGNMENTS = ["Lawful", "Neutral", "Chaotic"],
-    ARMOR = [
-      {
-        armorName: "Unarmored",
-        AC: 0,
-        weight: 0,
-        cost: 0,
-        cleric: true,
-        fighter: false,
-        magicUser: true,
-        thief: true,
-        elf: true,
-      },
-      {
-        armorName: "Chain Mail",
-        AC: 4,
-        weight: 50,
-        cost: 30,
-        cleric: true,
-        fighter: true,
-        magicUser: false,
-        thief: false,
-        elf: true,
-      },
-      {
-        armorName: "Leather",
-        AC: 2,
-        weight: 25,
-        cost: 15,
-        cleric: true,
-        fighter: true,
-        magicUser: false,
-        thief: true,
-        elf: true,
-      },
-      {
-        armorName: "Plate Mail",
-        AC: 6,
-        weight: 75,
-        cost: 50,
-        cleric: true,
-        fighter: true,
-        magicUser: false,
-        thief: false,
-        elf: false,
-      },
-    ];
+    "Charm Person",
+    "Detect Magic",
+    "Hold Portal",
+    "Light",
+    "Protection from Chaos",
+    "Read Languages",
+    "Read Magic",
+    "Sleep",
+  ];
 
   const SHIELD = {
     armorName: "Shield",
@@ -712,7 +643,11 @@ function generateCharacter(armorClassPreference) {
   const characterAlignment =
     ALIGNMENTS[Math.floor(Math.random() * ALIGNMENTS.length)];
 
-  let xpBonus = determineXPBonus(generatedCharacterClass.primeAttributeValue);
+  let xpBonus = determineXPBonus(
+    rollForWisdom,
+    rollForCharisma,
+    generatedCharacterClass.primeAttributeValue
+  );
 
   let characterHP = generatedCharacterClass.HDatLevel1 + constitutionModifier;
   if (characterHP <= 0) {
