@@ -1,5 +1,5 @@
-import { diceRoller } from "./diceRoller";
-("strict mode");
+"strict mode";
+import { diceRoller } from "./diceRoller.js";
 
 //TODO: Include name randomizer
 
