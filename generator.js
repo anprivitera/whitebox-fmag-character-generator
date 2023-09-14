@@ -590,7 +590,7 @@ function generateCharacter(armorClassPreference) {
   for (let n = 0; n < characterEquipment.length; n++) {
     equipmentToDisplay += `${characterEquipment[n].itemName}<br/> `;
   }
-  equipmentToDisplay += `${currentMoney} gp</div>`;
+  equipmentToDisplay += currentMoney > 0 ? `${currentMoney} gp</div>` : "";
   document.getElementById("equipment").innerHTML = equipmentToDisplay;
 
   document.getElementById(
