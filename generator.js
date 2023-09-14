@@ -1,5 +1,9 @@
 "strict mode";
-import { diceRoller, shuffleArray } from "./systemNeutralFunctions.js";
+import {
+  diceRoller,
+  shuffleArray,
+  determineCharacterClass,
+} from "./systemNeutralFunctions.js";
 
 import determineModifier from "./Whitebox/determineModifier.js";
 import determineXPBonus from "./Whitebox/determineXPBonus.js";
@@ -15,25 +19,6 @@ import CHARACTER_CLASSES from "./Whitebox/CHARACTER_CLASSES.js";
 //TODO: move these functions to modules?
 
 function generateCharacter(armorClassPreference) {
-  function determineCharacterClass(attributes) {
-    let generatedCharacterClass = null;
-    let fromHighToLow = attributes.map((x) => x);
-    fromHighToLow.sort((a, b) => b.attributeValue - a.attributeValue);
-    while (generatedCharacterClass == null) {
-      for (let x = 0; x < fromHighToLow.length; x++) {
-        for (let i = 0; i < CHARACTER_CLASSES.length; i++) {
-          if (
-            fromHighToLow[x].attributeName ==
-            CHARACTER_CLASSES[i].primeAttribute
-          ) {
-            generatedCharacterClass = CHARACTER_CLASSES[i];
-            return generatedCharacterClass;
-          }
-        }
-      }
-    }
-  }
-
   function determineCharacterRace(generatedCharacterClass) {
     const ELF = {
       raceName: "",
@@ -221,7 +206,10 @@ function generateCharacter(armorClassPreference) {
     },
   ];
 
-  const generatedCharacterClass = determineCharacterClass(generatedAttributes);
+  const generatedCharacterClass = determineCharacterClass(
+    generatedAttributes,
+    CHARACTER_CLASSES
+  );
 
   const generatedCharacterRace = determineCharacterRace(
     generatedCharacterClass
