@@ -3,10 +3,10 @@ import { diceRoller } from "./diceRoller.js";
 
 import determineModifier from "./Whitebox/determineModifier.js";
 import determineXPBonus from "./Whitebox/determineXPBonus.js";
-import WEAPONS from "./Whitebox/weapons.js";
-import ARMOR from "./Whitebox/armor.js";
-import ALIGNMENTS from "./Whitebox/alignments.js";
-import ADVENTURING_GEAR from "./Whitebox/adventuringGear.js";
+import WEAPONS from "./Whitebox/WEAPONS.js";
+import ARMOR from "./Whitebox/ARMOR.js";
+import ALIGNMENTS from "./Whitebox/ALIGNMENTS.js";
+import ADVENTURING_GEAR from "./Whitebox/ADVENTURING_GEAR.js";
 
 //TODO: Include name randomizer
 
