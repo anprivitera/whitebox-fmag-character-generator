@@ -18,7 +18,7 @@ function generateCharacter(armorClassPreference) {
     const cleric = {
       characterClassName: "Cleric",
       xpToLevel2: 1500,
-      HDatLevel1: diceRoller(1),
+      HDatLevel1: diceRoller(1, 6),
       toHitAtLevel1: 0,
       savingThrowAtLevel1: 15,
       savingThrowBonus: "+2 vs. death/poison",
@@ -31,7 +31,7 @@ function generateCharacter(armorClassPreference) {
     const fighter = {
       characterClassName: "Fighter",
       xpToLevel2: 2000,
-      HDatLevel1: diceRoller(1) + 1,
+      HDatLevel1: diceRoller(1, 6) + 1,
       toHitAtLevel1: 0,
       savingThrowAtLevel1: 14,
       savingThrowBonus: "+2 vs. poison/paralysis",
@@ -45,7 +45,7 @@ function generateCharacter(armorClassPreference) {
     const elf = {
       characterClassName: "Elf",
       xpToLevel2: 5000,
-      HDatLevel1: diceRoller(1) + 1,
+      HDatLevel1: diceRoller(1, 6) + 1,
       toHitAtLevel1: 0,
       savingThrowAtLevel1: 14,
       savingThrowBonus: "+2 vs. poison/paralysis",
@@ -62,7 +62,7 @@ function generateCharacter(armorClassPreference) {
     const magicUser = {
       characterClassName: "Magic-User",
       xpToLevel2: 2500,
-      HDatLevel1: diceRoller(1),
+      HDatLevel1: diceRoller(1, 6),
       toHitAtLevel1: 0,
       savingThrowAtLevel1: 15,
       savingThrowBonus: "+2 vs. spells",
@@ -81,7 +81,7 @@ function generateCharacter(armorClassPreference) {
     const thief = {
       characterClassName: "Thief",
       xpToLevel2: 1250,
-      HDatLevel1: diceRoller(1),
+      HDatLevel1: diceRoller(1, 6),
       toHitAtLevel1: 0,
       savingThrowAtLevel1: 14,
       savingThrowBonus: "+2 vs. Traps",
@@ -278,19 +278,19 @@ function generateCharacter(armorClassPreference) {
   //TODO: Divide consumables items, so that they can be purchased more than once, and display them as unified (i.e., Torches (10))
 
   //START RUNTIME
-  const rollForStrength = diceRoller(3),
-    rollForDexterity = diceRoller(3),
-    rollForConstitution = diceRoller(3),
-    rollForIntelligence = diceRoller(3),
-    rollForWisdom = diceRoller(3),
-    rollForCharisma = diceRoller(3),
+  const rollForStrength = diceRoller(3, 6),
+    rollForDexterity = diceRoller(3, 6),
+    rollForConstitution = diceRoller(3, 6),
+    rollForIntelligence = diceRoller(3, 6),
+    rollForWisdom = diceRoller(3, 6),
+    rollForCharisma = diceRoller(3, 6),
     stengthModifier = determineModifier(rollForStrength),
     dexterityModifier = determineModifier(rollForDexterity),
     constitutionModifier = determineModifier(rollForConstitution),
     intelligenceModifier = determineModifier(rollForIntelligence),
     wisdomModifier = determineModifier(rollForWisdom),
     charismaModifier = determineModifier(rollForCharisma),
-    initialMoney = diceRoller(3) * 10;
+    initialMoney = diceRoller(3, 6) * 10;
 
   const generatedAttributes = [
     {

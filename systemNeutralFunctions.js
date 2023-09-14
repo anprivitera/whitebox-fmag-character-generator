@@ -1,7 +1,7 @@
-function diceRoller(numberOfDice) {
+function diceRoller(numberOfDice, diceFace) {
   let rollResult = null;
   for (let i = 0; i < numberOfDice; i++) {
-    rollResult += Math.floor(Math.random() * 6 + 1);
+    rollResult += Math.floor(Math.random() * diceFace + 1);
   }
   return rollResult;
 }
