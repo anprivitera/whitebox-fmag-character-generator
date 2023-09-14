@@ -5,7 +5,7 @@ import {
   determineCharacterClass,
   receivePortrait,
   rollForAttributes,
-} from "./systemNeutralFunctions.js";
+} from "./System Neutral/functions.js";
 
 import {
   determineModifier,

@@ -1,4 +1,4 @@
-import { diceRoller } from "../systemNeutralFunctions.js";
+import { diceRoller } from "../System Neutral/functions.js";
 
 const ELF_PRIME_ATTRIBUTES = ["STR", "INT"];
 
