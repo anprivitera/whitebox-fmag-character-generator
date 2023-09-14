@@ -260,16 +260,6 @@ function generateCharacter(armorClassPreference) {
       generatedCharacter.characterArmorGear[i].weight;
   }
 
-  let armorClass = null,
-    armorClassModifier = null;
-  if (armorClassPreference == "descending") {
-    armorClass = generatedCharacter.descendingArmorClass;
-    armorClassModifier = "-";
-  } else if (armorClassPreference == "ascending") {
-    armorClass = generatedCharacter.ascendingArmorClass;
-    armorClassModifier = "+";
-  }
-
   for (let i = 0; i < generatedCharacter.characterWeapons.length; i++) {
     generatedCharacter.gearWeight +=
       generatedCharacter.characterWeapons[i].weight;
@@ -361,7 +351,10 @@ function generateCharacter(armorClassPreference) {
   // document.getElementById("attributes").innerHTML = attributesToDisplay;
 
   document.getElementById("ac-written").innerHTML =
-    generatedCharacter.armorClass;
+    armorClassPreference == "descending"
+      ? generatedCharacter.descendingArmorClass
+      : generatedCharacter.ascendingArmorClass;
+
   document.getElementById("hp-written").innerHTML =
     generatedCharacter.characterHP;
   document.getElementById("st-written").innerHTML =
@@ -393,7 +386,11 @@ function generateCharacter(armorClassPreference) {
   for (let n = 0; n < generatedCharacter.characterArmorGear.length; n++) {
     generatedCharacter.characterArmorGear[n].armorName == "Unarmored"
       ? (weaponsAndArmor += "")
-      : (weaponsAndArmor += `<div class="vitals" id="armor">${generatedCharacter.characterArmorGear[n].armorName}</div><div class="description">(${armorClassModifier}${generatedCharacter.characterArmorGear[n].AC})</div>`);
+      : (weaponsAndArmor += `<div class="vitals" id="armor">${
+          generatedCharacter.characterArmorGear[n].armorName
+        }</div><div class="description">(${
+          armorClassPreference == "ascending" ? "+" : "-"
+        }${generatedCharacter.characterArmorGear[n].AC})</div>`);
   }
   document.getElementById("weapons-and-armor").innerHTML = weaponsAndArmor;
 
