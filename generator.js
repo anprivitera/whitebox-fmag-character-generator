@@ -222,6 +222,7 @@ function generateCharacter(armorClassPreference) {
     //TODO: Include more dynamic combinations for weapon selection (i.e., weapon and shield, two weapons...)
     //TODO: make sure that currentMoney is never negative, both by checking at the beginning of the function if the money can be spent, and by checking after each purchase.
     switch (whoIsTheCharacter) {
+      //TODO: find a way to not state each filter so to make code modular
       case "Fighter":
         filteredByCharacter = shoppingArray.filter((n) => n.fighter == true);
         break;
