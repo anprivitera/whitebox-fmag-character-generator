@@ -45,4 +45,53 @@ function receivePortrait(race) {
   return characterPortrait;
 }
 
-export { diceRoller, shuffleArray, determineCharacterClass, receivePortrait };
+function rollForAttributes(numberOfDice) {
+  let generatedAttributes = null;
+  const rollForStrength = diceRoller(numberOfDice, 6),
+    rollForDexterity = diceRoller(numberOfDice, 6),
+    rollForConstitution = diceRoller(numberOfDice, 6),
+    rollForIntelligence = diceRoller(numberOfDice, 6),
+    rollForWisdom = diceRoller(numberOfDice, 6),
+    rollForCharisma = diceRoller(numberOfDice, 6);
+
+  return [
+    {
+      attributeName: "STR",
+      attributeValue: rollForStrength,
+      modifierValue: null,
+    },
+    {
+      attributeName: "DEX",
+      attributeValue: rollForDexterity,
+      modifierValue: null,
+    },
+    {
+      attributeName: "CON",
+      attributeValue: rollForConstitution,
+      modifierValue: null,
+    },
+    {
+      attributeName: "INT",
+      attributeValue: rollForIntelligence,
+      modifierValue: null,
+    },
+    {
+      attributeName: "WIS",
+      attributeValue: rollForWisdom,
+      modifierValue: null,
+    },
+    {
+      attributeName: "CHA",
+      attributeValue: rollForCharisma,
+      modifierValue: null,
+    },
+  ];
+}
+
+export {
+  diceRoller,
+  shuffleArray,
+  determineCharacterClass,
+  receivePortrait,
+  rollForAttributes,
+};
