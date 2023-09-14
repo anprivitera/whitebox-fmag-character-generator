@@ -73,7 +73,7 @@ function generateCharacter(armorClassPreference) {
         `5-in-6 chance of going undetected when outside of combat`,
       ],
     };
-    const RACES = [HUMAN, DWARF, HALFLING];
+    const CLASSED_RACES = [HUMAN, DWARF, HALFLING];
     if (generatedCharacterClass.characterClassName == "Elf") {
       let characterRace = ELF;
       return characterRace;
@@ -83,7 +83,8 @@ function generateCharacter(armorClassPreference) {
       generatedCharacterClass.characterClassName == "Fighter" ||
       generatedCharacterClass.characterClassName == "Thief"
     ) {
-      characterRace = RACES[Math.floor(Math.random() * RACES.length)];
+      characterRace =
+        CLASSED_RACES[Math.floor(Math.random() * CLASSED_RACES.length)];
     }
     return characterRace;
   }
