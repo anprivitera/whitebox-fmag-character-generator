@@ -31,4 +31,18 @@ function determineCharacterClass(attributes, characterClasses) {
   }
 }
 
-export { diceRoller, shuffleArray, determineCharacterClass };
+function receivePortrait(race) {
+  let character = null;
+  if (race == "Human" || race == "Halfling") {
+    const gender = ["man", "woman"];
+    character = gender[Math.floor(Math.random() * gender.length)];
+  } else if (race == "Dwarf") {
+    character = "dwarf";
+  } else {
+    character = "elf";
+  }
+  let characterPortrait = `https://campaignwiki.org/face/redirect/alex/${character}`;
+  return characterPortrait;
+}
+
+export { diceRoller, shuffleArray, determineCharacterClass, receivePortrait };

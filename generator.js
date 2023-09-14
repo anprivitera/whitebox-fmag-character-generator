@@ -3,6 +3,7 @@ import {
   diceRoller,
   shuffleArray,
   determineCharacterClass,
+  receivePortrait,
 } from "./systemNeutralFunctions.js";
 
 import determineModifier from "./Whitebox/determineModifier.js";
@@ -20,24 +21,6 @@ import CHARACTER_CLASSES from "./Whitebox/CHARACTER_CLASSES.js";
 //TODO: move these functions to modules?
 
 function generateCharacter(armorClassPreference) {
-  function receivePortrait() {
-    let character = null;
-    if (
-      generatedCharacterRace.raceName == "Human" ||
-      generatedCharacterRace.raceName == "Halfling"
-    ) {
-      const gender = ["man", "woman"];
-      character = gender[Math.floor(Math.random() * gender.length)];
-      // character = gender[genderSelect];
-    } else if (generatedCharacterRace.raceName == "Dwarf") {
-      character = "dwarf";
-    } else {
-      character = "elf";
-    }
-    characterPortrait = `https://campaignwiki.org/face/redirect/alex/${character}`;
-    return characterPortrait;
-  }
-
   function selectItems(
     itemsToEvaluate,
     numberOfItems,
@@ -150,7 +133,7 @@ function generateCharacter(armorClassPreference) {
   );
 
   let characterPortrait = null;
-  characterPortrait = receivePortrait();
+  characterPortrait = receivePortrait(generatedCharacterRace.raceName);
 
   const characterAlignment =
     ALIGNMENTS[Math.floor(Math.random() * ALIGNMENTS.length)];
