@@ -20,7 +20,7 @@ import CHARACTER_CLASSES from "./Whitebox/CHARACTER_CLASSES.js";
 //TODO: move these functions to modules?
 
 function generateCharacter(armorClassPreference) {
-  function receivePortrait(race) {
+  function receivePortrait() {
     let character = null;
     if (
       generatedCharacterRace.raceName == "Human" ||
@@ -150,7 +150,7 @@ function generateCharacter(armorClassPreference) {
   );
 
   let characterPortrait = null;
-  characterPortrait = receivePortrait(generatedCharacterRace.raceName);
+  characterPortrait = receivePortrait();
 
   const characterAlignment =
     ALIGNMENTS[Math.floor(Math.random() * ALIGNMENTS.length)];
