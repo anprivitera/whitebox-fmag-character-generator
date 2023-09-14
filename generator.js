@@ -8,7 +8,7 @@ import {
 import determineModifier from "./Whitebox/determineModifier.js";
 import determineXPBonus from "./Whitebox/determineXPBonus.js";
 import WEAPONS from "./Whitebox/WEAPONS.js";
-import ARMOR from "./Whitebox/ARMOR.js";
+import { ARMOR, SHIELD } from "./Whitebox/ARMOR_SHIELD.js";
 import ALIGNMENTS from "./Whitebox/ALIGNMENTS.js";
 import ADVENTURING_GEAR from "./Whitebox/ADVENTURING_GEAR.js";
 import CHARACTER_CLASSES from "./Whitebox/CHARACTER_CLASSES.js";
@@ -142,18 +142,6 @@ function generateCharacter(armorClassPreference) {
   }
 
   //CONSTANTS
-
-  const SHIELD = {
-    armorName: "Shield",
-    AC: 1,
-    weight: 10,
-    cost: 10,
-    cleric: true,
-    fighter: true,
-    magicUser: false,
-    thief: false,
-    elf: true,
-  };
 
   //TODO: Treat ammunitions as a separate purchase: if a character gets a missile weapon, they should obviously get also ammunitions. Bow > arrows, Sling > stones, Crossbow > Bolts
   //TODO: Divide consumables items, so that they can be purchased more than once, and display them as unified (i.e., Torches (10))

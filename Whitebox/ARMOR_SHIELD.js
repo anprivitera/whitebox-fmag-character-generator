@@ -1,4 +1,4 @@
-export default [
+const ARMOR = [
   {
     armorName: "Unarmored",
     AC: 0,
@@ -44,3 +44,17 @@ export default [
     elf: false,
   },
 ];
+
+const SHIELD = {
+  armorName: "Shield",
+  AC: 1,
+  weight: 10,
+  cost: 10,
+  cleric: true,
+  fighter: true,
+  magicUser: false,
+  thief: false,
+  elf: true,
+};
+
+export { ARMOR, SHIELD };
