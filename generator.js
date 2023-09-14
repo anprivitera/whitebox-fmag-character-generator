@@ -246,10 +246,7 @@ function generateCharacter(armorClassPreference) {
         currentMoney > 0
       ) {
         selectedItems.unshift(filteredByPrice.shift());
-        console.log(selectedItems);
-        console.log(`Money BEFORE purchase: ${currentMoney}`);
         currentMoney = currentMoney - selectedItems[0].cost;
-        console.log(`Money AFTER purchase: ${currentMoney}`);
         filteredByPrice = filteredByPrice.filter((x) => x.cost <= currentMoney);
       } else {
         return [selectedItems, currentMoney];
