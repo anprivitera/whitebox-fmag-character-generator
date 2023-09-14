@@ -12,11 +12,14 @@ import {
   determineCharacterRace,
 } from "./Whitebox/functions.js";
 
-import WEAPONS from "./Whitebox/WEAPONS.js";
-import { ARMOR, SHIELD } from "./Whitebox/ARMOR_SHIELD.js";
-import ALIGNMENTS from "./Whitebox/ALIGNMENTS.js";
-import ADVENTURING_GEAR from "./Whitebox/ADVENTURING_GEAR.js";
-import CHARACTER_CLASSES from "./Whitebox/CHARACTER_CLASSES.js";
+import {
+  ADVENTURING_GEAR,
+  ALIGNMENTS,
+  ARMORS,
+  CHARACTER_CLASSES,
+  SHIELDS,
+  WEAPONS,
+} from "./Whitebox/constants.js";
 
 //TODO: Include name randomizer
 
@@ -187,7 +190,7 @@ function generateCharacter(armorClassPreference) {
   let characterEquipment = [];
 
   [characterArmorGear, currentMoney] = selectItems(
-    ARMOR,
+    ARMORS,
     1,
     currentMoney,
     generatedCharacterClass.characterClassName
@@ -208,9 +211,9 @@ function generateCharacter(armorClassPreference) {
   ) {
     let chanceOfShield = Math.floor(Math.random() * 100);
 
-    if (chanceOfShield <= 40 && currentMoney >= SHIELD.cost) {
-      characterArmorGear.push(SHIELD);
-      currentMoney = currentMoney - SHIELD.cost;
+    if (chanceOfShield <= 40 && currentMoney >= SHIELDS.cost) {
+      characterArmorGear.push(SHIELDS);
+      currentMoney = currentMoney - SHIELDS.cost;
     } else {
       let chanceOf2ndWeapon = Math.floor(Math.random() * 100);
       if (
