@@ -7,6 +7,7 @@ import WEAPONS from "./Whitebox/WEAPONS.js";
 import ARMOR from "./Whitebox/ARMOR.js";
 import ALIGNMENTS from "./Whitebox/ALIGNMENTS.js";
 import ADVENTURING_GEAR from "./Whitebox/ADVENTURING_GEAR.js";
+import CHARACTER_CLASSES from "./Whitebox/CHARACTER_CLASSES.js";
 
 //TODO: Include name randomizer
 
@@ -15,115 +16,19 @@ import ADVENTURING_GEAR from "./Whitebox/ADVENTURING_GEAR.js";
 
 function generateCharacter(armorClassPreference) {
   function determineCharacterClass(attributes) {
-    const cleric = {
-      characterClassName: "Cleric",
-      xpToLevel2: 1500,
-      HDatLevel1: diceRoller(1, 6),
-      toHitAtLevel1: 0,
-      savingThrowAtLevel1: 15,
-      savingThrowBonus: "+2 vs. death/poison",
-      spellcasterType: "divine",
-      primeAttribute: "WIS",
-      domininonKind: "Temple",
-      dominionLevel: 10,
-      specialAbilities: [`Turn the Undead`],
-    };
-    const fighter = {
-      characterClassName: "Fighter",
-      xpToLevel2: 2000,
-      HDatLevel1: diceRoller(1, 6) + 1,
-      toHitAtLevel1: 0,
-      savingThrowAtLevel1: 14,
-      savingThrowBonus: "+2 vs. poison/paralysis",
-      spellcasterType: null,
-      spellsAtLevel1: null,
-      primeAttribute: "STR",
-      domininonKind: "Stronghold",
-      dominionLevel: 9,
-      specialAbilities: [`Combat Fury (+1 attack/level vs. >=1 HD foes)`],
-    };
-    const elf = {
-      characterClassName: "Elf",
-      xpToLevel2: 5000,
-      HDatLevel1: diceRoller(1, 6) + 1,
-      toHitAtLevel1: 0,
-      savingThrowAtLevel1: 14,
-      savingThrowBonus: "+2 vs. poison/paralysis",
-      spellcasterType: null, // TODO: change when implementing more character levels
-      spellsAtLevel1: null,
-      primeAttribute: null,
-      specialAbilities: [
-        `+1 to-hit vs. goblins, orcs, intelligent undead, lycantropes`,
-        `Immune to undead paralysis`,
-        `Half damage from giants and ogres`,
-        `4-in-6 chances of actively spotting hidden or concealed doors (2-in-6 if passing by)`,
-      ],
-    };
-    const magicUser = {
-      characterClassName: "Magic-User",
-      xpToLevel2: 2500,
-      HDatLevel1: diceRoller(1, 6),
-      toHitAtLevel1: 0,
-      savingThrowAtLevel1: 15,
-      savingThrowBonus: "+2 vs. spells",
-      spellcasterType: "magic",
-      primeAttribute: "INT",
-      domininonKind: "Wizard Tower",
-      dominionLevel: 9,
-      specialAbilities: [
-        `Known Spells: ${
-          MAGIC_USER_SPELLS_LEVEL_1[
-            Math.floor(Math.random() * MAGIC_USER_SPELLS_LEVEL_1.length)
-          ]
-        }`,
-      ],
-    };
-    const thief = {
-      characterClassName: "Thief",
-      xpToLevel2: 1250,
-      HDatLevel1: diceRoller(1, 6),
-      toHitAtLevel1: 0,
-      savingThrowAtLevel1: 14,
-      savingThrowBonus: "+2 vs. Traps",
-      spellcasterType: null,
-      primeAttribute: "DEX",
-      domininonKind: "Guild",
-      dominionLevel: 9,
-      specialAbilities: [
-        `Back Stab (+2 to Hit and x2 damage on hit)`,
-        `Thievery 2-in-6`,
-      ],
-    };
     let generatedCharacterClass = null;
-    if (Math.random() < 0.1) {
-      generatedCharacterClass = elf;
-      return generatedCharacterClass;
-    }
     let fromHighToLow = attributes.map((x) => x);
     fromHighToLow.sort((a, b) => b.attributeValue - a.attributeValue);
     while (generatedCharacterClass == null) {
       for (let x = 0; x < fromHighToLow.length; x++) {
-        //TODO: migrate character clasess to separate javascript folder in arrays, then create nested for loop to check the prime attribute of each character class contained in the array
-        if (fromHighToLow[x].attributeName == cleric.primeAttribute) {
-          generatedCharacterClass = cleric;
-          generatedCharacterClass.primeAttributeValue =
-            fromHighToLow[x].attributeValue;
-          return generatedCharacterClass;
-        } else if (fromHighToLow[x].attributeName == fighter.primeAttribute) {
-          generatedCharacterClass = fighter;
-          generatedCharacterClass.primeAttributeValue =
-            fromHighToLow[x].attributeValue;
-          return generatedCharacterClass;
-        } else if (fromHighToLow[x].attributeName == magicUser.primeAttribute) {
-          generatedCharacterClass = magicUser;
-          generatedCharacterClass.primeAttributeValue =
-            fromHighToLow[x].attributeValue;
-          return generatedCharacterClass;
-        } else if (fromHighToLow[x].attributeName == thief.primeAttribute) {
-          generatedCharacterClass = thief;
-          generatedCharacterClass.primeAttributeValue =
-            fromHighToLow[x].attributeValue;
-          return generatedCharacterClass;
+        for (let i = 0; i < CHARACTER_CLASSES.length; i++) {
+          if (
+            fromHighToLow[x].attributeName ==
+            CHARACTER_CLASSES[i].primeAttribute
+          ) {
+            generatedCharacterClass = CHARACTER_CLASSES[i];
+            return generatedCharacterClass;
+          }
         }
       }
     }
@@ -251,16 +156,6 @@ function generateCharacter(armorClassPreference) {
   }
 
   //CONSTANTS
-  const MAGIC_USER_SPELLS_LEVEL_1 = [
-    "Charm Person",
-    "Detect Magic",
-    "Hold Portal",
-    "Light",
-    "Protection from Chaos",
-    "Read Languages",
-    "Read Magic",
-    "Sleep",
-  ];
 
   const SHIELD = {
     armorName: "Shield",
