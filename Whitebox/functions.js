@@ -1,4 +1,35 @@
-export default function determineCharacterRace(generatedCharacterClass) {
+export function determineModifier(attributeScore) {
+  if (attributeScore <= 6) {
+    return -1;
+  } else if (attributeScore >= 7 && attributeScore <= 14) {
+    return 0;
+  } else {
+    return +1;
+  }
+}
+
+export function determineXPBonus(
+  rollForWisdom,
+  rollForCharisma,
+  primeAttribute
+) {
+  let xpBonus = 0;
+  if (rollForWisdom >= 15) {
+    xpBonus += 5;
+  }
+  if (rollForCharisma >= 15) {
+    xpBonus += 5;
+  }
+  if (primeAttribute >= 15) {
+    xpBonus += 5;
+  }
+  if (xpBonus > 15) {
+    xpBonus = 15;
+  }
+  return xpBonus;
+}
+
+export function determineCharacterRace(generatedCharacterClass) {
   const ELF = {
     raceName: "",
     standardMovementRate: 12,

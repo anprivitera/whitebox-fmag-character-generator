@@ -6,9 +6,12 @@ import {
   receivePortrait,
 } from "./systemNeutralFunctions.js";
 
-import determineModifier from "./Whitebox/determineModifier.js";
-import determineXPBonus from "./Whitebox/determineXPBonus.js";
-import determineCharacterRace from "./Whitebox/determineCharacterRace.js";
+import {
+  determineModifier,
+  determineXPBonus,
+  determineCharacterRace,
+} from "./Whitebox/functions.js";
+
 import WEAPONS from "./Whitebox/WEAPONS.js";
 import { ARMOR, SHIELD } from "./Whitebox/ARMOR_SHIELD.js";
 import ALIGNMENTS from "./Whitebox/ALIGNMENTS.js";
@@ -132,8 +135,7 @@ function generateCharacter(armorClassPreference) {
     generatedCharacterClass
   );
 
-  let characterPortrait = null;
-  characterPortrait = receivePortrait(generatedCharacterRace.raceName);
+  let characterPortrait = receivePortrait(generatedCharacterRace.raceName);
 
   const characterAlignment =
     ALIGNMENTS[Math.floor(Math.random() * ALIGNMENTS.length)];
