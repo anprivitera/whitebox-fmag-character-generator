@@ -110,6 +110,7 @@ function generateCharacter(armorClassPreference) {
     fromHighToLow.sort((a, b) => b.attributeValue - a.attributeValue);
     while (generatedCharacterClass == null) {
       for (let x = 0; x < fromHighToLow.length; x++) {
+        //TODO: migrate character clasess to separate javascript folder in arrays, then create nested for loop to check the prime attribute of each character class contained in the array
         if (fromHighToLow[x].attributeName == cleric.primeAttribute) {
           generatedCharacterClass = cleric;
           generatedCharacterClass.primeAttributeValue =
