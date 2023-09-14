@@ -1,5 +1,5 @@
 "strict mode";
-import { diceRoller } from "./diceRoller.js";
+import { diceRoller, shuffleArray } from "./systemNeutralFunctions.js";
 
 import determineModifier from "./Whitebox/determineModifier.js";
 import determineXPBonus from "./Whitebox/determineXPBonus.js";
@@ -14,13 +14,6 @@ import ADVENTURING_GEAR from "./Whitebox/ADVENTURING_GEAR.js";
 //TODO: move these functions to modules?
 
 function generateCharacter(armorClassPreference) {
-  function shuffle(array) {
-    for (let i = array.length - 1; i > 0; i--) {
-      let j = Math.floor(Math.random() * (i + 1));
-      [array[i], array[j]] = [array[j], array[i]];
-    }
-  }
-
   function determineCharacterClass(attributes) {
     const cleric = {
       characterClassName: "Cleric",
@@ -218,7 +211,7 @@ function generateCharacter(armorClassPreference) {
       filteredByCharacter = null,
       filteredByPrice = null,
       selectedItems = [];
-    shuffle(shoppingArray);
+    shuffleArray(shoppingArray);
     //TODO: Include more dynamic combinations for weapon selection (i.e., weapon and shield, two weapons...)
     //TODO: make sure that currentMoney is never negative, both by checking at the beginning of the function if the money can be spent, and by checking after each purchase.
     switch (whoIsTheCharacter) {
