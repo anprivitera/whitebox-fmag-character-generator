@@ -466,10 +466,7 @@ function generateCharacter(armorClassPreference) {
   }
 
   if (currentMoney != null) {
-    console.log(gearWeight);
-    console.log(currentMoney);
     gearWeight += Math.floor(currentMoney / 10);
-    console.log(gearWeight);
   }
 
   let movementRate = generatedCharacterRace.standardMovementRate * 10;
