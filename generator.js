@@ -289,9 +289,16 @@ function generateCharacter(armorClassPreference) {
   document.getElementById("character-abilities-list").innerHTML =
     characterAbilitiesToDisplay;
 
-  let weaponsAndArmor = `<h2>Weapons and Armor</h2><div class="vitals" id="tohit-melee">Melee: ${generatedCharacter.toHitMelee} </div> <div class="description" id="tohit-melee-description">(to-hit and damage)</div> <div class="vitals" id="tohit-missile">Missile: ${generatedCharacter.toHitMissile} </div> <div class="description" id="tohit-missile-description">(to-hit)</div>`;
+  document.getElementById("to-hit-melee-written").innerHTML =
+    generatedCharacter.toHitMelee;
+
+  document.getElementById("to-hit-missile-written").innerHTML =
+    generatedCharacter.toHitMissile;
+
+  let weaponsAndArmor = "";
+
   for (let n = 0; n < generatedCharacter.characterWeapons.length; n++) {
-    weaponsAndArmor += `<div class="vitals" id="weapon">${generatedCharacter.characterWeapons[n].weaponName}</div><div class="description">(${generatedCharacter.characterWeapons[n].damage})</div>`;
+    weaponsAndArmor += `<span class="handwritten-small"">${generatedCharacter.characterWeapons[n].weaponName}</span><br /><span class="description">(${generatedCharacter.characterWeapons[n].damage}, ${generatedCharacter.characterWeapons[n].handling})</span>`;
   }
   for (let n = 0; n < generatedCharacter.characterArmorGear.length; n++) {
     generatedCharacter.characterArmorGear[n].armorName == "Unarmored"
@@ -300,7 +307,7 @@ function generateCharacter(armorClassPreference) {
           generatedCharacter.characterArmorGear[n].armorName
         }</div><div class="description">(${
           armorClassPreference == "ascending" ? "+" : "-"
-        }${generatedCharacter.characterArmorGear[n].AC})</div>`);
+        }${generatedCharacter.characterArmorGear[n].AC} AC)</div>`);
   }
   document.getElementById("weapons-and-armor").innerHTML = weaponsAndArmor;
 
