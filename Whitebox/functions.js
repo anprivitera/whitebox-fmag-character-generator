@@ -30,6 +30,7 @@ export function determineXPBonus(
 }
 
 export function determineCharacterRace(generatedCharacterClass) {
+  //TODO: Move constants to constants.js
   const ELF = {
     raceName: "",
     maxLevel: 8,
