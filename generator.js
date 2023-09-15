@@ -218,8 +218,6 @@ function generateCharacter(armorClassPreference) {
     "char-current-xp-written"
   ).innerHTML = `${generatedCharacter.currentXP}/${generatedCharacter.xpToNextLevel}`;
 
-  // setInterval(setXP, 1000);
-
   document.getElementById(
     "char-race-class-written"
   ).innerHTML = `${generatedCharacter.characterRace.raceName}
@@ -278,18 +276,18 @@ function generateCharacter(armorClassPreference) {
 
   let characterAbilities = [];
   characterAbilities.push(
-    ...generatedCharacter.characterClass.specialAbilities
+    ...generatedCharacter.characterClass.classSpecialAbilities
   );
   characterAbilities.push(
     ...generatedCharacter.characterRace.raceSpecialAbilities
   );
 
-  let characterAbilitiesToDisplay = `<h2>Abilities</h2>`;
+  let characterAbilitiesToDisplay = ``;
   for (let i = 0; i < characterAbilities.length; i++) {
-    characterAbilitiesToDisplay += `<div class="character-info" id="ability">${characterAbilities[i]}</div> `;
+    characterAbilitiesToDisplay += `<span class="handwritten-smaller">${characterAbilities[i]}</span><br /> `;
   }
 
-  document.getElementById("character-abilities").innerHTML =
+  document.getElementById("character-abilities-list").innerHTML =
     characterAbilitiesToDisplay;
 
   let weaponsAndArmor = `<h2>Weapons and Armor</h2><div class="vitals" id="tohit-melee">Melee: ${generatedCharacter.toHitMelee} </div> <div class="description" id="tohit-melee-description">(to-hit and damage)</div> <div class="vitals" id="tohit-missile">Missile: ${generatedCharacter.toHitMissile} </div> <div class="description" id="tohit-missile-description">(to-hit)</div>`;

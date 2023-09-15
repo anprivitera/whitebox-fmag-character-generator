@@ -7,7 +7,7 @@ body {
 }
 
 ul {
-    list-style-type: none;
+    list-style-type:circle;
 }
 
 h1 {
@@ -53,6 +53,11 @@ label {
 
 .handwritten-small {
     font-size: x-large;
+}
+
+.handwritten-smaller {
+    font-size: medium;
+    margin-bottom: 5.5px;
 }
 
 .character-info {

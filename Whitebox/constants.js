@@ -259,7 +259,7 @@ export const CHARACTER_CLASSES = [
     primeAttribute: "WIS",
     domininonKind: "Temple",
     dominionLevel: 10,
-    specialAbilities: [`Turn the Undead`],
+    classSpecialAbilities: [`Turn the Undead`],
   },
   {
     characterClassName: "Fighter",
@@ -273,7 +273,7 @@ export const CHARACTER_CLASSES = [
     primeAttribute: "STR",
     domininonKind: "Stronghold",
     dominionLevel: 9,
-    specialAbilities: [`Combat Fury (+1 attack/level vs. >=1 HD foes)`],
+    classSpecialAbilities: [`Combat Fury (+1 attack/level vs. >=1 HD foes)`],
   },
   {
     characterClassName: "Elf",
@@ -288,7 +288,7 @@ export const CHARACTER_CLASSES = [
       ELF_PRIME_ATTRIBUTES[
         Math.floor(Math.random() * ELF_PRIME_ATTRIBUTES.length)
       ],
-    specialAbilities: [
+    classSpecialAbilities: [
       `+1 to-hit vs. goblins, orcs, intelligent undead, lycantropes`,
       `Immune to undead paralysis`,
       `Half damage from giants and ogres`,
@@ -306,7 +306,7 @@ export const CHARACTER_CLASSES = [
     primeAttribute: "INT",
     domininonKind: "Wizard Tower",
     dominionLevel: 9,
-    specialAbilities: [
+    classSpecialAbilities: [
       `Known Spells: ${
         MAGIC_USER_SPELLS_LEVEL_1[
           Math.floor(Math.random() * MAGIC_USER_SPELLS_LEVEL_1.length)
@@ -325,7 +325,7 @@ export const CHARACTER_CLASSES = [
     primeAttribute: "DEX",
     domininonKind: "Guild",
     dominionLevel: 9,
-    specialAbilities: [
+    classSpecialAbilities: [
       `Back Stab (+2 to Hit and x2 damage on hit)`,
       `Thievery 2-in-6`,
     ],
