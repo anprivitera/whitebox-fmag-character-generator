@@ -34,7 +34,6 @@ function generateCharacter(armorClassPreference) {
   //CONSTANTS
 
   //TODO: Treat ammunitions as a separate purchase: if a character gets a missile weapon, they should obviously get also ammunitions. Bow > arrows, Sling > stones, Crossbow > Bolts
-  //TODO: Divide consumables items, so that they can be purchased more than once, and display them as unified (i.e., Torches (10))
 
   //START RUNTIME
   const generatedCharacter = {};
