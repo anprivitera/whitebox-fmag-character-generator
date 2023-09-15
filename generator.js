@@ -202,17 +202,20 @@ function generateCharacter(armorClassPreference) {
     "xp-bonus-written"
   ).innerHTML = `${generatedCharacter.xpBonus}%`;
 
-  let characterLevel = document.getElementById("character-level").value;
-  if (characterLevel == 1) {
+  generatedCharacter.characterLevel =
+    document.getElementById("character-level").value;
+  if (generatedCharacter.characterLevel == 1) {
     generatedCharacter.currentXP = 0;
     generatedCharacter.xpToNextLevel =
       generatedCharacter.characterClass.xpToLevel2;
-  } else if (characterLevel == 2) {
+  } else if (generatedCharacter.characterLevel == 2) {
     generatedCharacter.currentXP = generatedCharacter.characterClass.xpToLevel2;
     generatedCharacter.xpToNextLevel =
       generatedCharacter.characterClass.xpToLevel2 * 2;
   }
-  document.getElementById("char-level-written").innerHTML = `${characterLevel}`;
+  document.getElementById(
+    "char-level-written"
+  ).innerHTML = `${generatedCharacter.characterLevel} of ${generatedCharacter.characterRace.maxLevel}`;
   document.getElementById(
     "char-current-xp-written"
   ).innerHTML = `${generatedCharacter.currentXP}/${generatedCharacter.xpToNextLevel}`;

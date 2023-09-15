@@ -32,12 +32,14 @@ export function determineXPBonus(
 export function determineCharacterRace(generatedCharacterClass) {
   const ELF = {
     raceName: "",
+    maxLevel: 8,
     standardMovementRate: 12,
     raceSavingThrowBonus: "",
-    raceSpecialAbilities: [`Can reach maximum level 8`],
+    raceSpecialAbilities: [],
   };
   const HUMAN = {
     raceName: "Human",
+    maxLevel: 10,
     standardMovementRate: 12,
     raceSavingThrowBonus: "",
     raceSpecialAbilities: [
@@ -47,9 +49,9 @@ export function determineCharacterRace(generatedCharacterClass) {
   const DWARF = {
     raceName: "Dwarf",
     standardMovementRate: 9,
+    maxLevel: 6,
     raceSavingThrowBonus: "<br />+4 vs. Magic",
     raceSpecialAbilities: [
-      `Can reach maximum level 6`,
       `Half damage from giants and ogres`,
       `4-in-6 chances of actively spotting traps, slanting passages or construction (2-in-6 if passing by)`,
       `Can speak with goblins, ogres, orcs, kobolds`,
@@ -57,6 +59,7 @@ export function determineCharacterRace(generatedCharacterClass) {
   };
   const HALFLING = {
     raceName: "Halfling",
+    maxLevel: "4/6",
     standardMovementRate: 9,
     raceSavingThrowBonus: "<br />+4 vs. Magic",
     raceSpecialAbilities: [
