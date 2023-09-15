@@ -324,18 +324,24 @@ function generateCharacter(armorClassPreference) {
   document.getElementById("equipment").innerHTML = equipmentToDisplay;
 
   document.getElementById(
-    "movement"
-  ).innerHTML = `<h2>Encumberance</h2><div class="character-info">Gear Weight: ${
-    generatedCharacter.gearWeight
-  }</div><div class="character-info">Normal: ${
-    generatedCharacter.movementRate
-  } ft.</div><div class="character-info">Careful: ${Math.floor(
+    "gear-weight-written"
+  ).innerHTML = `${generatedCharacter.gearWeight} lbs.`;
+
+  document.getElementById(
+    "movement-normal-written"
+  ).innerHTML = `${generatedCharacter.movementRate} ft.`;
+
+  document.getElementById("movement-careful-written").innerHTML = `${
     generatedCharacter.movementRate / 2
-  )} ft.</div><div class="character-info">Running: ${
+  } ft.`;
+
+  document.getElementById("movement-running-written").innerHTML = `${
     generatedCharacter.movementRate * 2
-  } ft.</div><div class="character-info">Combat: ${Math.floor(
+  } ft.`;
+
+  document.getElementById("movement-combat-written").innerHTML = `${
     generatedCharacter.movementRate / 3
-  )} ft.</div>`;
+  } ft.`;
 
   //TODO: implement async function so that there is no load time for the portait
 
