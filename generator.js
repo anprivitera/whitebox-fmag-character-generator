@@ -12,6 +12,7 @@ import {
   determineModifier,
   determineXPBonus,
   determineCharacterRace,
+  determineHirelings,
 } from "./Whitebox/functions.js";
 
 import {
@@ -56,12 +57,12 @@ function generateCharacter(armorClassPreference) {
 
   let characterPortrait = receivePortrait(
     generatedCharacter.characterRace.raceName
-  );
+  ); //TODO: this should be outside of the main function otherwise it generates always the same picture for the same tag
 
   generatedCharacter.characterAlignment =
     ALIGNMENTS[Math.floor(Math.random() * ALIGNMENTS.length)];
 
-  let xpBonus = determineXPBonus(
+  generatedCharacter.xpBonus = determineXPBonus(
     generatedCharacter.attributes[4].attributeValue,
     generatedCharacter.attributes[5].attributeValue,
     generatedCharacter.characterClass.primeAttributeValue
@@ -95,45 +96,8 @@ function generateCharacter(armorClassPreference) {
     generatedCharacter.attributes[1].modifierValue
   }`;
 
-  generatedCharacter.maxHirelings = null;
-  generatedCharacter.hirelingsLoyalty = null;
-  if (generatedCharacter.attributes[5].attributeValue <= 4) {
-    generatedCharacter.maxHirelings = 1;
-    generatedCharacter.hirelingsLoyalty = -2;
-  } else if (
-    generatedCharacter.attributes[5].attributeValue >= 5 &&
-    generatedCharacter.attributes[5].attributeValue <= 6
-  ) {
-    generatedCharacter.maxHirelings = 2;
-    generatedCharacter.hirelingsLoyalty = -2;
-  } else if (
-    generatedCharacter.attributes[5].attributeValue >= 7 &&
-    generatedCharacter.attributes[5].attributeValue <= 8
-  ) {
-    generatedCharacter.maxHirelings = 3;
-    generatedCharacter.hirelingsLoyalty = -1;
-  } else if (
-    generatedCharacter.attributes[5].attributeValue >= 9 &&
-    generatedCharacter.attributes[5].attributeValue <= 12
-  ) {
-    generatedCharacter.maxHirelings = 4;
-    generatedCharacter.hirelingsLoyalty = 0;
-  } else if (
-    generatedCharacter.attributes[5].attributeValue >= 13 &&
-    generatedCharacter.attributes[5].attributeValue <= 15
-  ) {
-    generatedCharacter.maxHirelings = 5;
-    generatedCharacter.hirelingsLoyalty = 1;
-  } else if (
-    generatedCharacter.attributes[5].attributeValue >= 16 &&
-    generatedCharacter.attributes[5].attributeValue <= 17
-  ) {
-    generatedCharacter.maxHirelings = 6;
-    generatedCharacter.hirelingsLoyalty = 2;
-  } else {
-    generatedCharacter.maxHirelings = 7;
-    generatedCharacter.hirelingsLoyalty = 2;
-  }
+  [generatedCharacter.maxHirelings, generatedCharacter.hirelingsLoyalty] =
+    determineHirelings(generatedCharacter.attributes[5].attributeValue);
 
   generatedCharacter.initialMoney = diceRoller(3, 6) * 10;
   generatedCharacter.currentMoney = generatedCharacter.initialMoney;
@@ -242,7 +206,9 @@ function generateCharacter(armorClassPreference) {
     "char-alignment-written"
   ).innerHTML = `${generatedCharacter.characterAlignment}`;
 
-  document.getElementById("xp-bonus-written").innerHTML = `${xpBonus}%`;
+  document.getElementById(
+    "xp-bonus-written"
+  ).innerHTML = `${generatedCharacter.xpBonus}%`;
 
   let characterLevel = document.getElementById("character-level").value;
   if (characterLevel == 1) {

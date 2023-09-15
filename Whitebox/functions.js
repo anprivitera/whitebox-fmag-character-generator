@@ -83,3 +83,31 @@ export function determineCharacterRace(generatedCharacterClass) {
   }
   return characterRace;
 }
+
+export function determineHirelings(charisma) {
+  let maxHirelings = null;
+  let hirelingsLoyalty = null;
+  if (charisma <= 4) {
+    maxHirelings = 1;
+    hirelingsLoyalty = -2;
+  } else if (charisma >= 5 && charisma <= 6) {
+    maxHirelings = 2;
+    hirelingsLoyalty = -2;
+  } else if (charisma >= 7 && charisma <= 8) {
+    maxHirelings = 3;
+    hirelingsLoyalty = -1;
+  } else if (charisma >= 9 && charisma <= 12) {
+    maxHirelings = 4;
+    hirelingsLoyalty = 0;
+  } else if (charisma >= 13 && charisma <= 15) {
+    maxHirelings = 5;
+    hirelingsLoyalty = 1;
+  } else if (charisma >= 16 && charisma <= 17) {
+    maxHirelings = 6;
+    hirelingsLoyalty = 2;
+  } else {
+    maxHirelings = 7;
+    hirelingsLoyalty = 2;
+  }
+  return [maxHirelings, hirelingsLoyalty];
+}
