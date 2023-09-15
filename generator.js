@@ -187,19 +187,20 @@ function generateCharacter(armorClassPreference) {
     generatedCharacter.currentMoney / 10
   );
 
-  let movementRate = generatedCharacter.characterRace.standardMovementRate * 10;
+  generatedCharacter.movementRate =
+    generatedCharacter.characterRace.standardMovementRate * 10;
   if (
     generatedCharacter.gearWeight >= 76 &&
     generatedCharacter.gearWeight <= 100
   ) {
-    movementRate -= 30;
+    generatedCharacter.movementRate -= 30;
   } else if (
     generatedCharacter.gearWeight >= 101 &&
     generatedCharacter.gearWeight <= 150
   ) {
-    movementRate -= 30;
+    generatedCharacter.movementRate -= 30;
   } else if (generatedCharacter.gearWeight >= 151) {
-    movementRate = 30;
+    generatedCharacter.movementRate = 30;
   }
 
   document.getElementById(
