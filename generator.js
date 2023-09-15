@@ -319,9 +319,11 @@ function generateCharacter(armorClassPreference) {
       generatedCharacter.characterEquipment[n].itemName
     }${generatedCharacter.characterEquipment[n].quantity != "" ? " - " : ", "}${
       generatedCharacter.characterEquipment[n].quantity
-    } ${generatedCharacter.characterEquipment[n].quantityType}${
-      generatedCharacter.characterEquipment[n].quantity != "" ? "," : ""
-    }
+    } ${
+      generatedCharacter.characterEquipment[n].quantityType != ""
+        ? generatedCharacter.characterEquipment[n].quantityType
+        : ""
+    }${generatedCharacter.characterEquipment[n].quantity != "" ? "," : ""}
     </span><br />`;
   }
   equipmentToDisplay +=
