@@ -313,15 +313,22 @@ function generateCharacter(armorClassPreference) {
 
   document.getElementById("hirelings").innerHTML = hirelings;
 
-  let equipmentToDisplay = `<h2>Equipment</h2><div class="character-info" id="equipment">`;
+  let equipmentToDisplay = "";
   for (let n = 0; n < generatedCharacter.characterEquipment.length; n++) {
-    equipmentToDisplay += `${generatedCharacter.characterEquipment[n].itemName}<br/> `;
+    equipmentToDisplay += `<span class="handwritten-smaller">${
+      generatedCharacter.characterEquipment[n].itemName
+    }${generatedCharacter.characterEquipment[n].quantity != "" ? " - " : ", "}${
+      generatedCharacter.characterEquipment[n].quantity
+    } ${generatedCharacter.characterEquipment[n].quantityType}${
+      generatedCharacter.characterEquipment[n].quantity != "" ? "," : ""
+    }
+    </span><br />`;
   }
   equipmentToDisplay +=
     generatedCharacter.currentMoney > 0
       ? `${generatedCharacter.currentMoney} gp</div>`
       : "";
-  document.getElementById("equipment").innerHTML = equipmentToDisplay;
+  document.getElementById("equipment-items").innerHTML = equipmentToDisplay;
 
   document.getElementById(
     "gear-weight-written"
