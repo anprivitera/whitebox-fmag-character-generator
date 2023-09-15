@@ -88,10 +88,44 @@ function rollForAttributes(numberOfDice) {
   ];
 }
 
+function selectItems(
+  itemsToEvaluate,
+  numberOfItems,
+  currentMoney,
+  characterClass
+) {
+  let shoppingArray = itemsToEvaluate.map((x) => x),
+    filteredByCharacter = null,
+    filteredByPrice = null,
+    selectedItems = [];
+  shuffleArray(shoppingArray);
+  console.log(shoppingArray[2].usedBy);
+  filteredByCharacter = shoppingArray.filter(
+    (i) => i.usedBy.indexOf(characterClass) > -1
+  );
+  filteredByPrice = filteredByCharacter.filter((x) => x.cost <= currentMoney);
+
+  for (let i = 0; i < numberOfItems; i++) {
+    if (
+      filteredByPrice != 0 &&
+      filteredByPrice.some((x) => x.cost < currentMoney) &&
+      currentMoney > 0
+    ) {
+      selectedItems.unshift(filteredByPrice.shift());
+      currentMoney = currentMoney - selectedItems[0].cost;
+      filteredByPrice = filteredByPrice.filter((x) => x.cost <= currentMoney);
+    } else {
+      return [selectedItems, currentMoney];
+    }
+  }
+  return [selectedItems, currentMoney];
+}
+
 export {
   diceRoller,
   shuffleArray,
   determineCharacterClass,
   receivePortrait,
   rollForAttributes,
+  selectItems,
 };

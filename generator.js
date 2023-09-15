@@ -5,6 +5,7 @@ import {
   determineCharacterClass,
   receivePortrait,
   rollForAttributes,
+  selectItems,
 } from "./System Neutral/functions.js";
 
 import {
@@ -28,53 +29,6 @@ import {
 //TODO: move these functions to modules?
 
 function generateCharacter(armorClassPreference) {
-  function selectItems(
-    itemsToEvaluate,
-    numberOfItems,
-    currentMoney,
-    whoIsTheCharacter
-  ) {
-    let shoppingArray = itemsToEvaluate.map((x) => x),
-      filteredByCharacter = null,
-      filteredByPrice = null,
-      selectedItems = [];
-    shuffleArray(shoppingArray);
-    switch (whoIsTheCharacter) {
-      //TODO: find a way to not state each filter so to make code modular
-      case "Fighter":
-        filteredByCharacter = shoppingArray.filter((n) => n.fighter == true);
-        break;
-      case "Elf":
-        filteredByCharacter = shoppingArray.filter((n) => n.fighter == true);
-        break;
-      case "Cleric":
-        filteredByCharacter = shoppingArray.filter((n) => n.cleric == true);
-        break;
-      case "Magic-User":
-        filteredByCharacter = shoppingArray.filter((n) => n.magicUser == true);
-        break;
-      case "Thief":
-        filteredByCharacter = shoppingArray.filter((n) => n.thief == true);
-        break;
-    }
-    filteredByPrice = filteredByCharacter.filter((x) => x.cost <= currentMoney);
-
-    for (let i = 0; i < numberOfItems; i++) {
-      if (
-        filteredByPrice != 0 &&
-        filteredByPrice.some((x) => x.cost < currentMoney) &&
-        currentMoney > 0
-      ) {
-        selectedItems.unshift(filteredByPrice.shift());
-        currentMoney = currentMoney - selectedItems[0].cost;
-        filteredByPrice = filteredByPrice.filter((x) => x.cost <= currentMoney);
-      } else {
-        return [selectedItems, currentMoney];
-      }
-    }
-    return [selectedItems, currentMoney];
-  }
-
   //CONSTANTS
 
   //TODO: Treat ammunitions as a separate purchase: if a character gets a missile weapon, they should obviously get also ammunitions. Bow > arrows, Sling > stones, Crossbow > Bolts
