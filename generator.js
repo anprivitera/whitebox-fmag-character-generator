@@ -316,13 +316,13 @@ function generateCharacter(armorClassPreference) {
   for (let n = 0; n < generatedCharacter.characterEquipment.length; n++) {
     equipmentToDisplay += `<span class="handwritten-smaller">${
       generatedCharacter.characterEquipment[n].itemName
-    }${generatedCharacter.characterEquipment[n].quantity != "" ? " - " : ", "}${
+    }${generatedCharacter.characterEquipment[n].quantity != "" ? " - " : ""}${
       generatedCharacter.characterEquipment[n].quantity
     } ${
       generatedCharacter.characterEquipment[n].quantityType != ""
         ? generatedCharacter.characterEquipment[n].quantityType
         : ""
-    }${generatedCharacter.characterEquipment[n].quantity != "" ? "," : ""}
+    }
     </span><br />`;
   }
   equipmentToDisplay +=
