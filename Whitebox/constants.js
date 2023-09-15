@@ -255,7 +255,7 @@ export const ADVENTURING_GEAR = [
     quantityType: null,
   },
   {
-    itemName: "Torches (6)",
+    itemName: "Torches",
     cost: 1,
     usedBy: ["Cleric", "Fighter", "Magic-User", "Thief", "Elf"],
     repeatable: true,
