@@ -51,6 +51,12 @@ label {
     font-size: x-large;
 }
 
+.printed-smaller {
+    font-family: "Josefin Sans", sans-serif;
+    color: black;
+    font-size: large;
+}
+
 .handwritten-small {
     font-size: x-large;
 }
