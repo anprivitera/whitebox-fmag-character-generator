@@ -111,7 +111,12 @@ function selectItems(
       filteredByPrice.some((x) => x.cost < currentMoney) &&
       currentMoney > 0
     ) {
-      selectedItems.unshift(filteredByPrice.shift());
+      if (filteredByPrice[0].repeatable) {
+        selectedItems.unshift(filteredByPrice[0]);
+      } else {
+        selectedItems.unshift(filteredByPrice.shift());
+      }
+      shuffleArray(filteredByPrice);
       currentMoney = currentMoney - selectedItems[0].cost;
       filteredByPrice = filteredByPrice.filter((x) => x.cost <= currentMoney);
     } else {
