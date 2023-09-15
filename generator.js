@@ -116,7 +116,7 @@ function generateCharacter(armorClassPreference) {
   [generatedCharacter.characterWeapons, generatedCharacter.currentMoney] =
     selectItems(
       WEAPONS,
-      1,
+      Math.floor(Math.random() * 3 + 1),
       generatedCharacter.currentMoney,
       generatedCharacter.characterClass.characterClassName
     );
@@ -298,7 +298,7 @@ function generateCharacter(armorClassPreference) {
   let weaponsAndArmor = "";
 
   for (let n = 0; n < generatedCharacter.characterWeapons.length; n++) {
-    weaponsAndArmor += `<span class="handwritten-small"">${generatedCharacter.characterWeapons[n].weaponName}</span><br /><span class="description">(${generatedCharacter.characterWeapons[n].damage}, ${generatedCharacter.characterWeapons[n].handling})</span>`;
+    weaponsAndArmor += `<span class="handwritten-small"">${generatedCharacter.characterWeapons[n].weaponName}</span><br /><span class="description">(${generatedCharacter.characterWeapons[n].damage}, ${generatedCharacter.characterWeapons[n].handling})</span><br />`;
   }
   for (let n = 0; n < generatedCharacter.characterArmorGear.length; n++) {
     generatedCharacter.characterArmorGear[n].armorName == "Unarmored"
