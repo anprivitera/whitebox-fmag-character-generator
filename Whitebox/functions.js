@@ -111,3 +111,15 @@ export function determineHirelings(charisma) {
   }
   return [maxHirelings, hirelingsLoyalty];
 }
+
+export function determineMovementRate(standardMovementRate, gearWeight) {
+  let movementRate = standardMovementRate * 10;
+  if (gearWeight >= 76 && gearWeight <= 100) {
+    movementRate -= 30;
+  } else if (gearWeight >= 101 && gearWeight <= 150) {
+    movementRate -= 30;
+  } else if (gearWeight >= 151) {
+    movementRate = 30;
+  }
+  return movementRate;
+}

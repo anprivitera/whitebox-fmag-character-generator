@@ -13,6 +13,7 @@ import {
   determineXPBonus,
   determineCharacterRace,
   determineHirelings,
+  determineMovementRate,
 } from "./Whitebox/functions.js";
 
 import {
@@ -187,21 +188,12 @@ function generateCharacter(armorClassPreference) {
     generatedCharacter.currentMoney / 10
   );
 
-  generatedCharacter.movementRate =
-    generatedCharacter.characterRace.standardMovementRate * 10;
-  if (
-    generatedCharacter.gearWeight >= 76 &&
-    generatedCharacter.gearWeight <= 100
-  ) {
-    generatedCharacter.movementRate -= 30;
-  } else if (
-    generatedCharacter.gearWeight >= 101 &&
-    generatedCharacter.gearWeight <= 150
-  ) {
-    generatedCharacter.movementRate -= 30;
-  } else if (generatedCharacter.gearWeight >= 151) {
-    generatedCharacter.movementRate = 30;
-  }
+  //generatedCharacter.characterRace.;
+
+  generatedCharacter.movementRate = determineMovementRate(
+    generatedCharacter.characterRace.standardMovementRate,
+    generatedCharacter.gearWeight
+  );
 
   document.getElementById(
     "char-alignment-written"
@@ -337,12 +329,14 @@ function generateCharacter(armorClassPreference) {
     "movement"
   ).innerHTML = `<h2>Encumberance</h2><div class="character-info">Gear Weight: ${
     generatedCharacter.gearWeight
-  }</div><div class="character-info">Normal: ${movementRate} ft.</div><div class="character-info">Careful: ${Math.floor(
-    movementRate / 2
+  }</div><div class="character-info">Normal: ${
+    generatedCharacter.movementRate
+  } ft.</div><div class="character-info">Careful: ${Math.floor(
+    generatedCharacter.movementRate / 2
   )} ft.</div><div class="character-info">Running: ${
-    movementRate * 2
+    generatedCharacter.movementRate * 2
   } ft.</div><div class="character-info">Combat: ${Math.floor(
-    movementRate / 3
+    generatedCharacter.movementRate / 3
   )} ft.</div>`;
 
   //TODO: implement async function so that there is no load time for the portait
