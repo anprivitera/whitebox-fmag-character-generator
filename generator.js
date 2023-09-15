@@ -116,7 +116,7 @@ function generateCharacter(armorClassPreference) {
   [generatedCharacter.characterWeapons, generatedCharacter.currentMoney] =
     selectItems(
       WEAPONS,
-      Math.floor(Math.random() * 3 + 1),
+      1,
       generatedCharacter.currentMoney,
       generatedCharacter.characterClass.characterClassName
     );
