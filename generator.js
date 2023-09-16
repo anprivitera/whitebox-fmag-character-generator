@@ -31,7 +31,7 @@ import {
 function generateCharacter(armorClassPreference) {
   //TODO: Treat ammunitions as a separate purchase: if a character gets a missile weapon, they should obviously get also ammunitions. Bow > arrows, Sling > stones, Crossbow > Bolts
 
-  const generatedCharacter = {};
+  let generatedCharacter = {};
 
   generatedCharacter.attributes = rollForAttributes(3);
 
@@ -46,16 +46,10 @@ function generateCharacter(armorClassPreference) {
     CHARACTER_CLASSES
   );
 
-  generatedCharacter.characterRace = determineCharacterRace(
+  generatedCharacter = determineCharacterRace(
     generatedCharacter,
     CHARACTER_RACES
   );
-
-  if (generatedCharacter.characterRace.raceID == "human") {
-    generatedCharacter.characterRace.raceSpecialAbilities.push(
-      `Can establish ${generatedCharacter.characterClass.domininonKind} at Level ${generatedCharacter.characterClass.dominionLevel}`
-    );
-  }
 
   let characterPortrait = receivePortrait(
     generatedCharacter.characterRace.raceName

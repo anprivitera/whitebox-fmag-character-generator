@@ -31,22 +31,31 @@ export function determineXPBonus(
 
 export function determineCharacterRace(generatedCharacter, characterRaces) {
   let availableCharacterRaces = characterRaces.map((x) => x);
-  if (generatedCharacter.characterClass.className == "Elf") {
-    let characterRace = availableCharacterRaces.find((x) => x.raceID == "elf");
-    return characterRace;
+  if (generatedCharacter.characterClass.characterClassName == "Elf") {
+    generatedCharacter.characterRace = availableCharacterRaces.find(
+      (x) => x.raceID == "elf"
+    );
+    return generatedCharacter;
   }
-  let characterRace = availableCharacterRaces.find((x) => x.raceID == "human");
+  generatedCharacter.characterRace = availableCharacterRaces.find(
+    (x) => x.raceID == "human"
+  );
   let classedRaces = availableCharacterRaces.filter(
     (x) => x.classedRace == true
   );
   if (
-    generatedCharacter.characterClass.className == "Fighter" ||
-    generatedCharacter.characterClass.className == "Thief"
+    generatedCharacter.characterClass.characterClassName == "Fighter" ||
+    generatedCharacter.characterClass.characterClassName == "Thief"
   ) {
-    characterRace =
+    generatedCharacter.characterRace =
       classedRaces[Math.floor(Math.random() * classedRaces.length)];
   }
-  return characterRace;
+  if (generatedCharacter.characterRace.raceID == "human") {
+    generatedCharacter.characterRace.raceSpecialAbilities.push(
+      `Can establish ${generatedCharacter.characterClass.domininonKind} at Level ${generatedCharacter.characterClass.dominionLevel}`
+    );
+  }
+  return generatedCharacter;
 }
 
 export function determineHirelings(charisma) {
