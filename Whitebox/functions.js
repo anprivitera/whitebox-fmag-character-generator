@@ -115,6 +115,7 @@ export function determineAlignment(alignments) {
   return characterAlignment;
 }
 
+//TODO: calculate HP of higher levels
 export function determineHP(generatedCharacter) {
   generatedCharacter.characterHP =
     generatedCharacter.characterClass.HDatLevel1 +
