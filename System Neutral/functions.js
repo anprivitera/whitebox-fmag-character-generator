@@ -135,7 +135,6 @@ function selectItems(
 
 export {
   diceRoller,
-  shuffleArray,
   determineCharacterClass,
   receivePortrait,
   rollForAttributes,

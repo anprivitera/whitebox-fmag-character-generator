@@ -1,7 +1,6 @@
 "strict mode";
 import {
   diceRoller,
-  shuffleArray,
   determineCharacterClass,
   receivePortrait,
   rollForAttributes,
