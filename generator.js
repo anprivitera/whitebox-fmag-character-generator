@@ -13,6 +13,7 @@ import {
   determineCharacterRace,
   determineHirelings,
   determineMovementRate,
+  determineAlignment,
 } from "./Whitebox/functions.js";
 
 import {
@@ -60,8 +61,7 @@ function generateCharacter(armorClassPreference) {
     generatedCharacter.characterRace.raceName
   ); //TODO: this should be outside of the main function otherwise it generates always the same picture for the same tag
 
-  generatedCharacter.characterAlignment =
-    ALIGNMENTS[Math.floor(Math.random() * ALIGNMENTS.length)];
+  generatedCharacter.characterAlignment = determineAlignment(ALIGNMENTS);
 
   generatedCharacter.xpBonus = determineXPBonus(
     generatedCharacter.attributes[4].attributeValue,

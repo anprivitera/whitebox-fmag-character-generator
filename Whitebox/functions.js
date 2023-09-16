@@ -88,3 +88,9 @@ export function determineMovementRate(standardMovementRate, gearWeight) {
   }
   return movementRate;
 }
+
+export function determineAlignment(alignments) {
+  let characterAlignment =
+    alignments[Math.floor(Math.random() * alignments.length)];
+  return characterAlignment;
+}
