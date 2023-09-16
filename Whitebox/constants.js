@@ -300,7 +300,7 @@ export const ARMORS = [
     repeatable: false,
   },
   {
-    armorName: "Leather",
+    armorName: "Leather Armor",
     AC: 2,
     weight: 25,
     cost: 15,
