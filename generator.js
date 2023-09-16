@@ -28,11 +28,8 @@ import {
 //TODO: Include name randomizer
 
 function generateCharacter(armorClassPreference) {
-  //CONSTANTS
-
   //TODO: Treat ammunitions as a separate purchase: if a character gets a missile weapon, they should obviously get also ammunitions. Bow > arrows, Sling > stones, Crossbow > Bolts
 
-  //START RUNTIME
   const generatedCharacter = {};
 
   generatedCharacter.attributes = rollForAttributes(3);
