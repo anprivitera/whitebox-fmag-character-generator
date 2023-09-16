@@ -437,8 +437,7 @@ export const CHARACTER_RACES = [
   {
     raceID: "halfling",
     raceName: "Halfling",
-    maxLevelFighter: 4,
-    maxLevelThief: 6,
+    maxLevel: null,
     standardMovementRate: 9,
     classedRace: true,
     raceSavingThrowBonus: "<br />+4 vs. Magic",

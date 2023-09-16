@@ -50,6 +50,14 @@ export function determineCharacterRace(generatedCharacter, characterRaces) {
     generatedCharacter.characterRace =
       classedRaces[Math.floor(Math.random() * classedRaces.length)];
   }
+  if (
+    generatedCharacter.characterRace.raceID == "halfling" &&
+    generatedCharacter.characterClass.characterClassName == "Fighter"
+  ) {
+    generatedCharacter.characterRace.maxLevel = 4;
+  } else {
+    generatedCharacter.characterRace.maxLevel = 6;
+  } //FABIO: is there a way to avoid using this if statement with "this" in the constant object?
   if (generatedCharacter.characterRace.raceID == "human") {
     generatedCharacter.characterRace.raceSpecialAbilities.push(
       `Can establish ${generatedCharacter.characterClass.domininonKind} at Level ${generatedCharacter.characterClass.dominionLevel}`
