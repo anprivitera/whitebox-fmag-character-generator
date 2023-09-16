@@ -27,9 +27,6 @@ import {
 
 //TODO: Include name randomizer
 
-//FUNCTIONS
-//TODO: move these functions to modules?
-
 function generateCharacter(armorClassPreference) {
   //CONSTANTS
 
@@ -161,8 +158,6 @@ function generateCharacter(armorClassPreference) {
     }
   }
 
-  //TODO: if there is a shield, then the selectable weapons should just be one handed
-
   [generatedCharacter.characterEquipment, generatedCharacter.currentMoney] =
     selectItems(
       ADVENTURING_GEAR,
@@ -189,12 +184,6 @@ function generateCharacter(armorClassPreference) {
     generatedCharacter.gearWeight +=
       generatedCharacter.characterWeapons[i].weight;
   }
-
-  // generatedCharacter.gearWeight += Math.floor(
-  //   generatedCharacter.currentMoney / 10
-  // );
-
-  //generatedCharacter.characterRace.;
 
   generatedCharacter.movementRate = determineMovementRate(
     generatedCharacter.characterRace.standardMovementRate,
