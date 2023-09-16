@@ -100,17 +100,17 @@ function generateCharacter(armorClassPreference) {
   generatedCharacter.characterArmorGear = [];
   generatedCharacter.characterEquipment = [];
 
-  [generatedCharacter.characterArmorGear, generatedCharacter.currentMoney] =
+  [generatedCharacter.characterWeapons, generatedCharacter.currentMoney] =
     selectItems(
-      ARMORS,
+      WEAPONS,
       1,
       generatedCharacter.currentMoney,
       generatedCharacter.characterClass.characterClassName
     );
 
-  [generatedCharacter.characterWeapons, generatedCharacter.currentMoney] =
+  [generatedCharacter.characterArmorGear, generatedCharacter.currentMoney] =
     selectItems(
-      WEAPONS,
+      ARMORS,
       1,
       generatedCharacter.currentMoney,
       generatedCharacter.characterClass.characterClassName
