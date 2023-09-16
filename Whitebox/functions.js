@@ -55,7 +55,10 @@ export function determineCharacterRace(generatedCharacter, characterRaces) {
     generatedCharacter.characterClass.characterClassName == "Fighter"
   ) {
     generatedCharacter.characterRace.maxLevel = 4;
-  } else {
+  } else if (
+    generatedCharacter.characterRace.raceID == "halfling" &&
+    generatedCharacter.characterClass.characterClassName == "Thief"
+  ) {
     generatedCharacter.characterRace.maxLevel = 6;
   } //FABIO: is there a way to avoid using this if statement with "this" in the constant object?
   if (generatedCharacter.characterRace.raceID == "human") {
