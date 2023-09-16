@@ -114,3 +114,12 @@ export function determineAlignment(alignments) {
     alignments[Math.floor(Math.random() * alignments.length)];
   return characterAlignment;
 }
+
+export function determineHP(generatedCharacter) {
+  generatedCharacter.characterHP =
+    generatedCharacter.characterClass.HDatLevel1 +
+    generatedCharacter.attributes[2].modifierValue;
+  if (generatedCharacter.characterHP <= 0) {
+    generatedCharacter.characterHP = 1;
+  }
+}

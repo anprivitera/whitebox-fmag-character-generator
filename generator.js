@@ -14,6 +14,7 @@ import {
   determineHirelings,
   determineMovementRate,
   determineAlignment,
+  determineHP,
 } from "./Whitebox/functions.js";
 
 import {
@@ -63,12 +64,7 @@ function generateCharacter(armorClassPreference) {
     generatedCharacter.characterClass.primeAttributeValue
   );
 
-  generatedCharacter.characterHP =
-    generatedCharacter.characterClass.HDatLevel1 +
-    generatedCharacter.attributes[2].modifierValue;
-  if (generatedCharacter.characterHP <= 0) {
-    generatedCharacter.characterHP = 1;
-  }
+  determineHP(generatedCharacter);
 
   generatedCharacter.toHitMelee = `${
     generatedCharacter.characterClass.toHitAtLevel1 +
