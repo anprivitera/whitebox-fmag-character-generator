@@ -29,61 +29,22 @@ export function determineXPBonus(
   return xpBonus;
 }
 
-export function determineCharacterRace(generatedCharacterClass) {
-  //TODO: Move constants to constants.js
-  const ELF = {
-    raceName: "",
-    maxLevel: 8,
-    standardMovementRate: 12,
-    raceSavingThrowBonus: "",
-    raceSpecialAbilities: [],
-  };
-  const HUMAN = {
-    raceName: "Human",
-    maxLevel: 10,
-    standardMovementRate: 12,
-    raceSavingThrowBonus: "",
-    raceSpecialAbilities: [
-      `Can establish ${generatedCharacterClass.domininonKind} at Level ${generatedCharacterClass.dominionLevel}`,
-    ],
-  };
-  const DWARF = {
-    raceName: "Dwarf",
-    standardMovementRate: 9,
-    maxLevel: 6,
-    raceSavingThrowBonus: "<br />+4 vs. Magic",
-    raceSpecialAbilities: [
-      `Half damage from giants and ogres`,
-      `4-in-6 chances of actively spotting traps, slanting passages or construction (2-in-6 if passing by)`,
-      `Can speak with goblins, ogres, orcs, kobolds`,
-    ],
-  };
-  const HALFLING = {
-    raceName: "Halfling",
-    maxLevel: "4/6",
-    standardMovementRate: 9,
-    raceSavingThrowBonus: "<br />+4 vs. Magic",
-    raceSpecialAbilities: [
-      `Can reach maxium level ${
-        generatedCharacterClass.characterClassName == "Fighter" ? "4" : "6"
-      }`,
-      `Half damage from giants and ogres`,
-      `+2 to-hit using missile weapons`,
-      `5-in-6 chance of going undetected when outside of combat`,
-    ],
-  };
-  const CLASSED_RACES = [HUMAN, DWARF, HALFLING];
-  if (generatedCharacterClass.characterClassName == "Elf") {
-    let characterRace = ELF;
+export function determineCharacterRace(generatedCharacter, characterRaces) {
+  let availableCharacterRaces = characterRaces.map((x) => x);
+  if (generatedCharacter.characterClass.className == "Elf") {
+    let characterRace = availableCharacterRaces.find((x) => x.raceID == "elf");
     return characterRace;
   }
-  let characterRace = HUMAN;
+  let characterRace = availableCharacterRaces.find((x) => x.raceID == "human");
+  let classedRaces = availableCharacterRaces.filter(
+    (x) => x.classedRace == true
+  );
   if (
-    generatedCharacterClass.characterClassName == "Fighter" ||
-    generatedCharacterClass.characterClassName == "Thief"
+    generatedCharacter.characterClass.className == "Fighter" ||
+    generatedCharacter.characterClass.className == "Thief"
   ) {
     characterRace =
-      CLASSED_RACES[Math.floor(Math.random() * CLASSED_RACES.length)];
+      classedRaces[Math.floor(Math.random() * classedRaces.length)];
   }
   return characterRace;
 }

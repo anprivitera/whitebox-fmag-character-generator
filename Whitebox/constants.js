@@ -402,6 +402,54 @@ export const CHARACTER_CLASSES = [
   },
 ];
 
+export const CHARACTER_RACES = [
+  {
+    raceID: "elf",
+    raceName: "",
+    maxLevel: 8,
+    classedRace: false,
+    standardMovementRate: 12,
+    raceSavingThrowBonus: "",
+    raceSpecialAbilities: [],
+  },
+  {
+    raceID: "human",
+    raceName: "Human",
+    maxLevel: 10,
+    classedRace: true,
+    standardMovementRate: 12,
+    raceSavingThrowBonus: "",
+    raceSpecialAbilities: [],
+  },
+  {
+    raceID: "dwarf",
+    raceName: "Dwarf",
+    standardMovementRate: 9,
+    maxLevel: 6,
+    classedRace: true,
+    raceSavingThrowBonus: "<br />+4 vs. Magic",
+    raceSpecialAbilities: [
+      `Half damage from giants and ogres`,
+      `4-in-6 chances of actively spotting traps, slanting passages or construction (2-in-6 if passing by)`,
+      `Can speak with goblins, ogres, orcs, kobolds`,
+    ],
+  },
+  {
+    raceID: "halfling",
+    raceName: "Halfling",
+    maxLevelFighter: 4,
+    maxLevelThief: 6,
+    standardMovementRate: 9,
+    classedRace: true,
+    raceSavingThrowBonus: "<br />+4 vs. Magic",
+    raceSpecialAbilities: [
+      `Half damage from giants and ogres`,
+      `+2 to-hit using missile weapons`,
+      `5-in-6 chance of going undetected when outside of combat`,
+    ],
+  },
+];
+
 export const SHIELDS = {
   armorName: "Shield",
   AC: 1,

@@ -21,6 +21,7 @@ import {
   ALIGNMENTS,
   ARMORS,
   CHARACTER_CLASSES,
+  CHARACTER_RACES,
   SHIELDS,
   WEAPONS,
 } from "./Whitebox/constants.js";
@@ -52,8 +53,15 @@ function generateCharacter(armorClassPreference) {
   );
 
   generatedCharacter.characterRace = determineCharacterRace(
-    generatedCharacter.characterClass
+    generatedCharacter,
+    CHARACTER_RACES
   );
+
+  if (generatedCharacter.characterRace.raceID == "human") {
+    generatedCharacter.characterRace.raceSpecialAbilities.push(
+      `Can establish ${generatedCharacter.characterClass.domininonKind} at Level ${generatedCharacter.characterClass.dominionLevel}`
+    );
+  }
 
   let characterPortrait = receivePortrait(
     generatedCharacter.characterRace.raceName
@@ -183,9 +191,9 @@ function generateCharacter(armorClassPreference) {
       generatedCharacter.characterWeapons[i].weight;
   }
 
-  generatedCharacter.gearWeight += Math.floor(
-    generatedCharacter.currentMoney / 10
-  );
+  // generatedCharacter.gearWeight += Math.floor(
+  //   generatedCharacter.currentMoney / 10
+  // );
 
   //generatedCharacter.characterRace.;
 
