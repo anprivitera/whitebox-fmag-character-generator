@@ -100,6 +100,7 @@ function generateCharacter(armorClassPreference) {
   generatedCharacter.characterArmorGear = [];
   generatedCharacter.characterEquipment = [];
 
+  //TODO: If the character has higher DEX than STR, the weapon should be missile
   [generatedCharacter.characterWeapons, generatedCharacter.currentMoney] =
     selectItems(
       WEAPONS,
@@ -139,6 +140,7 @@ function generateCharacter(armorClassPreference) {
       ) {
         let weaponNum2 = null;
         [weaponNum2, generatedCharacter.currentMoney] = selectItems(
+          //TODO: dynamically select a different kind of weapon than the one the character already has
           WEAPONS.filter((x) => x.handling == "one-handed"),
           1,
           generatedCharacter.currentMoney,
@@ -300,7 +302,7 @@ function generateCharacter(armorClassPreference) {
         }${generatedCharacter.characterArmorGear[n].AC} AC)</div>`);
   }
   document.getElementById("weapons-and-armor").innerHTML = weaponsAndArmor;
-
+  //TODO: change spaghetti code here
   let hirelings = `<h2>Hirelings</h2><div class="character-info">Max #: ${
     generatedCharacter.maxHirelings
   }</div><div class="character-info">Loyalty: ${
