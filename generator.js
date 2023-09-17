@@ -280,8 +280,24 @@ function generateCharacter(armorClassPreference) {
   document.getElementById("to-hit-melee-written").innerHTML =
     generatedCharacter.toHitMelee;
 
+  document.getElementById("to-hit-melee-description-written").innerHTML = `${
+    generatedCharacter.characterClass.toHitAtLevel1 > 0 ? "+" : ""
+  }${generatedCharacter.characterClass.toHitAtLevel1} lvl bonus, ${
+    generatedCharacter.attributes[0].modifierValue > 0 ? "+" : ""
+  }${generatedCharacter.attributes[0].modifierValue} ${
+    generatedCharacter.attributes[0].attributeName
+  } bonus.`;
+
   document.getElementById("to-hit-missile-written").innerHTML =
     generatedCharacter.toHitMissile;
+
+  document.getElementById("to-hit-missile-description-written").innerHTML = `${
+    generatedCharacter.characterClass.toHitAtLevel1 > 0 ? "+" : ""
+  }${generatedCharacter.characterClass.toHitAtLevel1} lvl bonus, ${
+    generatedCharacter.attributes[1].modifierValue > 0 ? "+" : ""
+  }${generatedCharacter.attributes[1].modifierValue} ${
+    generatedCharacter.attributes[1].attributeName
+  } bonus.`;
 
   let weaponsAndArmor = "";
 
