@@ -68,23 +68,27 @@ function generateCharacter(armorClassPreference) {
 
   generatedCharacter.toHitMelee = `${
     generatedCharacter.characterClass.toHitAtLevel1 +
-      generatedCharacter.attributes[0].modifierValue >
+      generatedCharacter.attributes[0].modifierValue +
+      generatedCharacter.characterRace.raceMeleeBonus >
     0
       ? "+"
       : ""
   }${
     generatedCharacter.characterClass.toHitAtLevel1 +
-    generatedCharacter.attributes[0].modifierValue
+    generatedCharacter.attributes[0].modifierValue +
+    generatedCharacter.characterRace.raceMeleeBonus
   }`;
   generatedCharacter.toHitMissile = `${
     generatedCharacter.characterClass.toHitAtLevel1 +
-      generatedCharacter.attributes[1].modifierValue >
+      generatedCharacter.attributes[1].modifierValue +
+      generatedCharacter.characterRace.raceMissileBonus >
     0
       ? "+"
       : ""
   }${
     generatedCharacter.characterClass.toHitAtLevel1 +
-    generatedCharacter.attributes[1].modifierValue
+    generatedCharacter.attributes[1].modifierValue +
+    +generatedCharacter.characterRace.raceMissileBonus
   }`;
 
   [generatedCharacter.maxHirelings, generatedCharacter.hirelingsLoyalty] =

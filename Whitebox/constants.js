@@ -411,6 +411,8 @@ export const CHARACTER_RACES = [
     standardMovementRate: 12,
     raceSavingThrowBonus: "",
     raceSpecialAbilities: [],
+    raceMeleeBonus: 0,
+    raceMissileBonus: 0,
   },
   {
     raceID: "human",
@@ -420,6 +422,8 @@ export const CHARACTER_RACES = [
     standardMovementRate: 12,
     raceSavingThrowBonus: "",
     raceSpecialAbilities: [],
+    raceMeleeBonus: 0,
+    raceMissileBonus: 0,
   },
   {
     raceID: "dwarf",
@@ -433,6 +437,8 @@ export const CHARACTER_RACES = [
       `4-in-6 chances of actively spotting traps, slanting passages or construction (2-in-6 if passing by)`,
       `Can speak with goblins, ogres, orcs, kobolds`,
     ],
+    raceMeleeBonus: 0,
+    raceMissileBonus: 0,
   },
   {
     raceID: "halfling",
@@ -446,6 +452,8 @@ export const CHARACTER_RACES = [
       `+2 to-hit using missile weapons`,
       `5-in-6 chance of going undetected when outside of combat`,
     ],
+    raceMeleeBonus: 0,
+    raceMissileBonus: 2,
   },
 ];
 
