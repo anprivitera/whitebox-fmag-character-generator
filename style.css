@@ -18,6 +18,7 @@ h2 {
     color: black;
     font-weight: 100;
     font-family: "Josefin Sans", sans-serif;
+    margin-left: 32px;
 }
 
 label {
@@ -65,6 +66,8 @@ label {
     font-size: large;
     margin: 5px;
     border: 1px;
+    border-style: solid;
+    border-color: black;
     /* border-style: dotted; */
 }
 
@@ -75,10 +78,16 @@ label {
     flex-wrap: wrap;
     justify-content: left;
     max-width: 700px;
+    border: 1px;
+    border-style: solid;
+    border-color: black;
 }
 
 .side-container {
     flex-grow: 0;
+    border: 1px;
+    border-radius: 255px 15px 225px 15px/15px 225px 15px 255px;
+    border-style: groove;
     /* align-self: flex-start; */
     /* display: flex;
     flex-wrap:wrap; */
@@ -110,7 +119,7 @@ label {
 }
 
 #character-abilities {
-max-width: 400px;
+width: 400px;
 }
 
 #ability {
