@@ -213,39 +213,39 @@ function generateCharacter(armorClassPreference) {
 
   document.getElementById("str-written").innerHTML =
     generatedCharacter.attributes[0].attributeValue;
-  document.getElementById("str-modifier-written").innerHTML = `${
-    generatedCharacter.attributes[0].modifierValue > 0 ? "+" : "  "
-  }${generatedCharacter.attributes[0].modifierValue}`;
+  document.getElementById("str-modifier-written").innerHTML = `(${
+    generatedCharacter.attributes[0].modifierValue > 0 ? "+" : ""
+  }${generatedCharacter.attributes[0].modifierValue})`;
 
   document.getElementById("dex-written").innerHTML =
     generatedCharacter.attributes[1].attributeValue;
-  document.getElementById("dex-modifier-written").innerHTML = `${
-    generatedCharacter.attributes[1].modifierValue > 0 ? "+" : "  "
-  }${generatedCharacter.attributes[1].modifierValue}`;
+  document.getElementById("dex-modifier-written").innerHTML = `(${
+    generatedCharacter.attributes[1].modifierValue > 0 ? "+" : ""
+  }${generatedCharacter.attributes[1].modifierValue})`;
 
   document.getElementById("con-written").innerHTML =
     generatedCharacter.attributes[2].attributeValue;
-  document.getElementById("con-modifier-written").innerHTML = `${
-    generatedCharacter.attributes[2].modifierValue > 0 ? "+" : "  "
-  }${generatedCharacter.attributes[2].modifierValue}`;
+  document.getElementById("con-modifier-written").innerHTML = `(${
+    generatedCharacter.attributes[2].modifierValue > 0 ? "+" : ""
+  }${generatedCharacter.attributes[2].modifierValue})`;
 
   document.getElementById("int-written").innerHTML =
     generatedCharacter.attributes[3].attributeValue;
-  document.getElementById("int-modifier-written").innerHTML = `${
-    generatedCharacter.attributes[3].modifierValue > 0 ? "+" : "  "
-  }${generatedCharacter.attributes[3].modifierValue}`;
+  document.getElementById("int-modifier-written").innerHTML = `(${
+    generatedCharacter.attributes[3].modifierValue > 0 ? "+" : ""
+  }${generatedCharacter.attributes[3].modifierValue})`;
 
   document.getElementById("wis-written").innerHTML =
     generatedCharacter.attributes[4].attributeValue;
-  document.getElementById("wis-modifier-written").innerHTML = `${
-    generatedCharacter.attributes[4].modifierValue > 0 ? "+" : "  "
-  }${generatedCharacter.attributes[4].modifierValue}`;
+  document.getElementById("wis-modifier-written").innerHTML = `(${
+    generatedCharacter.attributes[4].modifierValue > 0 ? "+" : ""
+  }${generatedCharacter.attributes[4].modifierValue})`;
 
   document.getElementById("cha-written").innerHTML =
     generatedCharacter.attributes[5].attributeValue;
-  document.getElementById("cha-modifier-written").innerHTML = `${
-    generatedCharacter.attributes[5].modifierValue > 0 ? "+" : "  "
-  }${generatedCharacter.attributes[5].modifierValue}`;
+  document.getElementById("cha-modifier-written").innerHTML = `(${
+    generatedCharacter.attributes[5].modifierValue > 0 ? "+" : ""
+  }${generatedCharacter.attributes[5].modifierValue})`;
 
   // document.getElementById("attributes").innerHTML = attributesToDisplay;
 

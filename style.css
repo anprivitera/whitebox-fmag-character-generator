@@ -1,5 +1,14 @@
 @import url('https://fonts.googleapis.com/css2?family=Josefin+Sans&family=Kalam:wght@300&display=swap');
 
+/* @media only screen and (max-width: 948px) {
+    .side-container {
+        display: inline-flex;
+        flex-wrap: nowrap;
+        flex-direction: row;
+        font-family: 'Courier New', Courier, monospace;
+    }
+} */
+
 body {
     background-color: white;
     color: #34568B;
@@ -30,9 +39,9 @@ label {
     /* background-image: url("https://gdocservices.com/wp-content/uploads/2020/06/AdobeStock_164991966.jpeg"); */
     background-color: whitesmoke;
     background-size: cover;
-    margin: 25px 90px 25px 110px;
+    /* margin: 25px 90px 25px 110px; */
     max-width: 1000px;
-    max-height: 1300px;
+    max-height: auto;
     border: 1px;
     border-style: solid;
     border-color: black;
@@ -81,11 +90,11 @@ label {
 
 .container {
     flex-grow: 1;
-    align-self: flex-start;
+    align-self:center;
     display: inline-flex;
     flex-wrap: wrap;
-    justify-content: left;
-    max-width: 700px;
+    justify-content: center;
+    max-width: 505px;
     border: 1px;
     border-style: solid;
     border-color: black;
@@ -96,12 +105,10 @@ label {
     border: 1px;
     border-style: solid;
     border-color: black;
-    /* align-self: flex-start; */
-    /* display: flex;
-    flex-wrap:wrap; */
-    /* flex-direction: column; */
-    /* justify-content:baseline; */
-    /* justify-content: space-evenly; */
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+
 }
 
 
@@ -139,6 +146,26 @@ label {
 #basic-info {
     width: 160px;
 }
+
+#attributes {
+    display: flex;
+    flex-direction:column;
+    flex-wrap: nowrap;
+}
+
+/* #attributes-written {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    margin: 0px;
+}
+
+#attributes-printed {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+} */
+
 
 #character-abilities {
 width: 300px;
