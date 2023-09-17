@@ -314,14 +314,12 @@ function generateCharacter(armorClassPreference) {
         }${generatedCharacter.characterArmorGear[n].AC} AC)</div>`);
   }
   document.getElementById("weapons-and-armor").innerHTML = weaponsAndArmor;
-  //TODO: change spaghetti code here
-  let hirelings = `<h2>Hirelings</h2><div class="character-info">Max #: ${
-    generatedCharacter.maxHirelings
-  }</div><div class="character-info">Loyalty: ${
-    generatedCharacter.hirelingsLoyalty > 0 ? "+" : ""
-  }${generatedCharacter.hirelingsLoyalty}</div>`;
 
-  document.getElementById("hirelings").innerHTML = hirelings;
+  document.getElementById("hirelings-max-written").innerHTML =
+    generatedCharacter.maxHirelings;
+  document.getElementById("hirelings-loyalty-written").innerHTML = `${
+    generatedCharacter.hirelingsLoyalty > 0 ? "+" : ""
+  }${generatedCharacter.hirelingsLoyalty}`;
 
   let equipmentToDisplay = "";
   for (let n = 0; n < generatedCharacter.characterEquipment.length; n++) {
