@@ -150,7 +150,7 @@ function generateCharacter(armorClassPreference) {
   [generatedCharacter.characterEquipment, generatedCharacter.currentMoney] =
     selectItems(
       ADVENTURING_GEAR,
-      Math.floor(Math.random() * ADVENTURING_GEAR.length + 1),
+      12,
       generatedCharacter.currentMoney,
       generatedCharacter.characterClass.characterClassName
     );
