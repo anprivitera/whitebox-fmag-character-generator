@@ -35,7 +35,7 @@ label {
     border-style: solid;
     border-color: whitesmoke;
     display: inline-flex;
-    flex-wrap: nowrap;
+    flex-wrap: wrap;
     justify-content:space-evenly;
 }
     /* text-align: right; */
@@ -73,12 +73,12 @@ label {
     align-self: flex-start;
     display: inline-flex;
     flex-wrap: wrap;
-    justify-content:left;
+    justify-content: left;
     max-width: 700px;
 }
 
 .side-container {
-    flex-grow: 2;
+    flex-grow: 0;
     /* align-self: flex-start; */
     /* display: flex;
     flex-wrap:wrap; */
@@ -116,45 +116,3 @@ max-width: 400px;
 #ability {
     font-size: medium;
 }
-
-/* #weapons-and-armor {
-    max-width: 300px;
-} */
-
-/* #basic-info {
-    /* max-height: 250px; 
-}*/
-
-
-/* #saving-throw:hover ~ #saving-throw-description {
-    visibility: visible;
-}
-
-#tohit-melee:hover ~ #tohit-melee-description {
-    visibility: visible;
-}
-
-#tohit-missile:hover ~ #tohit-missile-description {
-    visibility: visible;
-} */
-
-
-
-
-/* #portrait{
-    align-self: left;
-}
-#basic-info{
-    align-self: right;
-} */
-
-
-
-/* div.center {
-    margin: auto;
-    width: auto;
-    border: 2px solid darkblue;
-    padding: 1px;
-  } */
-
-/* TODO: Include animations. I don't want the character to just appear instantly, but to make the user feel as if they are rolling it physically */
