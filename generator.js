@@ -201,13 +201,14 @@ function generateCharacter(armorClassPreference) {
   document.getElementById(
     "char-level-written"
   ).innerHTML = `${generatedCharacter.characterLevel} of ${generatedCharacter.characterRace.maxLevel}`;
-  document.getElementById(
-    "char-current-xp-written"
-  ).innerHTML = `${generatedCharacter.currentXP}/${generatedCharacter.xpToNextLevel}`;
+  document.getElementById("char-current-xp-written").innerHTML =
+    generatedCharacter.currentXP;
+  document.getElementById("char-xp-to-next-lvl-written").innerHTML =
+    generatedCharacter.xpToNextLevel;
 
   document.getElementById(
     "char-race-class-written"
-  ).innerHTML = `${generatedCharacter.characterRace.raceName}
+  ).innerHTML = `${generatedCharacter.characterRace.raceName}<br/>
   ${generatedCharacter.characterClass.characterClassName}`;
 
   document.getElementById("str-written").innerHTML =
