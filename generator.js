@@ -271,7 +271,7 @@ function generateCharacter(armorClassPreference) {
 
   let characterAbilitiesToDisplay = ``;
   for (let i = 0; i < characterAbilities.length; i++) {
-    characterAbilitiesToDisplay += `<span class="handwritten-smaller">${characterAbilities[i]}</span><br /> `;
+    characterAbilitiesToDisplay += `<span class="handwritten-smaller" id=ability-${i}>${characterAbilities[i]}</span><br /> `;
   }
 
   document.getElementById("character-abilities-list").innerHTML =
