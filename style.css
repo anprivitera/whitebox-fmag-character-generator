@@ -35,6 +35,12 @@ label {
     color: black;
 }
 
+#attributions {
+    font-family:  "Josefin Sans", sans-serif;
+    font-weight: 500;
+    font-size: xx-small;
+}
+
 .page {
     display: inline-flex;
     flex-wrap: wrap-reverse;
