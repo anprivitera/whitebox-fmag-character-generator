@@ -155,7 +155,9 @@ function generateCharacter() {
         let weaponNum2 = null;
         [weaponNum2, generatedCharacter.currentMoney] = selectItems(
           //TODO: dynamically select a different kind of weapon than the one the character already has
-          WEAPONS.filter((x) => x.handling == "one-handed"),
+          WEAPONS.filter(
+            (x) => x.handling != generatedCharacter.characterWeapons[0].handling
+          ),
           1,
           generatedCharacter.currentMoney,
           generatedCharacter.characterClass.characterClassName
