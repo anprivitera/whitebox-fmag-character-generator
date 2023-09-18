@@ -337,22 +337,26 @@ document.getElementById("to-hit-melee-written").innerHTML =
 
 document.getElementById("to-hit-melee-description-written").innerHTML = `${
   generatedCharacter.characterClass.toHitAtLevel1 > 0 ? "+" : ""
-}${generatedCharacter.characterClass.toHitAtLevel1} lvl bonus, ${
+}${generatedCharacter.characterClass.toHitAtLevel1} lvl, ${
   generatedCharacter.attributes[0].modifierValue > 0 ? "+" : ""
 }${generatedCharacter.attributes[0].modifierValue} ${
   generatedCharacter.attributes[0].attributeName
-} bonus.`;
+}, ${generatedCharacter.characterRace.raceMeleeBonus > 0 ? "+" : ""}${
+  generatedCharacter.characterRace.raceMeleeBonus
+} race`;
 
 document.getElementById("to-hit-missile-written").innerHTML =
   generatedCharacter.toHitMissile;
 
 document.getElementById("to-hit-missile-description-written").innerHTML = `${
   generatedCharacter.characterClass.toHitAtLevel1 > 0 ? "+" : ""
-}${generatedCharacter.characterClass.toHitAtLevel1} lvl bonus, ${
+}${generatedCharacter.characterClass.toHitAtLevel1} lvl, ${
   generatedCharacter.attributes[1].modifierValue > 0 ? "+" : ""
 }${generatedCharacter.attributes[1].modifierValue} ${
   generatedCharacter.attributes[1].attributeName
-} bonus.`;
+}, ${generatedCharacter.characterRace.raceMissileBonus > 0 ? "+" : ""}${
+  generatedCharacter.characterRace.raceMissileBonus
+} race.`;
 
 let weaponsAndArmor = "";
 

@@ -111,6 +111,17 @@ label {
 
 }
 
+.left-container {
+    flex-grow: 0;
+    border: 1px;
+    border-style: solid;
+    border-color: black;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    width: 124px;
+}
+
 
 
 
@@ -166,7 +177,7 @@ label {
 
 
 #character-abilities {
-width: 300px;
+width: 335px;
 height: 300px;
 }
 
