@@ -114,10 +114,24 @@ function generateCharacter() {
   generatedCharacter.characterArmorGear = [];
   generatedCharacter.characterEquipment = [];
 
-  //TODO: If the character has higher DEX than STR, the weapon should be missile
+  let weaponsByAttribute = null;
+  if (
+    generatedCharacter.attributes[0].modifierValue <
+    generatedCharacter.attributes[1].modifierValue
+  ) {
+    weaponsByAttribute = WEAPONS.filter((x) => x.missile);
+  } else if (
+    generatedCharacter.attributes[0].modifierValue >
+    generatedCharacter.attributes[1].modifierValue
+  ) {
+    weaponsByAttribute = WEAPONS.filter((x) => x.melee);
+  } else {
+    weaponsByAttribute = WEAPONS;
+  }
+
   [generatedCharacter.characterWeapons, generatedCharacter.currentMoney] =
     selectItems(
-      WEAPONS,
+      weaponsByAttribute,
       1,
       generatedCharacter.currentMoney,
       generatedCharacter.characterClass.characterClassName
