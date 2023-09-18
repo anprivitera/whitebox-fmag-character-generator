@@ -35,6 +35,16 @@ label {
     color: black;
 }
 
+.page {
+    display: inline-flex;
+    flex-wrap: wrap-reverse;
+
+}
+
+.menu {
+    margin: 15px;
+}
+
 .sheet {
     /* background-image: url("https://gdocservices.com/wp-content/uploads/2020/06/AdobeStock_164991966.jpeg"); */
     background-color: whitesmoke;
@@ -121,9 +131,6 @@ label {
     flex-direction: column;
     width: 124px;
 }
-
-
-
 
 .description {
     /* display: inline-flex; */
