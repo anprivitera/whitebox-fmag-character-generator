@@ -81,30 +81,14 @@ function generateCharacter() {
 
   determineHP(generatedCharacter);
 
-  generatedCharacter.toHitMelee = `${
-    generatedCharacter.characterClass.toHitAtLevel1 +
-      generatedCharacter.attributes[0].modifierValue +
-      generatedCharacter.characterRace.raceMeleeBonus >
-    0
-      ? "+"
-      : ""
-  }${
+  generatedCharacter.toHitMelee =
     generatedCharacter.characterClass.toHitAtLevel1 +
     generatedCharacter.attributes[0].modifierValue +
-    generatedCharacter.characterRace.raceMeleeBonus
-  }`;
-  generatedCharacter.toHitMissile = `${
-    generatedCharacter.characterClass.toHitAtLevel1 +
-      generatedCharacter.attributes[1].modifierValue +
-      generatedCharacter.characterRace.raceMissileBonus >
-    0
-      ? "+"
-      : ""
-  }${
+    generatedCharacter.characterRace.raceMeleeBonus;
+  generatedCharacter.toHitMissile =
     generatedCharacter.characterClass.toHitAtLevel1 +
     generatedCharacter.attributes[1].modifierValue +
-    +generatedCharacter.characterRace.raceMissileBonus
-  }`;
+    +generatedCharacter.characterRace.raceMissileBonus;
 
   [generatedCharacter.maxHirelings, generatedCharacter.hirelingsLoyalty] =
     determineHirelings(generatedCharacter.attributes[5].attributeValue);
@@ -116,15 +100,9 @@ function generateCharacter() {
   generatedCharacter.characterEquipment = [];
 
   let weaponsByAttribute = null;
-  if (
-    generatedCharacter.attributes[0].modifierValue <
-    generatedCharacter.attributes[1].modifierValue
-  ) {
+  if (generatedCharacter.toHitMelee < generatedCharacter.toHitMissile) {
     weaponsByAttribute = WEAPONS.filter((x) => x.missile);
-  } else if (
-    generatedCharacter.attributes[0].modifierValue >
-    generatedCharacter.attributes[1].modifierValue
-  ) {
+  } else if (generatedCharacter.toHitMelee > generatedCharacter.toHitMissile) {
     weaponsByAttribute = WEAPONS.filter((x) => x.melee);
   } else {
     weaponsByAttribute = WEAPONS;
@@ -349,8 +327,9 @@ for (let i = 0; i < characterAbilities.length; i++) {
 document.getElementById("character-abilities-list").innerHTML =
   characterAbilitiesToDisplay;
 
-document.getElementById("to-hit-melee-written").innerHTML =
-  generatedCharacter.toHitMelee;
+document.getElementById("to-hit-melee-written").innerHTML = `${
+  generatedCharacter.toHitMelee > 0 ? "+" : ""
+}${generatedCharacter.toHitMelee}`;
 
 document.getElementById("to-hit-melee-description-written").innerHTML = `${
   generatedCharacter.characterClass.toHitAtLevel1 > 0 ? "+" : ""
@@ -362,8 +341,9 @@ document.getElementById("to-hit-melee-description-written").innerHTML = `${
   generatedCharacter.characterRace.raceMeleeBonus
 } race`;
 
-document.getElementById("to-hit-missile-written").innerHTML =
-  generatedCharacter.toHitMissile;
+document.getElementById("to-hit-missile-written").innerHTML = `${
+  generatedCharacter.toHitMissile > 0 ? "+" : ""
+}${generatedCharacter.toHitMissile}`;
 
 document.getElementById("to-hit-missile-description-written").innerHTML = `${
   generatedCharacter.characterClass.toHitAtLevel1 > 0 ? "+" : ""
