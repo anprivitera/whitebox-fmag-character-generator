@@ -117,7 +117,7 @@ label {
 
 .container {
     flex-grow: 1;
-    align-self:center;
+    /* align-self:center; */
     display: inline-flex;
     flex-wrap: wrap;
     justify-content: center;
@@ -203,6 +203,10 @@ label {
 #character-abilities {
 width: 335px;
 height: 300px;
+}
+
+#movement-and-encumberance {
+    height: 300px;
 }
 
 #weapons-and-armor {
