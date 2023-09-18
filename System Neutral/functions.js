@@ -31,11 +31,10 @@ function determineCharacterClass(attributes, characterClasses) {
   }
 }
 
-function receivePortrait(race) {
+function receivePortrait(race, gender) {
   let character = null;
   if (race == "Human" || race == "Halfling") {
-    const gender = ["man", "woman"];
-    character = gender[Math.floor(Math.random() * gender.length)];
+    character = gender;
   } else if (race == "Dwarf") {
     character = "dwarf";
   } else {
