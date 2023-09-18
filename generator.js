@@ -3,10 +3,20 @@ import {
   diceRoller,
   determineCharacterClass,
   receivePortrait,
-  receiveName,
   rollForAttributes,
   selectItems,
 } from "./System Neutral/functions.js";
+
+import {
+  PHYSIQUE,
+  SKIN,
+  CLOTHING,
+  VIRTUE,
+  VICE,
+  SPEECH,
+  BACKGROUND,
+  MISFORTUNES,
+} from "./System Neutral/constants.js";
 
 import {
   determineModifier,
@@ -58,10 +68,7 @@ function generateCharacter() {
   generatedCharacter.characterGender =
     genderArray[Math.floor(Math.random() * genderArray.length)];
 
-  generatedCharacter.characterName = receiveName(
-    generatedCharacter.characterRace.raceID,
-    generatedCharacter.characterGender
-  );
+  generatedCharacter.characterName = "Arvos";
 
   generatedCharacter.characterAlignment = determineAlignment(ALIGNMENTS);
 
@@ -201,6 +208,30 @@ let characterPortrait = receivePortrait(
 
 document.getElementById("name-handwritten").innerHTML =
   generatedCharacter.characterName;
+
+document.getElementById("physique-handwritten").innerHTML =
+  PHYSIQUE[Math.floor(Math.random() * PHYSIQUE.length)];
+
+document.getElementById("skin-handwritten").innerHTML =
+  SKIN[Math.floor(Math.random() * SKIN.length)];
+
+document.getElementById("clothing-handwritten").innerHTML =
+  CLOTHING[Math.floor(Math.random() * CLOTHING.length)];
+
+document.getElementById("virtue-handwritten").innerHTML =
+  VIRTUE[Math.floor(Math.random() * VIRTUE.length)];
+
+document.getElementById("vice-handwritten").innerHTML =
+  VICE[Math.floor(Math.random() * VICE.length)];
+
+document.getElementById("speech-handwritten").innerHTML =
+  SPEECH[Math.floor(Math.random() * SPEECH.length)];
+
+document.getElementById("background-handwritten").innerHTML =
+  BACKGROUND[Math.floor(Math.random() * BACKGROUND.length)];
+
+document.getElementById("misfortune-handwritten").innerHTML =
+  MISFORTUNES[Math.floor(Math.random() * MISFORTUNES.length)];
 
 document.getElementById(
   "char-alignment-written"
@@ -388,7 +419,7 @@ document.getElementById("movement-combat-written").innerHTML = `${
 
 document.getElementById(
   "portrait"
-).innerHTML = `<img src = "${characterPortrait}" width = 175></img>`;
+).innerHTML = `<img src = "${characterPortrait}" width = 100></img>`;
 
 const newCharacterButton = document.querySelector("#new-character");
 
