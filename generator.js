@@ -415,8 +415,6 @@ document.getElementById("movement-combat-written").innerHTML = `${
   generatedCharacter.movementRate / 3
 } ft.`;
 
-//TODO: implement async function so that there is no load time for the portait
-
 document.getElementById(
   "portrait"
 ).innerHTML = `<img src = "${characterPortrait}" width = 100></img>`;
