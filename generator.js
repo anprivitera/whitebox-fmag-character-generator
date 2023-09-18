@@ -358,16 +358,16 @@ document.getElementById("to-hit-missile-description-written").innerHTML = `${
 let weaponsAndArmor = "";
 
 for (let n = 0; n < generatedCharacter.characterWeapons.length; n++) {
-  weaponsAndArmor += `<span class="handwritten-smaller">${generatedCharacter.characterWeapons[n].weaponName} (${generatedCharacter.characterWeapons[n].damage})</span><br /><span class="description">(${generatedCharacter.characterWeapons[n].handling})</span><br />`;
+  weaponsAndArmor += `<div class="handwritten-smaller" id="weapon-${n}">${generatedCharacter.characterWeapons[n].weaponName}, ${generatedCharacter.characterWeapons[n].damage}</div><div class="description" id="weapon-${n}-description">${generatedCharacter.characterWeapons[n].handling}</div>`;
 }
 for (let n = 0; n < generatedCharacter.characterArmorGear.length; n++) {
   generatedCharacter.characterArmorGear[n].armorName == "Unarmored"
     ? (weaponsAndArmor += "")
     : (weaponsAndArmor += `<div class="handwritten-smaller" id="armor">${
         generatedCharacter.characterArmorGear[n].armorName
-      }</div><div class="description">(${
+      }</div><div class="description">${
         document.getElementById("armor-class").value == "ascending" ? "+" : "-"
-      }${generatedCharacter.characterArmorGear[n].AC} AC)</div>`);
+      }${generatedCharacter.characterArmorGear[n].AC} AC</div>`);
 }
 document.getElementById("weapons-and-armor").innerHTML = weaponsAndArmor;
 
