@@ -45,6 +45,16 @@ label {
     margin: 15px;
 }
 
+.loader-container {
+    width: 100%;
+    height: 100vh;
+    position: fixed;
+    background: #fff
+        url("https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExdnBsYzVqY2syb3RoMW44a3dpYTk2dnBuZ2VtYncxd3p2ZDRlNm9zOCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/MXKqCv2UDLCdfavigs/giphy.gif") center
+        no-repeat;
+    z-index: 1;
+}
+
 .sheet {
     /* background-image: url("https://gdocservices.com/wp-content/uploads/2020/06/AdobeStock_164991966.jpeg"); */
     background-color: whitesmoke;

@@ -1,3 +1,8 @@
+function removeLoadScreen() {
+  const loaderContainer = document.querySelector(".loader-container");
+  loaderContainer.style.display = "none";
+}
+
 function diceRoller(numberOfDice, diceFace) {
   let rollResult = null;
   for (let i = 0; i < numberOfDice; i++) {
@@ -137,4 +142,5 @@ export {
   receivePortrait,
   rollForAttributes,
   selectItems,
+  removeLoadScreen,
 };

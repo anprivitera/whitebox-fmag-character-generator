@@ -5,6 +5,7 @@ import {
   receivePortrait,
   rollForAttributes,
   selectItems,
+  removeLoadScreen,
 } from "./System Neutral/functions.js";
 
 import {
@@ -214,7 +215,7 @@ function generateCharacter() {
   );
   return generatedCharacter;
 }
-
+setTimeout(removeLoadScreen, 1500);
 let generatedCharacter = generateCharacter();
 
 let characterPortrait = receivePortrait(
