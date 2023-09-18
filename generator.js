@@ -3,6 +3,7 @@ import {
   diceRoller,
   determineCharacterClass,
   receivePortrait,
+  receiveName,
   rollForAttributes,
   selectItems,
 } from "./System Neutral/functions.js";
@@ -29,7 +30,7 @@ import {
 
 //TODO: Include name randomizer
 
-function generateCharacter(armorClassPreference) {
+function generateCharacter() {
   //TODO: Treat ammunitions as a separate purchase: if a character gets a missile weapon, they should obviously get also ammunitions. Bow > arrows, Sling > stones, Crossbow > Bolts
 
   let generatedCharacter = {};
@@ -52,9 +53,15 @@ function generateCharacter(armorClassPreference) {
     CHARACTER_RACES
   );
 
-  let characterPortrait = receivePortrait(
-    generatedCharacter.characterRace.raceName
-  ); //TODO: this should be outside of the main function otherwise it generates always the same picture for the same tag
+  const genderArray = ["man", "woman"];
+
+  generatedCharacter.characterGender =
+    genderArray[Math.floor(Math.random() * genderArray.length)];
+
+  generatedCharacter.characterName = receiveName(
+    generatedCharacter.characterRace.raceID,
+    generatedCharacter.characterGender
+  );
 
   generatedCharacter.characterAlignment = determineAlignment(ALIGNMENTS);
 
@@ -182,196 +189,206 @@ function generateCharacter(armorClassPreference) {
     generatedCharacter.characterRace.standardMovementRate,
     generatedCharacter.gearWeight
   );
+  return generatedCharacter;
+}
 
-  document.getElementById(
-    "char-alignment-written"
-  ).innerHTML = `${generatedCharacter.characterAlignment}`;
+let generatedCharacter = generateCharacter();
 
-  document.getElementById(
-    "xp-bonus-written"
-  ).innerHTML = `${generatedCharacter.xpBonus}%`;
+let characterPortrait = receivePortrait(
+  generatedCharacter.characterRace.raceName,
+  generatedCharacter.characterGender
+); //TODO: this should be outside of the main function otherwise it generates always the same picture for the same tag
 
-  generatedCharacter.characterLevel =
-    document.getElementById("character-level").value;
-  if (generatedCharacter.characterLevel == 1) {
-    generatedCharacter.currentXP = 0;
-    generatedCharacter.xpToNextLevel =
-      generatedCharacter.characterClass.xpToLevel2;
-  } else if (generatedCharacter.characterLevel == 2) {
-    generatedCharacter.currentXP = generatedCharacter.characterClass.xpToLevel2;
-    generatedCharacter.xpToNextLevel =
-      generatedCharacter.characterClass.xpToLevel2 * 2;
-  }
-  document.getElementById(
-    "char-level-written"
-  ).innerHTML = `${generatedCharacter.characterLevel} of ${generatedCharacter.characterRace.maxLevel}`;
-  document.getElementById("char-current-xp-written").innerHTML =
-    generatedCharacter.currentXP;
-  document.getElementById("char-xp-to-next-lvl-written").innerHTML =
-    generatedCharacter.xpToNextLevel;
+document.getElementById("name-handwritten").innerHTML =
+  generatedCharacter.characterName;
 
-  document.getElementById(
-    "char-race-class-written"
-  ).innerHTML = `${generatedCharacter.characterRace.raceName}<br/>
+document.getElementById(
+  "char-alignment-written"
+).innerHTML = `${generatedCharacter.characterAlignment}`;
+
+document.getElementById(
+  "xp-bonus-written"
+).innerHTML = `${generatedCharacter.xpBonus}%`;
+
+generatedCharacter.characterLevel =
+  document.getElementById("character-level").value;
+if (generatedCharacter.characterLevel == 1) {
+  generatedCharacter.currentXP = 0;
+  generatedCharacter.xpToNextLevel =
+    generatedCharacter.characterClass.xpToLevel2;
+} else if (generatedCharacter.characterLevel == 2) {
+  generatedCharacter.currentXP = generatedCharacter.characterClass.xpToLevel2;
+  generatedCharacter.xpToNextLevel =
+    generatedCharacter.characterClass.xpToLevel2 * 2;
+}
+document.getElementById(
+  "char-level-written"
+).innerHTML = `${generatedCharacter.characterLevel} of ${generatedCharacter.characterRace.maxLevel}`;
+document.getElementById("char-current-xp-written").innerHTML =
+  generatedCharacter.currentXP;
+document.getElementById("char-xp-to-next-lvl-written").innerHTML =
+  generatedCharacter.xpToNextLevel;
+
+document.getElementById(
+  "char-race-class-written"
+).innerHTML = `${generatedCharacter.characterRace.raceName}<br/>
   ${generatedCharacter.characterClass.characterClassName}`;
 
-  document.getElementById("str-written").innerHTML =
-    generatedCharacter.attributes[0].attributeValue;
-  document.getElementById("str-modifier-written").innerHTML = `(${
-    generatedCharacter.attributes[0].modifierValue > 0 ? "+" : ""
-  }${generatedCharacter.attributes[0].modifierValue})`;
+document.getElementById("str-written").innerHTML =
+  generatedCharacter.attributes[0].attributeValue;
+document.getElementById("str-modifier-written").innerHTML = `(${
+  generatedCharacter.attributes[0].modifierValue > 0 ? "+" : ""
+}${generatedCharacter.attributes[0].modifierValue})`;
 
-  document.getElementById("dex-written").innerHTML =
-    generatedCharacter.attributes[1].attributeValue;
-  document.getElementById("dex-modifier-written").innerHTML = `(${
-    generatedCharacter.attributes[1].modifierValue > 0 ? "+" : ""
-  }${generatedCharacter.attributes[1].modifierValue})`;
+document.getElementById("dex-written").innerHTML =
+  generatedCharacter.attributes[1].attributeValue;
+document.getElementById("dex-modifier-written").innerHTML = `(${
+  generatedCharacter.attributes[1].modifierValue > 0 ? "+" : ""
+}${generatedCharacter.attributes[1].modifierValue})`;
 
-  document.getElementById("con-written").innerHTML =
-    generatedCharacter.attributes[2].attributeValue;
-  document.getElementById("con-modifier-written").innerHTML = `(${
-    generatedCharacter.attributes[2].modifierValue > 0 ? "+" : ""
-  }${generatedCharacter.attributes[2].modifierValue})`;
+document.getElementById("con-written").innerHTML =
+  generatedCharacter.attributes[2].attributeValue;
+document.getElementById("con-modifier-written").innerHTML = `(${
+  generatedCharacter.attributes[2].modifierValue > 0 ? "+" : ""
+}${generatedCharacter.attributes[2].modifierValue})`;
 
-  document.getElementById("int-written").innerHTML =
-    generatedCharacter.attributes[3].attributeValue;
-  document.getElementById("int-modifier-written").innerHTML = `(${
-    generatedCharacter.attributes[3].modifierValue > 0 ? "+" : ""
-  }${generatedCharacter.attributes[3].modifierValue})`;
+document.getElementById("int-written").innerHTML =
+  generatedCharacter.attributes[3].attributeValue;
+document.getElementById("int-modifier-written").innerHTML = `(${
+  generatedCharacter.attributes[3].modifierValue > 0 ? "+" : ""
+}${generatedCharacter.attributes[3].modifierValue})`;
 
-  document.getElementById("wis-written").innerHTML =
-    generatedCharacter.attributes[4].attributeValue;
-  document.getElementById("wis-modifier-written").innerHTML = `(${
-    generatedCharacter.attributes[4].modifierValue > 0 ? "+" : ""
-  }${generatedCharacter.attributes[4].modifierValue})`;
+document.getElementById("wis-written").innerHTML =
+  generatedCharacter.attributes[4].attributeValue;
+document.getElementById("wis-modifier-written").innerHTML = `(${
+  generatedCharacter.attributes[4].modifierValue > 0 ? "+" : ""
+}${generatedCharacter.attributes[4].modifierValue})`;
 
-  document.getElementById("cha-written").innerHTML =
-    generatedCharacter.attributes[5].attributeValue;
-  document.getElementById("cha-modifier-written").innerHTML = `(${
-    generatedCharacter.attributes[5].modifierValue > 0 ? "+" : ""
-  }${generatedCharacter.attributes[5].modifierValue})`;
+document.getElementById("cha-written").innerHTML =
+  generatedCharacter.attributes[5].attributeValue;
+document.getElementById("cha-modifier-written").innerHTML = `(${
+  generatedCharacter.attributes[5].modifierValue > 0 ? "+" : ""
+}${generatedCharacter.attributes[5].modifierValue})`;
 
-  // document.getElementById("attributes").innerHTML = attributesToDisplay;
+// document.getElementById("attributes").innerHTML = attributesToDisplay;
 
-  document.getElementById("ac-written").innerHTML =
-    armorClassPreference == "descending"
-      ? generatedCharacter.descendingArmorClass
-      : generatedCharacter.ascendingArmorClass;
+document.getElementById("ac-written").innerHTML =
+  document.getElementById("armor-class").value == "descending"
+    ? generatedCharacter.descendingArmorClass
+    : generatedCharacter.ascendingArmorClass;
 
-  document.getElementById("hp-written").innerHTML =
-    generatedCharacter.characterHP;
-  document.getElementById("st-written").innerHTML =
-    generatedCharacter.characterClass.savingThrowAtLevel1;
-  document.getElementById(
-    "st-description-written"
-  ).innerHTML = `${generatedCharacter.characterClass.savingThrowBonus}${generatedCharacter.characterRace.raceSavingThrowBonus}`;
+document.getElementById("hp-written").innerHTML =
+  generatedCharacter.characterHP;
+document.getElementById("st-written").innerHTML =
+  generatedCharacter.characterClass.savingThrowAtLevel1;
+document.getElementById(
+  "st-description-written"
+).innerHTML = `${generatedCharacter.characterClass.savingThrowBonus}${generatedCharacter.characterRace.raceSavingThrowBonus}`;
 
-  let characterAbilities = [];
-  characterAbilities.push(
-    ...generatedCharacter.characterClass.classSpecialAbilities
-  );
-  characterAbilities.push(
-    ...generatedCharacter.characterRace.raceSpecialAbilities
-  );
+let characterAbilities = [];
+characterAbilities.push(
+  ...generatedCharacter.characterClass.classSpecialAbilities
+);
+characterAbilities.push(
+  ...generatedCharacter.characterRace.raceSpecialAbilities
+);
 
-  let characterAbilitiesToDisplay = ``;
-  for (let i = 0; i < characterAbilities.length; i++) {
-    characterAbilitiesToDisplay += `<span class="handwritten-smaller" id=ability-${i}>${characterAbilities[i]}</span><br /> `;
-  }
-
-  document.getElementById("character-abilities-list").innerHTML =
-    characterAbilitiesToDisplay;
-
-  document.getElementById("to-hit-melee-written").innerHTML =
-    generatedCharacter.toHitMelee;
-
-  document.getElementById("to-hit-melee-description-written").innerHTML = `${
-    generatedCharacter.characterClass.toHitAtLevel1 > 0 ? "+" : ""
-  }${generatedCharacter.characterClass.toHitAtLevel1} lvl bonus, ${
-    generatedCharacter.attributes[0].modifierValue > 0 ? "+" : ""
-  }${generatedCharacter.attributes[0].modifierValue} ${
-    generatedCharacter.attributes[0].attributeName
-  } bonus.`;
-
-  document.getElementById("to-hit-missile-written").innerHTML =
-    generatedCharacter.toHitMissile;
-
-  document.getElementById("to-hit-missile-description-written").innerHTML = `${
-    generatedCharacter.characterClass.toHitAtLevel1 > 0 ? "+" : ""
-  }${generatedCharacter.characterClass.toHitAtLevel1} lvl bonus, ${
-    generatedCharacter.attributes[1].modifierValue > 0 ? "+" : ""
-  }${generatedCharacter.attributes[1].modifierValue} ${
-    generatedCharacter.attributes[1].attributeName
-  } bonus.`;
-
-  let weaponsAndArmor = "";
-
-  for (let n = 0; n < generatedCharacter.characterWeapons.length; n++) {
-    weaponsAndArmor += `<span class="handwritten-smaller">${generatedCharacter.characterWeapons[n].weaponName} (${generatedCharacter.characterWeapons[n].damage})</span><br /><span class="description">(${generatedCharacter.characterWeapons[n].handling})</span><br />`;
-  }
-  for (let n = 0; n < generatedCharacter.characterArmorGear.length; n++) {
-    generatedCharacter.characterArmorGear[n].armorName == "Unarmored"
-      ? (weaponsAndArmor += "")
-      : (weaponsAndArmor += `<div class="handwritten-smaller" id="armor">${
-          generatedCharacter.characterArmorGear[n].armorName
-        }</div><div class="description">(${
-          armorClassPreference == "ascending" ? "+" : "-"
-        }${generatedCharacter.characterArmorGear[n].AC} AC)</div>`);
-  }
-  document.getElementById("weapons-and-armor").innerHTML = weaponsAndArmor;
-
-  document.getElementById("hirelings-max-written").innerHTML =
-    generatedCharacter.maxHirelings;
-  document.getElementById("hirelings-loyalty-written").innerHTML = `${
-    generatedCharacter.hirelingsLoyalty > 0 ? "+" : ""
-  }${generatedCharacter.hirelingsLoyalty}`;
-
-  let equipmentToDisplay = "";
-  for (let n = 0; n < generatedCharacter.characterEquipment.length; n++) {
-    equipmentToDisplay += `<span class="handwritten-smaller">${
-      generatedCharacter.characterEquipment[n].itemName
-    }${generatedCharacter.characterEquipment[n].quantity != "" ? " - " : ""}${
-      generatedCharacter.characterEquipment[n].quantity
-    } ${
-      generatedCharacter.characterEquipment[n].quantityType != ""
-        ? generatedCharacter.characterEquipment[n].quantityType
-        : ""
-    }
-    </span><br />`;
-  }
-  equipmentToDisplay +=
-    generatedCharacter.currentMoney > 0
-      ? `${generatedCharacter.currentMoney} gp</div>`
-      : "";
-  document.getElementById("equipment-items").innerHTML = equipmentToDisplay;
-
-  document.getElementById(
-    "gear-weight-written"
-  ).innerHTML = `${generatedCharacter.gearWeight} lbs.`;
-
-  document.getElementById(
-    "movement-normal-written"
-  ).innerHTML = `${generatedCharacter.movementRate} ft.`;
-
-  document.getElementById("movement-careful-written").innerHTML = `${
-    generatedCharacter.movementRate / 2
-  } ft.`;
-
-  document.getElementById("movement-running-written").innerHTML = `${
-    generatedCharacter.movementRate * 2
-  } ft.`;
-
-  document.getElementById("movement-combat-written").innerHTML = `${
-    generatedCharacter.movementRate / 3
-  } ft.`;
-
-  //TODO: implement async function so that there is no load time for the portait
-
-  document.getElementById(
-    "portrait"
-  ).innerHTML = `<img src = "${characterPortrait}" width = 175></img>`;
+let characterAbilitiesToDisplay = ``;
+for (let i = 0; i < characterAbilities.length; i++) {
+  characterAbilitiesToDisplay += `<span class="handwritten-smaller" id=ability-${i}>${characterAbilities[i]}</span><br /> `;
 }
-generateCharacter(document.getElementById("armor-class").value);
+
+document.getElementById("character-abilities-list").innerHTML =
+  characterAbilitiesToDisplay;
+
+document.getElementById("to-hit-melee-written").innerHTML =
+  generatedCharacter.toHitMelee;
+
+document.getElementById("to-hit-melee-description-written").innerHTML = `${
+  generatedCharacter.characterClass.toHitAtLevel1 > 0 ? "+" : ""
+}${generatedCharacter.characterClass.toHitAtLevel1} lvl bonus, ${
+  generatedCharacter.attributes[0].modifierValue > 0 ? "+" : ""
+}${generatedCharacter.attributes[0].modifierValue} ${
+  generatedCharacter.attributes[0].attributeName
+} bonus.`;
+
+document.getElementById("to-hit-missile-written").innerHTML =
+  generatedCharacter.toHitMissile;
+
+document.getElementById("to-hit-missile-description-written").innerHTML = `${
+  generatedCharacter.characterClass.toHitAtLevel1 > 0 ? "+" : ""
+}${generatedCharacter.characterClass.toHitAtLevel1} lvl bonus, ${
+  generatedCharacter.attributes[1].modifierValue > 0 ? "+" : ""
+}${generatedCharacter.attributes[1].modifierValue} ${
+  generatedCharacter.attributes[1].attributeName
+} bonus.`;
+
+let weaponsAndArmor = "";
+
+for (let n = 0; n < generatedCharacter.characterWeapons.length; n++) {
+  weaponsAndArmor += `<span class="handwritten-smaller">${generatedCharacter.characterWeapons[n].weaponName} (${generatedCharacter.characterWeapons[n].damage})</span><br /><span class="description">(${generatedCharacter.characterWeapons[n].handling})</span><br />`;
+}
+for (let n = 0; n < generatedCharacter.characterArmorGear.length; n++) {
+  generatedCharacter.characterArmorGear[n].armorName == "Unarmored"
+    ? (weaponsAndArmor += "")
+    : (weaponsAndArmor += `<div class="handwritten-smaller" id="armor">${
+        generatedCharacter.characterArmorGear[n].armorName
+      }</div><div class="description">(${
+        document.getElementById("armor-class").value == "ascending" ? "+" : "-"
+      }${generatedCharacter.characterArmorGear[n].AC} AC)</div>`);
+}
+document.getElementById("weapons-and-armor").innerHTML = weaponsAndArmor;
+
+document.getElementById("hirelings-max-written").innerHTML =
+  generatedCharacter.maxHirelings;
+document.getElementById("hirelings-loyalty-written").innerHTML = `${
+  generatedCharacter.hirelingsLoyalty > 0 ? "+" : ""
+}${generatedCharacter.hirelingsLoyalty}`;
+
+let equipmentToDisplay = "";
+for (let n = 0; n < generatedCharacter.characterEquipment.length; n++) {
+  equipmentToDisplay += `<span class="handwritten-smaller">${
+    generatedCharacter.characterEquipment[n].itemName
+  }${generatedCharacter.characterEquipment[n].quantity != "" ? " - " : ""}${
+    generatedCharacter.characterEquipment[n].quantity
+  } ${
+    generatedCharacter.characterEquipment[n].quantityType != ""
+      ? generatedCharacter.characterEquipment[n].quantityType
+      : ""
+  }
+    </span><br />`;
+}
+equipmentToDisplay +=
+  generatedCharacter.currentMoney > 0
+    ? `${generatedCharacter.currentMoney} gp</div>`
+    : "";
+document.getElementById("equipment-items").innerHTML = equipmentToDisplay;
+
+document.getElementById(
+  "gear-weight-written"
+).innerHTML = `${generatedCharacter.gearWeight} lbs.`;
+
+document.getElementById(
+  "movement-normal-written"
+).innerHTML = `${generatedCharacter.movementRate} ft.`;
+
+document.getElementById("movement-careful-written").innerHTML = `${
+  generatedCharacter.movementRate / 2
+} ft.`;
+
+document.getElementById("movement-running-written").innerHTML = `${
+  generatedCharacter.movementRate * 2
+} ft.`;
+
+document.getElementById("movement-combat-written").innerHTML = `${
+  generatedCharacter.movementRate / 3
+} ft.`;
+
+//TODO: implement async function so that there is no load time for the portait
+
+document.getElementById(
+  "portrait"
+).innerHTML = `<img src = "${characterPortrait}" width = 175></img>`;
 
 const newCharacterButton = document.querySelector("#new-character");
 
