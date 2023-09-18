@@ -35,10 +35,11 @@ label {
     color: black;
 }
 
-#attributions {
+.footer {
     font-family:  "Josefin Sans", sans-serif;
     font-weight: 500;
-    font-size: xx-small;
+    font-size: x-small;
+    margin-top: 10px;
 }
 
 .page {
