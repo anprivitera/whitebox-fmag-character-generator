@@ -99,7 +99,6 @@ function selectItems(
     filteredByPrice = null,
     selectedItems = [];
   shuffleArray(shoppingArray);
-  console.log(shoppingArray[2].usedBy);
   filteredByCharacter = shoppingArray.filter(
     (i) => i.usedBy.indexOf(characterClass) > -1
   );
