@@ -39,6 +39,19 @@ ul {
     list-style-type: circle;
 }
 
+input[type=number] {
+    color: #34568B;
+    background-color: whitesmoke;
+    font-family: 'Kalam', cursive, sans-serif;
+    font-size: medium;
+    width: 35px;
+    border-width: 0.3px;
+    border-style: dashed;
+    border-color: #34568B;
+}
+
+
+
 .footer {
     font-family:  "Josefin Sans", sans-serif;
     font-weight: 500;
