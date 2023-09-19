@@ -122,7 +122,8 @@ function generateCharacter() {
 
   if (
     generatedCharacter.characterWeapons[0].meleeOrMissile.indexOf("missile") >
-    -1
+      -1 &&
+    generatedCharacter.characterWeapons[0].meleeOrMissile.ammunitions
   ) {
     let ammunitionForPurchasedWeapon = AMMUNITIONS.find(
       (x) =>
