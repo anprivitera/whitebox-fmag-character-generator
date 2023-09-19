@@ -37,6 +37,11 @@ function determineCharacterClass(attributes, characterClasses) {
 }
 
 function receivePortrait(race, gender) {
+  document.getElementById(
+    "portrait"
+  ).innerHTML = `<img src ="" width = 125></img>`;
+  let originalUrl = null;
+  let redirectedUrl = null;
   let character = null;
   if (race == "Human" || race == "Halfling") {
     character = gender;
@@ -45,8 +50,12 @@ function receivePortrait(race, gender) {
   } else {
     character = "elf";
   }
-  let characterPortrait = `https://campaignwiki.org/face/redirect/alex/${character}`;
-  return characterPortrait;
+  //TODO: Find a way to generate a new character portait
+  originalUrl = `https://campaignwiki.org/face/redirect/alex/${character}`;
+  redirectedUrl = new URL(originalUrl);
+  document.getElementById(
+    "portrait"
+  ).innerHTML = `<img src = "${redirectedUrl}" width = 125></img>`;
 }
 
 function rollForAttributes(numberOfDice) {
