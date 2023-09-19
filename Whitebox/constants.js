@@ -471,7 +471,7 @@ export const CHARACTER_CLASSES = [
 export const CHARACTER_RACES = [
   {
     raceID: "elf",
-    raceName: "",
+    raceName: "<br />",
     maxLevel: 8,
     classedRace: false,
     standardMovementRate: 12,

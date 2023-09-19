@@ -310,8 +310,8 @@ document.getElementById("char-xp-to-next-lvl-written").innerHTML =
 
 document.getElementById(
   "char-race-class-written"
-).innerHTML = `${generatedCharacter.characterRace.raceName}<br/>
-  ${generatedCharacter.characterClass.characterClassName}`;
+).innerHTML = `<span>${generatedCharacter.characterRace.raceName}</span>
+<span>${generatedCharacter.characterClass.characterClassName}</span>`;
 
 document.getElementById("str-written").innerHTML =
   generatedCharacter.attributes[0].attributeValue;
