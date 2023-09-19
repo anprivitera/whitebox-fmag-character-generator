@@ -377,7 +377,7 @@ for (let n = 0; n < generatedCharacter.characterArmorGear.length; n++) {
 // document.getElementById("weapons-and-armor").innerHTML = weaponsAndArmor;
 
 for (let n = 0; n < generatedCharacter.characterEquipment.length; n++) {
-  equipmentToDisplay += `<li class="handwritten-medium">${
+  equipmentToDisplay += `<li class="handwritten-large">${
     generatedCharacter.characterEquipment[n].itemName
   }${generatedCharacter.characterEquipment[n].quantity != "" ? " - " : ""}${
     generatedCharacter.characterEquipment[n].quantity
