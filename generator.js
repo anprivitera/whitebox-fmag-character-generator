@@ -101,9 +101,13 @@ function generateCharacter() {
 
   let weaponsByAttribute = null;
   if (generatedCharacter.toHitMelee < generatedCharacter.toHitMissile) {
-    weaponsByAttribute = WEAPONS.filter((x) => x.missile);
+    weaponsByAttribute = WEAPONS.filter(
+      (x) => x.meleeOrMissile.indexOf("missile") > -1
+    );
   } else if (generatedCharacter.toHitMelee > generatedCharacter.toHitMissile) {
-    weaponsByAttribute = WEAPONS.filter((x) => x.melee);
+    weaponsByAttribute = WEAPONS.filter(
+      (x) => x.meleeOrMissile.indexOf("melee") > -1
+    );
   } else {
     weaponsByAttribute = WEAPONS;
   }
@@ -193,7 +197,7 @@ function generateCharacter() {
   );
   return generatedCharacter;
 }
-setTimeout(removeLoadScreen, 1500);
+setTimeout(removeLoadScreen, 1200);
 let generatedCharacter = generateCharacter();
 
 let characterPortrait = receivePortrait(
@@ -319,10 +323,11 @@ characterAbilities.push(
   ...generatedCharacter.characterRace.raceSpecialAbilities
 );
 
-let characterAbilitiesToDisplay = ``;
+let characterAbilitiesToDisplay = `<ul>`;
 for (let i = 0; i < characterAbilities.length; i++) {
-  characterAbilitiesToDisplay += `<span class="handwritten-smaller" id=ability-${i}>${characterAbilities[i]}</span><br /> `;
+  characterAbilitiesToDisplay += `<li class="handwritten-medium" id="ability-${i}">${characterAbilities[i]}</li>`;
 }
+characterAbilitiesToDisplay += "</ul>";
 
 document.getElementById("character-abilities-list").innerHTML =
   characterAbilitiesToDisplay;
@@ -355,31 +360,24 @@ document.getElementById("to-hit-missile-description-written").innerHTML = `${
   generatedCharacter.characterRace.raceMissileBonus
 } race.`;
 
-let weaponsAndArmor = "";
+let equipmentToDisplay = "<ol>";
 
 for (let n = 0; n < generatedCharacter.characterWeapons.length; n++) {
-  weaponsAndArmor += `<div class="handwritten-smaller" id="weapon-${n}">${generatedCharacter.characterWeapons[n].weaponName}, ${generatedCharacter.characterWeapons[n].damage}</div><div class="description" id="weapon-${n}-description">${generatedCharacter.characterWeapons[n].handling}</div>`;
+  equipmentToDisplay += `<li class="handwritten-large" id="weapon-${n}">${generatedCharacter.characterWeapons[n].weaponName}, ${generatedCharacter.characterWeapons[n].damage} <br/><span class="description" id="weapon-${n}-description">${generatedCharacter.characterWeapons[n].handling}</li>`;
 }
 for (let n = 0; n < generatedCharacter.characterArmorGear.length; n++) {
   generatedCharacter.characterArmorGear[n].armorName == "Unarmored"
-    ? (weaponsAndArmor += "")
-    : (weaponsAndArmor += `<div class="handwritten-smaller" id="armor">${
+    ? (equipmentToDisplay += "")
+    : (equipmentToDisplay += `<li class="handwritten-large" id="armor">${
         generatedCharacter.characterArmorGear[n].armorName
-      }</div><div class="description">${
+      }<br /><span class="description">${
         document.getElementById("armor-class").value == "ascending" ? "+" : "-"
-      }${generatedCharacter.characterArmorGear[n].AC} AC</div>`);
+      }${generatedCharacter.characterArmorGear[n].AC} AC</li>`);
 }
-document.getElementById("weapons-and-armor").innerHTML = weaponsAndArmor;
+// document.getElementById("weapons-and-armor").innerHTML = weaponsAndArmor;
 
-document.getElementById("hirelings-max-written").innerHTML =
-  generatedCharacter.maxHirelings;
-document.getElementById("hirelings-loyalty-written").innerHTML = `${
-  generatedCharacter.hirelingsLoyalty > 0 ? "+" : ""
-}${generatedCharacter.hirelingsLoyalty}`;
-
-let equipmentToDisplay = "";
 for (let n = 0; n < generatedCharacter.characterEquipment.length; n++) {
-  equipmentToDisplay += `<span class="handwritten-smaller">${
+  equipmentToDisplay += `<li class="handwritten-medium">${
     generatedCharacter.characterEquipment[n].itemName
   }${generatedCharacter.characterEquipment[n].quantity != "" ? " - " : ""}${
     generatedCharacter.characterEquipment[n].quantity
@@ -388,13 +386,22 @@ for (let n = 0; n < generatedCharacter.characterEquipment.length; n++) {
       ? generatedCharacter.characterEquipment[n].quantityType
       : ""
   }
-    </span><br />`;
+    </li>`;
 }
 equipmentToDisplay +=
   generatedCharacter.currentMoney > 0
     ? `${generatedCharacter.currentMoney} gp</div>`
     : "";
+
+equipmentToDisplay += "</ol>";
+
 document.getElementById("equipment-items").innerHTML = equipmentToDisplay;
+
+document.getElementById("hirelings-max-written").innerHTML =
+  generatedCharacter.maxHirelings;
+document.getElementById("hirelings-loyalty-written").innerHTML = `${
+  generatedCharacter.hirelingsLoyalty > 0 ? "+" : ""
+}${generatedCharacter.hirelingsLoyalty}`;
 
 document.getElementById(
   "gear-weight-written"

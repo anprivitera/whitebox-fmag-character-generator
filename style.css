@@ -35,6 +35,10 @@ label {
     color: black;
 }
 
+ul {
+    list-style-type: circle;
+}
+
 .footer {
     font-family:  "Josefin Sans", sans-serif;
     font-weight: 500;
@@ -87,21 +91,27 @@ label {
 .printed-smaller {
     font-family: "Josefin Sans", sans-serif;
     color: black;
-    font-size: large;
+    font-size: medium;
 }
 
-.handwritten-small {
+.handwritten-x-large {
     font-size: x-large;
 }
 
-.handwritten-smaller {
+.handwritten-large {
     font-size: large;
+    /* margin-bottom: 5.5px; */
+}
+
+.handwritten-medium {
+    font-size: medium;
     /* margin-bottom: 5.5px; */
 }
 
 .character-info {
     font-size: large;
-    margin: 5px;
+    margin-left: 3px;
+    margin-bottom: 5px;
     border-bottom: 1px dashed;
     border-color: black;
     /* border-style: dotted; */
@@ -121,7 +131,7 @@ label {
     display: inline-flex;
     flex-wrap: wrap;
     justify-content: center;
-    max-width: 505px;
+    max-width: 435px;
     border: 1px;
     border-style: solid;
     border-color: black;
@@ -201,12 +211,13 @@ label {
 
 
 #character-abilities {
-width: 335px;
-height: 300px;
+width: 260px;
+height: 350px;
+padding-right: 24px;
 }
 
 #movement-and-encumberance {
-    height: 300px;
+    height: 310px;
 }
 
 #weapons-and-armor {
