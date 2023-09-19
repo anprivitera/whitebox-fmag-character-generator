@@ -197,6 +197,7 @@ input[type=number] {
     border-style: solid;
     border-color: black;
     max-height: 248px;
+    width: 130px;
 }
 
 #basic-info {
@@ -207,7 +208,14 @@ input[type=number] {
     display: flex;
     flex-direction:column;
     flex-wrap: nowrap;
-    width: 135px;
+    width: 140px;
+}
+
+#combat-info {
+    display: flex;
+    flex-direction:column;
+    flex-wrap: nowrap;
+    width: 120px;
 }
 
 /* #attributes-written {
