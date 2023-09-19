@@ -145,7 +145,10 @@ input[type=number] {
     flex-wrap: wrap;
     justify-content: center;
     max-width: 300px;
-    border: 1px;
+    border-left: 1px;
+    border-top: 0px;
+    border-right: 1px;
+    border-bottom: 0px;
     border-style: solid;
     border-color: black;
 }
@@ -208,14 +211,14 @@ input[type=number] {
     display: flex;
     flex-direction:column;
     flex-wrap: nowrap;
-    width: 140px;
+    width: 130px;
 }
 
 #combat-info {
     display: flex;
     flex-direction:column;
     flex-wrap: nowrap;
-    width: 120px;
+    width: 140px;
 }
 
 /* #attributes-written {

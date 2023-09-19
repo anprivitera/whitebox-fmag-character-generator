@@ -403,17 +403,17 @@ document.getElementById("to-hit-missile-description-written").innerHTML = `${
 let equipmentToDisplay = "<ol>";
 
 for (let n = 0; n < generatedCharacter.characterWeapons.length; n++) {
-  equipmentToDisplay += `<li class="handwritten-large" id="weapon-${n}">${generatedCharacter.characterWeapons[n].weaponName}, ${generatedCharacter.characterWeapons[n].damage} <br/><div class="description" id="weapon-${n}-description">${generatedCharacter.characterWeapons[n].meleeOrMissile}, ${generatedCharacter.characterWeapons[n].handling}, ${generatedCharacter.characterWeapons[n].missileRange}${generatedCharacter.characterWeapons[n].missileROF}${generatedCharacter.characterWeapons[n].weight} lbs.</div></li>`;
+  equipmentToDisplay += `<li class="handwritten-medium" id="weapon-${n}">${generatedCharacter.characterWeapons[n].weaponName}, ${generatedCharacter.characterWeapons[n].damage} <br/><div class="description" id="weapon-${n}-description">${generatedCharacter.characterWeapons[n].meleeOrMissile}, ${generatedCharacter.characterWeapons[n].handling}, ${generatedCharacter.characterWeapons[n].missileRange}${generatedCharacter.characterWeapons[n].missileROF}${generatedCharacter.characterWeapons[n].weight} lbs.</div></li>`;
 }
 
 for (let n = 0; n < generatedCharacter.characterAmmunitions.length; n++) {
-  equipmentToDisplay += `<li class="handwritten-large" id="weapon-${n}">${generatedCharacter.characterAmmunitions[n].ammunitionName}, <input type="number" value="${generatedCharacter.characterAmmunitions[n].quantity}"></input><div class="description" id="ammunition-${n}-description">${generatedCharacter.characterAmmunitions[n].weight} lbs.</div></li>`;
+  equipmentToDisplay += `<li class="handwritten-medium" id="weapon-${n}">${generatedCharacter.characterAmmunitions[n].ammunitionName}, <input type="number" value="${generatedCharacter.characterAmmunitions[n].quantity}"></input><div class="description" id="ammunition-${n}-description">${generatedCharacter.characterAmmunitions[n].weight} lbs.</div></li>`;
 }
 
 for (let n = 0; n < generatedCharacter.characterArmorGear.length; n++) {
   generatedCharacter.characterArmorGear[n].armorName == "Unarmored"
     ? (equipmentToDisplay += "")
-    : (equipmentToDisplay += `<li class="handwritten-large" id="armor">${
+    : (equipmentToDisplay += `<li class="handwritten-medium" id="armor">${
         generatedCharacter.characterArmorGear[n].armorName
       }<br /><div class="description">${
         document.getElementById("armor-class").value == "ascending" ? "+" : "-"
@@ -424,7 +424,7 @@ for (let n = 0; n < generatedCharacter.characterArmorGear.length; n++) {
 // document.getElementById("weapons-and-armor").innerHTML = weaponsAndArmor;
 
 for (let n = 0; n < generatedCharacter.characterContainer.length; n++) {
-  equipmentToDisplay += `<li class="handwritten-large">${
+  equipmentToDisplay += `<li class="handwritten-medium">${
     generatedCharacter.characterContainer[n].itemName
   }<div class="description">${Math.floor(
     10 + generatedCharacter.currentMoney * 0.1
@@ -432,10 +432,14 @@ for (let n = 0; n < generatedCharacter.characterContainer.length; n++) {
 }
 
 for (let n = 0; n < generatedCharacter.characterEquipment.length; n++) {
-  equipmentToDisplay += `<li class="handwritten-large">${
+  equipmentToDisplay += `<li class="handwritten-medium">${
     generatedCharacter.characterEquipment[n].itemName
-  }${generatedCharacter.characterEquipment[n].quantity != "" ? " - " : ""}${
-    generatedCharacter.characterEquipment[n].quantity
+  }${
+    generatedCharacter.characterEquipment[n].quantity != ""
+      ? ', <input type="number" value="'
+      : ""
+  }${generatedCharacter.characterEquipment[n].quantity}${
+    generatedCharacter.characterEquipment[n].quantity != "" ? '"></input>' : ""
   } ${
     generatedCharacter.characterEquipment[n].quantityType != ""
       ? generatedCharacter.characterEquipment[n].quantityType
@@ -445,7 +449,7 @@ for (let n = 0; n < generatedCharacter.characterEquipment.length; n++) {
 }
 equipmentToDisplay +=
   generatedCharacter.currentMoney > 0
-    ? `<li class="handwritten-large">${generatedCharacter.currentMoney} gp</li>`
+    ? `<li class="handwritten-medium">${generatedCharacter.currentMoney} gp</li>`
     : "";
 
 equipmentToDisplay += "</ol>";
