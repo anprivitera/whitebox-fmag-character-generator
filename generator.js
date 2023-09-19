@@ -467,9 +467,9 @@ document.getElementById("hirelings-loyalty-written").innerHTML = `${
   generatedCharacter.hirelingsLoyalty > 0 ? "+" : ""
 }${generatedCharacter.hirelingsLoyalty}`;
 
-document.getElementById(
-  "gear-weight-written"
-).innerHTML = `${generatedCharacter.gearWeight}/300 lbs.`;
+document.getElementById("gear-weight-written").innerHTML = `${Math.floor(
+  generatedCharacter.gearWeight
+)}/300 lbs.`;
 
 document.getElementById(
   "movement-normal-written"
