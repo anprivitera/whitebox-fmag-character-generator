@@ -21,6 +21,7 @@ export const ADVENTURING_GEAR = [
     repeatable: false,
     quantity: "",
     quantityType: "",
+    container: true,
   },
   {
     itemName: "Bedroll",
@@ -29,6 +30,7 @@ export const ADVENTURING_GEAR = [
     repeatable: false,
     quantity: "",
     quantityType: "",
+    container: false,
   },
   {
     itemName: "Belladonna, bunch",
@@ -37,6 +39,7 @@ export const ADVENTURING_GEAR = [
     repeatable: false,
     quantity: "",
     quantityType: "",
+    container: false,
   },
   {
     itemName: "Bottle (wine), glass",
@@ -45,6 +48,7 @@ export const ADVENTURING_GEAR = [
     repeatable: false,
     quantity: "",
     quantityType: "",
+    container: false,
   },
   {
     itemName: "Case (map or scroll)",
@@ -53,6 +57,7 @@ export const ADVENTURING_GEAR = [
     repeatable: false,
     quantity: "",
     quantityType: "",
+    container: false,
   },
   {
     itemName: "Crowbar",
@@ -61,6 +66,7 @@ export const ADVENTURING_GEAR = [
     repeatable: false,
     quantity: "",
     quantityType: "",
+    container: false,
   },
   {
     itemName: "Flint and Stell",
@@ -69,6 +75,7 @@ export const ADVENTURING_GEAR = [
     repeatable: false,
     quantity: "",
     quantityType: "",
+    container: false,
   },
   {
     itemName: "Garlic",
@@ -77,6 +84,7 @@ export const ADVENTURING_GEAR = [
     repeatable: true,
     quantity: 1,
     quantityType: "lb.",
+    container: false,
   },
   {
     itemName: "Grappling Hook",
@@ -85,6 +93,7 @@ export const ADVENTURING_GEAR = [
     repeatable: false,
     quantity: "",
     quantityType: "",
+    container: false,
   },
   {
     itemName: "Hammer",
@@ -93,6 +102,7 @@ export const ADVENTURING_GEAR = [
     repeatable: false,
     quantity: "",
     quantityType: "",
+    container: false,
   },
   {
     itemName: "Helmet",
@@ -101,6 +111,7 @@ export const ADVENTURING_GEAR = [
     repeatable: false,
     quantity: "",
     quantityType: "",
+    container: false,
   },
   {
     itemName: "Holy Symbol, wooden",
@@ -109,6 +120,7 @@ export const ADVENTURING_GEAR = [
     repeatable: false,
     quantity: "",
     quantityType: "",
+    container: false,
   },
   {
     itemName: "Holy Symbol, silver",
@@ -117,6 +129,7 @@ export const ADVENTURING_GEAR = [
     repeatable: false,
     quantity: "",
     quantityType: "",
+    container: false,
   },
   {
     itemName: "Holy Water",
@@ -125,6 +138,7 @@ export const ADVENTURING_GEAR = [
     repeatable: true,
     quantity: 1,
     quantityType: "small vial",
+    container: false,
   },
   {
     itemName: "Lantern",
@@ -133,6 +147,7 @@ export const ADVENTURING_GEAR = [
     repeatable: false,
     quantity: "",
     quantityType: "",
+    container: false,
   },
   {
     itemName: "Mirror (small), steel",
@@ -141,6 +156,7 @@ export const ADVENTURING_GEAR = [
     repeatable: false,
     quantity: "",
     quantityType: "",
+    container: false,
   },
   {
     itemName: "Oil (lamp)",
@@ -149,6 +165,7 @@ export const ADVENTURING_GEAR = [
     repeatable: true,
     quantity: 1,
     quantityType: "pint",
+    container: false,
   },
   {
     itemName: "Pole - 10 ft.",
@@ -157,6 +174,7 @@ export const ADVENTURING_GEAR = [
     repeatable: false,
     quantity: "",
     quantityType: "",
+    container: false,
   },
   {
     itemName: "Rations, trail",
@@ -165,6 +183,7 @@ export const ADVENTURING_GEAR = [
     repeatable: true,
     quantity: 1,
     quantityType: "day(s)",
+    container: false,
   },
   {
     itemName: "Rations, dried",
@@ -173,6 +192,7 @@ export const ADVENTURING_GEAR = [
     repeatable: true,
     quantity: 1,
     quantityType: "day(s)",
+    container: false,
   },
   {
     itemName: "Rope, hemp",
@@ -181,6 +201,7 @@ export const ADVENTURING_GEAR = [
     repeatable: true,
     quantity: 50,
     quantityType: "ft.",
+    container: false,
   },
   {
     itemName: "Rope, silk",
@@ -189,6 +210,7 @@ export const ADVENTURING_GEAR = [
     repeatable: true,
     quantity: 50,
     quantityType: "ft.",
+    container: false,
   },
   {
     itemName: "Sack (15 lb. capacity)",
@@ -197,6 +219,7 @@ export const ADVENTURING_GEAR = [
     repeatable: false,
     quantity: "",
     quantityType: "",
+    container: true,
   },
   {
     itemName: "Sack (30 lb. capacity)",
@@ -205,6 +228,7 @@ export const ADVENTURING_GEAR = [
     repeatable: false,
     quantity: "",
     quantityType: "",
+    container: true,
   },
   {
     itemName: "Shovel",
@@ -213,6 +237,7 @@ export const ADVENTURING_GEAR = [
     repeatable: false,
     quantity: "",
     quantityType: "",
+    container: false,
   },
   {
     itemName: "Spellbook",
@@ -221,6 +246,7 @@ export const ADVENTURING_GEAR = [
     repeatable: false,
     quantity: "",
     quantityType: "",
+    container: false,
   },
   {
     itemName: "Spikes, iron",
@@ -229,6 +255,7 @@ export const ADVENTURING_GEAR = [
     repeatable: true,
     quantity: 12,
     quantityType: "",
+    container: false,
   },
   {
     itemName: "Stakes, wooden",
@@ -237,6 +264,7 @@ export const ADVENTURING_GEAR = [
     repeatable: true,
     quantity: 12,
     quantityType: "",
+    container: false,
   },
   {
     itemName: "Tent",
@@ -245,6 +273,7 @@ export const ADVENTURING_GEAR = [
     repeatable: false,
     quantity: "",
     quantityType: "",
+    container: false,
   },
   {
     itemName: "Thieves' Tools",
@@ -253,6 +282,7 @@ export const ADVENTURING_GEAR = [
     repeatable: false,
     quantity: "",
     quantityType: "",
+    container: false,
   },
   {
     itemName: "Torches",
@@ -261,6 +291,7 @@ export const ADVENTURING_GEAR = [
     repeatable: true,
     quantity: 6,
     quantityType: "",
+    container: false,
   },
   {
     itemName: "Waterskin",
@@ -269,6 +300,7 @@ export const ADVENTURING_GEAR = [
     repeatable: false,
     quantity: "",
     quantityType: "",
+    container: false,
   },
   {
     itemName: "Wolfsbane, bunch",
@@ -277,6 +309,7 @@ export const ADVENTURING_GEAR = [
     repeatable: false,
     quantity: "",
     quantityType: "",
+    container: false,
   },
 ];
 

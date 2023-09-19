@@ -182,18 +182,31 @@ function generateCharacter() {
     }
   }
 
-  [generatedCharacter.characterEquipment, generatedCharacter.currentMoney] =
-    selectItems(
-      ADVENTURING_GEAR,
-      10 -
-        generatedCharacter.characterWeapons.length -
-        generatedCharacter.characterArmorGear.length -
-        generatedCharacter.characterAmmunitions.length +
-        generatedCharacter.attributes[0].modifierValue +
-        generatedCharacter.attributes[2].modifierValue,
-      generatedCharacter.currentMoney,
-      generatedCharacter.characterClass.characterClassName
-    );
+  let container = [];
+  let equipment = [];
+
+  [container, generatedCharacter.currentMoney] = selectItems(
+    ADVENTURING_GEAR.filter((x) => x.container),
+    Math.floor(Math.random() * 2 + 1),
+    generatedCharacter.currentMoney,
+    generatedCharacter.characterClass.characterClassName
+  );
+
+  [equipment, generatedCharacter.currentMoney] = selectItems(
+    ADVENTURING_GEAR,
+    10 -
+      generatedCharacter.characterWeapons.length -
+      generatedCharacter.characterArmorGear.length -
+      container.length -
+      generatedCharacter.characterAmmunitions.length +
+      generatedCharacter.attributes[0].modifierValue +
+      generatedCharacter.attributes[2].modifierValue,
+    generatedCharacter.currentMoney,
+    generatedCharacter.characterClass.characterClassName
+  );
+
+  generatedCharacter.characterEquipment.push(...container);
+  generatedCharacter.characterEquipment.push(...equipment);
 
   generatedCharacter.descendingArmorClass =
     9 - generatedCharacter.attributes[1].modifierValue;
