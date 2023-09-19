@@ -187,7 +187,7 @@ function generateCharacter() {
   [generatedCharacter.characterContainer, generatedCharacter.currentMoney] =
     selectItems(
       ADVENTURING_GEAR.filter((x) => x.container),
-      1,
+      Math.floor(Math.random() * 3 + 1),
       generatedCharacter.currentMoney,
       generatedCharacter.characterClass.characterClassName
     );
@@ -195,9 +195,10 @@ function generateCharacter() {
   [generatedCharacter.characterEquipment, generatedCharacter.currentMoney] =
     selectItems(
       ADVENTURING_GEAR.filter((x) => !x.container),
-      9 -
+      10 -
         generatedCharacter.characterWeapons.length -
         generatedCharacter.characterArmorGear.length -
+        generatedCharacter.characterContainer.length -
         generatedCharacter.characterAmmunitions.length +
         generatedCharacter.attributes[0].modifierValue +
         generatedCharacter.attributes[2].modifierValue,
@@ -235,6 +236,14 @@ function generateCharacter() {
     generatedCharacter.characterRace.standardMovementRate,
     generatedCharacter.gearWeight
   );
+
+  generatedCharacter.characterCapacity = 0;
+
+  for (let i = 0; i < generatedCharacter.characterContainer.length; i++) {
+    generatedCharacter.characterCapacity +=
+      generatedCharacter.characterContainer[i].capacity;
+  }
+
   return generatedCharacter;
 }
 setTimeout(removeLoadScreen, 1200);
@@ -424,11 +433,7 @@ for (let n = 0; n < generatedCharacter.characterArmorGear.length; n++) {
 // document.getElementById("weapons-and-armor").innerHTML = weaponsAndArmor;
 
 for (let n = 0; n < generatedCharacter.characterContainer.length; n++) {
-  equipmentToDisplay += `<li class="handwritten-medium">${
-    generatedCharacter.characterContainer[n].itemName
-  }<div class="description">${Math.floor(
-    10 + generatedCharacter.currentMoney * 0.1
-  )} lbs. filled</div></li>`;
+  equipmentToDisplay += `<li class="handwritten-medium">${generatedCharacter.characterContainer[n].itemName}</li>`;
 }
 
 for (let n = 0; n < generatedCharacter.characterEquipment.length; n++) {
@@ -464,7 +469,7 @@ document.getElementById("hirelings-loyalty-written").innerHTML = `${
 
 document.getElementById(
   "gear-weight-written"
-).innerHTML = `${generatedCharacter.gearWeight} lbs.`;
+).innerHTML = `${generatedCharacter.gearWeight}/300 lbs.`;
 
 document.getElementById(
   "movement-normal-written"
@@ -481,6 +486,10 @@ document.getElementById("movement-running-written").innerHTML = `${
 document.getElementById("movement-combat-written").innerHTML = `${
   generatedCharacter.movementRate / 3
 } ft.`;
+
+document.getElementById("carrying-capacity-written").innerHTML = `${Math.floor(
+  10 + generatedCharacter.currentMoney * 0.1
+)}/${generatedCharacter.characterCapacity} lbs.`;
 
 //TODO: implement async function so that there is no load time for the portait
 
