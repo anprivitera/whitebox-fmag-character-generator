@@ -254,10 +254,10 @@ newCharacterButton.addEventListener("click", generateCharacter);
 setTimeout(removeLoadScreen, 1200);
 let generatedCharacter = generateCharacter();
 
-// let characterPortrait = receivePortrait(
-//   generatedCharacter.characterRace.raceName,
-//   generatedCharacter.characterGender
-// ); //TODO: this should be outside of the main function otherwise it generates always the same picture for the same tag
+let characterPortrait = receivePortrait(
+  generatedCharacter.characterRace.raceName,
+  generatedCharacter.characterGender
+); //TODO: this should be outside of the main function otherwise it generates always the same picture for the same tag
 
 document
   .getElementById("change-portrait")
