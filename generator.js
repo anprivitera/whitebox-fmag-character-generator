@@ -390,7 +390,7 @@ for (let n = 0; n < generatedCharacter.characterEquipment.length; n++) {
 }
 equipmentToDisplay +=
   generatedCharacter.currentMoney > 0
-    ? `${generatedCharacter.currentMoney} gp</div>`
+    ? `<li class="handwritten-large">${generatedCharacter.currentMoney} gp</li>`
     : "";
 
 equipmentToDisplay += "</ol>";
