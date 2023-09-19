@@ -44,7 +44,22 @@ input[type=number] {
     background-color: whitesmoke;
     font-family: 'Kalam', cursive, sans-serif;
     font-size: medium;
-    width: 35px;
+    width: auto;
+    max-width: 55px;
+    height: 20px;
+    border-width: 0.3px;
+    border-style: dashed;
+    border-color: #34568B;
+}
+
+input[type=number]#treasure-box {
+    color: #34568B;
+    background-color: rgb(155, 28, 28);
+    font-family: 'Kalam', cursive, sans-serif;
+    font-size: medium;
+    width: auto;
+    max-width: 40px;
+    height: 20px;
     border-width: 0.3px;
     border-style: dashed;
     border-color: #34568B;
@@ -252,11 +267,23 @@ padding-right: 24px;
     }
 
 #equipment-box {
-    height: 470px;
-    width: 230px;
+    height: 450px;
+    /* width: 230px; */
     }
 
 
 #ability {
     font-size: medium;
+}
+
+.coin-slot-printed {
+    font-size: small;
+    font-family: "Josefin Sans", sans-serif;
+    color: black;
+    margin: 2px;
+}
+
+#treasure-box {
+    display: inline-flex;
+    padding-left: 5px;
 }

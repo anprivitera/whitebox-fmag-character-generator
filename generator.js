@@ -452,12 +452,9 @@ for (let n = 0; n < generatedCharacter.characterEquipment.length; n++) {
   }
     </li>`;
 }
-equipmentToDisplay +=
-  generatedCharacter.currentMoney > 0
-    ? `<li class="handwritten-medium">${generatedCharacter.currentMoney} gp</li>`
-    : "";
-
 equipmentToDisplay += "</ol>";
+
+document.getElementById("gp-written").value = generatedCharacter.currentMoney;
 
 document.getElementById("equipment-items").innerHTML = equipmentToDisplay;
 
