@@ -123,8 +123,9 @@ function generateCharacter() {
   if (
     generatedCharacter.characterWeapons[0].meleeOrMissile.indexOf("missile") >
       -1 &&
-    generatedCharacter.characterWeapons[0].meleeOrMissile.ammunitions
+    generatedCharacter.characterWeapons[0].ammunitions
   ) {
+    console.log(generatedCharacter.characterWeapons[0].ammunitions);
     let ammunitionForPurchasedWeapon = AMMUNITIONS.find(
       (x) =>
         x.usedBy.indexOf(generatedCharacter.characterWeapons[0].weaponName) > -1
@@ -167,7 +168,10 @@ function generateCharacter() {
         [weaponNum2, generatedCharacter.currentMoney] = selectItems(
           //TODO: dynamically select a different kind of weapon than the one the character already has
           WEAPONS.filter(
-            (x) => x.handling != generatedCharacter.characterWeapons[0].handling
+            (x) =>
+              x.handling != generatedCharacter.characterWeapons[0].handling ||
+              x.meleeOrMissile !=
+                generatedCharacter.characterWeapons[0].meleeOrMissile
           ),
           1,
           generatedCharacter.currentMoney,
@@ -181,7 +185,12 @@ function generateCharacter() {
   [generatedCharacter.characterEquipment, generatedCharacter.currentMoney] =
     selectItems(
       ADVENTURING_GEAR,
-      12,
+      10 -
+        generatedCharacter.characterWeapons.length -
+        generatedCharacter.characterArmorGear.length -
+        generatedCharacter.characterAmmunitions.length +
+        generatedCharacter.attributes[0].modifierValue +
+        generatedCharacter.attributes[2].modifierValue,
       generatedCharacter.currentMoney,
       generatedCharacter.characterClass.characterClassName
     );
