@@ -227,7 +227,7 @@ input[type=number]#treasure-box {
     display: flex;
     flex-direction:column;
     flex-wrap: nowrap;
-    width: 130px;
+    width: 135px;
 }
 
 #combat-info {
