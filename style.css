@@ -131,7 +131,7 @@ ul {
     display: inline-flex;
     flex-wrap: wrap;
     justify-content: center;
-    max-width: 435px;
+    max-width: 300px;
     border: 1px;
     border-style: solid;
     border-color: black;
@@ -156,7 +156,7 @@ ul {
     display: flex;
     flex-wrap: wrap;
     flex-direction: column;
-    width: 124px;
+    width: 140px;
 }
 
 .description {
@@ -187,13 +187,14 @@ ul {
 }
 
 #basic-info {
-    width: 115px;
+    width: 130px;
 }
 
 #attributes {
     display: flex;
     flex-direction:column;
     flex-wrap: nowrap;
+    width: 135px;
 }
 
 /* #attributes-written {
@@ -211,7 +212,7 @@ ul {
 
 
 #character-abilities {
-width: 260px;
+width: 250px;
 height: 350px;
 padding-right: 24px;
 }

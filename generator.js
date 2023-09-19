@@ -187,7 +187,7 @@ function generateCharacter() {
 
   [container, generatedCharacter.currentMoney] = selectItems(
     ADVENTURING_GEAR.filter((x) => x.container),
-    Math.floor(Math.random() * 2 + 1),
+    1,
     generatedCharacter.currentMoney,
     generatedCharacter.characterClass.characterClassName
   );
@@ -249,29 +249,29 @@ let characterPortrait = receivePortrait(
 document.getElementById("name-handwritten").innerHTML =
   generatedCharacter.characterName;
 
-document.getElementById("physique-handwritten").innerHTML =
-  PHYSIQUE[Math.floor(Math.random() * PHYSIQUE.length)];
+// document.getElementById("physique-handwritten").innerHTML =
+//   PHYSIQUE[Math.floor(Math.random() * PHYSIQUE.length)];
 
-document.getElementById("skin-handwritten").innerHTML =
-  SKIN[Math.floor(Math.random() * SKIN.length)];
+// document.getElementById("skin-handwritten").innerHTML =
+//   SKIN[Math.floor(Math.random() * SKIN.length)];
 
-document.getElementById("clothing-handwritten").innerHTML =
-  CLOTHING[Math.floor(Math.random() * CLOTHING.length)];
+// document.getElementById("clothing-handwritten").innerHTML =
+//   CLOTHING[Math.floor(Math.random() * CLOTHING.length)];
 
-document.getElementById("virtue-handwritten").innerHTML =
-  VIRTUE[Math.floor(Math.random() * VIRTUE.length)];
+// document.getElementById("virtue-handwritten").innerHTML =
+//   VIRTUE[Math.floor(Math.random() * VIRTUE.length)];
 
-document.getElementById("vice-handwritten").innerHTML =
-  VICE[Math.floor(Math.random() * VICE.length)];
+// document.getElementById("vice-handwritten").innerHTML =
+//   VICE[Math.floor(Math.random() * VICE.length)];
 
-document.getElementById("speech-handwritten").innerHTML =
-  SPEECH[Math.floor(Math.random() * SPEECH.length)];
+// document.getElementById("speech-handwritten").innerHTML =
+//   SPEECH[Math.floor(Math.random() * SPEECH.length)];
 
-document.getElementById("background-handwritten").innerHTML =
-  BACKGROUND[Math.floor(Math.random() * BACKGROUND.length)];
+// document.getElementById("background-handwritten").innerHTML =
+//   BACKGROUND[Math.floor(Math.random() * BACKGROUND.length)];
 
-document.getElementById("misfortune-handwritten").innerHTML =
-  MISFORTUNES[Math.floor(Math.random() * MISFORTUNES.length)];
+// document.getElementById("misfortune-handwritten").innerHTML =
+//   MISFORTUNES[Math.floor(Math.random() * MISFORTUNES.length)];
 
 document.getElementById(
   "char-alignment-written"
@@ -473,7 +473,7 @@ document.getElementById("movement-combat-written").innerHTML = `${
 
 document.getElementById(
   "portrait"
-).innerHTML = `<img src = "${characterPortrait}" width = 100></img>`;
+).innerHTML = `<img src = "${characterPortrait}" width = 125></img>`;
 
 const newCharacterButton = document.querySelector("#new-character");
 
