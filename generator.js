@@ -193,7 +193,7 @@ function generateCharacter() {
   );
 
   [equipment, generatedCharacter.currentMoney] = selectItems(
-    ADVENTURING_GEAR,
+    ADVENTURING_GEAR.filter((x) => !x.container),
     10 -
       generatedCharacter.characterWeapons.length -
       generatedCharacter.characterArmorGear.length -
