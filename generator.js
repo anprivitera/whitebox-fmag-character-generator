@@ -407,7 +407,7 @@ for (let n = 0; n < generatedCharacter.characterWeapons.length; n++) {
 }
 
 for (let n = 0; n < generatedCharacter.characterAmmunitions.length; n++) {
-  equipmentToDisplay += `<li class="handwritten-large" id="weapon-${n}">${generatedCharacter.characterAmmunitions[n].ammunitionName}, ${generatedCharacter.characterAmmunitions[n].quantity}</li>`;
+  equipmentToDisplay += `<li class="handwritten-large" id="weapon-${n}">${generatedCharacter.characterAmmunitions[n].ammunitionName}, ${generatedCharacter.characterAmmunitions[n].quantity}<div class="description" id="ammunition-${n}-description">${generatedCharacter.characterAmmunitions[n].weight} lbs.</div></li>`;
 }
 
 for (let n = 0; n < generatedCharacter.characterArmorGear.length; n++) {
@@ -426,9 +426,9 @@ for (let n = 0; n < generatedCharacter.characterArmorGear.length; n++) {
 for (let n = 0; n < generatedCharacter.characterContainer.length; n++) {
   equipmentToDisplay += `<li class="handwritten-large">${
     generatedCharacter.characterContainer[n].itemName
-  }<div class="description">${
+  }<div class="description">${Math.floor(
     10 + generatedCharacter.currentMoney * 0.1
-  } lbs. filled</div></li>`;
+  )} lbs. filled</div></li>`;
 }
 
 for (let n = 0; n < generatedCharacter.characterEquipment.length; n++) {
