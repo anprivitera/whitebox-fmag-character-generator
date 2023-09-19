@@ -37,13 +37,12 @@ import {
   CHARACTER_RACES,
   SHIELDS,
   WEAPONS,
+  AMMUNITIONS,
 } from "./Whitebox/constants.js";
 
 //TODO: Include name randomizer
 
 function generateCharacter() {
-  //TODO: Treat ammunitions as a separate purchase: if a character gets a missile weapon, they should obviously get also ammunitions. Bow > arrows, Sling > stones, Crossbow > Bolts
-
   let generatedCharacter = {};
 
   generatedCharacter.attributes = rollForAttributes(3);
@@ -96,6 +95,7 @@ function generateCharacter() {
   generatedCharacter.initialMoney = diceRoller(3, 6) * 10;
   generatedCharacter.currentMoney = generatedCharacter.initialMoney;
   generatedCharacter.characterWeapons = [];
+  generatedCharacter.characterAmmunitions = [];
   generatedCharacter.characterArmorGear = [];
   generatedCharacter.characterEquipment = [];
 
@@ -119,6 +119,19 @@ function generateCharacter() {
       generatedCharacter.currentMoney,
       generatedCharacter.characterClass.characterClassName
     );
+
+  if (
+    generatedCharacter.characterWeapons[0].meleeOrMissile.indexOf("missile") >
+    -1
+  ) {
+    let ammunitionForPurchasedWeapon = AMMUNITIONS.find(
+      (x) =>
+        x.usedBy.indexOf(generatedCharacter.characterWeapons[0].weaponName) > -1
+    );
+    generatedCharacter.characterAmmunitions.push(ammunitionForPurchasedWeapon);
+    generatedCharacter.currentMoney =
+      generatedCharacter.currentMoney - ammunitionForPurchasedWeapon.cost;
+  }
 
   [generatedCharacter.characterArmorGear, generatedCharacter.currentMoney] =
     selectItems(
@@ -189,6 +202,11 @@ function generateCharacter() {
   for (let i = 0; i < generatedCharacter.characterWeapons.length; i++) {
     generatedCharacter.gearWeight +=
       generatedCharacter.characterWeapons[i].weight;
+  }
+
+  for (let i = 0; i < generatedCharacter.characterAmmunitions.length; i++) {
+    generatedCharacter.gearWeight +=
+      generatedCharacter.characterAmmunitions[i].weight;
   }
 
   generatedCharacter.movementRate = determineMovementRate(
@@ -365,6 +383,11 @@ let equipmentToDisplay = "<ol>";
 for (let n = 0; n < generatedCharacter.characterWeapons.length; n++) {
   equipmentToDisplay += `<li class="handwritten-large" id="weapon-${n}">${generatedCharacter.characterWeapons[n].weaponName}, ${generatedCharacter.characterWeapons[n].damage} <br/><span class="description" id="weapon-${n}-description">${generatedCharacter.characterWeapons[n].handling}</li>`;
 }
+
+for (let n = 0; n < generatedCharacter.characterAmmunitions.length; n++) {
+  equipmentToDisplay += `<li class="handwritten-large" id="weapon-${n}">${generatedCharacter.characterAmmunitions[n].ammunitionName}, ${generatedCharacter.characterAmmunitions[n].quantity}</li>`;
+}
+
 for (let n = 0; n < generatedCharacter.characterArmorGear.length; n++) {
   generatedCharacter.characterArmorGear[n].armorName == "Unarmored"
     ? (equipmentToDisplay += "")

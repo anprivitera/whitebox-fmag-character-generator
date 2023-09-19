@@ -677,3 +677,33 @@ export const WEAPONS = [
     repeatable: false,
   },
 ];
+export const AMMUNITIONS = [
+  {
+    ammunitionName: "Quiver of Arrows",
+    quantity: 20,
+    weight: 2,
+    cost: 10,
+    usedBy: ["Bow, long", "Bow, short"],
+  },
+  {
+    ammunitionName: "Silver Arrow",
+    quantity: 1,
+    weight: 1,
+    cost: 5,
+    usedBy: ["Bow, long", "Bow, short"],
+  },
+  {
+    ammunitionName: "Case of Bolts",
+    quantity: 30,
+    weight: 6,
+    cost: 10,
+    usedBy: ["Crossbow, light", "Crossbow, heavy"],
+  },
+  {
+    ammunitionName: "Pouch of Stones",
+    quantity: 20,
+    weight: 2,
+    cost: 2,
+    usedBy: ["Sling"],
+  },
+];
