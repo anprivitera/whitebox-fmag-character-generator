@@ -115,14 +115,7 @@ function selectItems(
       currentMoney > 0
     ) {
       if (filteredByPrice[0].repeatable) {
-        if (selectedItems.indexOf(filteredByPrice[0]) <= -1) {
-          selectedItems.unshift(filteredByPrice[0]);
-        } else {
-          let elementToUpdate = selectedItems.find(
-            (x) => x == filteredByPrice[0]
-          );
-          elementToUpdate.quantity += filteredByPrice[0].quantity;
-        }
+        selectedItems.unshift(filteredByPrice[0]);
       } else {
         selectedItems.unshift(filteredByPrice.shift());
       }
