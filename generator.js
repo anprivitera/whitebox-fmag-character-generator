@@ -187,7 +187,7 @@ function generateCharacter() {
   [generatedCharacter.characterContainer, generatedCharacter.currentMoney] =
     selectItems(
       ADVENTURING_GEAR.filter((x) => x.container),
-      Math.floor(Math.random() * 3 + 1),
+      Math.floor(Math.random() * (3 - 2) + 2),
       generatedCharacter.currentMoney,
       generatedCharacter.characterClass.characterClassName
     );
