@@ -8,16 +8,16 @@ import {
   removeLoadScreen,
 } from "./System Neutral/functions.js";
 
-import {
-  PHYSIQUE,
-  SKIN,
-  CLOTHING,
-  VIRTUE,
-  VICE,
-  SPEECH,
-  BACKGROUND,
-  MISFORTUNES,
-} from "./System Neutral/constants.js";
+// import {
+//   PHYSIQUE,
+//   SKIN,
+//   CLOTHING,
+//   VIRTUE,
+//   VICE,
+//   SPEECH,
+//   BACKGROUND,
+//   MISFORTUNES,
+// } from "./System Neutral/constants.js";
 
 import {
   determineModifier,
