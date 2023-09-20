@@ -6,6 +6,7 @@ import {
   rollForAttributes,
   selectItems,
   removeLoadScreen,
+  addLoadScreen,
 } from "./System Neutral/functions.js";
 
 // import {
@@ -500,8 +501,12 @@ function generateCharacter() {
 
 const newCharacterButton = document.querySelector("#new-character");
 
-newCharacterButton.addEventListener("click", generateCharacter);
+newCharacterButton.addEventListener("click", function () {
+  addLoadScreen(), generateCharacter(), setTimeout(removeLoadScreen, 1200);
+});
 
 setTimeout(removeLoadScreen, 1200);
+
+generateCharacter();
 
 //TODO: implement async function so that there is no load time for the portait
