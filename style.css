@@ -39,6 +39,9 @@ ul {
     list-style-type: circle;
 }
 
+
+
+
 #treasure-box input[type=number] {
     color: #34568B;
     background-color: whitesmoke;
@@ -50,6 +53,10 @@ ul {
     border-width: 0.3px;
     border-style: dashed;
     border-color: #34568B;
+}
+
+#treasure-box input[type=number]:hover {
+    border-style: solid;
 }
 
 
@@ -168,6 +175,10 @@ ul {
     border-color: #34568B; 
 }
 
+.container input[type=number]:hover {
+    border-style: solid;
+}
+
 .side-container {
     flex-grow: 0;
     /* border: 1px;
@@ -235,6 +246,10 @@ ul {
     border-color: #34568B; 
 }
 
+#basic-info input[type=number]:hover {
+    border-style: solid;
+}
+
 #attributes {
     display: flex;
     flex-direction:column;
@@ -289,11 +304,15 @@ padding-right: 24px;
     font-family: 'Kalam', cursive, sans-serif;
     font-size: medium;
     width: auto;
-    max-width: 55px;
+    max-width: 35px;
     height: 20px;
     border-width: 0.3px;
     border-style: dashed;
     border-color: #34568B;
+}
+
+#equipment-box input[type=number]:hover {
+    border-style: solid;
 }
 
 #ability {
@@ -313,3 +332,4 @@ padding-right: 24px;
     height: 35px;
     align-items: center;
 }
+
