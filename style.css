@@ -39,27 +39,14 @@ ul {
     list-style-type: circle;
 }
 
-input[type=number] {
+#treasure-box input[type=number] {
     color: #34568B;
     background-color: whitesmoke;
     font-family: 'Kalam', cursive, sans-serif;
     font-size: medium;
     width: auto;
-    max-width: 55px;
-    height: 20px;
-    border-width: 0.3px;
-    border-style: dashed;
-    border-color: #34568B;
-}
-
-input[type=number]#treasure-box {
-    color: #34568B;
-    background-color: rgb(155, 28, 28);
-    font-family: 'Kalam', cursive, sans-serif;
-    font-size: medium;
-    width: auto;
-    max-width: 40px;
-    height: 20px;
+    max-width: 50px;
+    height: 25px;
     border-width: 0.3px;
     border-style: dashed;
     border-color: #34568B;
@@ -168,6 +155,19 @@ input[type=number]#treasure-box {
     border-color: black;
 }
 
+.container input[type=number] {
+    color: #34568B;
+    background-color: whitesmoke;
+    font-family: 'Kalam', cursive, sans-serif;
+    font-size: x-large;
+    width: auto;
+    max-width: 40px;
+    height: 50px;
+    border-width: 0.3px;
+    border-style: dashed;
+    border-color: #34568B; 
+}
+
 .side-container {
     flex-grow: 0;
     /* border: 1px;
@@ -223,6 +223,18 @@ input[type=number]#treasure-box {
     justify-content: center;
 }
 
+#basic-info input[type=number] {
+    color: #34568B;
+    background-color: whitesmoke;
+    font-family: 'Kalam', cursive, sans-serif;
+    font-size: x-large;
+    width: 100px;
+    height: 50px;
+    border-width: 0.3px;
+    border-style: dashed;
+    border-color: #34568B; 
+}
+
 #attributes {
     display: flex;
     flex-direction:column;
@@ -271,6 +283,18 @@ padding-right: 24px;
     /* width: 230px; */
     }
 
+#equipment-box input[type=number] {
+    color: #34568B;
+    background-color: whitesmoke;
+    font-family: 'Kalam', cursive, sans-serif;
+    font-size: medium;
+    width: auto;
+    max-width: 55px;
+    height: 20px;
+    border-width: 0.3px;
+    border-style: dashed;
+    border-color: #34568B;
+}
 
 #ability {
     font-size: medium;
@@ -286,4 +310,6 @@ padding-right: 24px;
 #treasure-box {
     display: inline-flex;
     padding-left: 5px;
+    height: 35px;
+    align-items: center;
 }
