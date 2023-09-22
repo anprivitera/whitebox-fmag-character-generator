@@ -46,7 +46,7 @@ import {
 
 let generatedCharacter = CHARACTER_SHEET;
 
-let { characterName, alignment, attributes, gender } = generatedCharacter;
+let { characterName, alignment, attributes, gender, characterClass } = generatedCharacter;
 
 function generateCharacter() {
   attributes = rollForAttributes(3);
@@ -57,7 +57,7 @@ function generateCharacter() {
     );
   }
 
-  generatedCharacter.characterClass = determineCharacterClass(
+  characterClass = determineCharacterClass(
     attributes,
     CHARACTER_CLASSES
   );
@@ -79,17 +79,17 @@ function generateCharacter() {
   generatedCharacter.xpBonus = determineXPBonus(
     attributes[4].attributeValue,
     attributes[5].attributeValue,
-    generatedCharacter.characterClass.primeAttributeValue
+    characterClass.primeAttributeValue
   );
 
   determineHP(generatedCharacter);
 
   generatedCharacter.toHitMelee =
-    generatedCharacter.characterClass.toHitAtLevel1 +
+    characterClass.toHitAtLevel1 +
     attributes[0].modifierValue +
     generatedCharacter.characterRace.raceMeleeBonus;
   generatedCharacter.toHitMissile =
-    generatedCharacter.characterClass.toHitAtLevel1 +
+    characterClass.toHitAtLevel1 +
     attributes[1].modifierValue +
     +generatedCharacter.characterRace.raceMissileBonus;
 
@@ -123,7 +123,7 @@ function generateCharacter() {
       weaponsByAttribute,
       1,
       generatedCharacter.currentMoney,
-      generatedCharacter.characterClass.characterClassName
+      characterClass.characterClassName
     );
 
   if (
@@ -147,13 +147,13 @@ function generateCharacter() {
       ARMORS,
       1,
       generatedCharacter.currentMoney,
-      generatedCharacter.characterClass.characterClassName
+      characterClass.characterClassName
     );
 
   if (
-    (generatedCharacter.characterClass.characterClassName == "Fighter" ||
-      generatedCharacter.characterClass.characterClassName == "Cleric" ||
-      generatedCharacter.characterClass.characterClassName == "Elf") &&
+    (characterClass.characterClassName == "Fighter" ||
+      characterClass.characterClassName == "Cleric" ||
+      characterClass.characterClassName == "Elf") &&
     generatedCharacter.equipment.weapons.some((x) => x.handling == "1H")
   ) {
     let chanceOfShield = Math.floor(Math.random() * 100);
@@ -169,7 +169,7 @@ function generateCharacter() {
       let chanceOf2ndWeapon = Math.floor(Math.random() * 100);
       if (
         chanceOf2ndWeapon <= 50 &&
-        generatedCharacter.characterClass.characterClassName == "Fighter"
+        characterClass.characterClassName == "Fighter"
       ) {
         let weaponNum2 = null;
         [weaponNum2, generatedCharacter.currentMoney] = selectItems(
@@ -181,7 +181,7 @@ function generateCharacter() {
           ),
           1,
           generatedCharacter.currentMoney,
-          generatedCharacter.characterClass.characterClassName
+          characterClass.characterClassName
         );
         generatedCharacter.equipment.weapons.push(...weaponNum2);
       }
@@ -196,7 +196,7 @@ function generateCharacter() {
       ADVENTURING_GEAR.filter((x) => x.container),
       Math.floor(Math.random() * (3 - 2) + 2),
       generatedCharacter.currentMoney,
-      generatedCharacter.characterClass.characterClassName
+      characterClass.characterClassName
     );
 
   [
@@ -212,7 +212,7 @@ function generateCharacter() {
     // + attributes[0].modifierValue +
     // attributes[2].modifierValue,
     generatedCharacter.currentMoney,
-    generatedCharacter.characterClass.characterClassName
+    characterClass.characterClassName
   );
 
   generatedCharacter.armorClass.descending -=
@@ -303,11 +303,11 @@ function generateCharacter() {
   if (generatedCharacter.characterLevel == 1) {
     generatedCharacter.currentXP = 0;
     generatedCharacter.xpToNextLevel =
-      generatedCharacter.characterClass.xpToLevel2;
+      characterClass.xpToLevel2;
   } else if (generatedCharacter.characterLevel == 2) {
-    generatedCharacter.currentXP = generatedCharacter.characterClass.xpToLevel2;
+    generatedCharacter.currentXP = characterClass.xpToLevel2;
     generatedCharacter.xpToNextLevel =
-      generatedCharacter.characterClass.xpToLevel2 * 2;
+      characterClass.xpToLevel2 * 2;
   }
   document.getElementById(
     "char-level-written"
@@ -320,7 +320,7 @@ function generateCharacter() {
   document.getElementById(
     "char-race-class-written"
   ).innerHTML = `<span>${generatedCharacter.characterRace.raceName}</span>
-  <span>${generatedCharacter.characterClass.characterClassName}</span>`;
+  <span>${characterClass.characterClassName}</span>`;
 
   document.getElementById("str-written").innerHTML =
     attributes[0].attributeValue;
@@ -368,14 +368,14 @@ function generateCharacter() {
   document.getElementById("hp-written").innerHTML =
     generatedCharacter.characterHP;
   document.getElementById("st-written").innerHTML =
-    generatedCharacter.characterClass.savingThrowAtLevel1;
+    characterClass.savingThrowAtLevel1;
   document.getElementById(
     "st-description-written"
-  ).innerHTML = `${generatedCharacter.characterClass.savingThrowBonus}${generatedCharacter.characterRace.raceSavingThrowBonus}`;
+  ).innerHTML = `${characterClass.savingThrowBonus}${generatedCharacter.characterRace.raceSavingThrowBonus}`;
 
   let characterAbilities = [];
   characterAbilities.push(
-    ...generatedCharacter.characterClass.classSpecialAbilities
+    ...characterClass.classSpecialAbilities
   );
   characterAbilities.push(
     ...generatedCharacter.characterRace.raceSpecialAbilities
@@ -395,8 +395,8 @@ function generateCharacter() {
   }${generatedCharacter.toHitMelee}`;
 
   document.getElementById("to-hit-melee-description-written").innerHTML = `${
-    generatedCharacter.characterClass.toHitAtLevel1 > 0 ? "+" : ""
-  }${generatedCharacter.characterClass.toHitAtLevel1} lvl, ${
+    characterClass.toHitAtLevel1 > 0 ? "+" : ""
+  }${characterClass.toHitAtLevel1} lvl, ${
     attributes[0].modifierValue > 0 ? "+" : ""
   }${attributes[0].modifierValue} ${
     attributes[0].attributeName
@@ -409,8 +409,8 @@ function generateCharacter() {
   }${generatedCharacter.toHitMissile}`;
 
   document.getElementById("to-hit-missile-description-written").innerHTML = `${
-    generatedCharacter.characterClass.toHitAtLevel1 > 0 ? "+" : ""
-  }${generatedCharacter.characterClass.toHitAtLevel1} lvl, ${
+    characterClass.toHitAtLevel1 > 0 ? "+" : ""
+  }${characterClass.toHitAtLevel1} lvl, ${
     attributes[1].modifierValue > 0 ? "+" : ""
   }${attributes[1].modifierValue} ${
     attributes[1].attributeName
