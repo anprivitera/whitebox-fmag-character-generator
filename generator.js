@@ -46,7 +46,7 @@ import {
 
 let generatedCharacter = CHARACTER_SHEET;
 
-let { characterName, alignment, attributes } = generatedCharacter;
+let { characterName, alignment, attributes, gender } = generatedCharacter;
 
 function generateCharacter() {
   attributes = rollForAttributes(3);
@@ -69,7 +69,7 @@ function generateCharacter() {
 
   const genderArray = ["man", "woman"];
 
-  generatedCharacter.gender =
+  gender =
     genderArray[Math.floor(Math.random() * genderArray.length)];
 
   characterName = "Kerrigan";
@@ -252,7 +252,7 @@ function generateCharacter() {
   }
   let characterPortrait = new receivePortrait(
     generatedCharacter.characterRace.raceName,
-    generatedCharacter.gender
+    gender
   ); //TODO: this should be outside of the main function otherwise it generates always the same picture for the same tag
 
   document
@@ -260,7 +260,7 @@ function generateCharacter() {
     .addEventListener("click", function () {
       new receivePortrait(
         generatedCharacter.characterRace.raceName,
-        generatedCharacter.gender
+        gender
       );
     });
 
