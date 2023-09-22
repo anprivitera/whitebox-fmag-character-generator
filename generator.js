@@ -41,14 +41,94 @@ import {
   AMMUNITIONS,
 } from "./Whitebox/constants.js";
 
-import {
-  human,
-} from "./node_modules/fantastical/src/generators/species.js";
-
 //TODO: Include name randomizer
 
 function generateCharacter() {
-  let generatedCharacter = {};
+  let generatedCharacter = {
+    characterName: undefined,
+    characterAlignment: undefined,
+    attributes: [
+      {
+        attributeName: "STR",
+        attributeValue: undefined,
+        modifierValue: 0,
+      },
+      {
+        attributeName: "DEX",
+        attributeValue: undefined,
+        modifierValue: 0,
+      },
+      {
+        attributeName: "CON",
+        attributeValue: undefined,
+        modifierValue: 0,
+      },
+      {
+        attributeName: "INT",
+        attributeValue: undefined,
+        modifierValue: 0,
+      },
+      {
+        attributeName: "WIS",
+        attributeValue: undefined,
+        modifierValue: 0,
+      },
+      {
+        attributeName: "CHA",
+        attributeValue: undefined,
+        modifierValue: 0,
+      },
+    ],
+    gender: undefined,
+    characterClass: {
+      characterClassName: undefined,
+      xpToLevel2: undefined,
+      HDatLevel1: undefined,
+      toHitAtLevel1: undefined,
+      savingThrowAtLevel1: undefined,
+      savingThrowBonus: undefined,
+      spellcasterType: undefined,
+      primeAttribute: undefined,
+      domininonKind: undefined,
+      dominionLevel: undefined,
+      classSpecialAbilities: [],
+    },
+    characterRace: {
+      raceID: undefined,
+      raceName: undefined,
+      maxLevel: undefined,
+      classedRace: undefined,
+      standardMovementRate: undefined,
+      raceSavingThrowBonus: undefined,
+      raceSpecialAbilities: undefined,
+      raceMeleeBonus: undefined,
+      raceMissileBonus: undefined,
+    },
+    xpBonus: undefined,
+    characterHP: undefined,
+    toHitMelee: undefined,
+    tohitMissile: undefined,
+    armorClass: {
+      descending: 9,
+      ascending: 10,
+    },
+    hirelings: {
+      maxHirelings: undefined,
+      hirelingsLoyalty: undefined,
+    },
+    initialMoney: undefined,
+    currentMoney: undefined,
+    equipment: {
+      weapons: [],
+      ammunitions: undefined,
+      armor: [],
+      adventuringGear: [],
+      containers: [],
+    },
+    gearWeight: 10,
+    characterCapacity: 0, //TODO: replace with automatic calculation of all equipment weight.
+    movementRate: undefined,
+  };
 
   generatedCharacter.attributes = rollForAttributes(3);
 
@@ -70,10 +150,10 @@ function generateCharacter() {
 
   const genderArray = ["man", "woman"];
 
-  generatedCharacter.characterGender =
+  generatedCharacter.gender =
     genderArray[Math.floor(Math.random() * genderArray.length)];
 
-  generatedCharacter.characterName = human;
+  generatedCharacter.characterName = "Kerrigan";
 
   generatedCharacter.characterAlignment = determineAlignment(ALIGNMENTS);
 
@@ -94,15 +174,17 @@ function generateCharacter() {
     generatedCharacter.attributes[1].modifierValue +
     +generatedCharacter.characterRace.raceMissileBonus;
 
-  [generatedCharacter.maxHirelings, generatedCharacter.hirelingsLoyalty] =
-    determineHirelings(generatedCharacter.attributes[5].attributeValue);
+  [
+    generatedCharacter.hirelings.maxHirelings,
+    generatedCharacter.hirelings.hirelingsLoyalty,
+  ] = determineHirelings(generatedCharacter.attributes[5].attributeValue);
 
   generatedCharacter.initialMoney = diceRoller(3, 6) * 10;
   generatedCharacter.currentMoney = generatedCharacter.initialMoney;
-  generatedCharacter.characterWeapons = [];
-  generatedCharacter.characterAmmunitions = [];
-  generatedCharacter.characterArmorGear = [];
-  generatedCharacter.characterEquipment = [];
+  generatedCharacter.equipment.weapons = [];
+  generatedCharacter.equipment.ammunitions = [];
+  generatedCharacter.equipment.armor = [];
+  generatedCharacter.equipment.adventuringGear = [];
 
   let weaponsByAttribute = null;
   if (generatedCharacter.toHitMelee < generatedCharacter.toHitMissile) {
@@ -117,7 +199,7 @@ function generateCharacter() {
     weaponsByAttribute = WEAPONS;
   }
 
-  [generatedCharacter.characterWeapons, generatedCharacter.currentMoney] =
+  [generatedCharacter.equipment.weapons, generatedCharacter.currentMoney] =
     selectItems(
       weaponsByAttribute,
       1,
@@ -126,21 +208,22 @@ function generateCharacter() {
     );
 
   if (
-    generatedCharacter.characterWeapons[0].meleeOrMissile.indexOf("missile") >
+    generatedCharacter.equipment.weapons[0].meleeOrMissile.indexOf("missile") >
       -1 &&
-    generatedCharacter.characterWeapons[0].ammunitions
+    generatedCharacter.equipment.weapons[0].ammunitions
   ) {
     //TODO: Find a way to include also the silver arrow for bows
     let ammunitionForPurchasedWeapon = AMMUNITIONS.find(
       (x) =>
-        x.usedBy.indexOf(generatedCharacter.characterWeapons[0].weaponName) > -1
+        x.usedBy.indexOf(generatedCharacter.equipment.weapons[0].weaponName) >
+        -1
     );
-    generatedCharacter.characterAmmunitions.push(ammunitionForPurchasedWeapon);
+    generatedCharacter.equipment.ammunitions.push(ammunitionForPurchasedWeapon);
     generatedCharacter.currentMoney =
       generatedCharacter.currentMoney - ammunitionForPurchasedWeapon.cost;
   }
 
-  [generatedCharacter.characterArmorGear, generatedCharacter.currentMoney] =
+  [generatedCharacter.equipment.armor, generatedCharacter.currentMoney] =
     selectItems(
       ARMORS,
       1,
@@ -152,7 +235,7 @@ function generateCharacter() {
     (generatedCharacter.characterClass.characterClassName == "Fighter" ||
       generatedCharacter.characterClass.characterClassName == "Cleric" ||
       generatedCharacter.characterClass.characterClassName == "Elf") &&
-    generatedCharacter.characterWeapons.some((x) => x.handling == "1H")
+    generatedCharacter.equipment.weapons.some((x) => x.handling == "1H")
   ) {
     let chanceOfShield = Math.floor(Math.random() * 100);
 
@@ -160,7 +243,7 @@ function generateCharacter() {
       chanceOfShield <= 40 &&
       generatedCharacter.currentMoney >= SHIELDS.cost
     ) {
-      generatedCharacter.characterArmorGear.push(SHIELDS);
+      generatedCharacter.equipment.armor.push(SHIELDS);
       generatedCharacter.currentMoney =
         generatedCharacter.currentMoney - SHIELDS.cost;
     } else {
@@ -173,15 +256,15 @@ function generateCharacter() {
         [weaponNum2, generatedCharacter.currentMoney] = selectItems(
           WEAPONS.filter(
             (x) =>
-              x.handling != generatedCharacter.characterWeapons[0].handling ||
+              x.handling != generatedCharacter.equipment.weapons[0].handling ||
               x.meleeOrMissile !=
-                generatedCharacter.characterWeapons[0].meleeOrMissile
+                generatedCharacter.equipment.weapons[0].meleeOrMissile
           ),
           1,
           generatedCharacter.currentMoney,
           generatedCharacter.characterClass.characterClassName
         );
-        generatedCharacter.characterWeapons.push(...weaponNum2);
+        generatedCharacter.equipment.weapons.push(...weaponNum2);
       }
     }
   }
@@ -189,7 +272,7 @@ function generateCharacter() {
   // let container = [];
   // let equipment = [];
 
-  [generatedCharacter.characterContainer, generatedCharacter.currentMoney] =
+  [generatedCharacter.equipment.containers, generatedCharacter.currentMoney] =
     selectItems(
       ADVENTURING_GEAR.filter((x) => x.container),
       Math.floor(Math.random() * (3 - 2) + 2),
@@ -197,42 +280,44 @@ function generateCharacter() {
       generatedCharacter.characterClass.characterClassName
     );
 
-  [generatedCharacter.characterEquipment, generatedCharacter.currentMoney] =
-    selectItems(
-      ADVENTURING_GEAR.filter((x) => !x.container),
-      12 -
-        generatedCharacter.characterWeapons.length -
-        generatedCharacter.characterArmorGear.length -
-        generatedCharacter.characterContainer.length -
-        generatedCharacter.characterAmmunitions.length,
-      // + generatedCharacter.attributes[0].modifierValue +
-      // generatedCharacter.attributes[2].modifierValue,
-      generatedCharacter.currentMoney,
-      generatedCharacter.characterClass.characterClassName
-    );
+  [
+    generatedCharacter.equipment.adventuringGear,
+    generatedCharacter.currentMoney,
+  ] = selectItems(
+    ADVENTURING_GEAR.filter((x) => !x.container),
+    12 -
+      generatedCharacter.equipment.weapons.length -
+      generatedCharacter.equipment.armor.length -
+      generatedCharacter.equipment.containers.length -
+      generatedCharacter.equipment.ammunitions.length,
+    // + generatedCharacter.attributes[0].modifierValue +
+    // generatedCharacter.attributes[2].modifierValue,
+    generatedCharacter.currentMoney,
+    generatedCharacter.characterClass.characterClassName
+  );
 
-  generatedCharacter.descendingArmorClass =
-    9 - generatedCharacter.attributes[1].modifierValue;
-  generatedCharacter.ascendingArmorClass =
-    10 + generatedCharacter.attributes[1].modifierValue;
+  generatedCharacter.armorClass.descending -=
+    generatedCharacter.attributes[1].modifierValue;
+  generatedCharacter.armorClass.ascending +=
+    generatedCharacter.attributes[1].modifierValue;
   generatedCharacter.gearWeight = 10;
-  for (let i = 0; i < generatedCharacter.characterArmorGear.length; i++) {
-    generatedCharacter.descendingArmorClass -=
-      generatedCharacter.characterArmorGear[i].AC;
-    generatedCharacter.ascendingArmorClass +=
-      generatedCharacter.characterArmorGear[i].AC;
+  for (let i = 0; i < generatedCharacter.equipment.armor.length; i++) {
+    generatedCharacter.armorClass.descending -=
+      generatedCharacter.equipment.armor[i].AC;
+    generatedCharacter.armorClass.ascending +=
+      generatedCharacter.equipment.armor[i].AC;
     generatedCharacter.gearWeight +=
-      generatedCharacter.characterArmorGear[i].weight;
+      generatedCharacter.equipment.armor[i].weight;
   }
 
-  for (let i = 0; i < generatedCharacter.characterWeapons.length; i++) {
+  for (let i = 0; i < generatedCharacter.equipment.weapons.length; i++) {
     generatedCharacter.gearWeight +=
-      generatedCharacter.characterWeapons[i].weight;
+      generatedCharacter.equipment.weapons[i].weight;
   }
 
-  for (let i = 0; i < generatedCharacter.characterAmmunitions.length; i++) {
+  for (let i = 0; i < generatedCharacter.equipment.ammunitions.length; i++) {
     generatedCharacter.gearWeight +=
-      generatedCharacter.characterAmmunitions[i].weight;
+      generatedCharacter.equipment.ammunitions[i].weight;
   }
 
   generatedCharacter.gearWeight += generatedCharacter.currentMoney * 0.1;
@@ -242,15 +327,13 @@ function generateCharacter() {
     generatedCharacter.gearWeight
   );
 
-  generatedCharacter.characterCapacity = 0;
-
-  for (let i = 0; i < generatedCharacter.characterContainer.length; i++) {
+  for (let i = 0; i < generatedCharacter.equipment.containers.length; i++) {
     generatedCharacter.characterCapacity +=
-      generatedCharacter.characterContainer[i].capacity;
+      generatedCharacter.equipment.containers[i].capacity;
   }
   let characterPortrait = new receivePortrait(
     generatedCharacter.characterRace.raceName,
-    generatedCharacter.characterGender
+    generatedCharacter.gender
   ); //TODO: this should be outside of the main function otherwise it generates always the same picture for the same tag
 
   document
@@ -258,7 +341,7 @@ function generateCharacter() {
     .addEventListener("click", function () {
       new receivePortrait(
         generatedCharacter.characterRace.raceName,
-        generatedCharacter.characterGender
+        generatedCharacter.gender
       );
     });
 
@@ -361,8 +444,8 @@ function generateCharacter() {
 
   document.getElementById("ac-written").innerHTML =
     document.getElementById("armor-class").value == "descending"
-      ? generatedCharacter.descendingArmorClass
-      : generatedCharacter.ascendingArmorClass;
+      ? generatedCharacter.armorClass.descending
+      : generatedCharacter.armorClass.ascending;
 
   document.getElementById("hp-written").innerHTML =
     generatedCharacter.characterHP;
@@ -419,47 +502,51 @@ function generateCharacter() {
 
   let equipmentToDisplay = "<ol>";
 
-  for (let n = 0; n < generatedCharacter.characterWeapons.length; n++) {
-    equipmentToDisplay += `<li class="handwritten-medium" id="weapon-${n}">${generatedCharacter.characterWeapons[n].weaponName}, ${generatedCharacter.characterWeapons[n].damage} <br/><div class="description" id="weapon-${n}-description">${generatedCharacter.characterWeapons[n].meleeOrMissile}, ${generatedCharacter.characterWeapons[n].handling}, ${generatedCharacter.characterWeapons[n].missileRange}${generatedCharacter.characterWeapons[n].missileROF}${generatedCharacter.characterWeapons[n].weight} lbs.</div></li>`;
+  for (let n = 0; n < generatedCharacter.equipment.weapons.length; n++) {
+    equipmentToDisplay += `<li class="handwritten-medium" id="weapon-${n}">${generatedCharacter.equipment.weapons[n].weaponName}, ${generatedCharacter.equipment.weapons[n].damage} <br/><div class="description" id="weapon-${n}-description">${generatedCharacter.equipment.weapons[n].meleeOrMissile}, ${generatedCharacter.equipment.weapons[n].handling}, ${generatedCharacter.equipment.weapons[n].missileRange}${generatedCharacter.equipment.weapons[n].missileROF}${generatedCharacter.equipment.weapons[n].weight} lbs.</div></li>`;
   }
 
-  for (let n = 0; n < generatedCharacter.characterAmmunitions.length; n++) {
-    equipmentToDisplay += `<li class="handwritten-medium" id="weapon-${n}">${generatedCharacter.characterAmmunitions[n].ammunitionName}, <input type="number" value="${generatedCharacter.characterAmmunitions[n].quantity}"></input><div class="description" id="ammunition-${n}-description">${generatedCharacter.characterAmmunitions[n].weight} lbs.</div></li>`;
+  for (let n = 0; n < generatedCharacter.equipment.ammunitions.length; n++) {
+    equipmentToDisplay += `<li class="handwritten-medium" id="weapon-${n}">${generatedCharacter.equipment.ammunitions[n].ammunitionName}, <input type="number" value="${generatedCharacter.equipment.ammunitions[n].quantity}"></input><div class="description" id="ammunition-${n}-description">${generatedCharacter.equipment.ammunitions[n].weight} lbs.</div></li>`;
   }
 
-  for (let n = 0; n < generatedCharacter.characterArmorGear.length; n++) {
-    generatedCharacter.characterArmorGear[n].armorName == "Unarmored"
+  for (let n = 0; n < generatedCharacter.equipment.armor.length; n++) {
+    generatedCharacter.equipment.armor[n].armorName == "Unarmored"
       ? (equipmentToDisplay += "")
       : (equipmentToDisplay += `<li class="handwritten-medium" id="armor">${
-          generatedCharacter.characterArmorGear[n].armorName
+          generatedCharacter.equipment.armor[n].armorName
         }<br /><div class="description">${
           document.getElementById("armor-class").value == "ascending"
             ? "+"
             : "-"
-        }${generatedCharacter.characterArmorGear[n].AC} AC, ${
-          generatedCharacter.characterArmorGear[n].weight
+        }${generatedCharacter.equipment.armor[n].AC} AC, ${
+          generatedCharacter.equipment.armor[n].weight
         } lbs.</div></li>`);
   }
   // document.getElementById("weapons-and-armor").innerHTML = weaponsAndArmor;
 
-  for (let n = 0; n < generatedCharacter.characterContainer.length; n++) {
-    equipmentToDisplay += `<li class="handwritten-medium">${generatedCharacter.characterContainer[n].itemName}</li>`;
+  for (let n = 0; n < generatedCharacter.equipment.containers.length; n++) {
+    equipmentToDisplay += `<li class="handwritten-medium">${generatedCharacter.equipment.containers[n].itemName}</li>`;
   }
 
-  for (let n = 0; n < generatedCharacter.characterEquipment.length; n++) {
+  for (
+    let n = 0;
+    n < generatedCharacter.equipment.adventuringGear.length;
+    n++
+  ) {
     equipmentToDisplay += `<li class="handwritten-medium">${
-      generatedCharacter.characterEquipment[n].itemName
+      generatedCharacter.equipment.adventuringGear[n].itemName
     }${
-      generatedCharacter.characterEquipment[n].quantity != ""
+      generatedCharacter.equipment.adventuringGear[n].quantity != ""
         ? ', <input type="number" value="'
         : ""
-    }${generatedCharacter.characterEquipment[n].quantity}${
-      generatedCharacter.characterEquipment[n].quantity != ""
+    }${generatedCharacter.equipment.adventuringGear[n].quantity}${
+      generatedCharacter.equipment.adventuringGear[n].quantity != ""
         ? '"></input>'
         : ""
     } ${
-      generatedCharacter.characterEquipment[n].quantityType != ""
-        ? generatedCharacter.characterEquipment[n].quantityType
+      generatedCharacter.equipment.adventuringGear[n].quantityType != ""
+        ? generatedCharacter.equipment.adventuringGear[n].quantityType
         : ""
     }
       </li>`;
@@ -471,10 +558,10 @@ function generateCharacter() {
   document.getElementById("equipment-items").innerHTML = equipmentToDisplay;
 
   document.getElementById("hirelings-max-written").innerHTML =
-    generatedCharacter.maxHirelings;
+    generatedCharacter.hirelings.maxHirelings;
   document.getElementById("hirelings-loyalty-written").innerHTML = `${
-    generatedCharacter.hirelingsLoyalty > 0 ? "+" : ""
-  }${generatedCharacter.hirelingsLoyalty}`;
+    generatedCharacter.hirelings.hirelingsLoyalty > 0 ? "+" : ""
+  }${generatedCharacter.hirelings.hirelingsLoyalty}`;
 
   document.getElementById("gear-weight-written").innerHTML = `${Math.floor(
     generatedCharacter.gearWeight
