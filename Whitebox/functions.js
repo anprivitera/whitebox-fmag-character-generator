@@ -117,11 +117,10 @@ export function determineAlignment(alignments) {
 }
 
 //TODO: calculate HP of higher levels
-export function determineHP(generatedCharacter) {
-  generatedCharacter.characterHP =
-    generatedCharacter.characterClass.HDatLevel1 +
-    generatedCharacter.attributes[2].modifierValue;
-  if (generatedCharacter.characterHP <= 0) {
-    generatedCharacter.characterHP = 1;
+export function determineHP(HD, constitutionModifier) {
+  let HP = HD + constitutionModifier;
+  if (HP <= 0) {
+    HP = 1;
   }
+  return HP;
 }

@@ -36,6 +36,7 @@ export const CHARACTER_SHEET = {
     },
   ],
   gender: undefined,
+  characterHP: undefined,
   characterClass: {
     characterClassName: undefined,
     xpToLevel2: undefined,
@@ -56,12 +57,12 @@ export const CHARACTER_SHEET = {
     classedRace: undefined,
     standardMovementRate: undefined,
     raceSavingThrowBonus: undefined,
-    raceSpecialAbilities: undefined,
+    raceSpecialAbilities: [],
     raceMeleeBonus: undefined,
     raceMissileBonus: undefined,
   },
   xpBonus: undefined,
-  characterHP: undefined,
+
   toHitMelee: undefined,
   tohitMissile: undefined,
   armorClass: {

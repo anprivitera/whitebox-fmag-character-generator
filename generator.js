@@ -46,7 +46,8 @@ import {
 
 let generatedCharacter = CHARACTER_SHEET;
 
-let { characterName, alignment, attributes, gender, characterClass } = generatedCharacter;
+let { characterName, alignment, attributes, gender, HP, characterClass } =
+  generatedCharacter;
 
 function generateCharacter() {
   attributes = rollForAttributes(3);
@@ -57,10 +58,7 @@ function generateCharacter() {
     );
   }
 
-  characterClass = determineCharacterClass(
-    attributes,
-    CHARACTER_CLASSES
-  );
+  characterClass = determineCharacterClass(attributes, CHARACTER_CLASSES);
 
   generatedCharacter = determineCharacterRace(
     generatedCharacter,
@@ -69,8 +67,7 @@ function generateCharacter() {
 
   const genderArray = ["man", "woman"];
 
-  gender =
-    genderArray[Math.floor(Math.random() * genderArray.length)];
+  gender = genderArray[Math.floor(Math.random() * genderArray.length)];
 
   characterName = "Kerrigan";
 
@@ -82,7 +79,7 @@ function generateCharacter() {
     characterClass.primeAttributeValue
   );
 
-  determineHP(generatedCharacter);
+  HP = determineHP(characterClass.HDatLevel1, attributes[2].modifierValue);
 
   generatedCharacter.toHitMelee =
     characterClass.toHitAtLevel1 +
@@ -215,10 +212,8 @@ function generateCharacter() {
     characterClass.characterClassName
   );
 
-  generatedCharacter.armorClass.descending -=
-    attributes[1].modifierValue;
-  generatedCharacter.armorClass.ascending +=
-    attributes[1].modifierValue;
+  generatedCharacter.armorClass.descending -= attributes[1].modifierValue;
+  generatedCharacter.armorClass.ascending += attributes[1].modifierValue;
   generatedCharacter.gearWeight = 10;
   for (let i = 0; i < generatedCharacter.equipment.armor.length; i++) {
     generatedCharacter.armorClass.descending -=
@@ -258,10 +253,7 @@ function generateCharacter() {
   document
     .getElementById("change-portrait")
     .addEventListener("click", function () {
-      new receivePortrait(
-        generatedCharacter.characterRace.raceName,
-        gender
-      );
+      new receivePortrait(generatedCharacter.characterRace.raceName, gender);
     });
 
   document.getElementById("name-handwritten").innerHTML = characterName;
@@ -290,9 +282,7 @@ function generateCharacter() {
   // document.getElementById("misfortune-handwritten").innerHTML =
   //   MISFORTUNES[Math.floor(Math.random() * MISFORTUNES.length)];
 
-  document.getElementById(
-    "char-alignment-written"
-  ).innerHTML = `${alignment}`;
+  document.getElementById("char-alignment-written").innerHTML = `${alignment}`;
 
   document.getElementById(
     "xp-bonus-written"
@@ -302,12 +292,10 @@ function generateCharacter() {
     document.getElementById("character-level").value;
   if (generatedCharacter.characterLevel == 1) {
     generatedCharacter.currentXP = 0;
-    generatedCharacter.xpToNextLevel =
-      characterClass.xpToLevel2;
+    generatedCharacter.xpToNextLevel = characterClass.xpToLevel2;
   } else if (generatedCharacter.characterLevel == 2) {
     generatedCharacter.currentXP = characterClass.xpToLevel2;
-    generatedCharacter.xpToNextLevel =
-      characterClass.xpToLevel2 * 2;
+    generatedCharacter.xpToNextLevel = characterClass.xpToLevel2 * 2;
   }
   document.getElementById(
     "char-level-written"
@@ -365,8 +353,7 @@ function generateCharacter() {
       ? generatedCharacter.armorClass.descending
       : generatedCharacter.armorClass.ascending;
 
-  document.getElementById("hp-written").innerHTML =
-    generatedCharacter.characterHP;
+  document.getElementById("hp-written").innerHTML = HP;
   document.getElementById("st-written").innerHTML =
     characterClass.savingThrowAtLevel1;
   document.getElementById(
@@ -374,9 +361,7 @@ function generateCharacter() {
   ).innerHTML = `${characterClass.savingThrowBonus}${generatedCharacter.characterRace.raceSavingThrowBonus}`;
 
   let characterAbilities = [];
-  characterAbilities.push(
-    ...characterClass.classSpecialAbilities
-  );
+  characterAbilities.push(...characterClass.classSpecialAbilities);
   characterAbilities.push(
     ...generatedCharacter.characterRace.raceSpecialAbilities
   );
@@ -398,11 +383,9 @@ function generateCharacter() {
     characterClass.toHitAtLevel1 > 0 ? "+" : ""
   }${characterClass.toHitAtLevel1} lvl, ${
     attributes[0].modifierValue > 0 ? "+" : ""
-  }${attributes[0].modifierValue} ${
-    attributes[0].attributeName
-  }, ${generatedCharacter.characterRace.raceMeleeBonus > 0 ? "+" : ""}${
-    generatedCharacter.characterRace.raceMeleeBonus
-  } race`;
+  }${attributes[0].modifierValue} ${attributes[0].attributeName}, ${
+    generatedCharacter.characterRace.raceMeleeBonus > 0 ? "+" : ""
+  }${generatedCharacter.characterRace.raceMeleeBonus} race`;
 
   document.getElementById("to-hit-missile-written").innerHTML = `${
     generatedCharacter.toHitMissile > 0 ? "+" : ""
@@ -412,11 +395,9 @@ function generateCharacter() {
     characterClass.toHitAtLevel1 > 0 ? "+" : ""
   }${characterClass.toHitAtLevel1} lvl, ${
     attributes[1].modifierValue > 0 ? "+" : ""
-  }${attributes[1].modifierValue} ${
-    attributes[1].attributeName
-  }, ${generatedCharacter.characterRace.raceMissileBonus > 0 ? "+" : ""}${
-    generatedCharacter.characterRace.raceMissileBonus
-  } race.`;
+  }${attributes[1].modifierValue} ${attributes[1].attributeName}, ${
+    generatedCharacter.characterRace.raceMissileBonus > 0 ? "+" : ""
+  }${generatedCharacter.characterRace.raceMissileBonus} race.`;
 
   let equipmentToDisplay = "<ol>";
 
