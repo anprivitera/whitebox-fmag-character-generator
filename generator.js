@@ -244,7 +244,7 @@ function generateCharacter() {
     generatedCharacter.characterCapacity +=
       generatedCharacter.characterContainer[i].capacity;
   }
-  let characterPortrait = receivePortrait(
+  let characterPortrait = new receivePortrait(
     generatedCharacter.characterRace.raceName,
     generatedCharacter.characterGender
   ); //TODO: this should be outside of the main function otherwise it generates always the same picture for the same tag
@@ -252,7 +252,7 @@ function generateCharacter() {
   document
     .getElementById("change-portrait")
     .addEventListener("click", function () {
-      receivePortrait(
+      new receivePortrait(
         generatedCharacter.characterRace.raceName,
         generatedCharacter.characterGender
       );
@@ -502,7 +502,7 @@ function generateCharacter() {
 const newCharacterButton = document.querySelector("#new-character");
 
 newCharacterButton.addEventListener("click", function () {
-  addLoadScreen(), generateCharacter(), setTimeout(removeLoadScreen, 1200);
+  addLoadScreen(), new generateCharacter(), setTimeout(removeLoadScreen, 1200);
 });
 
 setTimeout(removeLoadScreen, 1200);
