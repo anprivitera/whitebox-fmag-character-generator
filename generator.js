@@ -41,6 +41,10 @@ import {
   AMMUNITIONS,
 } from "./Whitebox/constants.js";
 
+import {
+  human,
+} from "./node_modules/fantastical/src/generators/species.js";
+
 //TODO: Include name randomizer
 
 function generateCharacter() {
@@ -69,7 +73,7 @@ function generateCharacter() {
   generatedCharacter.characterGender =
     genderArray[Math.floor(Math.random() * genderArray.length)];
 
-  generatedCharacter.characterName = "Arvos";
+  generatedCharacter.characterName = human;
 
   generatedCharacter.characterAlignment = determineAlignment(ALIGNMENTS);
 
