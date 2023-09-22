@@ -36,6 +36,7 @@ import {
   ARMORS,
   CHARACTER_CLASSES,
   CHARACTER_RACES,
+  CHARACTER_SHEET,
   SHIELDS,
   WEAPONS,
   AMMUNITIONS,
@@ -43,93 +44,11 @@ import {
 
 //TODO: Include name randomizer
 
-function generateCharacter() {
-  let generatedCharacter = {
-    characterName: undefined,
-    characterAlignment: undefined,
-    attributes: [
-      {
-        attributeName: "STR",
-        attributeValue: undefined,
-        modifierValue: 0,
-      },
-      {
-        attributeName: "DEX",
-        attributeValue: undefined,
-        modifierValue: 0,
-      },
-      {
-        attributeName: "CON",
-        attributeValue: undefined,
-        modifierValue: 0,
-      },
-      {
-        attributeName: "INT",
-        attributeValue: undefined,
-        modifierValue: 0,
-      },
-      {
-        attributeName: "WIS",
-        attributeValue: undefined,
-        modifierValue: 0,
-      },
-      {
-        attributeName: "CHA",
-        attributeValue: undefined,
-        modifierValue: 0,
-      },
-    ],
-    gender: undefined,
-    characterClass: {
-      characterClassName: undefined,
-      xpToLevel2: undefined,
-      HDatLevel1: undefined,
-      toHitAtLevel1: undefined,
-      savingThrowAtLevel1: undefined,
-      savingThrowBonus: undefined,
-      spellcasterType: undefined,
-      primeAttribute: undefined,
-      domininonKind: undefined,
-      dominionLevel: undefined,
-      classSpecialAbilities: [],
-    },
-    characterRace: {
-      raceID: undefined,
-      raceName: undefined,
-      maxLevel: undefined,
-      classedRace: undefined,
-      standardMovementRate: undefined,
-      raceSavingThrowBonus: undefined,
-      raceSpecialAbilities: undefined,
-      raceMeleeBonus: undefined,
-      raceMissileBonus: undefined,
-    },
-    xpBonus: undefined,
-    characterHP: undefined,
-    toHitMelee: undefined,
-    tohitMissile: undefined,
-    armorClass: {
-      descending: 9,
-      ascending: 10,
-    },
-    hirelings: {
-      maxHirelings: undefined,
-      hirelingsLoyalty: undefined,
-    },
-    initialMoney: undefined,
-    currentMoney: undefined,
-    equipment: {
-      weapons: [],
-      ammunitions: undefined,
-      armor: [],
-      adventuringGear: [],
-      containers: [],
-    },
-    gearWeight: 10,
-    characterCapacity: 0, //TODO: replace with automatic calculation of all equipment weight.
-    movementRate: undefined,
-  };
+let generatedCharacter = CHARACTER_SHEET;
 
+let { characterName } = generatedCharacter;
+
+function generateCharacter() {
   generatedCharacter.attributes = rollForAttributes(3);
 
   for (let i = 0; i < generatedCharacter.attributes.length; i++) {
@@ -153,7 +72,7 @@ function generateCharacter() {
   generatedCharacter.gender =
     genderArray[Math.floor(Math.random() * genderArray.length)];
 
-  generatedCharacter.characterName = "Kerrigan";
+  characterName = "Kerrigan";
 
   generatedCharacter.characterAlignment = determineAlignment(ALIGNMENTS);
 
@@ -345,8 +264,7 @@ function generateCharacter() {
       );
     });
 
-  document.getElementById("name-handwritten").innerHTML =
-    generatedCharacter.characterName;
+  document.getElementById("name-handwritten").innerHTML = characterName;
 
   // document.getElementById("physique-handwritten").innerHTML =
   //   PHYSIQUE[Math.floor(Math.random() * PHYSIQUE.length)];

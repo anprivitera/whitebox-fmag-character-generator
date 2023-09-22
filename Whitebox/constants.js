@@ -1,5 +1,91 @@
 import { diceRoller } from "../System Neutral/functions.js";
 
+export const CHARACTER_SHEET = {
+  characterName: undefined,
+  characterAlignment: undefined,
+  attributes: [
+    {
+      attributeName: "STR",
+      attributeValue: undefined,
+      modifierValue: 0,
+    },
+    {
+      attributeName: "DEX",
+      attributeValue: undefined,
+      modifierValue: 0,
+    },
+    {
+      attributeName: "CON",
+      attributeValue: undefined,
+      modifierValue: 0,
+    },
+    {
+      attributeName: "INT",
+      attributeValue: undefined,
+      modifierValue: 0,
+    },
+    {
+      attributeName: "WIS",
+      attributeValue: undefined,
+      modifierValue: 0,
+    },
+    {
+      attributeName: "CHA",
+      attributeValue: undefined,
+      modifierValue: 0,
+    },
+  ],
+  gender: undefined,
+  characterClass: {
+    characterClassName: undefined,
+    xpToLevel2: undefined,
+    HDatLevel1: undefined,
+    toHitAtLevel1: undefined,
+    savingThrowAtLevel1: undefined,
+    savingThrowBonus: undefined,
+    spellcasterType: undefined,
+    primeAttribute: undefined,
+    domininonKind: undefined,
+    dominionLevel: undefined,
+    classSpecialAbilities: [],
+  },
+  characterRace: {
+    raceID: undefined,
+    raceName: undefined,
+    maxLevel: undefined,
+    classedRace: undefined,
+    standardMovementRate: undefined,
+    raceSavingThrowBonus: undefined,
+    raceSpecialAbilities: undefined,
+    raceMeleeBonus: undefined,
+    raceMissileBonus: undefined,
+  },
+  xpBonus: undefined,
+  characterHP: undefined,
+  toHitMelee: undefined,
+  tohitMissile: undefined,
+  armorClass: {
+    descending: 9,
+    ascending: 10,
+  },
+  hirelings: {
+    maxHirelings: undefined,
+    hirelingsLoyalty: undefined,
+  },
+  initialMoney: undefined,
+  currentMoney: undefined,
+  equipment: {
+    weapons: [],
+    ammunitions: undefined,
+    armor: [],
+    adventuringGear: [],
+    containers: [],
+  },
+  gearWeight: 10,
+  characterCapacity: 0, //TODO: replace with automatic calculation of all equipment weight.
+  movementRate: undefined,
+};
+
 const ELF_PRIME_ATTRIBUTES = ["STR", "INT"];
 
 const MAGIC_USER_SPELLS_LEVEL_1 = [
