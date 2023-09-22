@@ -110,11 +110,6 @@ export function determineMovementRate(standardMovementRate, gearWeight) {
   return movementRate;
 }
 
-export function arrayRandomItem(array) {
-  let item = array[Math.floor(Math.random() * array.length)];
-  return item;
-}
-
 //TODO: calculate HP of higher levels
 export function determineHP(HD, constitutionModifier) {
   let HP = HD + constitutionModifier;

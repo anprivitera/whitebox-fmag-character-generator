@@ -6,6 +6,7 @@ import {
   selectItems,
   removeLoadScreen,
   addLoadScreen,
+  arrayRandomItem,
 } from "./System Neutral/functions.js";
 
 import { GENDERS } from "./System Neutral/constants.js";
@@ -16,9 +17,7 @@ import {
   determineCharacterRace,
   determineHirelings,
   determineMovementRate,
-  determineAlignment,
   determineHP,
-  arrayRandomItem,
 } from "./Whitebox/functions.js";
 
 import {
