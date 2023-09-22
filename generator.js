@@ -3,22 +3,12 @@ import {
   diceRoller,
   determineCharacterClass,
   receivePortrait,
-  rollForAttributes,
   selectItems,
   removeLoadScreen,
   addLoadScreen,
 } from "./System Neutral/functions.js";
 
-// import {
-//   PHYSIQUE,
-//   SKIN,
-//   CLOTHING,
-//   VIRTUE,
-//   VICE,
-//   SPEECH,
-//   BACKGROUND,
-//   MISFORTUNES,
-// } from "./System Neutral/constants.js";
+import { GENDERS } from "./System Neutral/constants.js";
 
 import {
   determineModifier,
@@ -28,6 +18,7 @@ import {
   determineMovementRate,
   determineAlignment,
   determineHP,
+  arrayRandomItem,
 } from "./Whitebox/functions.js";
 
 import {
@@ -44,17 +35,19 @@ import {
 
 //TODO: Include name randomizer
 
-let generatedCharacter = CHARACTER_SHEET;
-
-let { characterName, alignment, attributes, gender, HP, characterClass } =
-  generatedCharacter;
-
 function generateCharacter() {
-  attributes = rollForAttributes(3);
+  let generatedCharacter = CHARACTER_SHEET;
 
-  for (let i = 0; i < attributes.length; i++) {
-    attributes[i].modifierValue = determineModifier(
-      attributes[i].attributeValue
+  let { characterName, alignment, attributes, gender, HP, characterClass } =
+    generatedCharacter;
+
+  let [strength, dexterity, constitution, intelligence, wisdom, charisma] =
+    attributes;
+
+  for (const attribute in attributes) {
+    attributes[attribute].attributeValue = diceRoller(3, 6);
+    attributes[attribute].modifierValue = determineModifier(
+      attributes[attribute].attributeValue
     );
   }
 
@@ -65,35 +58,33 @@ function generateCharacter() {
     CHARACTER_RACES
   );
 
-  const genderArray = ["man", "woman"];
-
-  gender = genderArray[Math.floor(Math.random() * genderArray.length)];
+  gender = arrayRandomItem(GENDERS);
 
   characterName = "Kerrigan";
 
-  alignment = determineAlignment(ALIGNMENTS);
+  alignment = arrayRandomItem(ALIGNMENTS);
 
   generatedCharacter.xpBonus = determineXPBonus(
-    attributes[4].attributeValue,
-    attributes[5].attributeValue,
+    wisdom.attributeValue,
+    charisma.attributeValue,
     characterClass.primeAttributeValue
   );
 
-  HP = determineHP(characterClass.HDatLevel1, attributes[2].modifierValue);
+  HP = determineHP(characterClass.HDatLevel1, constitution.modifierValue);
 
   generatedCharacter.toHitMelee =
     characterClass.toHitAtLevel1 +
-    attributes[0].modifierValue +
+    strength.modifierValue +
     generatedCharacter.characterRace.raceMeleeBonus;
   generatedCharacter.toHitMissile =
     characterClass.toHitAtLevel1 +
-    attributes[1].modifierValue +
+    dexterity.modifierValue +
     +generatedCharacter.characterRace.raceMissileBonus;
 
   [
     generatedCharacter.hirelings.maxHirelings,
     generatedCharacter.hirelings.hirelingsLoyalty,
-  ] = determineHirelings(attributes[5].attributeValue);
+  ] = determineHirelings(charisma.attributeValue);
 
   generatedCharacter.initialMoney = diceRoller(3, 6) * 10;
   generatedCharacter.currentMoney = generatedCharacter.initialMoney;
@@ -206,22 +197,22 @@ function generateCharacter() {
       generatedCharacter.equipment.armor.length -
       generatedCharacter.equipment.containers.length -
       generatedCharacter.equipment.ammunitions.length,
-    // + attributes[0].modifierValue +
-    // attributes[2].modifierValue,
+    // + strength.modifierValue +
+    // constitution.modifierValue,
     generatedCharacter.currentMoney,
     characterClass.characterClassName
   );
 
-  generatedCharacter.armorClass.descending -= attributes[1].modifierValue;
-  generatedCharacter.armorClass.ascending += attributes[1].modifierValue;
+  generatedCharacter.armorClass.descending -= dexterity.modifierValue;
+  generatedCharacter.armorClass.ascending += dexterity.modifierValue;
   generatedCharacter.gearWeight = 10;
-  for (let i = 0; i < generatedCharacter.equipment.armor.length; i++) {
+  for (const armors in generatedCharacter.equipment.armor) {
     generatedCharacter.armorClass.descending -=
-      generatedCharacter.equipment.armor[i].AC;
+      generatedCharacter.equipment.armor[armors].AC;
     generatedCharacter.armorClass.ascending +=
-      generatedCharacter.equipment.armor[i].AC;
+      generatedCharacter.equipment.armor[armors].AC;
     generatedCharacter.gearWeight +=
-      generatedCharacter.equipment.armor[i].weight;
+      generatedCharacter.equipment.armor[armors].weight;
   }
 
   for (let i = 0; i < generatedCharacter.equipment.weapons.length; i++) {
@@ -310,41 +301,37 @@ function generateCharacter() {
   ).innerHTML = `<span>${generatedCharacter.characterRace.raceName}</span>
   <span>${characterClass.characterClassName}</span>`;
 
-  document.getElementById("str-written").innerHTML =
-    attributes[0].attributeValue;
+  document.getElementById("str-written").innerHTML = strength.attributeValue;
   document.getElementById("str-modifier-written").innerHTML = `(${
-    attributes[0].modifierValue > 0 ? "+" : ""
-  }${attributes[0].modifierValue})`;
+    strength.modifierValue > 0 ? "+" : ""
+  }${strength.modifierValue})`;
 
-  document.getElementById("dex-written").innerHTML =
-    attributes[1].attributeValue;
+  document.getElementById("dex-written").innerHTML = dexterity.attributeValue;
   document.getElementById("dex-modifier-written").innerHTML = `(${
-    attributes[1].modifierValue > 0 ? "+" : ""
-  }${attributes[1].modifierValue})`;
+    dexterity.modifierValue > 0 ? "+" : ""
+  }${dexterity.modifierValue})`;
 
   document.getElementById("con-written").innerHTML =
-    attributes[2].attributeValue;
+    constitution.attributeValue;
   document.getElementById("con-modifier-written").innerHTML = `(${
-    attributes[2].modifierValue > 0 ? "+" : ""
-  }${attributes[2].modifierValue})`;
+    constitution.modifierValue > 0 ? "+" : ""
+  }${constitution.modifierValue})`;
 
   document.getElementById("int-written").innerHTML =
-    attributes[3].attributeValue;
+    intelligence.attributeValue;
   document.getElementById("int-modifier-written").innerHTML = `(${
-    attributes[3].modifierValue > 0 ? "+" : ""
-  }${attributes[3].modifierValue})`;
+    intelligence.modifierValue > 0 ? "+" : ""
+  }${intelligence.modifierValue})`;
 
-  document.getElementById("wis-written").innerHTML =
-    attributes[4].attributeValue;
+  document.getElementById("wis-written").innerHTML = wisdom.attributeValue;
   document.getElementById("wis-modifier-written").innerHTML = `(${
-    attributes[4].modifierValue > 0 ? "+" : ""
-  }${attributes[4].modifierValue})`;
+    wisdom.modifierValue > 0 ? "+" : ""
+  }${wisdom.modifierValue})`;
 
-  document.getElementById("cha-written").innerHTML =
-    attributes[5].attributeValue;
+  document.getElementById("cha-written").innerHTML = charisma.attributeValue;
   document.getElementById("cha-modifier-written").innerHTML = `(${
-    attributes[5].modifierValue > 0 ? "+" : ""
-  }${attributes[5].modifierValue})`;
+    charisma.modifierValue > 0 ? "+" : ""
+  }${charisma.modifierValue})`;
 
   // document.getElementById("attributes").innerHTML = attributesToDisplay;
 
@@ -382,8 +369,8 @@ function generateCharacter() {
   document.getElementById("to-hit-melee-description-written").innerHTML = `${
     characterClass.toHitAtLevel1 > 0 ? "+" : ""
   }${characterClass.toHitAtLevel1} lvl, ${
-    attributes[0].modifierValue > 0 ? "+" : ""
-  }${attributes[0].modifierValue} ${attributes[0].attributeName}, ${
+    strength.modifierValue > 0 ? "+" : ""
+  }${strength.modifierValue} ${strength.attributeName}, ${
     generatedCharacter.characterRace.raceMeleeBonus > 0 ? "+" : ""
   }${generatedCharacter.characterRace.raceMeleeBonus} race`;
 
@@ -394,8 +381,8 @@ function generateCharacter() {
   document.getElementById("to-hit-missile-description-written").innerHTML = `${
     characterClass.toHitAtLevel1 > 0 ? "+" : ""
   }${characterClass.toHitAtLevel1} lvl, ${
-    attributes[1].modifierValue > 0 ? "+" : ""
-  }${attributes[1].modifierValue} ${attributes[1].attributeName}, ${
+    dexterity.modifierValue > 0 ? "+" : ""
+  }${dexterity.modifierValue} ${dexterity.attributeName}, ${
     generatedCharacter.characterRace.raceMissileBonus > 0 ? "+" : ""
   }${generatedCharacter.characterRace.raceMissileBonus} race.`;
 

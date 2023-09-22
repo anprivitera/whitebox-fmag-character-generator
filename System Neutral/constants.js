@@ -1,3 +1,5 @@
+export const GENDERS = ["man", "woman"];
+
 //From Knave
 export const PHYSIQUE = [
   "Athletic",

@@ -110,10 +110,9 @@ export function determineMovementRate(standardMovementRate, gearWeight) {
   return movementRate;
 }
 
-export function determineAlignment(alignments) {
-  let characterAlignment =
-    alignments[Math.floor(Math.random() * alignments.length)];
-  return characterAlignment;
+export function arrayRandomItem(array) {
+  let item = array[Math.floor(Math.random() * array.length)];
+  return item;
 }
 
 //TODO: calculate HP of higher levels
