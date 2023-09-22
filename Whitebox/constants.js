@@ -46,6 +46,7 @@ export const CHARACTER_SHEET = {
     savingThrowBonus: undefined,
     spellcasterType: undefined,
     primeAttribute: undefined,
+    primeAttributeValue: undefined,
     domininonKind: undefined,
     dominionLevel: undefined,
     classSpecialAbilities: [],
