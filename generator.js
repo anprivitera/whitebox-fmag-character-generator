@@ -46,19 +46,19 @@ import {
 
 let generatedCharacter = CHARACTER_SHEET;
 
-let { characterName, alignment } = generatedCharacter;
+let { characterName, alignment, attributes } = generatedCharacter;
 
 function generateCharacter() {
-  generatedCharacter.attributes = rollForAttributes(3);
+  attributes = rollForAttributes(3);
 
-  for (let i = 0; i < generatedCharacter.attributes.length; i++) {
-    generatedCharacter.attributes[i].modifierValue = determineModifier(
-      generatedCharacter.attributes[i].attributeValue
+  for (let i = 0; i < attributes.length; i++) {
+    attributes[i].modifierValue = determineModifier(
+      attributes[i].attributeValue
     );
   }
 
   generatedCharacter.characterClass = determineCharacterClass(
-    generatedCharacter.attributes,
+    attributes,
     CHARACTER_CLASSES
   );
 
@@ -77,8 +77,8 @@ function generateCharacter() {
   alignment = determineAlignment(ALIGNMENTS);
 
   generatedCharacter.xpBonus = determineXPBonus(
-    generatedCharacter.attributes[4].attributeValue,
-    generatedCharacter.attributes[5].attributeValue,
+    attributes[4].attributeValue,
+    attributes[5].attributeValue,
     generatedCharacter.characterClass.primeAttributeValue
   );
 
@@ -86,17 +86,17 @@ function generateCharacter() {
 
   generatedCharacter.toHitMelee =
     generatedCharacter.characterClass.toHitAtLevel1 +
-    generatedCharacter.attributes[0].modifierValue +
+    attributes[0].modifierValue +
     generatedCharacter.characterRace.raceMeleeBonus;
   generatedCharacter.toHitMissile =
     generatedCharacter.characterClass.toHitAtLevel1 +
-    generatedCharacter.attributes[1].modifierValue +
+    attributes[1].modifierValue +
     +generatedCharacter.characterRace.raceMissileBonus;
 
   [
     generatedCharacter.hirelings.maxHirelings,
     generatedCharacter.hirelings.hirelingsLoyalty,
-  ] = determineHirelings(generatedCharacter.attributes[5].attributeValue);
+  ] = determineHirelings(attributes[5].attributeValue);
 
   generatedCharacter.initialMoney = diceRoller(3, 6) * 10;
   generatedCharacter.currentMoney = generatedCharacter.initialMoney;
@@ -209,16 +209,16 @@ function generateCharacter() {
       generatedCharacter.equipment.armor.length -
       generatedCharacter.equipment.containers.length -
       generatedCharacter.equipment.ammunitions.length,
-    // + generatedCharacter.attributes[0].modifierValue +
-    // generatedCharacter.attributes[2].modifierValue,
+    // + attributes[0].modifierValue +
+    // attributes[2].modifierValue,
     generatedCharacter.currentMoney,
     generatedCharacter.characterClass.characterClassName
   );
 
   generatedCharacter.armorClass.descending -=
-    generatedCharacter.attributes[1].modifierValue;
+    attributes[1].modifierValue;
   generatedCharacter.armorClass.ascending +=
-    generatedCharacter.attributes[1].modifierValue;
+    attributes[1].modifierValue;
   generatedCharacter.gearWeight = 10;
   for (let i = 0; i < generatedCharacter.equipment.armor.length; i++) {
     generatedCharacter.armorClass.descending -=
@@ -323,40 +323,40 @@ function generateCharacter() {
   <span>${generatedCharacter.characterClass.characterClassName}</span>`;
 
   document.getElementById("str-written").innerHTML =
-    generatedCharacter.attributes[0].attributeValue;
+    attributes[0].attributeValue;
   document.getElementById("str-modifier-written").innerHTML = `(${
-    generatedCharacter.attributes[0].modifierValue > 0 ? "+" : ""
-  }${generatedCharacter.attributes[0].modifierValue})`;
+    attributes[0].modifierValue > 0 ? "+" : ""
+  }${attributes[0].modifierValue})`;
 
   document.getElementById("dex-written").innerHTML =
-    generatedCharacter.attributes[1].attributeValue;
+    attributes[1].attributeValue;
   document.getElementById("dex-modifier-written").innerHTML = `(${
-    generatedCharacter.attributes[1].modifierValue > 0 ? "+" : ""
-  }${generatedCharacter.attributes[1].modifierValue})`;
+    attributes[1].modifierValue > 0 ? "+" : ""
+  }${attributes[1].modifierValue})`;
 
   document.getElementById("con-written").innerHTML =
-    generatedCharacter.attributes[2].attributeValue;
+    attributes[2].attributeValue;
   document.getElementById("con-modifier-written").innerHTML = `(${
-    generatedCharacter.attributes[2].modifierValue > 0 ? "+" : ""
-  }${generatedCharacter.attributes[2].modifierValue})`;
+    attributes[2].modifierValue > 0 ? "+" : ""
+  }${attributes[2].modifierValue})`;
 
   document.getElementById("int-written").innerHTML =
-    generatedCharacter.attributes[3].attributeValue;
+    attributes[3].attributeValue;
   document.getElementById("int-modifier-written").innerHTML = `(${
-    generatedCharacter.attributes[3].modifierValue > 0 ? "+" : ""
-  }${generatedCharacter.attributes[3].modifierValue})`;
+    attributes[3].modifierValue > 0 ? "+" : ""
+  }${attributes[3].modifierValue})`;
 
   document.getElementById("wis-written").innerHTML =
-    generatedCharacter.attributes[4].attributeValue;
+    attributes[4].attributeValue;
   document.getElementById("wis-modifier-written").innerHTML = `(${
-    generatedCharacter.attributes[4].modifierValue > 0 ? "+" : ""
-  }${generatedCharacter.attributes[4].modifierValue})`;
+    attributes[4].modifierValue > 0 ? "+" : ""
+  }${attributes[4].modifierValue})`;
 
   document.getElementById("cha-written").innerHTML =
-    generatedCharacter.attributes[5].attributeValue;
+    attributes[5].attributeValue;
   document.getElementById("cha-modifier-written").innerHTML = `(${
-    generatedCharacter.attributes[5].modifierValue > 0 ? "+" : ""
-  }${generatedCharacter.attributes[5].modifierValue})`;
+    attributes[5].modifierValue > 0 ? "+" : ""
+  }${attributes[5].modifierValue})`;
 
   // document.getElementById("attributes").innerHTML = attributesToDisplay;
 
@@ -397,9 +397,9 @@ function generateCharacter() {
   document.getElementById("to-hit-melee-description-written").innerHTML = `${
     generatedCharacter.characterClass.toHitAtLevel1 > 0 ? "+" : ""
   }${generatedCharacter.characterClass.toHitAtLevel1} lvl, ${
-    generatedCharacter.attributes[0].modifierValue > 0 ? "+" : ""
-  }${generatedCharacter.attributes[0].modifierValue} ${
-    generatedCharacter.attributes[0].attributeName
+    attributes[0].modifierValue > 0 ? "+" : ""
+  }${attributes[0].modifierValue} ${
+    attributes[0].attributeName
   }, ${generatedCharacter.characterRace.raceMeleeBonus > 0 ? "+" : ""}${
     generatedCharacter.characterRace.raceMeleeBonus
   } race`;
@@ -411,9 +411,9 @@ function generateCharacter() {
   document.getElementById("to-hit-missile-description-written").innerHTML = `${
     generatedCharacter.characterClass.toHitAtLevel1 > 0 ? "+" : ""
   }${generatedCharacter.characterClass.toHitAtLevel1} lvl, ${
-    generatedCharacter.attributes[1].modifierValue > 0 ? "+" : ""
-  }${generatedCharacter.attributes[1].modifierValue} ${
-    generatedCharacter.attributes[1].attributeName
+    attributes[1].modifierValue > 0 ? "+" : ""
+  }${attributes[1].modifierValue} ${
+    attributes[1].attributeName
   }, ${generatedCharacter.characterRace.raceMissileBonus > 0 ? "+" : ""}${
     generatedCharacter.characterRace.raceMissileBonus
   } race.`;
