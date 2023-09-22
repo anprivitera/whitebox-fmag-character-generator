@@ -46,7 +46,7 @@ import {
 
 let generatedCharacter = CHARACTER_SHEET;
 
-let { characterName } = generatedCharacter;
+let { characterName, alignment } = generatedCharacter;
 
 function generateCharacter() {
   generatedCharacter.attributes = rollForAttributes(3);
@@ -74,7 +74,7 @@ function generateCharacter() {
 
   characterName = "Kerrigan";
 
-  generatedCharacter.characterAlignment = determineAlignment(ALIGNMENTS);
+  alignment = determineAlignment(ALIGNMENTS);
 
   generatedCharacter.xpBonus = determineXPBonus(
     generatedCharacter.attributes[4].attributeValue,
@@ -292,7 +292,7 @@ function generateCharacter() {
 
   document.getElementById(
     "char-alignment-written"
-  ).innerHTML = `${generatedCharacter.characterAlignment}`;
+  ).innerHTML = `${alignment}`;
 
   document.getElementById(
     "xp-bonus-written"
