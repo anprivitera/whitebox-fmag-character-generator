@@ -49,6 +49,7 @@ function generateCharacter() {
     toHitMelee,
     toHitMissile,
     armorClass,
+    hirelings,
   } = generatedCharacter;
 
   let [strength, dexterity, constitution, intelligence, wisdom, charisma] =
@@ -89,8 +90,8 @@ function generateCharacter() {
     +characterRace.raceMissileBonus;
 
   [
-    generatedCharacter.hirelings.maxHirelings,
-    generatedCharacter.hirelings.hirelingsLoyalty,
+    hirelings.maxHirelings,
+    hirelings.hirelingsLoyalty,
   ] = determineHirelings(charisma.attributeValue);
 
   generatedCharacter.initialMoney = diceRoller(3, 6) * 10;
@@ -442,10 +443,10 @@ function generateCharacter() {
   document.getElementById("equipment-items").innerHTML = equipmentToDisplay;
 
   document.getElementById("hirelings-max-written").innerHTML =
-    generatedCharacter.hirelings.maxHirelings;
+    hirelings.maxHirelings;
   document.getElementById("hirelings-loyalty-written").innerHTML = `${
-    generatedCharacter.hirelings.hirelingsLoyalty > 0 ? "+" : ""
-  }${generatedCharacter.hirelings.hirelingsLoyalty}`;
+    hirelings.hirelingsLoyalty > 0 ? "+" : ""
+  }${hirelings.hirelingsLoyalty}`;
 
   document.getElementById("gear-weight-written").innerHTML = `${Math.floor(
     generatedCharacter.gearWeight
