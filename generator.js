@@ -35,30 +35,39 @@ import {
 //TODO: Include name randomizer
 
 function generateCharacter() {
-  let generatedCharacter = CHARACTER_SHEET;
-
-  let {
-    characterName,
-    alignment,
-    attributes,
-    gender,
-    HP,
-    characterClass,
-    characterRace,
-    xpBonus,
-    toHitMelee,
-    toHitMissile,
-    armorClass,
-    hirelings,
-    money,
-    equipment,
-    gearWeight,
-    characterCapacity,
-    movementRate,
-  } = generatedCharacter;
-
-  let [strength, dexterity, constitution, intelligence, wisdom, charisma] =
-    attributes;
+  let generatedCharacter = CHARACTER_SHEET,
+    {
+      characterName,
+      alignment,
+      attributes,
+      gender,
+      HP,
+      characterClass,
+      characterRace,
+      xpBonus,
+      toHitMelee,
+      toHitMissile,
+      armorClass,
+      hirelings,
+      money,
+      equipment,
+      gearWeight,
+      characterCapacity,
+      movementRate,
+    } = generatedCharacter,
+    [strength, dexterity, constitution, intelligence, wisdom, charisma] =
+      attributes,
+    {
+      characterClassName,
+      xpToLevel2,
+      HDatLevel1,
+      toHitAtLevel1,
+      savingThrowAtLevel1,
+      savingThrowBonus,
+      primeAttributeValue,
+      classSpecialAbilities,
+    } = characterClass,
+    {raceID, raceName, maxLevel, classedRace, standardMovementRate, raceSavingThrowBonus, raceSpecialAbilities, raceMeleeBonus, raceMissileBonus} = characterRace;
 
   for (const attribute in attributes) {
     attributes[attribute].attributeValue = diceRoller(3, 6);
@@ -80,19 +89,15 @@ function generateCharacter() {
   xpBonus = determineXPBonus(
     wisdom.attributeValue,
     charisma.attributeValue,
-    characterClass.primeAttributeValue
+    primeAttributeValue
   );
 
-  HP = determineHP(characterClass.HDatLevel1, constitution.modifierValue);
+  HP = determineHP(HDatLevel1, constitution.modifierValue);
 
   toHitMelee =
-    characterClass.toHitAtLevel1 +
-    strength.modifierValue +
-    characterRace.raceMeleeBonus;
+    toHitAtLevel1 + strength.modifierValue + raceMeleeBonus;
   toHitMissile =
-    characterClass.toHitAtLevel1 +
-    dexterity.modifierValue +
-    +characterRace.raceMissileBonus;
+    toHitAtLevel1 + dexterity.modifierValue + +raceMissileBonus;
 
   [hirelings.maxHirelings, hirelings.hirelingsLoyalty] = determineHirelings(
     charisma.attributeValue
@@ -122,7 +127,7 @@ function generateCharacter() {
     weaponsByAttribute,
     1,
     money.currentMoney,
-    characterClass.characterClassName
+    characterClassName
   );
 
   if (
@@ -141,13 +146,13 @@ function generateCharacter() {
     ARMORS,
     1,
     money.currentMoney,
-    characterClass.characterClassName
+    characterClassName
   );
 
   if (
-    (characterClass.characterClassName == "Fighter" ||
-      characterClass.characterClassName == "Cleric" ||
-      characterClass.characterClassName == "Elf") &&
+    (characterClassName == "Fighter" ||
+      characterClassName == "Cleric" ||
+      characterClassName == "Elf") &&
     equipment.weapons.some((x) => x.handling == "1H")
   ) {
     let chanceOfShield = Math.floor(Math.random() * 100);
@@ -157,10 +162,7 @@ function generateCharacter() {
       money.currentMoney = money.currentMoney - SHIELDS.cost;
     } else {
       let chanceOf2ndWeapon = Math.floor(Math.random() * 100);
-      if (
-        chanceOf2ndWeapon <= 50 &&
-        characterClass.characterClassName == "Fighter"
-      ) {
+      if (chanceOf2ndWeapon <= 50 && characterClassName == "Fighter") {
         let weaponNum2 = null;
         [weaponNum2, money.currentMoney] = selectItems(
           WEAPONS.filter(
@@ -170,7 +172,7 @@ function generateCharacter() {
           ),
           1,
           money.currentMoney,
-          characterClass.characterClassName
+          characterClassName
         );
         equipment.weapons.push(...weaponNum2);
       }
@@ -184,7 +186,7 @@ function generateCharacter() {
     ADVENTURING_GEAR.filter((x) => x.container),
     Math.floor(Math.random() * (3 - 2) + 2),
     money.currentMoney,
-    characterClass.characterClassName
+    characterClassName
   );
 
   [equipment.adventuringGear, money.currentMoney] = selectItems(
@@ -197,7 +199,7 @@ function generateCharacter() {
     // + strength.modifierValue +
     // constitution.modifierValue,
     money.currentMoney,
-    characterClass.characterClassName
+    characterClassName
   );
 
   armorClass.descending = 9 - dexterity.modifierValue;
@@ -220,19 +222,19 @@ function generateCharacter() {
   gearWeight += money.currentMoney * 0.1;
 
   movementRate = determineMovementRate(
-    characterRace.standardMovementRate,
+    standardMovementRate,
     gearWeight
   );
 
   for (let i = 0; i < equipment.containers.length; i++) {
     characterCapacity += equipment.containers[i].capacity;
   }
-  let characterPortrait = new receivePortrait(characterRace.raceName, gender); //TODO: this should be outside of the main function otherwise it generates always the same picture for the same tag
+  let characterPortrait = new receivePortrait(raceName, gender); //TODO: this should be outside of the main function otherwise it generates always the same picture for the same tag
 
   document
     .getElementById("change-portrait")
     .addEventListener("click", function () {
-      new receivePortrait(characterRace.raceName, gender);
+      new receivePortrait(raceName, gender);
     });
 
   document.getElementById("name-handwritten").innerHTML = characterName;
@@ -269,14 +271,14 @@ function generateCharacter() {
     document.getElementById("character-level").value;
   if (generatedCharacter.characterLevel == 1) {
     generatedCharacter.currentXP = 0;
-    generatedCharacter.xpToNextLevel = characterClass.xpToLevel2;
+    generatedCharacter.xpToNextLevel = xpToLevel2;
   } else if (generatedCharacter.characterLevel == 2) {
-    generatedCharacter.currentXP = characterClass.xpToLevel2;
-    generatedCharacter.xpToNextLevel = characterClass.xpToLevel2 * 2;
+    generatedCharacter.currentXP = xpToLevel2;
+    generatedCharacter.xpToNextLevel = xpToLevel2 * 2;
   }
   document.getElementById(
     "char-level-written"
-  ).innerHTML = `${generatedCharacter.characterLevel} of ${characterRace.maxLevel}`;
+  ).innerHTML = `${generatedCharacter.characterLevel} of ${maxLevel}`;
   document.getElementById("char-current-xp-written").innerHTML =
     generatedCharacter.currentXP;
   document.getElementById("char-xp-to-next-lvl-written").innerHTML =
@@ -284,8 +286,8 @@ function generateCharacter() {
 
   document.getElementById(
     "char-race-class-written"
-  ).innerHTML = `<span>${characterRace.raceName}</span>
-  <span>${characterClass.characterClassName}</span>`;
+  ).innerHTML = `<span>${raceName}</span>
+  <span>${characterClassName}</span>`;
 
   document.getElementById("str-written").innerHTML = strength.attributeValue;
   document.getElementById("str-modifier-written").innerHTML = `(${
@@ -327,15 +329,14 @@ function generateCharacter() {
       : armorClass.ascending;
 
   document.getElementById("hp-written").innerHTML = HP;
-  document.getElementById("st-written").innerHTML =
-    characterClass.savingThrowAtLevel1;
+  document.getElementById("st-written").innerHTML = savingThrowAtLevel1;
   document.getElementById(
     "st-description-written"
-  ).innerHTML = `${characterClass.savingThrowBonus}${characterRace.raceSavingThrowBonus}`;
+  ).innerHTML = `${savingThrowBonus}${raceSavingThrowBonus}`;
 
   let characterAbilities = [];
-  characterAbilities.push(...characterClass.classSpecialAbilities);
-  characterAbilities.push(...characterRace.raceSpecialAbilities);
+  characterAbilities.push(...classSpecialAbilities);
+  characterAbilities.push(...raceSpecialAbilities);
 
   let characterAbilitiesToDisplay = `<ul>`;
   for (let i = 0; i < characterAbilities.length; i++) {
@@ -351,24 +352,24 @@ function generateCharacter() {
   }${toHitMelee}`;
 
   document.getElementById("to-hit-melee-description-written").innerHTML = `${
-    characterClass.toHitAtLevel1 > 0 ? "+" : ""
-  }${characterClass.toHitAtLevel1} lvl, ${
-    strength.modifierValue > 0 ? "+" : ""
-  }${strength.modifierValue} ${strength.attributeName}, ${
-    characterRace.raceMeleeBonus > 0 ? "+" : ""
-  }${characterRace.raceMeleeBonus} race`;
+    toHitAtLevel1 > 0 ? "+" : ""
+  }${toHitAtLevel1} lvl, ${strength.modifierValue > 0 ? "+" : ""}${
+    strength.modifierValue
+  } ${strength.attributeName}, ${raceMeleeBonus > 0 ? "+" : ""}${
+    raceMeleeBonus
+  } race`;
 
   document.getElementById("to-hit-missile-written").innerHTML = `${
     toHitMissile > 0 ? "+" : ""
   }${toHitMissile}`;
 
   document.getElementById("to-hit-missile-description-written").innerHTML = `${
-    characterClass.toHitAtLevel1 > 0 ? "+" : ""
-  }${characterClass.toHitAtLevel1} lvl, ${
-    dexterity.modifierValue > 0 ? "+" : ""
-  }${dexterity.modifierValue} ${dexterity.attributeName}, ${
-    characterRace.raceMissileBonus > 0 ? "+" : ""
-  }${characterRace.raceMissileBonus} race.`;
+    toHitAtLevel1 > 0 ? "+" : ""
+  }${toHitAtLevel1} lvl, ${dexterity.modifierValue > 0 ? "+" : ""}${
+    dexterity.modifierValue
+  } ${dexterity.attributeName}, ${
+    raceMissileBonus > 0 ? "+" : ""
+  }${raceMissileBonus} race.`;
 
   let equipmentToDisplay = "<ol>";
 
