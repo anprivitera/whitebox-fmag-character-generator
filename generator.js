@@ -156,17 +156,22 @@ function generateCharacter() {
   currentMoney = initialMoney;
 
   let weaponsByAttribute = null;
+  console.log(weaponsByAttribute);
   if (toHitMelee < toHitMissile) {
     weaponsByAttribute = WEAPONS.filter(
       (x) => x.meleeOrMissile.indexOf("missile") > -1
     );
+    console.log(weaponsByAttribute);
   } else if (toHitMelee > toHitMissile) {
     weaponsByAttribute = WEAPONS.filter(
       (x) => x.meleeOrMissile.indexOf("melee") > -1
     );
+    console.log(weaponsByAttribute);
   } else {
+    console.log(weaponsByAttribute);
     weaponsByAttribute = WEAPONS;
   }
+  console.log(weaponsByAttribute);
 
   [weapons, currentMoney] = selectItems(
     weaponsByAttribute,
@@ -174,6 +179,8 @@ function generateCharacter() {
     currentMoney,
     characterClassName
   );
+
+  console.log(weapons[0]);
 
   if (
     weapons[0].meleeOrMissile.indexOf("missile") > -1 &&
@@ -356,7 +363,7 @@ function generateCharacter() {
   // document.getElementById("attributes").innerHTML = attributesToDisplay;
 
   document.getElementById("ac-written").innerHTML =
-    document.getElementById("armor-class").value == "descendingAC"
+    document.getElementById("armor-class").value == "descendingPreferred"
       ? descendingAC
       : ascendingAC;
 
@@ -419,9 +426,9 @@ function generateCharacter() {
       : (equipmentToDisplay += `<li class="handwritten-medium" id="armor">${
           armor[piece].armorName
         }<br /><div class="description">${
-          document.getElementById("armor-class").value == "ascendingAC"
-            ? "+"
-            : "-"
+          document.getElementById("armor-class").value == "descendingPreferred"
+            ? "-"
+            : "+"
         }${armor[piece].AC} AC, ${armor[piece].weight} lbs.</div></li>`);
   }
   // document.getElementById("weapons-and-armor").innerHTML = weaponsAndArmor;
