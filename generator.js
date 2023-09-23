@@ -50,6 +50,7 @@ function generateCharacter() {
     toHitMissile,
     armorClass,
     hirelings,
+    money
   } = generatedCharacter;
 
   let [strength, dexterity, constitution, intelligence, wisdom, charisma] =
@@ -94,8 +95,8 @@ function generateCharacter() {
     hirelings.hirelingsLoyalty,
   ] = determineHirelings(charisma.attributeValue);
 
-  generatedCharacter.initialMoney = diceRoller(3, 6) * 10;
-  generatedCharacter.currentMoney = generatedCharacter.initialMoney;
+  money.initialMoney = diceRoller(3, 6) * 10;
+  money.currentMoney = money.initialMoney;
   generatedCharacter.equipment.weapons = [];
   generatedCharacter.equipment.ammunitions = [];
   generatedCharacter.equipment.armor = [];
@@ -114,11 +115,11 @@ function generateCharacter() {
     weaponsByAttribute = WEAPONS;
   }
 
-  [generatedCharacter.equipment.weapons, generatedCharacter.currentMoney] =
+  [generatedCharacter.equipment.weapons, money.currentMoney] =
     selectItems(
       weaponsByAttribute,
       1,
-      generatedCharacter.currentMoney,
+      money.currentMoney,
       characterClass.characterClassName
     );
 
@@ -134,15 +135,15 @@ function generateCharacter() {
         -1
     );
     generatedCharacter.equipment.ammunitions.push(ammunitionForPurchasedWeapon);
-    generatedCharacter.currentMoney =
-      generatedCharacter.currentMoney - ammunitionForPurchasedWeapon.cost;
+    money.currentMoney =
+      money.currentMoney - ammunitionForPurchasedWeapon.cost;
   }
 
-  [generatedCharacter.equipment.armor, generatedCharacter.currentMoney] =
+  [generatedCharacter.equipment.armor, money.currentMoney] =
     selectItems(
       ARMORS,
       1,
-      generatedCharacter.currentMoney,
+      money.currentMoney,
       characterClass.characterClassName
     );
 
@@ -156,11 +157,11 @@ function generateCharacter() {
 
     if (
       chanceOfShield <= 40 &&
-      generatedCharacter.currentMoney >= SHIELDS.cost
+      money.currentMoney >= SHIELDS.cost
     ) {
       generatedCharacter.equipment.armor.push(SHIELDS);
-      generatedCharacter.currentMoney =
-        generatedCharacter.currentMoney - SHIELDS.cost;
+      money.currentMoney =
+        money.currentMoney - SHIELDS.cost;
     } else {
       let chanceOf2ndWeapon = Math.floor(Math.random() * 100);
       if (
@@ -168,7 +169,7 @@ function generateCharacter() {
         characterClass.characterClassName == "Fighter"
       ) {
         let weaponNum2 = null;
-        [weaponNum2, generatedCharacter.currentMoney] = selectItems(
+        [weaponNum2, money.currentMoney] = selectItems(
           WEAPONS.filter(
             (x) =>
               x.handling != generatedCharacter.equipment.weapons[0].handling ||
@@ -176,7 +177,7 @@ function generateCharacter() {
                 generatedCharacter.equipment.weapons[0].meleeOrMissile
           ),
           1,
-          generatedCharacter.currentMoney,
+          money.currentMoney,
           characterClass.characterClassName
         );
         generatedCharacter.equipment.weapons.push(...weaponNum2);
@@ -187,17 +188,17 @@ function generateCharacter() {
   // let container = [];
   // let equipment = [];
 
-  [generatedCharacter.equipment.containers, generatedCharacter.currentMoney] =
+  [generatedCharacter.equipment.containers, money.currentMoney] =
     selectItems(
       ADVENTURING_GEAR.filter((x) => x.container),
       Math.floor(Math.random() * (3 - 2) + 2),
-      generatedCharacter.currentMoney,
+      money.currentMoney,
       characterClass.characterClassName
     );
 
   [
     generatedCharacter.equipment.adventuringGear,
-    generatedCharacter.currentMoney,
+    money.currentMoney,
   ] = selectItems(
     ADVENTURING_GEAR.filter((x) => !x.container),
     12 -
@@ -207,7 +208,7 @@ function generateCharacter() {
       generatedCharacter.equipment.ammunitions.length,
     // + strength.modifierValue +
     // constitution.modifierValue,
-    generatedCharacter.currentMoney,
+    money.currentMoney,
     characterClass.characterClassName
   );
 
@@ -231,7 +232,7 @@ function generateCharacter() {
       generatedCharacter.equipment.ammunitions[i].weight;
   }
 
-  generatedCharacter.gearWeight += generatedCharacter.currentMoney * 0.1;
+  generatedCharacter.gearWeight += money.currentMoney * 0.1;
 
   generatedCharacter.movementRate = determineMovementRate(
     characterRace.standardMovementRate,
@@ -438,7 +439,7 @@ function generateCharacter() {
   }
   equipmentToDisplay += "</ol>";
 
-  document.getElementById("gp-written").value = generatedCharacter.currentMoney;
+  document.getElementById("gp-written").value = money.currentMoney;
 
   document.getElementById("equipment-items").innerHTML = equipmentToDisplay;
 
@@ -470,7 +471,7 @@ function generateCharacter() {
 
   document.getElementById(
     "carrying-capacity-written"
-  ).innerHTML = `${Math.floor(10 + generatedCharacter.currentMoney * 0.1)}/${
+  ).innerHTML = `${Math.floor(10 + money.currentMoney * 0.1)}/${
     generatedCharacter.characterCapacity
   } lbs.`;
 }

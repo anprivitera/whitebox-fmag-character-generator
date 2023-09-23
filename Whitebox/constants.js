@@ -73,8 +73,7 @@ export const CHARACTER_SHEET = {
     maxHirelings: undefined,
     hirelingsLoyalty: undefined,
   },
-  initialMoney: undefined,
-  currentMoney: undefined,
+  money: { initialMoney: undefined, currentMoney: undefined },
   equipment: {
     weapons: [],
     ammunitions: undefined,
