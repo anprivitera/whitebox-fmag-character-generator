@@ -2,6 +2,8 @@ import { diceRoller } from "../System Neutral/functions.js";
 
 export const CHARACTER_SHEET = {
   characterName: undefined,
+  characterLevel: 1,
+  currentXP: 0,
   characterAlignment: undefined,
   attributes: [
     {
@@ -66,8 +68,8 @@ export const CHARACTER_SHEET = {
   toHitMelee: undefined,
   toHitMissile: undefined,
   armorClass: {
-    descending: undefined,
-    ascending: undefined,
+    descendingAC: undefined,
+    ascendingAC: undefined,
   },
   hirelings: {
     maxHirelings: undefined,
