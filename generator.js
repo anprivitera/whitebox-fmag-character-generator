@@ -48,6 +48,7 @@ function generateCharacter() {
     xpBonus,
     toHitMelee,
     toHitMissile,
+    armorClass,
   } = generatedCharacter;
 
   let [strength, dexterity, constitution, intelligence, wisdom, charisma] =
@@ -209,13 +210,13 @@ function generateCharacter() {
     characterClass.characterClassName
   );
 
-  generatedCharacter.armorClass.descending -= dexterity.modifierValue;
-  generatedCharacter.armorClass.ascending += dexterity.modifierValue;
+  armorClass.descending -= dexterity.modifierValue;
+  armorClass.ascending += dexterity.modifierValue;
   generatedCharacter.gearWeight = 10;
   for (const armors in generatedCharacter.equipment.armor) {
-    generatedCharacter.armorClass.descending -=
+    armorClass.descending -=
       generatedCharacter.equipment.armor[armors].AC;
-    generatedCharacter.armorClass.ascending +=
+    armorClass.ascending +=
       generatedCharacter.equipment.armor[armors].AC;
     generatedCharacter.gearWeight +=
       generatedCharacter.equipment.armor[armors].weight;
@@ -338,8 +339,8 @@ function generateCharacter() {
 
   document.getElementById("ac-written").innerHTML =
     document.getElementById("armor-class").value == "descending"
-      ? generatedCharacter.armorClass.descending
-      : generatedCharacter.armorClass.ascending;
+      ? armorClass.descending
+      : armorClass.ascending;
 
   document.getElementById("hp-written").innerHTML = HP;
   document.getElementById("st-written").innerHTML =
