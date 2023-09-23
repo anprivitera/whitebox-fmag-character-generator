@@ -29,45 +29,38 @@ export function determineXPBonus(
   return xpBonus;
 }
 
-export function determineCharacterRace(generatedCharacter, characterRaces) {
-  let availableCharacterRaces = characterRaces.map((x) => x);
-  if (generatedCharacter.characterClass.characterClassName == "Elf") {
-    generatedCharacter.characterRace = availableCharacterRaces.find(
-      (x) => x.raceID == "elf"
-    );
-    return generatedCharacter;
+export function determineCharacterRace(characterClass, characterRaces) {
+  let availableCharacterRaces = characterRaces.map((x) => x),
+    characterRace = availableCharacterRaces.find((x) => x.raceID == "human"),
+    classedRaces = availableCharacterRaces.filter((x) => x.classedRace == true);
+  if (characterClass.characterClassName == "Elf") {
+    characterRace = availableCharacterRaces.find((x) => x.raceID == "elf");
+    return characterRace;
   }
-  generatedCharacter.characterRace = availableCharacterRaces.find(
-    (x) => x.raceID == "human"
-  );
-  let classedRaces = availableCharacterRaces.filter(
-    (x) => x.classedRace == true
-  );
   if (
-    generatedCharacter.characterClass.characterClassName == "Fighter" ||
-    generatedCharacter.characterClass.characterClassName == "Thief"
+    characterClass.characterClassName == "Fighter" ||
+    characterClass.characterClassName == "Thief"
   ) {
-    generatedCharacter.characterRace =
+    characterRace =
       classedRaces[Math.floor(Math.random() * classedRaces.length)];
   }
   if (
-    generatedCharacter.characterRace.raceID == "halfling" &&
-    generatedCharacter.characterClass.characterClassName == "Fighter"
+    characterRace.raceID == "halfling" &&
+    characterClass.characterClassName == "Fighter"
   ) {
-    generatedCharacter.characterRace.maxLevel = 4;
+    characterRace.maxLevel = 4;
   } else if (
-    generatedCharacter.characterRace.raceID == "halfling" &&
-    generatedCharacter.characterClass.characterClassName == "Thief"
+    characterRace.raceID == "halfling" &&
+    characterClass.characterClassName == "Thief"
   ) {
-    generatedCharacter.characterRace.maxLevel = 6;
+    characterRace.maxLevel = 6;
   } //FABIO: is there a way to avoid using this if statement with "this" in the constant object?
-  if (generatedCharacter.characterRace.raceID == "human") {
-    generatedCharacter.characterRace.raceSpecialAbilities = [];
-    generatedCharacter.characterRace.raceSpecialAbilities.push(
-      `Can establish ${generatedCharacter.characterClass.domininonKind} at Level ${generatedCharacter.characterClass.dominionLevel}`
-    );
+  if (characterRace.raceID == "human") {
+    characterRace.raceSpecialAbilities = [
+      `Can establish ${characterClass.domininonKind} at Level ${characterClass.dominionLevel}`,
+    ];
   }
-  return generatedCharacter;
+  return characterRace;
 }
 
 export function determineHirelings(charisma) {

@@ -112,5 +112,4 @@ export {
   selectItems,
   removeLoadScreen,
   addLoadScreen,
-  arrayRandomItem,
 };
