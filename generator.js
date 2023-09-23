@@ -54,6 +54,7 @@ function generateCharacter() {
     equipment,
     gearWeight,
     characterCapacity,
+    movementRate,
   } = generatedCharacter;
 
   let [strength, dexterity, constitution, intelligence, wisdom, charisma] =
@@ -218,7 +219,7 @@ function generateCharacter() {
 
   gearWeight += money.currentMoney * 0.1;
 
-  generatedCharacter.movementRate = determineMovementRate(
+  movementRate = determineMovementRate(
     characterRace.standardMovementRate,
     gearWeight
   );
@@ -432,25 +433,25 @@ function generateCharacter() {
 
   document.getElementById(
     "movement-normal-written"
-  ).innerHTML = `${generatedCharacter.movementRate} ft.`;
+  ).innerHTML = `${movementRate} ft.`;
 
   document.getElementById("movement-careful-written").innerHTML = `${
-    generatedCharacter.movementRate / 2
+    movementRate / 2
   } ft.`;
 
   document.getElementById("movement-running-written").innerHTML = `${
-    generatedCharacter.movementRate * 2
+    movementRate * 2
   } ft.`;
 
   document.getElementById("movement-combat-written").innerHTML = `${
-    generatedCharacter.movementRate / 3
+    movementRate / 3
   } ft.`;
 
   document.getElementById(
     "carrying-capacity-written"
-  ).innerHTML = `${Math.floor(10 + money.currentMoney * 0.1)}/${
-    characterCapacity
-  } lbs.`;
+  ).innerHTML = `${Math.floor(
+    10 + money.currentMoney * 0.1
+  )}/${characterCapacity} lbs.`;
 }
 
 const newCharacterButton = document.querySelector("#new-character");
