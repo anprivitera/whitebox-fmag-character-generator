@@ -53,6 +53,7 @@ function generateCharacter() {
     money,
     equipment,
     gearWeight,
+    characterCapacity,
   } = generatedCharacter;
 
   let [strength, dexterity, constitution, intelligence, wisdom, charisma] =
@@ -223,7 +224,7 @@ function generateCharacter() {
   );
 
   for (let i = 0; i < equipment.containers.length; i++) {
-    generatedCharacter.characterCapacity += equipment.containers[i].capacity;
+    characterCapacity += equipment.containers[i].capacity;
   }
   let characterPortrait = new receivePortrait(characterRace.raceName, gender); //TODO: this should be outside of the main function otherwise it generates always the same picture for the same tag
 
@@ -448,7 +449,7 @@ function generateCharacter() {
   document.getElementById(
     "carrying-capacity-written"
   ).innerHTML = `${Math.floor(10 + money.currentMoney * 0.1)}/${
-    generatedCharacter.characterCapacity
+    characterCapacity
   } lbs.`;
 }
 
