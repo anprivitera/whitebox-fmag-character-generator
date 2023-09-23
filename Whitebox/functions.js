@@ -29,35 +29,34 @@ export function determineXPBonus(
   return xpBonus;
 }
 
-export function determineCharacterRace(characterClass, characterRaces) {
+export function determineCharacterRace(
+  characterClassName,
+  domininonKind,
+  dominionLevel,
+  characterRaces
+) {
   let availableCharacterRaces = characterRaces.map((x) => x),
     characterRace = availableCharacterRaces.find((x) => x.raceID == "human"),
     classedRaces = availableCharacterRaces.filter((x) => x.classedRace == true);
-  if (characterClass.characterClassName == "Elf") {
+  if (characterClassName == "Elf") {
     characterRace = availableCharacterRaces.find((x) => x.raceID == "elf");
     return characterRace;
   }
-  if (
-    characterClass.characterClassName == "Fighter" ||
-    characterClass.characterClassName == "Thief"
-  ) {
+  if (characterClassName == "Fighter" || characterClassName == "Thief") {
     characterRace =
       classedRaces[Math.floor(Math.random() * classedRaces.length)];
   }
-  if (
-    characterRace.raceID == "halfling" &&
-    characterClass.characterClassName == "Fighter"
-  ) {
+  if (characterRace.raceID == "halfling" && characterClassName == "Fighter") {
     characterRace.maxLevel = 4;
   } else if (
     characterRace.raceID == "halfling" &&
-    characterClass.characterClassName == "Thief"
+    characterClassName == "Thief"
   ) {
     characterRace.maxLevel = 6;
-  } //FABIO: is there a way to avoid using this if statement with "this" in the constant object?
+  }
   if (characterRace.raceID == "human") {
     characterRace.raceSpecialAbilities = [
-      `Can establish ${characterClass.domininonKind} at Level ${characterClass.dominionLevel}`,
+      `Can establish ${domininonKind} at Level ${dominionLevel}`,
     ];
   }
   return characterRace;

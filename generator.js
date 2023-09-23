@@ -35,63 +35,62 @@ import {
 //TODO: Include name randomizer
 
 function generateCharacter() {
-  let generatedCharacter = CHARACTER_SHEET;
-
-  let {
-    characterName,
-    characterLevel,
-    currentXP,
-    alignment,
-    attributes,
-    attributes: [
-      strength,
-      dexterity,
-      constitution,
-      intelligence,
-      wisdom,
-      charisma,
-    ],
-    gender,
-    HP,
-    characterClass,
-    characterClass: {
-      characterClassName,
-      xpToLevel2,
-      HDatLevel1,
-      toHitAtLevel1,
-      savingThrowAtLevel1,
-      savingThrowBonus,
-      spellcasterType,
-      primeAttribute,
-      primeAttributeValue,
-      domininonKind,
-      dominionLevel,
-      classSpecialAbilities,
-    },
-    characterRace,
-    characterRace: {
-      raceID,
-      raceName,
-      maxLevel,
-      classedRace,
-      standardMovementRate,
-      raceSavingThrowBonus,
-      raceSpecialAbilities,
-      raceMeleeBonus,
-      raceMissileBonus,
-    },
-    xpBonus,
-    toHitMelee,
-    toHitMissile,
-    armorClass: { descendingAC, ascendingAC },
-    hirelings: { maxHirelings, hirelingsLoyalty },
-    money: { initialMoney, currentMoney },
-    equipment,
-    equipment: { weapons, ammunitions, armor, adventuringGear, containers },
-    gearWeight,
-    characterCapacity,
-    movementRate,
-  } = generatedCharacter;
+  let generatedCharacter = CHARACTER_SHEET,
+    {
+      characterName,
+      characterLevel,
+      currentXP,
+      alignment,
+      attributes,
+      attributes: [
+        strength,
+        dexterity,
+        constitution,
+        intelligence,
+        wisdom,
+        charisma,
+      ],
+      gender,
+      HP,
+      characterClass,
+      characterClass: {
+        characterClassName,
+        xpToLevel2,
+        HDatLevel1,
+        toHitAtLevel1,
+        savingThrowAtLevel1,
+        savingThrowBonus,
+        spellcasterType,
+        primeAttribute,
+        primeAttributeValue,
+        domininonKind,
+        dominionLevel,
+        classSpecialAbilities,
+      },
+      characterRace,
+      characterRace: {
+        raceID,
+        raceName,
+        maxLevel,
+        classedRace,
+        standardMovementRate,
+        raceSavingThrowBonus,
+        raceSpecialAbilities,
+        raceMeleeBonus,
+        raceMissileBonus,
+      },
+      xpBonus,
+      toHitMelee,
+      toHitMissile,
+      armorClass: { descendingAC, ascendingAC },
+      hirelings: { maxHirelings, hirelingsLoyalty },
+      money: { initialMoney, currentMoney },
+      equipment,
+      equipment: { weapons, ammunitions, armor, adventuringGear, containers },
+      gearWeight,
+      characterCapacity,
+      movementRate,
+    } = generatedCharacter;
 
   for (const attribute in attributes) {
     attributes[attribute].attributeValue = diceRoller(3, 6);
@@ -125,7 +124,12 @@ function generateCharacter() {
     raceSpecialAbilities,
     raceMeleeBonus,
     raceMissileBonus,
-  } = determineCharacterRace(characterClass, CHARACTER_RACES));
+  } = determineCharacterRace(
+    characterClassName,
+    domininonKind,
+    dominionLevel,
+    CHARACTER_RACES
+  ));
 
   gender = arrayRandomItem(GENDERS);
 
@@ -150,10 +154,6 @@ function generateCharacter() {
 
   initialMoney = diceRoller(3, 6) * 10;
   currentMoney = initialMoney;
-  weapons = [];
-  ammunitions = [];
-  armor = [];
-  adventuringGear = [];
 
   let weaponsByAttribute = null;
   if (toHitMelee < toHitMissile) {
@@ -224,9 +224,6 @@ function generateCharacter() {
     }
   }
 
-  // let container = [];
-  // let equipment = [];
-
   [containers, currentMoney] = selectItems(
     ADVENTURING_GEAR.filter((x) => x.container),
     Math.floor(Math.random() * (3 - 2) + 2),
@@ -237,8 +234,6 @@ function generateCharacter() {
   [adventuringGear, currentMoney] = selectItems(
     ADVENTURING_GEAR.filter((x) => !x.container),
     12 - weapons.length - armor.length - containers.length - ammunitions.length,
-    // + strength.modifierValue +
-    // constitution.modifierValue,
     currentMoney,
     characterClassName
   );
@@ -252,12 +247,12 @@ function generateCharacter() {
     gearWeight += armor[armors].weight;
   }
 
-  for (let i = 0; i < weapons.length; i++) {
-    gearWeight += weapons[i].weight;
+  for (const item in weapons) {
+    gearWeight += weapons[item].weight;
   }
 
-  for (let i = 0; i < ammunitions.length; i++) {
-    gearWeight += ammunitions[i].weight;
+  for (const ammunition in ammunitions) {
+    gearWeight += ammunitions[ammunition].weight;
   }
 
   gearWeight += currentMoney * 0.1;
@@ -266,8 +261,8 @@ function generateCharacter() {
 
   characterCapacity = 0;
 
-  for (let i = 0; i < containers.length; i++) {
-    characterCapacity += containers[i].capacity;
+  for (const container in containers) {
+    characterCapacity += containers[container].capacity;
   }
   receivePortrait(raceName, gender); //TODO: Show a different image for each generated character
 
@@ -376,8 +371,8 @@ function generateCharacter() {
   characterAbilities.push(...raceSpecialAbilities);
 
   let characterAbilitiesToDisplay = `<ul>`;
-  for (let i = 0; i < characterAbilities.length; i++) {
-    characterAbilitiesToDisplay += `<li class="handwritten-medium" id="ability-${i}">${characterAbilities[i]}</li>`;
+  for (const ability in characterAbilities) {
+    characterAbilitiesToDisplay += `<li class="handwritten-medium">${characterAbilities[ability]}</li>`;
   }
   characterAbilitiesToDisplay += "</ul>";
 
@@ -410,41 +405,43 @@ function generateCharacter() {
 
   let equipmentToDisplay = "<ol>";
 
-  for (let n = 0; n < weapons.length; n++) {
-    equipmentToDisplay += `<li class="handwritten-medium" id="weapon-${n}">${weapons[n].weaponName}, ${weapons[n].damage} <br/><div class="description" id="weapon-${n}-description">${weapons[n].meleeOrMissile}, ${weapons[n].handling}, ${weapons[n].missileRange}${weapons[n].missileROF}${weapons[n].weight} lbs.</div></li>`;
+  for (const weapon in weapons) {
+    equipmentToDisplay += `<li class="handwritten-medium">${weapons[weapon].weaponName}, ${weapons[weapon].damage} <br/><div class="description">${weapons[weapon].meleeOrMissile}, ${weapons[weapon].handling}, ${weapons[weapon].missileRange}${weapons[weapon].missileROF}${weapons[weapon].weight} lbs.</div></li>`;
   }
 
-  for (let n = 0; n < ammunitions.length; n++) {
-    equipmentToDisplay += `<li class="handwritten-medium" id="weapon-${n}">${ammunitions[n].ammunitionName}, <input type="number" value="${ammunitions[n].quantity}"></input><div class="description" id="ammunition-${n}-description">${ammunitions[n].weight} lbs.</div></li>`;
+  for (const item in ammunitions) {
+    equipmentToDisplay += `<li class="handwritten-medium">${ammunitions[item].ammunitionName}, <input type="number" value="${ammunitions[item].quantity}"></input><div class="description">${ammunitions[item].weight} lbs.</div></li>`;
   }
 
-  for (let n = 0; n < armor.length; n++) {
-    armor[n].armorName == "Unarmored"
+  for (const piece in armor) {
+    armor[piece].armorName == "Unarmored"
       ? (equipmentToDisplay += "")
       : (equipmentToDisplay += `<li class="handwritten-medium" id="armor">${
-          armor[n].armorName
+          armor[piece].armorName
         }<br /><div class="description">${
           document.getElementById("armor-class").value == "ascendingAC"
             ? "+"
             : "-"
-        }${armor[n].AC} AC, ${armor[n].weight} lbs.</div></li>`);
+        }${armor[piece].AC} AC, ${armor[piece].weight} lbs.</div></li>`);
   }
   // document.getElementById("weapons-and-armor").innerHTML = weaponsAndArmor;
 
-  for (let n = 0; n < containers.length; n++) {
-    equipmentToDisplay += `<li class="handwritten-medium">${containers[n].itemName}</li>`;
+  for (const item in containers) {
+    equipmentToDisplay += `<li class="handwritten-medium">${containers[item].itemName}</li>`;
   }
 
-  for (let n = 0; n < adventuringGear.length; n++) {
+  for (const item in adventuringGear) {
     equipmentToDisplay += `<li class="handwritten-medium">${
-      adventuringGear[n].itemName
+      adventuringGear[item].itemName
     }${
-      adventuringGear[n].quantity != "" ? ', <input type="number" value="' : ""
-    }${adventuringGear[n].quantity}${
-      adventuringGear[n].quantity != "" ? '"></input>' : ""
+      adventuringGear[item].quantity != ""
+        ? ', <input type="number" value="'
+        : ""
+    }${adventuringGear[item].quantity}${
+      adventuringGear[item].quantity != "" ? '"></input>' : ""
     } ${
-      adventuringGear[n].quantityType != ""
-        ? adventuringGear[n].quantityType
+      adventuringGear[item].quantityType != ""
+        ? adventuringGear[item].quantityType
         : ""
     }
       </li>`;
@@ -496,5 +493,3 @@ newCharacterButton.addEventListener("click", function () {
 setTimeout(removeLoadScreen, 1200);
 
 generateCharacter();
-
-//TODO: implement async function so that there is no load time for the portait
