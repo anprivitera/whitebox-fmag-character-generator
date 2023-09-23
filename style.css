@@ -173,6 +173,7 @@ ul {
     border-width: 0.3px;
     border-style: dashed;
     border-color: #34568B; 
+    
 }
 
 .container input[type=number]:hover {
@@ -198,7 +199,8 @@ ul {
     display: flex;
     flex-wrap: wrap;
     flex-direction: column;
-    width: 140px;
+    width: 130px;
+    margin-top: 10px;
 }
 
 .description {
@@ -226,11 +228,12 @@ ul {
     border-style: solid;
     border-color: black;
     max-height: 248px;
-    width: 130px;
+    width: 117px;
 }
 
 #basic-info {
     width: 117px;
+    height: 495px;
     justify-content: center;
 }
 
@@ -279,8 +282,8 @@ ul {
 
 
 #character-abilities {
-width: 250px;
-height: 350px;
+width: 270px;
+height: 375px;
 padding-right: 24px;
 }
 
