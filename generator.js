@@ -170,6 +170,8 @@ function generateCharacter() {
     characterClassName
   );
 
+  ammunitions = [];
+
   if (
     weapons[0].meleeOrMissile.indexOf("missile") > -1 &&
     weapons[0].ammunitions
