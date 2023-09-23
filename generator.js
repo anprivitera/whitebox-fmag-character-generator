@@ -44,6 +44,20 @@ function generateCharacter() {
     gender,
     HP,
     characterClass,
+    characterClass: {
+      characterClassName,
+      xpToLevel2,
+      HDatLevel1,
+      toHitAtLevel1,
+      savingThrowAtLevel1,
+      savingThrowBonus,
+      spellcasterType,
+      primeAttribute,
+      primeAttributeValue,
+      domininonKind,
+      dominionLevel,
+      classSpecialAbilities,
+    },
     characterRace,
     xpBonus,
     toHitMelee,
@@ -61,7 +75,20 @@ function generateCharacter() {
     );
   }
 
-  characterClass = determineCharacterClass(attributes, CHARACTER_CLASSES);
+  ({
+    characterClassName,
+    xpToLevel2,
+    HDatLevel1,
+    toHitAtLevel1,
+    savingThrowAtLevel1,
+    savingThrowBonus,
+    spellcasterType,
+    primeAttribute,
+    primeAttributeValue,
+    domininonKind,
+    dominionLevel,
+    classSpecialAbilities,
+  } = determineCharacterClass(attributes, CHARACTER_CLASSES));
 
   characterRace = determineCharacterRace(characterClass, CHARACTER_RACES);
 
@@ -74,19 +101,15 @@ function generateCharacter() {
   xpBonus = determineXPBonus(
     wisdom.attributeValue,
     charisma.attributeValue,
-    characterClass.primeAttributeValue
+    primeAttributeValue
   );
 
-  HP = determineHP(characterClass.HDatLevel1, constitution.modifierValue);
+  HP = determineHP(HDatLevel1, constitution.modifierValue);
 
   toHitMelee =
-    characterClass.toHitAtLevel1 +
-    strength.modifierValue +
-    characterRace.raceMeleeBonus;
+    toHitAtLevel1 + strength.modifierValue + characterRace.raceMeleeBonus;
   toHitMissile =
-    characterClass.toHitAtLevel1 +
-    dexterity.modifierValue +
-    +characterRace.raceMissileBonus;
+    toHitAtLevel1 + dexterity.modifierValue + +characterRace.raceMissileBonus;
 
   [
     generatedCharacter.hirelings.maxHirelings,
@@ -118,7 +141,7 @@ function generateCharacter() {
       weaponsByAttribute,
       1,
       generatedCharacter.currentMoney,
-      characterClass.characterClassName
+      characterClassName
     );
 
   if (
@@ -138,17 +161,12 @@ function generateCharacter() {
   }
 
   [generatedCharacter.equipment.armor, generatedCharacter.currentMoney] =
-    selectItems(
-      ARMORS,
-      1,
-      generatedCharacter.currentMoney,
-      characterClass.characterClassName
-    );
+    selectItems(ARMORS, 1, generatedCharacter.currentMoney, characterClassName);
 
   if (
-    (characterClass.characterClassName == "Fighter" ||
-      characterClass.characterClassName == "Cleric" ||
-      characterClass.characterClassName == "Elf") &&
+    (characterClassName == "Fighter" ||
+      characterClassName == "Cleric" ||
+      characterClassName == "Elf") &&
     generatedCharacter.equipment.weapons.some((x) => x.handling == "1H")
   ) {
     let chanceOfShield = Math.floor(Math.random() * 100);
@@ -162,10 +180,7 @@ function generateCharacter() {
         generatedCharacter.currentMoney - SHIELDS.cost;
     } else {
       let chanceOf2ndWeapon = Math.floor(Math.random() * 100);
-      if (
-        chanceOf2ndWeapon <= 50 &&
-        characterClass.characterClassName == "Fighter"
-      ) {
+      if (chanceOf2ndWeapon <= 50 && characterClassName == "Fighter") {
         let weaponNum2 = null;
         [weaponNum2, generatedCharacter.currentMoney] = selectItems(
           WEAPONS.filter(
@@ -176,7 +191,7 @@ function generateCharacter() {
           ),
           1,
           generatedCharacter.currentMoney,
-          characterClass.characterClassName
+          characterClassName
         );
         generatedCharacter.equipment.weapons.push(...weaponNum2);
       }
@@ -191,7 +206,7 @@ function generateCharacter() {
       ADVENTURING_GEAR.filter((x) => x.container),
       Math.floor(Math.random() * (3 - 2) + 2),
       generatedCharacter.currentMoney,
-      characterClass.characterClassName
+      characterClassName
     );
 
   [
@@ -207,7 +222,7 @@ function generateCharacter() {
     // + strength.modifierValue +
     // constitution.modifierValue,
     generatedCharacter.currentMoney,
-    characterClass.characterClassName
+    characterClassName
   );
 
   armorClass.descending = 9 - dexterity.modifierValue;
@@ -283,10 +298,10 @@ function generateCharacter() {
     document.getElementById("character-level").value;
   if (generatedCharacter.characterLevel == 1) {
     generatedCharacter.currentXP = 0;
-    generatedCharacter.xpToNextLevel = characterClass.xpToLevel2;
+    generatedCharacter.xpToNextLevel = xpToLevel2;
   } else if (generatedCharacter.characterLevel == 2) {
-    generatedCharacter.currentXP = characterClass.xpToLevel2;
-    generatedCharacter.xpToNextLevel = characterClass.xpToLevel2 * 2;
+    generatedCharacter.currentXP = xpToLevel2;
+    generatedCharacter.xpToNextLevel = xpToLevel2 * 2;
   }
   document.getElementById(
     "char-level-written"
@@ -299,7 +314,7 @@ function generateCharacter() {
   document.getElementById(
     "char-race-class-written"
   ).innerHTML = `<span>${characterRace.raceName}</span>
-  <span>${characterClass.characterClassName}</span>`;
+  <span>${characterClassName}</span>`;
 
   document.getElementById("str-written").innerHTML = strength.attributeValue;
   document.getElementById("str-modifier-written").innerHTML = `(${
@@ -341,14 +356,13 @@ function generateCharacter() {
       : armorClass.ascending;
 
   document.getElementById("hp-written").innerHTML = HP;
-  document.getElementById("st-written").innerHTML =
-    characterClass.savingThrowAtLevel1;
+  document.getElementById("st-written").innerHTML = savingThrowAtLevel1;
   document.getElementById(
     "st-description-written"
-  ).innerHTML = `${characterClass.savingThrowBonus}${characterRace.raceSavingThrowBonus}`;
+  ).innerHTML = `${savingThrowBonus}${characterRace.raceSavingThrowBonus}`;
 
   let characterAbilities = [];
-  characterAbilities.push(...characterClass.classSpecialAbilities);
+  characterAbilities.push(...classSpecialAbilities);
   characterAbilities.push(...characterRace.raceSpecialAbilities);
 
   let characterAbilitiesToDisplay = `<ul>`;
@@ -365,22 +379,22 @@ function generateCharacter() {
   }${toHitMelee}`;
 
   document.getElementById("to-hit-melee-description-written").innerHTML = `${
-    characterClass.toHitAtLevel1 > 0 ? "+" : ""
-  }${characterClass.toHitAtLevel1} lvl, ${
-    strength.modifierValue > 0 ? "+" : ""
-  }${strength.modifierValue} ${strength.attributeName}, ${
-    characterRace.raceMeleeBonus > 0 ? "+" : ""
-  }${characterRace.raceMeleeBonus} race`;
+    toHitAtLevel1 > 0 ? "+" : ""
+  }${toHitAtLevel1} lvl, ${strength.modifierValue > 0 ? "+" : ""}${
+    strength.modifierValue
+  } ${strength.attributeName}, ${characterRace.raceMeleeBonus > 0 ? "+" : ""}${
+    characterRace.raceMeleeBonus
+  } race`;
 
   document.getElementById("to-hit-missile-written").innerHTML = `${
     toHitMissile > 0 ? "+" : ""
   }${toHitMissile}`;
 
   document.getElementById("to-hit-missile-description-written").innerHTML = `${
-    characterClass.toHitAtLevel1 > 0 ? "+" : ""
-  }${characterClass.toHitAtLevel1} lvl, ${
-    dexterity.modifierValue > 0 ? "+" : ""
-  }${dexterity.modifierValue} ${dexterity.attributeName}, ${
+    toHitAtLevel1 > 0 ? "+" : ""
+  }${toHitAtLevel1} lvl, ${dexterity.modifierValue > 0 ? "+" : ""}${
+    dexterity.modifierValue
+  } ${dexterity.attributeName}, ${
     characterRace.raceMissileBonus > 0 ? "+" : ""
   }${characterRace.raceMissileBonus} race.`;
 
