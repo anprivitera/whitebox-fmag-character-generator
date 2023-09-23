@@ -66,8 +66,8 @@ export const CHARACTER_SHEET = {
   toHitMelee: undefined,
   tohitMissile: undefined,
   armorClass: {
-    descending: 9,
-    ascending: 10,
+    descending: undefined,
+    ascending: undefined,
   },
   hirelings: {
     maxHirelings: undefined,

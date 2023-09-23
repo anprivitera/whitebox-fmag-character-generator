@@ -210,14 +210,12 @@ function generateCharacter() {
     characterClass.characterClassName
   );
 
-  armorClass.descending -= dexterity.modifierValue;
-  armorClass.ascending += dexterity.modifierValue;
+  armorClass.descending = 9 - dexterity.modifierValue;
+  armorClass.ascending = 10 + dexterity.modifierValue;
   generatedCharacter.gearWeight = 10;
   for (const armors in generatedCharacter.equipment.armor) {
-    armorClass.descending -=
-      generatedCharacter.equipment.armor[armors].AC;
-    armorClass.ascending +=
-      generatedCharacter.equipment.armor[armors].AC;
+    armorClass.descending -= generatedCharacter.equipment.armor[armors].AC;
+    armorClass.ascending += generatedCharacter.equipment.armor[armors].AC;
     generatedCharacter.gearWeight +=
       generatedCharacter.equipment.armor[armors].weight;
   }
