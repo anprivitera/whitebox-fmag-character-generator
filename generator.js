@@ -155,23 +155,18 @@ function generateCharacter() {
   initialMoney = diceRoller(3, 6) * 10;
   currentMoney = initialMoney;
 
-  let weaponsByAttribute = null;
-  console.log(weaponsByAttribute);
-  if (toHitMelee < toHitMissile) {
-    weaponsByAttribute = WEAPONS.filter(
-      (x) => x.meleeOrMissile.indexOf("missile") > -1
-    );
-    console.log(weaponsByAttribute);
-  } else if (toHitMelee > toHitMissile) {
-    weaponsByAttribute = WEAPONS.filter(
-      (x) => x.meleeOrMissile.indexOf("melee") > -1
-    );
-    console.log(weaponsByAttribute);
-  } else {
-    console.log(weaponsByAttribute);
-    weaponsByAttribute = WEAPONS;
+  let weaponsByAttribute = WEAPONS;
+  if (characterClassName != "Magic-User") {
+    if (toHitMelee < toHitMissile) {
+      weaponsByAttribute = WEAPONS.filter(
+        (x) => x.meleeOrMissile.indexOf("missile") > -1
+      );
+    } else if (toHitMelee > toHitMissile) {
+      weaponsByAttribute = WEAPONS.filter(
+        (x) => x.meleeOrMissile.indexOf("melee") > -1
+      );
+    }
   }
-  console.log(weaponsByAttribute);
 
   [weapons, currentMoney] = selectItems(
     weaponsByAttribute,
@@ -179,8 +174,6 @@ function generateCharacter() {
     currentMoney,
     characterClassName
   );
-
-  console.log(weapons[0]);
 
   if (
     weapons[0].meleeOrMissile.indexOf("missile") > -1 &&

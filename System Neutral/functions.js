@@ -78,7 +78,6 @@ function selectItems(
     (i) => i.usedBy.indexOf(characterClassName) > -1
   );
   filteredByPrice = filteredByCharacter.filter((x) => x.cost <= currentMoney);
-
   for (let i = 0; i < numberOfItems; i++) {
     if (
       filteredByPrice != 0 &&
