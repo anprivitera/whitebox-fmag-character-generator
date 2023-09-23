@@ -46,6 +46,8 @@ function generateCharacter() {
     characterClass,
     characterRace,
     xpBonus,
+    toHitMelee,
+    toHitMissile,
   } = generatedCharacter;
 
   let [strength, dexterity, constitution, intelligence, wisdom, charisma] =
@@ -76,11 +78,11 @@ function generateCharacter() {
 
   HP = determineHP(characterClass.HDatLevel1, constitution.modifierValue);
 
-  generatedCharacter.toHitMelee =
+  toHitMelee =
     characterClass.toHitAtLevel1 +
     strength.modifierValue +
     characterRace.raceMeleeBonus;
-  generatedCharacter.toHitMissile =
+  toHitMissile =
     characterClass.toHitAtLevel1 +
     dexterity.modifierValue +
     +characterRace.raceMissileBonus;
@@ -98,11 +100,11 @@ function generateCharacter() {
   generatedCharacter.equipment.adventuringGear = [];
 
   let weaponsByAttribute = null;
-  if (generatedCharacter.toHitMelee < generatedCharacter.toHitMissile) {
+  if (toHitMelee < toHitMissile) {
     weaponsByAttribute = WEAPONS.filter(
       (x) => x.meleeOrMissile.indexOf("missile") > -1
     );
-  } else if (generatedCharacter.toHitMelee > generatedCharacter.toHitMissile) {
+  } else if (toHitMelee > toHitMissile) {
     weaponsByAttribute = WEAPONS.filter(
       (x) => x.meleeOrMissile.indexOf("melee") > -1
     );
@@ -360,8 +362,8 @@ function generateCharacter() {
     characterAbilitiesToDisplay;
 
   document.getElementById("to-hit-melee-written").innerHTML = `${
-    generatedCharacter.toHitMelee > 0 ? "+" : ""
-  }${generatedCharacter.toHitMelee}`;
+    toHitMelee > 0 ? "+" : ""
+  }${toHitMelee}`;
 
   document.getElementById("to-hit-melee-description-written").innerHTML = `${
     characterClass.toHitAtLevel1 > 0 ? "+" : ""
@@ -372,8 +374,8 @@ function generateCharacter() {
   }${characterRace.raceMeleeBonus} race`;
 
   document.getElementById("to-hit-missile-written").innerHTML = `${
-    generatedCharacter.toHitMissile > 0 ? "+" : ""
-  }${generatedCharacter.toHitMissile}`;
+    toHitMissile > 0 ? "+" : ""
+  }${toHitMissile}`;
 
   document.getElementById("to-hit-missile-description-written").innerHTML = `${
     characterClass.toHitAtLevel1 > 0 ? "+" : ""

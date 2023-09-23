@@ -63,7 +63,6 @@ export const CHARACTER_SHEET = {
     raceMissileBonus: undefined,
   },
   xpBonus: undefined,
-
   toHitMelee: undefined,
   tohitMissile: undefined,
   armorClass: {
