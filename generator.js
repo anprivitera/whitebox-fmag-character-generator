@@ -52,6 +52,7 @@ function generateCharacter() {
     hirelings,
     money,
     equipment,
+    gearWeight,
   } = generatedCharacter;
 
   let [strength, dexterity, constitution, intelligence, wisdom, charisma] =
@@ -123,15 +124,12 @@ function generateCharacter() {
   );
 
   if (
-    equipment.weapons[0].meleeOrMissile.indexOf("missile") >
-      -1 &&
+    equipment.weapons[0].meleeOrMissile.indexOf("missile") > -1 &&
     equipment.weapons[0].ammunitions
   ) {
     //TODO: Find a way to include also the silver arrow for bows
     let ammunitionForPurchasedWeapon = AMMUNITIONS.find(
-      (x) =>
-        x.usedBy.indexOf(equipment.weapons[0].weaponName) >
-        -1
+      (x) => x.usedBy.indexOf(equipment.weapons[0].weaponName) > -1
     );
     equipment.ammunitions.push(ammunitionForPurchasedWeapon);
     money.currentMoney = money.currentMoney - ammunitionForPurchasedWeapon.cost;
@@ -166,8 +164,7 @@ function generateCharacter() {
           WEAPONS.filter(
             (x) =>
               x.handling != equipment.weapons[0].handling ||
-              x.meleeOrMissile !=
-                equipment.weapons[0].meleeOrMissile
+              x.meleeOrMissile != equipment.weapons[0].meleeOrMissile
           ),
           1,
           money.currentMoney,
@@ -188,50 +185,45 @@ function generateCharacter() {
     characterClass.characterClassName
   );
 
-  [equipment.adventuringGear, money.currentMoney] =
-    selectItems(
-      ADVENTURING_GEAR.filter((x) => !x.container),
-      12 -
-        equipment.weapons.length -
-        equipment.armor.length -
-        equipment.containers.length -
-        equipment.ammunitions.length,
-      // + strength.modifierValue +
-      // constitution.modifierValue,
-      money.currentMoney,
-      characterClass.characterClassName
-    );
+  [equipment.adventuringGear, money.currentMoney] = selectItems(
+    ADVENTURING_GEAR.filter((x) => !x.container),
+    12 -
+      equipment.weapons.length -
+      equipment.armor.length -
+      equipment.containers.length -
+      equipment.ammunitions.length,
+    // + strength.modifierValue +
+    // constitution.modifierValue,
+    money.currentMoney,
+    characterClass.characterClassName
+  );
 
   armorClass.descending = 9 - dexterity.modifierValue;
   armorClass.ascending = 10 + dexterity.modifierValue;
-  generatedCharacter.gearWeight = 10;
+  gearWeight = 10;
   for (const armors in equipment.armor) {
     armorClass.descending -= equipment.armor[armors].AC;
     armorClass.ascending += equipment.armor[armors].AC;
-    generatedCharacter.gearWeight +=
-      equipment.armor[armors].weight;
+    gearWeight += equipment.armor[armors].weight;
   }
 
   for (let i = 0; i < equipment.weapons.length; i++) {
-    generatedCharacter.gearWeight +=
-      equipment.weapons[i].weight;
+    gearWeight += equipment.weapons[i].weight;
   }
 
   for (let i = 0; i < equipment.ammunitions.length; i++) {
-    generatedCharacter.gearWeight +=
-      equipment.ammunitions[i].weight;
+    gearWeight += equipment.ammunitions[i].weight;
   }
 
-  generatedCharacter.gearWeight += money.currentMoney * 0.1;
+  gearWeight += money.currentMoney * 0.1;
 
   generatedCharacter.movementRate = determineMovementRate(
     characterRace.standardMovementRate,
-    generatedCharacter.gearWeight
+    gearWeight
   );
 
   for (let i = 0; i < equipment.containers.length; i++) {
-    generatedCharacter.characterCapacity +=
-      equipment.containers[i].capacity;
+    generatedCharacter.characterCapacity += equipment.containers[i].capacity;
   }
   let characterPortrait = new receivePortrait(characterRace.raceName, gender); //TODO: this should be outside of the main function otherwise it generates always the same picture for the same tag
 
@@ -405,11 +397,7 @@ function generateCharacter() {
     equipmentToDisplay += `<li class="handwritten-medium">${equipment.containers[n].itemName}</li>`;
   }
 
-  for (
-    let n = 0;
-    n < equipment.adventuringGear.length;
-    n++
-  ) {
+  for (let n = 0; n < equipment.adventuringGear.length; n++) {
     equipmentToDisplay += `<li class="handwritten-medium">${
       equipment.adventuringGear[n].itemName
     }${
@@ -417,9 +405,7 @@ function generateCharacter() {
         ? ', <input type="number" value="'
         : ""
     }${equipment.adventuringGear[n].quantity}${
-      equipment.adventuringGear[n].quantity != ""
-        ? '"></input>'
-        : ""
+      equipment.adventuringGear[n].quantity != "" ? '"></input>' : ""
     } ${
       equipment.adventuringGear[n].quantityType != ""
         ? equipment.adventuringGear[n].quantityType
@@ -440,7 +426,7 @@ function generateCharacter() {
   }${hirelings.hirelingsLoyalty}`;
 
   document.getElementById("gear-weight-written").innerHTML = `${Math.floor(
-    generatedCharacter.gearWeight
+    gearWeight
   )}/300 lbs.`;
 
   document.getElementById(
