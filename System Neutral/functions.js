@@ -67,7 +67,7 @@ function selectItems(
   itemsToEvaluate,
   numberOfItems,
   currentMoney,
-  characterClass
+  characterClassName
 ) {
   let shoppingArray = itemsToEvaluate.map((x) => x),
     filteredByCharacter = null,
@@ -75,7 +75,7 @@ function selectItems(
     selectedItems = [];
   shuffleArray(shoppingArray);
   filteredByCharacter = shoppingArray.filter(
-    (i) => i.usedBy.indexOf(characterClass) > -1
+    (i) => i.usedBy.indexOf(characterClassName) > -1
   );
   filteredByPrice = filteredByCharacter.filter((x) => x.cost <= currentMoney);
 

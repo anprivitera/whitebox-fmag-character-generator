@@ -76,7 +76,7 @@ export const CHARACTER_SHEET = {
   money: { initialMoney: undefined, currentMoney: undefined },
   equipment: {
     weapons: [],
-    ammunitions: undefined,
+    ammunitions: [],
     armor: [],
     adventuringGear: [],
     containers: [],
