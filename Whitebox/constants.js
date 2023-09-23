@@ -64,7 +64,7 @@ export const CHARACTER_SHEET = {
   },
   xpBonus: undefined,
   toHitMelee: undefined,
-  tohitMissile: undefined,
+  toHitMissile: undefined,
   armorClass: {
     descending: undefined,
     ascending: undefined,

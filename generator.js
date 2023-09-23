@@ -37,49 +37,60 @@ import {
 function generateCharacter() {
   let generatedCharacter = CHARACTER_SHEET;
   let {
-    characterName,
-    alignment,
+    characterName: characterName,
+    characterAlignment: characterAlignment,
     attributes,
-    gender,
-    HP,
-    characterClass,
-    characterRace,
-    xpBonus,
-    toHitMelee,
-    toHitMissile,
-    armorClass,
-    hirelings,
-    money,
-    equipment,
-    gearWeight,
-    characterCapacity,
-    movementRate,
+    gender: gender,
+    characterHP: HP,
+    characterClass: {
+      characterClassName: characterClassName,
+      xpToLevel2: xpToLevel2,
+      HDatLevel1: HDatLevel1,
+      toHitAtLevel1: toHitAtLevel1,
+      savingThrowAtLevel1: savingThrowAtLevel1,
+      savingThrowBonus: savingThrowBonus,
+      spellcasterType: spellcasterType,
+      primeAttribute: primeAttribute,
+      primeAttributeValue: primeAttributeValue,
+      domininonKind: domininonKind,
+      dominionLevel: dominionLevel,
+      classSpecialAbilities: classSpecialAbilities,
+    },
+    characterRace: {
+      raceID: raceID,
+      raceName: raceName,
+      maxLevel: maxLevel,
+      classedRace: classedRace,
+      standardMovementRate: standardMovementRate,
+      raceSavingThrowBonus: raceSavingThrowBonus,
+      raceSpecialAbilities: raceSpecialAbilities,
+      raceMeleeBonus: raceMeleeBonus,
+      raceMissileBonus: raceMissileBonus,
+    },
+    xpBonus: xpBonus,
+    toHitMelee: toHitMelee,
+    tohitMissile: tohitMissile,
+    armorClass: {
+      descending: descending,
+      ascending: ascending,
+    },
+    hirelings: {
+      maxHirelings: maxHirelings,
+      hirelingsLoyalty: hirelingsLoyalty,
+    },
+    money: { initialMoney: initialMoney, currentMoney: currentMoney },
+    equipment: {
+      weapons: weapons,
+      ammunitions: ammunitions,
+      armor: armor,
+      adventuringGear: adventuringGear,
+      containers: containers,
+    },
+    gearWeight: gearWeight,
+    characterCapacity: characterCapacity, //TODO: replace with automatic calculation of all equipment weight.
+    movementRate: movementRate,
   } = generatedCharacter;
-  let [strength, dexterity, constitution, intelligence, wisdom, charisma] =
-    attributes;
-  let {
-    characterClassName: characterClassName,
-    xpToLevel2,
-    HDatLevel1,
-    toHitAtLevel1,
-    savingThrowAtLevel1,
-    savingThrowBonus,
-    primeAttributeValue,
-    classSpecialAbilities,
-  } = characterClass;
-  let {
-    raceName,
-    maxLevel,
-    standardMovementRate,
-    raceSavingThrowBonus,
-    raceSpecialAbilities,
-    raceMeleeBonus,
-    raceMissileBonus,
-  } = characterRace;
-  let { descending, ascending } = armorClass;
-  let { maxHirelings, hirelingsLoyalty } = hirelings;
-  let { initialMoney, currentMoney } = money;
-  let { weapons, ammunitions, armor, adventuringGear, containers } = equipment;
+  let [strength, dexterity, constitution, intelligence, wisdom, charisma] = attributes
 
   for (const attribute in attributes) {
     attributes[attribute].attributeValue = diceRoller(3, 6);
