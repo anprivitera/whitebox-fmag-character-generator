@@ -1,14 +1,14 @@
-function removeLoadScreen() {
+export function removeLoadScreen() {
   const loaderContainer = document.querySelector(".loader-container");
   loaderContainer.style.display = "none";
 }
 
-function addLoadScreen() {
+export function addLoadScreen() {
   const loaderContainer = document.querySelector(".loader-container");
   loaderContainer.style.display = "initial";
 }
 
-function diceRoller(numberOfDice, diceFace) {
+export function diceRoller(numberOfDice, diceFace) {
   let rollResult = null;
   for (let i = 0; i < numberOfDice; i++) {
     rollResult += Math.floor(Math.random() * diceFace + 1);
@@ -16,14 +16,14 @@ function diceRoller(numberOfDice, diceFace) {
   return rollResult;
 }
 
-function shuffleArray(array) {
+export function shuffleArray(array) {
   for (let i = array.length - 1; i > 0; i--) {
     let j = Math.floor(Math.random() * (i + 1));
     [array[i], array[j]] = [array[j], array[i]];
   }
 }
 
-function determineCharacterClass(attributes, characterClasses) {
+export function determineCharacterClass(attributes, characterClasses) {
   let generatedCharacterClass = null;
   let fromHighToLow = attributes.map((x) => x);
   fromHighToLow.sort((a, b) => b.attributeValue - a.attributeValue);
@@ -41,7 +41,7 @@ function determineCharacterClass(attributes, characterClasses) {
   }
 }
 
-function receivePortrait(race, gender) {
+export function receivePortrait(race, gender) {
   document.getElementById(
     "portrait"
   ).innerHTML = `<img src ="" width = 125></img>`;
@@ -63,7 +63,7 @@ function receivePortrait(race, gender) {
   ).innerHTML = `<img src = "${redirectedUrl}" width = 125></img>`;
 }
 
-function selectItems(
+export function selectItems(
   itemsToEvaluate,
   numberOfItems,
   currentMoney,
@@ -103,12 +103,3 @@ export function arrayRandomItem(array) {
   let item = array[Math.floor(Math.random() * array.length)];
   return item;
 }
-
-export {
-  diceRoller,
-  determineCharacterClass,
-  receivePortrait,
-  selectItems,
-  removeLoadScreen,
-  addLoadScreen,
-};
