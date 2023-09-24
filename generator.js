@@ -261,7 +261,7 @@ function generateCharacter() {
   for (const container in containers) {
     characterCapacity += containers[container].capacity;
   }
-  receivePortrait(raceName, gender); //TODO: Show a different image for each generated character
+  receivePortrait(raceName, gender);
 
   document
     .getElementById("change-portrait")
@@ -299,19 +299,23 @@ function generateCharacter() {
 
   document.getElementById("xp-bonus-written").innerHTML = `${xpBonus}%`;
 
-  // characterLevel = document.getElementById("character-level").value;
-  // if (characterLevel == 1) {
-  //   currentXP = 0;
-  //   xpToNextLevel = xpToLevel2;
-  // } else if (characterLevel == 2) {
-  //   currentXP = xpToLevel2;
-  //   xpToNextLevel = xpToLevel2 * 2;
-  // }
+  let xpToNextLevel = xpToLevel2;
+  let currentXPOnSheet = document.getElementById("char-current-xp-written");
+  characterLevel = document.getElementById("character-level").value;
+  if (characterLevel == 1) {
+    currentXP = 0;
+    xpToNextLevel = xpToLevel2;
+  } else if (characterLevel == 2) {
+    currentXP = xpToLevel2;
+    xpToNextLevel = xpToLevel2 * 2;
+  }
   document.getElementById(
     "char-level-written"
   ).innerHTML = `${characterLevel} of ${maxLevel}`;
   document.getElementById("char-current-xp-written").innerHTML = currentXP;
-  document.getElementById("char-xp-to-next-lvl-written").innerHTML = xpToLevel2;
+  document.getElementById("char-xp-to-next-lvl-written").innerHTML =
+    xpToNextLevel;
+  currentXPOnSheet.value = currentXP;
 
   document.getElementById(
     "char-race-class-written"
@@ -350,14 +354,14 @@ function generateCharacter() {
     charisma.modifierValue > 0 ? "+" : ""
   }${charisma.modifierValue})`;
 
-  // document.getElementById("attributes").innerHTML = attributesToDisplay;
-
   document.getElementById("ac-written").innerHTML =
     document.getElementById("armor-class").value == "descendingPreferred"
       ? descendingAC
       : ascendingAC;
 
   document.getElementById("hp-written").innerHTML = HP;
+
+  document.getElementById("hp-written-current").value = HP;
   document.getElementById("st-written").innerHTML = savingThrowAtLevel1;
   document.getElementById(
     "st-description-written"
