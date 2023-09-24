@@ -41,11 +41,28 @@ export function determineCharacterClass(attributes, characterClasses) {
   }
 }
 
-// export function receivePortrait(race, gender) {
+export function receivePortrait(race, gender) {
+  let character = undefined;
+  let img = document.getElementById("campaignwiki-image");
+  let id = Math.floor(Math.random() * 2 ** 53); //TODO: replace later with uuid module
+  if (race == "Human" || race == "Halfling") {
+    character = gender;
+  } else if (race == "Dwarf") {
+    character = "dwarf";
+  } else {
+    character = "elf";
+  }
+  //TODO: Find a way to generate a new character portait
+  let url = `https://campaignwiki.org/face/redirect/alex/${character}/?${id}`;
+  img.src = url;
+}
+
+// export async function receivePortrait(race, gender) {
 //   let url = new URL(`https://campaignwiki.org/`);
 //   let character = undefined;
 //   let portraitFrame = document.getElementById("portrait");
-//   console.log(portraitFrame);
+//   let headers = new Headers();
+//   console.log(url);
 //   if (race == "Human" || race == "Halfling") {
 //     character = gender;
 //   } else if (race == "Dwarf") {
@@ -55,41 +72,30 @@ export function determineCharacterClass(attributes, characterClasses) {
 //   }
 //   //TODO: Find a way to generate a new character portait
 //   url.pathname = `face/redirect/alex/${character}`;
-//   let imgElement = `<img src = "${url}" width = 115></img>`;
 //   console.log(url);
+//   console.log(headers);
+//   let response = await fetch(url, {
+//     method: "GET",
+//     headers: headers,
+//     mode: "no-cors",
+//     credentials: "include",
+//   });
+//   console.log(response.status);
+//   let image = response.url;
+//   console.log(image);
+//   let imgElement = `<img src = "${image}" width = 115></img>`;
+
 //   portraitFrame.innerHTML = imgElement;
-//   imgElement = portraitFrame.innerHTML;
 // }
 
-export async function receivePortrait(race, gender) {
-  let url = new URL(`https://campaignwiki.org/`);
-  let character = undefined;
-  let portraitFrame = document.getElementById("portrait");
-  let headers = new Headers();
-  console.log(url);
-  if (race == "Human" || race == "Halfling") {
-    character = gender;
-  } else if (race == "Dwarf") {
-    character = "dwarf";
-  } else {
-    character = "elf";
-  }
-  //TODO: Find a way to generate a new character portait
-  url.pathname = `face/redirect/alex/${character}`;
-  console.log(url);
-  let response = await fetch(url, {
-    method: "GET",
-    headers: headers,
-    mode: "cors",
-    credentials: "include",
-  });
-  console.log(response.status);
-  let image = response.url;
-  console.log(image);
-  let imgElement = `<img src = "${image}" width = 115></img>`;
-
-  portraitFrame.innerHTML = imgElement;
-}
+// export async function receivePortrait() {
+//   // const { url } = await fetch(
+//   //   "https://campaignwiki.org/face/redirect/alex/human",
+//   //   { cache: "no-store", mode: "no-cors" }
+//   // );
+//   // return console.log(url);
+//   return console.log("https://campaignwiki.org/face/redirect/alex/human");
+// }
 
 export function selectItems(
   itemsToEvaluate,
