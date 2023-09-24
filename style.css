@@ -35,6 +35,59 @@ label {
     color: black;
 }
 
+ul {
+    list-style-type: circle;
+}
+
+
+
+
+#treasure-box input[type=number] {
+    color: #34568B;
+    background-color: whitesmoke;
+    font-family: 'Kalam', cursive, sans-serif;
+    font-size: medium;
+    width: auto;
+    max-width: 50px;
+    height: 25px;
+    border-width: 0.3px;
+    border-style: dashed;
+    border-color: #34568B;
+}
+
+#treasure-box input[type=number]:hover {
+    border-style: solid;
+}
+
+
+
+.footer {
+    font-family:  "Josefin Sans", sans-serif;
+    font-weight: 500;
+    font-size: x-small;
+    margin-top: 10px;
+}
+
+.page {
+    display: inline-flex;
+    flex-wrap: wrap-reverse;
+
+}
+
+.menu {
+    margin: 15px;
+}
+
+.loader-container {
+    width: 100%;
+    height: 100vh;
+    position: fixed;
+    background: #fff
+        url("https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExdnBsYzVqY2syb3RoMW44a3dpYTk2dnBuZ2VtYncxd3p2ZDRlNm9zOCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/MXKqCv2UDLCdfavigs/giphy.gif") center
+        no-repeat;
+    z-index: 1;
+}
+
 .sheet {
     /* background-image: url("https://gdocservices.com/wp-content/uploads/2020/06/AdobeStock_164991966.jpeg"); */
     background-color: whitesmoke;
@@ -60,21 +113,27 @@ label {
 .printed-smaller {
     font-family: "Josefin Sans", sans-serif;
     color: black;
-    font-size: large;
+    font-size: medium;
 }
 
-.handwritten-small {
+.handwritten-x-large {
     font-size: x-large;
 }
 
-.handwritten-smaller {
+.handwritten-large {
     font-size: large;
+    /* margin-bottom: 5.5px; */
+}
+
+.handwritten-medium {
+    font-size: medium;
     /* margin-bottom: 5.5px; */
 }
 
 .character-info {
     font-size: large;
-    margin: 5px;
+    margin-left: 3px;
+    margin-bottom: 5px;
     border-bottom: 1px dashed;
     border-color: black;
     /* border-style: dotted; */
@@ -82,7 +141,7 @@ label {
 .subsection {
     font-size: large;
     margin: 5px;
-    border: 1.5px;
+    border: 1px;
     border-style: solid;
     border-color: black;
     /* border-style: dotted; */
@@ -90,20 +149,41 @@ label {
 
 .container {
     flex-grow: 1;
-    align-self:center;
+    /* align-self:center; */
     display: inline-flex;
     flex-wrap: wrap;
     justify-content: center;
-    max-width: 505px;
-    border: 1px;
+    max-width: 300px;
+    border-left: 1px;
+    border-top: 0px;
+    border-right: 1px;
+    border-bottom: 0px;
     border-style: solid;
     border-color: black;
 }
 
+.container input[type=number] {
+    color: #34568B;
+    background-color: whitesmoke;
+    font-family: 'Kalam', cursive, sans-serif;
+    font-size: x-large;
+    width: auto;
+    max-width: 40px;
+    height: 50px;
+    border-width: 0.3px;
+    border-style: dashed;
+    border-color: #34568B; 
+    
+}
+
+.container input[type=number]:hover {
+    border-style: solid;
+}
+
 .side-container {
     flex-grow: 0;
-    border: 1px;
-    border-style: solid;
+    /* border: 1px;
+    border-style: solid; */
     border-color: black;
     display: flex;
     flex-wrap: wrap;
@@ -111,8 +191,17 @@ label {
 
 }
 
-
-
+.left-container {
+    flex-grow: 0;
+    /* border: 1px;
+    border-style: solid; */
+    border-color: black;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    width: 130px;
+    margin-top: 10px;
+}
 
 .description {
     /* display: inline-flex; */
@@ -139,16 +228,43 @@ label {
     border-style: solid;
     border-color: black;
     max-height: 248px;
+    width: 117px;
 }
 
 #basic-info {
-    width: 160px;
+    width: 117px;
+    height: 495px;
+    justify-content: center;
+}
+
+#basic-info input[type=number] {
+    color: #34568B;
+    background-color: whitesmoke;
+    font-family: 'Kalam', cursive, sans-serif;
+    font-size: x-large;
+    width: 100px;
+    height: 50px;
+    border-width: 0.3px;
+    border-style: dashed;
+    border-color: #34568B; 
+}
+
+#basic-info input[type=number]:hover {
+    border-style: solid;
 }
 
 #attributes {
     display: flex;
     flex-direction:column;
     flex-wrap: nowrap;
+    width: 135px;
+}
+
+#combat-info {
+    display: flex;
+    flex-direction:column;
+    flex-wrap: nowrap;
+    width: 140px;
 }
 
 /* #attributes-written {
@@ -166,8 +282,13 @@ label {
 
 
 #character-abilities {
-width: 300px;
-height: 300px;
+width: 270px;
+height: 375px;
+padding-right: 24px;
+}
+
+#movement-and-encumberance {
+    height: 255px;
 }
 
 #weapons-and-armor {
@@ -176,11 +297,42 @@ height: 300px;
     }
 
 #equipment-box {
-    height: 460px;
-    width: 230px;
+    height: 450px;
+    max-width: 260px;
     }
 
+#equipment-box input[type=number] {
+    color: #34568B;
+    background-color: whitesmoke;
+    font-family: 'Kalam', cursive, sans-serif;
+    font-size: medium;
+    width: auto;
+    max-width: 35px;
+    height: 20px;
+    border-width: 0.3px;
+    border-style: dashed;
+    border-color: #34568B;
+}
+
+#equipment-box input[type=number]:hover {
+    border-style: solid;
+}
 
 #ability {
     font-size: medium;
 }
+
+.coin-slot-printed {
+    font-size: small;
+    font-family: "Josefin Sans", sans-serif;
+    color: black;
+    margin: 2px;
+}
+
+#treasure-box {
+    display: inline-flex;
+    padding-left: 5px;
+    height: 35px;
+    align-items: center;
+}
+

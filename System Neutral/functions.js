@@ -1,4 +1,14 @@
-function diceRoller(numberOfDice, diceFace) {
+export function removeLoadScreen() {
+  const loaderContainer = document.querySelector(".loader-container");
+  loaderContainer.style.display = "none";
+}
+
+export function addLoadScreen() {
+  const loaderContainer = document.querySelector(".loader-container");
+  loaderContainer.style.display = "initial";
+}
+
+export function diceRoller(numberOfDice, diceFace) {
   let rollResult = null;
   for (let i = 0; i < numberOfDice; i++) {
     rollResult += Math.floor(Math.random() * diceFace + 1);
@@ -6,14 +16,14 @@ function diceRoller(numberOfDice, diceFace) {
   return rollResult;
 }
 
-function shuffleArray(array) {
+export function shuffleArray(array) {
   for (let i = array.length - 1; i > 0; i--) {
     let j = Math.floor(Math.random() * (i + 1));
     [array[i], array[j]] = [array[j], array[i]];
   }
 }
 
-function determineCharacterClass(attributes, characterClasses) {
+export function determineCharacterClass(attributes, characterClasses) {
   let generatedCharacterClass = null;
   let fromHighToLow = attributes.map((x) => x);
   fromHighToLow.sort((a, b) => b.attributeValue - a.attributeValue);
@@ -31,8 +41,10 @@ function determineCharacterClass(attributes, characterClasses) {
   }
 }
 
-function receivePortrait(race, gender) {
-  let character = null;
+export function receivePortrait(race, gender) {
+  let character = undefined;
+  let img = document.getElementById("campaignwiki-image");
+  let id = Math.floor(Math.random() * 2 ** 53); //TODO: replace later with uuid module
   if (race == "Human" || race == "Halfling") {
     character = gender;
   } else if (race == "Dwarf") {
@@ -40,58 +52,56 @@ function receivePortrait(race, gender) {
   } else {
     character = "elf";
   }
-  let characterPortrait = `https://campaignwiki.org/face/redirect/alex/${character}`;
-  return characterPortrait;
+  //TODO: Find a way to generate a new character portait
+  let url = `https://campaignwiki.org/face/redirect/alex/${character}/?${id}`;
+  img.src = url;
 }
 
-function rollForAttributes(numberOfDice) {
-  let generatedAttributes = null;
-  const rollForStrength = diceRoller(numberOfDice, 6),
-    rollForDexterity = diceRoller(numberOfDice, 6),
-    rollForConstitution = diceRoller(numberOfDice, 6),
-    rollForIntelligence = diceRoller(numberOfDice, 6),
-    rollForWisdom = diceRoller(numberOfDice, 6),
-    rollForCharisma = diceRoller(numberOfDice, 6);
+// export async function receivePortrait(race, gender) {
+//   let url = new URL(`https://campaignwiki.org/`);
+//   let character = undefined;
+//   let portraitFrame = document.getElementById("portrait");
+//   let headers = new Headers();
+//   console.log(url);
+//   if (race == "Human" || race == "Halfling") {
+//     character = gender;
+//   } else if (race == "Dwarf") {
+//     character = "dwarf";
+//   } else {
+//     character = "elf";
+//   }
+//   //TODO: Find a way to generate a new character portait
+//   url.pathname = `face/redirect/alex/${character}`;
+//   console.log(url);
+//   console.log(headers);
+//   let response = await fetch(url, {
+//     method: "GET",
+//     headers: headers,
+//     mode: "no-cors",
+//     credentials: "include",
+//   });
+//   console.log(response.status);
+//   let image = response.url;
+//   console.log(image);
+//   let imgElement = `<img src = "${image}" width = 115></img>`;
 
-  return [
-    {
-      attributeName: "STR",
-      attributeValue: rollForStrength,
-      modifierValue: null,
-    },
-    {
-      attributeName: "DEX",
-      attributeValue: rollForDexterity,
-      modifierValue: null,
-    },
-    {
-      attributeName: "CON",
-      attributeValue: rollForConstitution,
-      modifierValue: null,
-    },
-    {
-      attributeName: "INT",
-      attributeValue: rollForIntelligence,
-      modifierValue: null,
-    },
-    {
-      attributeName: "WIS",
-      attributeValue: rollForWisdom,
-      modifierValue: null,
-    },
-    {
-      attributeName: "CHA",
-      attributeValue: rollForCharisma,
-      modifierValue: null,
-    },
-  ];
-}
+//   portraitFrame.innerHTML = imgElement;
+// }
 
-function selectItems(
+// export async function receivePortrait() {
+//   // const { url } = await fetch(
+//   //   "https://campaignwiki.org/face/redirect/alex/human",
+//   //   { cache: "no-store", mode: "no-cors" }
+//   // );
+//   // return console.log(url);
+//   return console.log("https://campaignwiki.org/face/redirect/alex/human");
+// }
+
+export function selectItems(
   itemsToEvaluate,
   numberOfItems,
   currentMoney,
-  characterClass
+  characterClassName
 ) {
   let shoppingArray = itemsToEvaluate.map((x) => x),
     filteredByCharacter = null,
@@ -99,10 +109,9 @@ function selectItems(
     selectedItems = [];
   shuffleArray(shoppingArray);
   filteredByCharacter = shoppingArray.filter(
-    (i) => i.usedBy.indexOf(characterClass) > -1
+    (i) => i.usedBy.indexOf(characterClassName) > -1
   );
   filteredByPrice = filteredByCharacter.filter((x) => x.cost <= currentMoney);
-
   for (let i = 0; i < numberOfItems; i++) {
     if (
       filteredByPrice != 0 &&
@@ -110,14 +119,7 @@ function selectItems(
       currentMoney > 0
     ) {
       if (filteredByPrice[0].repeatable) {
-        if (selectedItems.indexOf(filteredByPrice[0]) <= -1) {
-          selectedItems.unshift(filteredByPrice[0]);
-        } else {
-          let elementToUpdate = selectedItems.find(
-            (x) => x == filteredByPrice[0]
-          );
-          elementToUpdate.quantity += filteredByPrice[0].quantity;
-        }
+        selectedItems.unshift(filteredByPrice[0]);
       } else {
         selectedItems.unshift(filteredByPrice.shift());
       }
@@ -131,10 +133,7 @@ function selectItems(
   return [selectedItems, currentMoney];
 }
 
-export {
-  diceRoller,
-  determineCharacterClass,
-  receivePortrait,
-  rollForAttributes,
-  selectItems,
-};
+export function arrayRandomItem(array) {
+  let item = array[Math.floor(Math.random() * array.length)];
+  return item;
+}

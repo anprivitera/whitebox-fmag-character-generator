@@ -1,0 +1,8 @@
+{
+  "devDependencies": {
+    "eslint": "^8.49.0"
+  },
+  "dependencies": {
+    "fantastical": "^2.0.1"
+  }
+}
