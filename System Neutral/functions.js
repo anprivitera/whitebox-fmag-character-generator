@@ -41,13 +41,32 @@ export function determineCharacterClass(attributes, characterClasses) {
   }
 }
 
-export function receivePortrait(race, gender) {
-  document.getElementById(
-    "portrait"
-  ).innerHTML = `<img src ="" width = 125></img>`;
-  let originalUrl = null;
-  let redirectedUrl = null;
-  let character = null;
+// export function receivePortrait(race, gender) {
+//   let url = new URL(`https://campaignwiki.org/`);
+//   let character = undefined;
+//   let portraitFrame = document.getElementById("portrait");
+//   console.log(portraitFrame);
+//   if (race == "Human" || race == "Halfling") {
+//     character = gender;
+//   } else if (race == "Dwarf") {
+//     character = "dwarf";
+//   } else {
+//     character = "elf";
+//   }
+//   //TODO: Find a way to generate a new character portait
+//   url.pathname = `face/redirect/alex/${character}`;
+//   let imgElement = `<img src = "${url}" width = 115></img>`;
+//   console.log(url);
+//   portraitFrame.innerHTML = imgElement;
+//   imgElement = portraitFrame.innerHTML;
+// }
+
+export async function receivePortrait(race, gender) {
+  let url = new URL(`https://campaignwiki.org/`);
+  let character = undefined;
+  let portraitFrame = document.getElementById("portrait");
+  let headers = new Headers();
+  console.log(url);
   if (race == "Human" || race == "Halfling") {
     character = gender;
   } else if (race == "Dwarf") {
@@ -56,11 +75,20 @@ export function receivePortrait(race, gender) {
     character = "elf";
   }
   //TODO: Find a way to generate a new character portait
-  originalUrl = `https://campaignwiki.org/face/redirect/alex/${character}`;
-  redirectedUrl = new URL(originalUrl);
-  document.getElementById(
-    "portrait"
-  ).innerHTML = `<img src = "${redirectedUrl}" width = 125></img>`;
+  url.pathname = `face/redirect/alex/${character}`;
+  console.log(url);
+  let response = await fetch(url, {
+    method: "GET",
+    headers: headers,
+    mode: "cors",
+    credentials: "include",
+  });
+  console.log(response.status);
+  let image = response.url;
+  console.log(image);
+  let imgElement = `<img src = "${image}" width = 115></img>`;
+
+  portraitFrame.innerHTML = imgElement;
 }
 
 export function selectItems(
