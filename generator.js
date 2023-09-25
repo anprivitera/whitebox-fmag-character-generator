@@ -475,7 +475,7 @@ function generateCharacter() {
   } ft.`;
 
   document.getElementById("movement-combat-written").innerHTML = `${
-    generatedCharacter.movementRate / 3
+    movementRate / 3
   } ft.`;
   document.getElementById(
     "carrying-capacity-written"
