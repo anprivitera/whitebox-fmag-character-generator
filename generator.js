@@ -92,7 +92,7 @@ function generateCharacter() {
     } = generatedCharacter;
 
   for (const attribute in attributes) {
-    attributes[attribute].attributeValue = diceRoller(3, 6);
+    attributes[attribute].attributeValue = diceRoller([3, 6, 0]);
     attributes[attribute].modifierValue = determineModifier(
       attributes[attribute].attributeValue
     );
@@ -147,7 +147,7 @@ function generateCharacter() {
     charisma.attributeValue
   );
 
-  initialMoney = diceRoller(3, 6) * 10;
+  initialMoney = diceRoller([3, 6, 0]) * 10;
   currentMoney = initialMoney;
 
   let weaponsByAttribute = WEAPONS;
@@ -474,9 +474,9 @@ function generateCharacter() {
     movementRate * 2
   } ft.`;
 
-document.getElementById("movement-combat-written").innerHTML = `${
-  generatedCharacter.movementRate / 3
-} ft.`;
+  document.getElementById("movement-combat-written").innerHTML = `${
+    generatedCharacter.movementRate / 3
+  } ft.`;
   document.getElementById(
     "carrying-capacity-written"
   ).innerHTML = `${Math.floor(

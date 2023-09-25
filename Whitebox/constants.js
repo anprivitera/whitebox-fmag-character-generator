@@ -1,5 +1,3 @@
-import { diceRoller } from "../System Neutral/functions.js";
-
 export const CHARACTER_SHEET = {
   characterName: undefined,
   characterLevel: 1,
@@ -475,7 +473,7 @@ export const CHARACTER_CLASSES = [
   {
     characterClassName: "Cleric",
     xpToLevel2: 1500,
-    HDatLevel1: diceRoller(1, 6),
+    HDatLevel1: [1, 6, 0],
     toHitAtLevel1: 0,
     savingThrowAtLevel1: 15,
     savingThrowBonus: "+2 vs. death/poison<br />",
@@ -488,7 +486,7 @@ export const CHARACTER_CLASSES = [
   {
     characterClassName: "Fighter",
     xpToLevel2: 2000,
-    HDatLevel1: diceRoller(1, 6) + 1,
+    HDatLevel1: [1, 6, 1],
     toHitAtLevel1: 0,
     savingThrowAtLevel1: 14,
     savingThrowBonus: "+2 vs. poison/paralysis<br />",
@@ -502,7 +500,7 @@ export const CHARACTER_CLASSES = [
   {
     characterClassName: "Elf",
     xpToLevel2: 5000,
-    HDatLevel1: diceRoller(1, 6) + 1,
+    HDatLevel1: [1, 6, 1],
     toHitAtLevel1: 0,
     savingThrowAtLevel1: 14,
     savingThrowBonus: "+2 vs. poison/paralysis<br />",
@@ -522,7 +520,7 @@ export const CHARACTER_CLASSES = [
   {
     characterClassName: "Magic-User",
     xpToLevel2: 2500,
-    HDatLevel1: diceRoller(1, 6),
+    HDatLevel1: [1, 6, 0],
     toHitAtLevel1: 0,
     savingThrowAtLevel1: 15,
     savingThrowBonus: "+2 vs. spells<br />",
@@ -541,7 +539,7 @@ export const CHARACTER_CLASSES = [
   {
     characterClassName: "Thief",
     xpToLevel2: 1250,
-    HDatLevel1: diceRoller(1, 6),
+    HDatLevel1: [1, 6, 0],
     toHitAtLevel1: 0,
     savingThrowAtLevel1: 14,
     savingThrowBonus: "+2 vs. Traps<br />",

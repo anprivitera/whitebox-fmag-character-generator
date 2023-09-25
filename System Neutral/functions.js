@@ -8,11 +8,12 @@ export function addLoadScreen() {
   loaderContainer.style.display = "initial";
 }
 
-export function diceRoller(numberOfDice, diceFace) {
+export function diceRoller([numberOfDice, diceFace, bonus]) {
   let rollResult = null;
   for (let i = 0; i < numberOfDice; i++) {
     rollResult += Math.floor(Math.random() * diceFace + 1);
   }
+  rollResult += bonus;
   return rollResult;
 }
 

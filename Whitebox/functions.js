@@ -1,3 +1,5 @@
+import { diceRoller } from "../System Neutral/functions.js";
+
 export function determineModifier(attributeScore) {
   if (attributeScore <= 6) {
     return -1;
@@ -103,8 +105,14 @@ export function determineMovementRate(standardMovementRate, gearWeight) {
 }
 
 //TODO: calculate HP of higher levels
-export function determineHP(HD, constitutionModifier) {
-  let HP = HD + constitutionModifier;
+
+export function determineHP(
+  [numberOfDice, diceFace, bonus],
+  consitutionModifier
+) {
+  const HD = [numberOfDice, diceFace, bonus];
+  const rollResult = diceRoller(HD);
+  let HP = rollResult + consitutionModifier;
   if (HP <= 0) {
     HP = 1;
   }
