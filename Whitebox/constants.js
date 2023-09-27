@@ -86,8 +86,6 @@ export const CHARACTER_SHEET = {
   movementRate: undefined,
 };
 
-const ELF_PRIME_ATTRIBUTES = ["STR", "INT"];
-
 const MAGIC_USER_SPELLS_LEVEL_1 = [
   "Charm Person",
   "Detect Magic",
@@ -478,7 +476,7 @@ export const CHARACTER_CLASSES = [
     savingThrowAtLevel1: 15,
     savingThrowBonus: "+2 vs. death/poison<br />",
     spellcasterType: "divine",
-    primeAttribute: "WIS",
+    primeAttribute: ["WIS"],
     domininonKind: "Temple",
     dominionLevel: 10,
     classSpecialAbilities: [`Turn the Undead`],
@@ -492,7 +490,7 @@ export const CHARACTER_CLASSES = [
     savingThrowBonus: "+2 vs. poison/paralysis<br />",
     spellcasterType: null,
     spellsAtLevel1: null,
-    primeAttribute: "STR",
+    primeAttribute: ["STR"],
     domininonKind: "Stronghold",
     dominionLevel: 9,
     classSpecialAbilities: [`Combat Fury (+1 attack/level vs. >=1 HD foes)`],
@@ -506,10 +504,7 @@ export const CHARACTER_CLASSES = [
     savingThrowBonus: "+2 vs. poison/paralysis<br />",
     spellcasterType: null, // TODO: change when implementing more character levels
     spellsAtLevel1: null,
-    primeAttribute:
-      ELF_PRIME_ATTRIBUTES[
-        Math.floor(Math.random() * ELF_PRIME_ATTRIBUTES.length)
-      ],
+    primeAttribute: ["STR", "INT"],
     classSpecialAbilities: [
       `+1 to-hit vs. goblins, orcs, intelligent undead, lycantropes`,
       `Immune to undead paralysis`,
@@ -525,7 +520,7 @@ export const CHARACTER_CLASSES = [
     savingThrowAtLevel1: 15,
     savingThrowBonus: "+2 vs. spells<br />",
     spellcasterType: "magic",
-    primeAttribute: "INT",
+    primeAttribute: ["INT"],
     domininonKind: "Wizard Tower",
     dominionLevel: 9,
     classSpecialAbilities: [
@@ -544,7 +539,7 @@ export const CHARACTER_CLASSES = [
     savingThrowAtLevel1: 14,
     savingThrowBonus: "+2 vs. Traps<br />",
     spellcasterType: null,
-    primeAttribute: "DEX",
+    primeAttribute: ["DEX"],
     domininonKind: "Guild",
     dominionLevel: 9,
     classSpecialAbilities: [

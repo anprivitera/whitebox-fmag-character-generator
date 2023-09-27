@@ -26,14 +26,15 @@ export function shuffleArray(array) {
 
 export function determineCharacterClass(attributes, characterClasses) {
   let generatedCharacterClass = null;
+  shuffleArray(characterClasses);
   let fromHighToLow = attributes.map((x) => x);
   fromHighToLow.sort((a, b) => b.attributeValue - a.attributeValue);
   while (generatedCharacterClass == null) {
     for (let x = 0; x < fromHighToLow.length; x++) {
       for (let i = 0; i < characterClasses.length; i++) {
-        if (
-          fromHighToLow[x].attributeName == characterClasses[i].primeAttribute
-        ) {
+        let attribute = fromHighToLow[x].attributeName;
+        let classPrimeAttribute = characterClasses[i].primeAttribute;
+        if (classPrimeAttribute.find((x) => x == attribute)) {
           generatedCharacterClass = characterClasses[i];
           return generatedCharacterClass;
         }
