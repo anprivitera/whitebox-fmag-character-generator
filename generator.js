@@ -54,10 +54,10 @@ function generateCharacter() {
       HP,
       characterClass: {
         characterClassName,
-        xpToLevel2,
-        HDatLevel1,
-        toHitAtLevel1,
-        savingThrowAtLevel1,
+        xpProgression,
+        hd,
+        toHitBonus,
+        savingThrow,
         savingThrowBonus,
         // spellcasterType,
         // primeAttribute,
@@ -100,10 +100,10 @@ function generateCharacter() {
 
   ({
     characterClassName,
-    xpToLevel2,
-    HDatLevel1,
-    toHitAtLevel1,
-    savingThrowAtLevel1,
+    xpProgression,
+    hd,
+    toHitBonus,
+    savingThrow,
     savingThrowBonus,
     primeAttributeValue,
     domininonKind,
@@ -138,10 +138,10 @@ function generateCharacter() {
     primeAttributeValue
   );
 
-  HP = determineHP(HDatLevel1, constitution.modifierValue);
+  HP = determineHP(hd, constitution.modifierValue);
 
-  toHitMelee = toHitAtLevel1 + strength.modifierValue + raceMeleeBonus;
-  toHitMissile = toHitAtLevel1 + dexterity.modifierValue + raceMissileBonus;
+  toHitMelee = toHitBonus + strength.modifierValue + raceMeleeBonus;
+  toHitMissile = toHitBonus + dexterity.modifierValue + raceMissileBonus;
 
   [maxHirelings, hirelingsLoyalty] = determineHirelings(
     charisma.attributeValue
@@ -299,15 +299,15 @@ function generateCharacter() {
 
   document.getElementById("xp-bonus-written").innerHTML = `${xpBonus}%`;
 
-  let xpToNextLevel = xpToLevel2;
+  let xpToNextLevel = xpProgression;
   let currentXPOnSheet = document.getElementById("char-current-xp-written");
   characterLevel = document.getElementById("character-level").value;
   if (characterLevel == 1) {
     currentXP = 0;
-    xpToNextLevel = xpToLevel2;
+    xpToNextLevel = xpProgression;
   } else if (characterLevel == 2) {
-    currentXP = xpToLevel2;
-    xpToNextLevel = xpToLevel2 * 2;
+    currentXP = xpProgression;
+    xpToNextLevel = xpProgression * 2;
   }
   document.getElementById(
     "char-level-written"
@@ -362,7 +362,7 @@ function generateCharacter() {
   document.getElementById("hp-written").innerHTML = HP;
 
   document.getElementById("hp-written-current").value = HP;
-  document.getElementById("st-written").innerHTML = savingThrowAtLevel1;
+  document.getElementById("st-written").innerHTML = savingThrow;
   document.getElementById(
     "st-description-written"
   ).innerHTML = `${savingThrowBonus}${raceSavingThrowBonus}`;
@@ -385,8 +385,8 @@ function generateCharacter() {
   }${toHitMelee}`;
 
   document.getElementById("to-hit-melee-description-written").innerHTML = `${
-    toHitAtLevel1 > 0 ? "+" : ""
-  }${toHitAtLevel1} lvl, ${strength.modifierValue > 0 ? "+" : ""}${
+    toHitBonus > 0 ? "+" : ""
+  }${toHitBonus} lvl, ${strength.modifierValue > 0 ? "+" : ""}${
     strength.modifierValue
   } ${strength.attributeName}, ${
     raceMeleeBonus > 0 ? "+" : ""
@@ -397,8 +397,8 @@ function generateCharacter() {
   }${toHitMissile}`;
 
   document.getElementById("to-hit-missile-description-written").innerHTML = `${
-    toHitAtLevel1 > 0 ? "+" : ""
-  }${toHitAtLevel1} lvl, ${dexterity.modifierValue > 0 ? "+" : ""}${
+    toHitBonus > 0 ? "+" : ""
+  }${toHitBonus} lvl, ${dexterity.modifierValue > 0 ? "+" : ""}${
     dexterity.modifierValue
   } ${dexterity.attributeName}, ${
     raceMissileBonus > 0 ? "+" : ""
