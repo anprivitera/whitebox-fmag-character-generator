@@ -7,9 +7,9 @@ import {
   removeLoadScreen,
   addLoadScreen,
   arrayRandomItem,
-} from "./System Neutral/functions.js";
+} from "./systemneutral-functions.js";
 
-import { GENDERS } from "./System Neutral/constants.js";
+import { GENDERS } from "./systemneutral-constants.js";
 
 import {
   determineModifier,
@@ -18,7 +18,7 @@ import {
   determineHirelings,
   determineMovementRate,
   determineHP,
-} from "./Whitebox/functions.js";
+} from "./whitebox-functions.js";
 
 import {
   ADVENTURING_GEAR,
@@ -30,7 +30,7 @@ import {
   SHIELDS,
   WEAPONS,
   AMMUNITIONS,
-} from "./Whitebox/constants.js";
+} from "./whitebox-constants.js";
 
 //TODO: Include name randomizer
 

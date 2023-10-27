@@ -1,4 +1,4 @@
-import { diceRoller } from "../System Neutral/functions.js";
+import { diceRoller } from "./systemneutral-functions.js";
 
 export function determineModifier(attributeScore) {
   if (attributeScore <= 6) {
