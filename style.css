@@ -336,3 +336,16 @@ padding-right: 24px;
     align-items: center;
 }
 
+#name-handwritten {
+    max-width: 115px;
+    color: #34568B;
+    background-color: whitesmoke;
+    font-family: 'Kalam', cursive, sans-serif;
+    font-size: x-large;
+    width: auto;
+    height: 60px;
+    border-width: 0.3px;
+    border-style: dashed;
+    border-color: #34568B;
+}
+

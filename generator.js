@@ -37,7 +37,6 @@ import {
 function generateCharacter() {
   let generatedCharacter = CHARACTER_SHEET,
     {
-      characterName,
       characterLevel,
       currentXP,
       alignment,
@@ -127,8 +126,6 @@ function generateCharacter() {
   ));
 
   gender = arrayRandomItem(GENDERS);
-
-  characterName = "Kerrigan";
 
   alignment = arrayRandomItem(ALIGNMENTS);
 
@@ -269,7 +266,7 @@ function generateCharacter() {
       new receivePortrait(raceName, gender);
     });
 
-  document.getElementById("name-handwritten").innerHTML = characterName;
+  // document.getElementById("name-handwritten").innerHTML = ;
 
   // document.getElementById("physique-handwritten").innerHTML =
   //   PHYSIQUE[Math.floor(Math.random() * PHYSIQUE.length)];
